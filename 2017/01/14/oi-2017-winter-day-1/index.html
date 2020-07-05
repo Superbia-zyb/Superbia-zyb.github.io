@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="今天是  吉林大学信息学奥赛2017冬令营 开营第一天 好赛艇啊 Day 1 知识点：模拟、排序、贪心、递推、分治、二分答案D1T1 净月潭探险问题描述学习信息学奥赛的OIER都热爱探险,小明就是其中的一个，有一天小明在净月潭公园中一条充满许多有趣路标的路上探险。这条路就像数轴一样被标记了，小明开始的时候站在原点(x &#x3D; 0)处。共有n个路标中，每个路标坐落于点 x1, x2, …, xn。小明想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI 2017 吉大冬令营 Day 1">
+<meta property="og:url" content="http://yoursite.com/2017/01/14/oi-2017-winter-day-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天是  吉林大学信息学奥赛2017冬令营 开营第一天 好赛艇啊 Day 1 知识点：模拟、排序、贪心、递推、分治、二分答案D1T1 净月潭探险问题描述学习信息学奥赛的OIER都热爱探险,小明就是其中的一个，有一天小明在净月潭公园中一条充满许多有趣路标的路上探险。这条路就像数轴一样被标记了，小明开始的时候站在原点(x &#x3D; 0)处。共有n个路标中，每个路标坐落于点 x1, x2, …, xn。小明想">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-01-14T13:42:36.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.191Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="二分答案">
+<meta property="article:tag" content="递推">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/01/14/oi-2017-winter-day-1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>OI 2017 吉大冬令营 Day 1 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day-1-知识点：模拟、排序、贪心、递推、分治、二分答案"><span class="nav-number">1.</span> <span class="nav-text">Day 1 知识点：模拟、排序、贪心、递推、分治、二分答案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D1T1-净月潭探险"><span class="nav-number"></span> <span class="nav-text">D1T1 净月潭探险</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number"></span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路："><span class="nav-number"></span> <span class="nav-text">思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D1T2-净月潭航线"><span class="nav-number"></span> <span class="nav-text">D1T2 净月潭航线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述-1"><span class="nav-number"></span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路：-1"><span class="nav-number"></span> <span class="nav-text">思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D1T3-排干净月潭水塘"><span class="nav-number"></span> <span class="nav-text">D1T3 排干净月潭水塘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述-2"><span class="nav-number"></span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路：-2"><span class="nav-number"></span> <span class="nav-text">思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-1总结：做T3时思路还是不够清晰，竟然漏掉了题中的关键信息，-真是太可怕了-一定要-吸取教训，之后再接再厉QAQ"><span class="nav-number"></span> <span class="nav-text">Day 1总结：做T3时思路还是不够清晰，竟然漏掉了题中的关键信息，  真是太可怕了 一定要 吸取教训，之后再接再厉QAQ</span></a></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/14/oi-2017-winter-day-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI 2017 吉大冬令营 Day 1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-14 21:42:36" itemprop="dateCreated datePublished" datetime="2017-01-14T21:42:36+08:00">2017-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今天是  <strong>吉林大学信息学奥赛2017冬令营</strong> 开营第一天 好赛艇啊</p>
+<h3 id="Day-1-知识点：模拟、排序、贪心、递推、分治、二分答案"><a href="#Day-1-知识点：模拟、排序、贪心、递推、分治、二分答案" class="headerlink" title="Day 1 知识点：模拟、排序、贪心、递推、分治、二分答案"></a>Day 1 知识点：模拟、排序、贪心、递推、分治、二分答案</h3><h2 id="D1T1-净月潭探险"><a href="#D1T1-净月潭探险" class="headerlink" title="D1T1 净月潭探险"></a>D1T1 净月潭探险</h2><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>学习信息学奥赛的OIER都热爱探险,小明就是其中的一个，有一天小明在净月潭公园中一条充满许多有趣路标的路上探险。这条路就像数轴一样被标记了，小明开始的时候站在原点(x = 0)处。共有n个路标中，每个路标坐落于点 x1, x2, …, xn。小明想在日落之前访问尽可能多的路标，现在距离日落还有T分钟，她每走一个单位长度，需要1分钟。 小明route照一个特殊的规则访问路标。即距离原点越近的路标，对 小明越重要，他每次总是跑到未访问过的距离原点越近的路标。没有两个路标距离原点的距离相等。 请你帮助计算一下，小明在日落之前能够访问多少个路标。</p>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>因为小明访问路标有一个特殊的规则 所以我们要将路标按照坐标绝对值从大到小排序 然后再枚举路标看是否能够走到，累加就是答案</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int n,t;
+int a[51000];
+int Absnumber(int x)
+{
+    return x&gt;=0?x:-x; 
+}
+int cmp(int x,int y)
+{
+    return Absnumber(x)&lt;Absnumber(y);
+}
+int ans;
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;t,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%d&quot;,&amp;a[i]);
+    sort(a+1,a+n+1,cmp);
+    for(int i=1;i&lt;=n;i++)
+    {
+        int tmp=Absnumber(a[i]-a[i-1]);
+        if(t&gt;tmp) t-=tmp,ans++;
+        else break;
+    }
+    printf(&quot;%d&quot;,ans);
+}</code></pre><h2 id="D1T2-净月潭航线"><a href="#D1T2-净月潭航线" class="headerlink" title="D1T2 净月潭航线"></a>D1T2 净月潭航线</h2><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>圆上有N个点，在这些点之间连一些不相交的弦（共同端点也算相交，即一个顶点只能连接0或1条弦，可以一条弦也不连），问共有多少种连法。</p>
+<h2 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h2><p>我们可以建立一个圆的内接正i边型； 当第i个顶点参与连线，任选一点a，枚举另一不同的点b，则余下的点被分为两部分，这部分方案数则为两组新的顶点方案数之积； 当其不参与连线，其他顶点间关系保持不变，这部分方案数即为F[i-1]； 将两部分方案数加和即为F[i]。</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int f[2000];
+int n;
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    f[0]=1;f[1]=1;f[2]=2;
+    for(int i=3;i&lt;=n;i++)
+    {
+        f[i]=f[i-1];
+        for(int j=0;j&lt;=i-2;j++)
+            f[i]=(f[i]+(f[i-j-2]*f[j])%12345)%12345;
+    }
+    printf(&quot;%d&quot;,f[n]%12345);
+}</code></pre><h2 id="D1T3-排干净月潭水塘"><a href="#D1T3-排干净月潭水塘" class="headerlink" title="D1T3 排干净月潭水塘"></a>D1T3 排干净月潭水塘</h2><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>净月潭公园里有n个水塘，因为要做吉林省OIER们的宿营地，需要把这n个水塘中的水排干，水塘中的水在自然条件下1个单位的时间可以蒸发A升水。现在买了1台抽水机，使用抽水机可以让你用1个单位的时间使每个水塘除开自然蒸发的A升水外，还可抽B升水，但在1个单位的时间内只能对1个水塘使用。 要你求出排干所有水塘的最少时间（水塘中的水为0时为排干）。</p>
+<h2 id="思路：-2"><a href="#思路：-2" class="headerlink" title="思路："></a>思路：</h2><p>二分答案,二分时间:对于每件衣服a[i],设需要抽水机工作x时，自然蒸干mid小时 所以我们能推出：mid*t1+t2*x=a[i] 整理得：x=(a[i]-mid*t1)/t2 (a[i]&gt;mid*t1),向上取整 累加得出sum,如果sum&gt;mid说明不合法 反之，则合法 <strong>然而考试时候公式推错了，-40分 QAQ</strong></p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int n,t1,t2;
+int a[510000];
+int calc(int x,int y)
+{
+    if(x%y==0)return x/y;
+    return (x/y)+1;
+}
+int check(int x)
+{
+    int sum=x;
+    for(int i=1;i&lt;=n;i++)
+    {
+        if(a[i]&lt;=x*t1) continue;
+        sum-=calc((a[i]-t1*x),t2);
+        if(sum&lt;0)return 0;
+    }
+    return 1;
+}
+void find(int l,int r)
+{
+    int ans=0;
+    int mid=(l+r)&gt;&gt;1;
+    while(l&lt;r)
+    {
+        if(check(mid))
+            r=mid,ans=mid;
+        else l=mid+1;
+        mid=(l+r)&gt;&gt;1;
+    }    
+    printf(&quot;%d&quot;,ans);
+}
+int main()
+{
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;t1,&amp;t2);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%d&quot;,&amp;a[i]);
+     find(1,10000000);
+}</code></pre><h2 id="Day-1总结：做T3时思路还是不够清晰，竟然漏掉了题中的关键信息，-真是太可怕了-一定要-吸取教训，之后再接再厉QAQ"><a href="#Day-1总结：做T3时思路还是不够清晰，竟然漏掉了题中的关键信息，-真是太可怕了-一定要-吸取教训，之后再接再厉QAQ" class="headerlink" title="Day 1总结：做T3时思路还是不够清晰，竟然漏掉了题中的关键信息，  真是太可怕了 一定要 吸取教训，之后再接再厉QAQ"></a><strong>Day 1总结：做T3时思路还是不够清晰，竟然漏掉了题中的关键信息，  真是太可怕了 一定要 吸取教训，之后再接再厉QAQ</strong></h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag"># 模拟</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" rel="tag"># 二分答案</a>
+              <a href="/tags/%E9%80%92%E6%8E%A8/" rel="tag"># 递推</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/01/10/lca-%E6%A8%A1%E6%9D%BF/" rel="prev" title="LCA 模板">
+      <i class="fa fa-chevron-left"></i> LCA 模板
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/14/oi-2017-winter-day-2/" rel="next" title="OI 2017 吉大冬令营 Day 2">
+      OI 2017 吉大冬令营 Day 2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

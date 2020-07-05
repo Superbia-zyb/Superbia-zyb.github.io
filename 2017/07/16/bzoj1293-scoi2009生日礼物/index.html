@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description小西有一条很长的彩带，彩带上挂着各式各样的彩珠。已知彩珠有N个，分为K种。简单的说，可以将彩带考虑为x轴，每一个彩珠有一个对应的坐标(即位置)。某些坐标上可以没有彩珠，但多个彩珠也可以出现在同一个位置上。 小布生日快到了，于是小西打算剪一段彩带送给小布。为了让礼物彩带足够漂亮，小西希望这一段彩带中能包含所有种类的彩珠。同时，为了方便，小西希望这段彩带尽可能短，你能帮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1293] [SCOI2009]生日礼物">
+<meta property="og:url" content="http://yoursite.com/2017/07/16/bzoj1293-scoi2009%E7%94%9F%E6%97%A5%E7%A4%BC%E7%89%A9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description小西有一条很长的彩带，彩带上挂着各式各样的彩珠。已知彩珠有N个，分为K种。简单的说，可以将彩带考虑为x轴，每一个彩珠有一个对应的坐标(即位置)。某些坐标上可以没有彩珠，但多个彩珠也可以出现在同一个位置上。 小布生日快到了，于是小西打算剪一段彩带送给小布。为了让礼物彩带足够漂亮，小西希望这一段彩带中能包含所有种类的彩珠。同时，为了方便，小西希望这段彩带尽可能短，你能帮">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-07-16T08:02:44.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.415Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="省选题">
+<meta property="article:tag" content="双指针法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/07/16/bzoj1293-scoi2009%E7%94%9F%E6%97%A5%E7%A4%BC%E7%89%A9/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1293] [SCOI2009]生日礼物 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">6.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析："><span class="nav-number">7.</span> <span class="nav-text">题目分析：</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/bzoj1293-scoi2009%E7%94%9F%E6%97%A5%E7%A4%BC%E7%89%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1293] [SCOI2009]生日礼物
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-07-16 16:02:44" itemprop="dateCreated datePublished" datetime="2017-07-16T16:02:44+08:00">2017-07-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1293" target="_blank" rel="noopener">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>小西有一条很长的彩带，彩带上挂着各式各样的彩珠。已知彩珠有N个，分为K种。简单的说，可以将彩带考虑为x轴，每一个彩珠有一个对应的坐标(即位置)。某些坐标上可以没有彩珠，但多个彩珠也可以出现在同一个位置上。 小布生日快到了，于是小西打算剪一段彩带送给小布。为了让礼物彩带足够漂亮，小西希望这一段彩带中能包含所有种类的彩珠。同时，为了方便，小西希望这段彩带尽可能短，你能帮助小西计算这个最短的长度么？彩带的长度即为彩带开始位置到结束位置的位置差。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行包含两个整数N, K，分别表示彩珠的总数以及种类数。接下来K行，每行第一个数为Ti，表示第i种彩珠的数目。接下来按升序给出Ti个非负整数，为这Ti个彩珠分别出现的位置。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>应包含一行，为最短彩带长度。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>6 3
+1 5
+2 1 7
+3 1 3 8</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>3</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>有多种方案可选，其中比较短的是1<del>5和5</del>8。后者长度为3最短。 【数据规模】 对于50%的数据， N≤10000； 对于80%的数据， N≤800000； 对于100%的数据，1≤N≤1000000，1≤K≤60，0≤彩珠位置&lt;2^31。</p>
+<h2 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h2><p>离线位置+双指针乱搞，注意l++时要把处在同一位置的彩珠都删去，r++时同理</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int cnt;
+int num[100];
+int n,k;
+struct your
+{
+    int x,id;
+}a[1000100];
+int tot;
+int cmp(your j,your k)
+{
+    return j.id&lt;k.id;
+}
+long long ans=1000000000;
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+    for(int i=1;i&lt;=k;i++)
+    {
+        int tmp;
+        scanf(&quot;%d&quot;,&amp;tmp);
+        for(int j=1;j&lt;=tmp;j++)
+        {
+            int x;
+            scanf(&quot;%d&quot;,&amp;x);
+            x++,tot++,a[tot].x=i,a[tot].id=x;
+        }
+    }
+    sort(a+1,a+n+1,cmp);
+    int l=1,r=0;
+    for(int i=1;i&lt;=n;)
+    {
+        num[a[i].x]++;
+        if(num[a[i].x]==1) cnt++;
+        while(i&lt;n&amp;&amp;a[i].id==a[i+1].id) 
+        {
+            i++;
+            num[a[i].x]++;
+            if(num[a[i].x]==1) cnt++;
+        }
+        if(cnt==k)
+        {
+            if(ans&gt;a[i].id-a[l].id) 
+                ans=a[i].id-a[l].id;
+            while(l&lt;=i&amp;&amp;cnt==k)
+            {
+                if(ans&gt;a[i].id-a[l].id) 
+                    ans=a[i].id-a[l].id;
+                num[a[l].x]--;
+                if(num[a[l].x]==0) cnt--;   
+                l++;
+                while(l&lt;=i&amp;&amp;a[l].id==a[l-1].id)
+                {
+                    num[a[l].x]--;
+                    if(num[a[l].x]==0) cnt--;
+                    l++;
+                }
+            }
+        }
+        i++;
+    }
+    printf(&quot;%lld&quot;,ans);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E7%9C%81%E9%80%89%E9%A2%98/" rel="tag"># 省选题</a>
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88%E6%B3%95/" rel="tag"># 双指针法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/15/bzoj4517-sdoi2016%E6%8E%92%E5%88%97%E8%AE%A1%E6%95%B0/" rel="prev" title="[BZOJ4517] [Sdoi2016]排列计数">
+      <i class="fa fa-chevron-left"></i> [BZOJ4517] [Sdoi2016]排列计数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/16/bzoj1858-scoi2010%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C/" rel="next" title="[BZOJ1858] [Scoi2010]序列操作">
+      [BZOJ1858] [Scoi2010]序列操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

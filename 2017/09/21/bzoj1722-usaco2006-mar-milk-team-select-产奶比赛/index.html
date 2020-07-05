@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionFarmer John’s N (1 &lt;&#x3D; N &lt;&#x3D; 500) cows are trying to select the milking team for the world-famous Multistate Milking Match-up (MMM) competition. As you probably know, any team that">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛">
+<meta property="og:url" content="http://yoursite.com/2017/09/21/bzoj1722-usaco2006-mar-milk-team-select-%E4%BA%A7%E5%A5%B6%E6%AF%94%E8%B5%9B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionFarmer John’s N (1 &lt;&#x3D; N &lt;&#x3D; 500) cows are trying to select the milking team for the world-famous Multistate Milking Match-up (MMM) competition. As you probably know, any team that">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-21T02:21:56.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.622Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="树形DP">
+<meta property="article:tag" content="USACO">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/09/21/bzoj1722-usaco2006-mar-milk-team-select-%E4%BA%A7%E5%A5%B6%E6%AF%94%E8%B5%9B/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">2.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">3.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">4.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">5.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/21/bzoj1722-usaco2006-mar-milk-team-select-%E4%BA%A7%E5%A5%B6%E6%AF%94%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-21 10:21:56" itemprop="dateCreated datePublished" datetime="2017-09-21T10:21:56+08:00">2017-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1722" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Farmer John’s N (1 &lt;= N &lt;= 500) cows are trying to select the milking team for the world-famous Multistate Milking Match-up (MMM) competition. As you probably know, any team that produces at least X (1 &lt;= X &lt;= 1,000,000) gallons of milk is a winner. Each cow has the potential of contributing between -10,000 and 10,000 gallons of milk. (Sadly, some cows have a tendency to knock over jugs containing milk produced by other cows.) The MMM prides itself on promoting family values. FJ’s cows have no doubt that they can produce X gallons of milk and win the contest, but to support the contest’s spirit, they want to send a team with as many parent-child relationships as possible (while still producing at least X gallons of milk). Not surprisingly, all the cows on FJ’s farm are female. Given the family tree of FJ’s cows and the amount of milk that each would contribute, compute the maximum number of parent-child relationships that can exist in a winning team. Note that a set of cows with a grandmother-mother-daughter combination has two parent-child relationships (grandmother-mother, mother-daughter). 约翰的N(1≤N≤500)头奶牛打算组队去参加一个世界级的产奶比赛(Multistate Milking Match-up，缩写为MMM)．她们很清楚其他队的实力，也就是说，她们派出的队只要能产出至少X(I≤X≤1000000)加仑牛奶，就能赢得这场比赛． 每头牛都能为集体贡献一定量的牛奶，数值在-10000到10000之间（有些奶牛总是想弄翻装着其他奶牛产的奶的瓶子）． MMM的举办目的之一，是通过竞赛中的合作来增进家庭成员之间的默契．奶牛们认为她们总是能赢得这场比赛，但为了表示对比赛精神的支持，她们希望在选出的队伍里能有尽可能多的牛来自同一个家庭，也就是说，有尽可能多对的牛有直系血缘关系（当然，这支队伍必须能产出至少X加仑牛奶）．当然了，所有的奶牛都是女性，所以队伍里所有直系血亲都是母女关系． 约翰熟知所有奶牛之间的血缘关系．现在他想知道，如果在保证一支队伍能赢得比赛的情况下，队伍中最多能存在多少对血缘关系．注意，如果一支队伍由某头奶牛和她的母亲、她的外祖母组成，那这支队伍里一共有2对血缘关系（这头奶牛外祖母与她的母亲，以及她与她的母亲）． Input</p>
+<ul>
+<li>Line 1: Two space-separated integers, N and X. * Lines 2..N+1: Line i+1 contains two space-separated integers describing cow i. The first integer is the number of gallons of milk cow i would contribute. The second integer (range 1..N) is the index of the cow’s mother. If the cow’s mother is unknown, the second number is 0. The family information has no cycles: no cow is her own mother, grandmother, etc.</li>
+</ul>
+<p>第1行：两个用空格隔开的整数N和X. 第2到N+1行：每行包括两个用空格隔开的整数，第一个数为一只奶牛能贡献出的牛奶的加仑数，第二个数表示她的母亲的编号．如果她的母亲不在整个牛群里，那第二个数为0．并且，血缘信息不会出现循环，也就是说一头奶牛不会是自己的母亲或祖母，或者更高代的祖先．</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><ul>
+<li>Line 1: The maximum number of parent-child relationships possible on a winning team. Print -1 if no team can win. 输出在一个能获胜的队伍中，最多可能存在的有血缘关系的牛的对数．如果任何一支队伍都不可能获胜，输出-1.</li>
+</ul>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5 8
+-1 0   //第一个数字代表这头奶的产量,第二个数字代表其父亲点是哪一个.
+3 1
+5 1
+-3 3
+2 0</code></pre><p>INPUT DETAILS: There are 5 cows. Cow 1 can produce -1 gallons and has two daughters, cow 2 and 3, who can produce 3 and 5 gallons, respectively. Cow 3 has a daughter (cow 4) who can produce -3 gallons. Then there’s cow 5, who canproduce 2 gallons.</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>2</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>约翰一共有5头奶牛．第1头奶牛能提供-1加仑的牛奶，且她是第2、第3头奶牛的母亲．第2、第3头奶牛的产奶量务别为3加仑和5加仑．第4头奶牛是第3头奶牛的女儿，她能提供-3加仑牛奶．还有与其他牛都没有关系的第5头奶牛，她的产奶量是2加仑． 最好的一支队伍包括第1，2，3，5头奶牛．她们一共能产出（-1）+3+5+2=9≥8加仑牛奶， 并且这支队伍里有2对牛有血缘关系（1—2和1-3）．如果只选第2，3，5头奶牛，虽然总产奶量会更高（10加仑），但这支队伍里包含的血缘关系的对数比上一种组合少（队伍里没有血缘关系对</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>树形DP $$f[i][j]$$ 表示以i为根的子树，选i，有j条边的最大产奶量 $$g[i][j]$$ 表示以i为根的子树，不选i，有j条边的最大产奶量 按照每个$$to[i]$$ 选与不选 分类讨论 $$f[x][0]=val[x],g[x][0]=0$$ $$f[x][j]=max(f[x][j-k]+f[to[i]][k-1],f[x][j-k]+g[to[i]][k])$$ $$g[x][j]=max(g[x][j-k]+max(f[to[i]][k],g[to[i]][k]))$$</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+int val[1010],fa[1010];
+int tot;
+int head[1010],to[5050],net[5050];
+int f[1010][510+10];
+int g[1010][510+10];
+void add(int x,int y)
+{
+    net[++tot]=head[x],head[x]=tot,to[tot]=y;
+}
+void dfs(int x)
+{   
+    f[x][0]=val[x];
+    g[x][0]=0;
+    for(int i=head[x];i;i=net[i])
+    {
+        if(to[i]==fa[x]) continue;
+        dfs(to[i]);
+        for(int j=n;j&gt;=0;j--)
+            for(int k=0;k&lt;=j;k++)
+            {
+                if(k) f[x][j]=max(f[x][j],f[x][j-k]+f[to[i]][k-1]);
+                f[x][j]=max(f[x][j],f[x][j-k]+g[to[i]][k]);
+                g[x][j]=max(g[x][j],g[x][j-k]+max(f[to[i]][k],g[to[i]][k]));
+            }
+    }
+}
+int main()
+{   
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%d%d&quot;,&amp;val[i],&amp;fa[i]),add(fa[i],i);
+    memset(f,0xef,sizeof f),memset(g,0xef,sizeof g);;
+    dfs(0);
+    for(int i=n;i&gt;=0;i--)
+        if(g[0][i]&gt;=m)
+        {
+            printf(&quot;%d&quot;,i);
+            return 0;
+        }
+    printf(&quot;-1&quot;);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%A0%91%E5%BD%A2DP/" rel="tag"># 树形DP</a>
+              <a href="/tags/USACO/" rel="tag"># USACO</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/21/bzoj4756-usaco2017-janpromotion-counting/" rel="prev" title="[BZOJ4756] [Usaco2017 Jan]Promotion Counting">
+      <i class="fa fa-chevron-left"></i> [BZOJ4756] [Usaco2017 Jan]Promotion Counting
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/21/bzoj2081-poi2010beads/" rel="next" title="[BZOJ2081] [Poi2010]Beads">
+      [BZOJ2081] [Poi2010]Beads <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

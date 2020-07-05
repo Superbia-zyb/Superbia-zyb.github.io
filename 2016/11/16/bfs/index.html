@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="算法简介： 广度优先搜索（也称宽度优先搜索，缩写BFS）是树的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。 一般可以用它做什么呢？一个最直观经典的例子就是走迷宫，我们从起点开始，找出到终点的最短路程，很多最短路径算法就是基于广度优先的思想成立的。(Spfa 时间复杂度最差情形下，BFS必须寻找所有到可能节点的所有路径，因此其时间复杂度为 O(|V| +">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BFS—广度优先搜索(入门)">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/bfs/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="算法简介： 广度优先搜索（也称宽度优先搜索，缩写BFS）是树的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。 一般可以用它做什么呢？一个最直观经典的例子就是走迷宫，我们从起点开始，找出到终点的最短路程，很多最短路径算法就是基于广度优先的思想成立的。(Spfa 时间复杂度最差情形下，BFS必须寻找所有到可能节点的所有路径，因此其时间复杂度为 O(|V| +">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://superbia.cn/wp-content/uploads/2016/11/214603617-e1479307160766-300x246.jpg">
+<meta property="og:image" content="https://superbia.cn/wp-content/uploads/2016/11/admin-ajax.jpg">
+<meta property="og:image" content="https://superbia.cn/wp-content/uploads/2016/11/%E6%9C%AA%E5%91%BD%E5%90%8D3-1.jpg">
+<meta property="article:published_time" content="2016-11-16T14:01:52.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.176Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="知识点复习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://superbia.cn/wp-content/uploads/2016/11/214603617-e1479307160766-300x246.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2016/11/16/bfs/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>BFS—广度优先搜索(入门) | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空间复杂度"><span class="nav-number">2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本实现思想："><span class="nav-number"></span> <span class="nav-text">基本实现思想：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪代码："><span class="nav-number"></span> <span class="nav-text">伪代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图解："><span class="nav-number"></span> <span class="nav-text">图解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题："><span class="nav-number"></span> <span class="nav-text">例题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意！！因为DFS会超时，甚至爆栈，所以地图寻找路径的题型必须用BFS！"><span class="nav-number"></span> <span class="nav-text">注意！！因为DFS会超时，甚至爆栈，所以地图寻找路径的题型必须用BFS！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续……"><span class="nav-number"></span> <span class="nav-text">未完待续……</span></a></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/bfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BFS—广度优先搜索(入门)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-11-16 22:01:52" itemprop="dateCreated datePublished" datetime="2016-11-16T22:01:52+08:00">2016-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>算法简介： 广度优先搜索（也称宽度优先搜索，缩写BFS）是树的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。 一般可以用它做什么呢？一个最直观经典的例子就是走迷宫，我们从起点开始，找出到终点的最短路程，很多最短路径算法就是基于广度优先的思想成立的。(Spfa</p>
+<h5 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h5><p>最差情形下，BFS必须寻找所有到可能节点的所有路径，因此其时间复杂度为 O(|V| + |E|)，其中 |V| 是节点的数目，而 |E| 是图中边的数目。</p>
+<h5 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h5><p>因为所有节点都必须被储存，因此BFS的空间复杂度为 O(|V| + |E|)，其中 |V| 是节点的数目，而 |E| 是图中边的数目。</p>
+<h2 id="基本实现思想："><a href="#基本实现思想：" class="headerlink" title="基本实现思想："></a>基本实现思想：</h2><p>设图G的初态是所有顶点均未访问，在G 中任选一顶点i作为初始点，则广度优先搜索的基本思想是： （1）从图中的某个顶点V出发，访问之；并将其访问标志置为已被访问,即book[i]=true； （2）依次访问顶点V的各个未被访问过的邻接点，将V的全部邻接点都访问到； （3）分别从这些邻接点出发，依次访问它们的未被访问过的邻接点，并使“先被访问的顶 点的邻接点”先于“后被访问的顶点的邻接点”被访问，直到图中所有已被访问过的顶 点的邻接点都被访问到。 <strong>依此类推，直到图中所有顶点都被访问完为止 ** 广度优先搜索在搜索访问一层时，需要记住已被访问的顶点，以便在访问下层顶点时，从已被访问的顶点出发搜索访问其邻接点。所以在广度优先搜索中需要设置一个队列</strong>Queue**，使已被访问的顶点顺序由队尾进入队列。在搜索访问下层顶点时，先从队首取出一个已被访问的上层顶点，再从该顶点出发搜索访问它的各个邻接点。</p>
+<h2 id="伪代码："><a href="#伪代码：" class="headerlink" title="伪代码："></a>伪代码：</h2><pre><code>void BFS()
+{
+    把起始源点的状态设置为已访问
+    将源点加入队列； 
+    while(队列元素不为空)
+    {
+        取出队首的元素
+        for(枚举)
+        {
+            if(当前点能被取出的元素遍历到)
+            {
+                标记当前点状态为已访问;
+                将当前枚举的点加入队列; 
+            } 
+        } 
+    }
+}</code></pre><h2 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h2><p><img src="https://superbia.cn/wp-content/uploads/2016/11/214603617-e1479307160766-300x246.jpg" alt="214603617"> 如图所示：BFS的遍历顺序分别为： A； B，C，D； E，F，G，H，I，J； K，L，M，N，O，P，Q，R； S，T，U； 也就是说：这种图的遍历的方式是一层层向下遍历的；只有在上一层全部更新完成后才会进行下一层；</p>
+<h2 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h2><p>1)：给出一个地图，起点为B，终点为C，’.’代表路，’*‘代表障碍，问从起点走到终点的最小步数与路径； 样例地图：</p>
+<pre><code>5 6
+B...*.
+..*...
+.**.*.
+..***.
+*..*.C</code></pre><p>BFS运行结果: <img src="https://superbia.cn/wp-content/uploads/2016/11/admin-ajax.jpg" alt="admin-ajax"> DFS运行结果： <img src="https://superbia.cn/wp-content/uploads/2016/11/%E6%9C%AA%E5%91%BD%E5%90%8D3-1.jpg" alt="%e6%9c%aa%e5%91%bd%e5%90%8d3"> BFS源代码：</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+char s[200];
+int f[200][200];
+int tmp[200][200];
+int dx[5]={0,0,1,-1,0};
+int dy[5]={0,1,0,0,-1};
+int n,m;
+int l1,l2,r1,r2;
+struct map
+{
+    int x,y,sum;
+}a[200];
+void BFS()
+{
+    queue&lt;map&gt;q;
+    tmp[l1][r1]=1;
+    map nmp;
+    nmp.x=l1;nmp.y=r1;nmp.sum=0;
+    q.push(nmp);
+    while(q.size())
+    {
+        nmp=q.front();
+        q.pop();
+        for(int i=1;i&lt;=4;i++)
+        {
+            int dxx=nmp.x+dx[i];
+            int dyy=nmp.y+dy[i];
+            if(dxx&gt;=1&amp;&amp;dxx&lt;=n&amp;&amp;dyy&gt;=1&amp;&amp;dyy&lt;=m)
+            {
+                if(f[dxx][dyy]==0&amp;&amp;tmp[dxx][dyy]==0)
+                {
+                    if(dxx==l2&amp;&amp;dyy==r2)
+                    {
+                        tmp[dxx][dyy]=nmp.sum+1;
+                        return ;
+                    }
+                    tmp[dxx][dyy]=nmp.sum+1;
+                    map temp;
+                    temp.x=dxx,temp.y=dyy;
+                    temp.sum=nmp.sum+1;
+                    q.push(temp);                   
+                }
+            }
+        }
+    }
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=n;i++)
+    {
+        scanf(&quot;%s&quot;,&amp;s[0]);
+        for(int j=0;j&lt;m;j++)
+        {
+            if(s[j]==&apos;*&apos;) f[i][j+1]=1;
+            if(s[j]==&apos;B&apos;) l1=i,r1=j+1;
+            if(s[j]==&apos;C&apos;) l2=i,r2=j+1;
+        }
+    }
+    BFS();
+    for(int i=1;i&lt;=n;i++)
+    {
+        for(int j=1;j&lt;=m;j++)
+        {
+            printf(&quot;%d &quot;,tmp[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }    
+}</code></pre><p>DFS源代码;</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cmath&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int f[200][200];
+bool tmp[200][200];
+int nmp[200][200];
+char s[200];
+int dx[5]={0,0,1,-1,0};
+int dy[5]={0,1,0,0,-1};
+int n,m;
+int ans=0x7f7f7f7f;
+int l1,l2,r1,r2;
+int k;
+void dfs(int x,int y,int sum)
+{
+    if(x==l2&amp;&amp;y==r2)
+    {
+        ans=min(sum,ans);
+        return ;
+    }
+    for(int i=1;i&lt;=4;i++)
+    {
+        int dxx=x+dx[i];
+        int dyy=y+dy[i];
+        if(dxx&gt;=1&amp;&amp;dxx&lt;=n&amp;&amp;dyy&gt;=1&amp;&amp;dyy&lt;=m)
+        {
+            if(f[dxx][dyy]==0&amp;&amp;tmp[dxx][dyy]==0)
+            {
+                nmp[dxx][dyy]=sum;
+                tmp[dxx][dyy]=1;
+                dfs(dxx,dyy,sum+1);
+                tmp[dxx][dyy]=0;
+            }
+        }
+    }
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=n;i++)
+    {
+        scanf(&quot;%s&quot;,&amp;s[0]);
+        for(int j=0;j&lt;m;j++)
+        {
+            if(s[j]==&apos;*&apos;) f[i][j+1]=1;
+            if(s[j]==&apos;B&apos;) l1=i,r1=j+1;
+            if(s[j]==&apos;C&apos;) l2=i,r2=j+1;
+        }
+    }
+    dfs(l1,r1,0);
+    for(int i=1;i&lt;=n;i++)
+    {
+        for(int j=1;j&lt;=m;j++)
+        {
+            printf(&quot;%d &quot;,nmp[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }   
+}</code></pre><p>现在大家应该能看出DFS与BFS的区别了吧；</p>
+<h2 id="注意！！因为DFS会超时，甚至爆栈，所以地图寻找路径的题型必须用BFS！"><a href="#注意！！因为DFS会超时，甚至爆栈，所以地图寻找路径的题型必须用BFS！" class="headerlink" title="注意！！因为DFS会超时，甚至爆栈，所以地图寻找路径的题型必须用BFS！"></a>注意！！因为DFS会超时，甚至爆栈，所以地图寻找路径的题型必须用BFS！</h2><p>2):3032: USACO 2016 Jan Bronze 2.Angry Cows</p>
+<p>给出n个炸弹的坐标，任选一个炸弹让它爆炸，第一次爆炸的范围是1，如果其他炸弹的坐标差与其小于等于1，就会被引爆，第二轮被引爆的炸弹的爆炸范围+1=2； 就这样传递下去，问最多能引爆几个炸弹？</p>
+<p>思路：枚举所有炸弹作为第一个被引爆的炸弹，BFS一下，统计出能被引爆的炸弹，取最大值即为答案；</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int n,ans;
+bool book[200];
+struct your
+{
+    int c,sum;
+}a[200];
+int search(int x)
+{
+    int k=1;
+    queue&lt;your&gt;q;
+    your tmp;
+    tmp.c=a[x].c;
+    tmp.sum=1;
+    q.push(tmp);//将源点压入队列 
+    while(q.size())
+    {
+        tmp=q.front();
+        q.pop();
+        for(int i=1;i&lt;=n;i++)
+        {
+            if(book[i]==0&amp;&amp;abs(tmp.c-a[i].c)&lt;=tmp.sum)//判断是否能被引爆 
+            {
+                k++;
+                book[i]=true;
+                your temp;
+                temp.c=a[i].c;
+                temp.sum=tmp.sum+1;
+                q.push(temp);//加入队列中 
+            }   
+        }
+    }
+    return k;
+}
+void init()
+{
+    memset(book,false,sizeof book);
+    for(int i=1;i&lt;=n;i++)
+        a[i].sum=0;
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;++i)
+        scanf(&quot;%d&quot;,&amp;a[i].c);
+    for(int i=1;i&lt;=n;i++)
+    {
+        init();//清空 ，初始 
+        book[i]=true;
+        ans=max(ans,search(i));
+    }
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre><h2 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%8D%E4%B9%A0/" rel="tag"># 知识点复习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/11/14/zero-1-%E6%B0%B4%E9%A2%98%E6%AC%A2%E4%B9%90%E8%B5%9B/" rel="prev" title="Zero 1 水题欢乐赛">
+      <i class="fa fa-chevron-left"></i> Zero 1 水题欢乐赛
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/11/22/noip2016/" rel="next" title="NOIP2016 总结">
+      NOIP2016 总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description每天,农夫John需要经过一些道路去检查牛棚N里面的牛. 农场上有M(1&lt;&#x3D;M&lt;&#x3D;50,000)条双向泥土道路,编号为1..M. 道路i连接牛棚P1_i和P2_i (1 &lt;&#x3D; P1_i &lt;&#x3D; N; 1 &lt;&#x3D; P2_i&lt;&#x3D; N). John需要T_i (1 &lt;&#x3D; T_i &lt;&#x3D; 1,000,000)时间单位用道路i从P1_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="USACO 2009 Feb Gold 3.Revamping Trails">
+<meta property="og:url" content="http://yoursite.com/2017/03/04/usaco-2009-feb-gold-3-revamping-trails/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description每天,农夫John需要经过一些道路去检查牛棚N里面的牛. 农场上有M(1&lt;&#x3D;M&lt;&#x3D;50,000)条双向泥土道路,编号为1..M. 道路i连接牛棚P1_i和P2_i (1 &lt;&#x3D; P1_i &lt;&#x3D; N; 1 &lt;&#x3D; P2_i&lt;&#x3D; N). John需要T_i (1 &lt;&#x3D; T_i &lt;&#x3D; 1,000,000)时间单位用道路i从P1_">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-03-04T12:24:56.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.242Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="USACO">
+<meta property="article:tag" content="分层图">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/03/04/usaco-2009-feb-gold-3-revamping-trails/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>USACO 2009 Feb Gold 3.Revamping Trails | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">4.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/04/usaco-2009-feb-gold-3-revamping-trails/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          USACO 2009 Feb Gold 3.Revamping Trails
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-04 20:24:56" itemprop="dateCreated datePublished" datetime="2017-03-04T20:24:56+08:00">2017-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://oj.jdfz.com.cn/oldoj/problem.php?id=2626" target="_blank" rel="noopener">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>每天,农夫John需要经过一些道路去检查牛棚N里面的牛. 农场上有M(1&lt;=M&lt;=50,000)条双向泥土道路,编号为1..M. 道路i连接牛棚P1_i和P2_i (1 &lt;= P1_i &lt;= N; 1 &lt;= P2_i&lt;= N). John需要T_i (1 &lt;= T_i &lt;= 1,000,000)时间单位用道路i从P1_i走到P2_i或者从P2_i 走到P１_i 他想更新一些路经来减少每天花在路上的时间.具体地说,他想更新K (1 &lt;= K &lt;= 20)条路经，将它们所须时间减为0．帮助FJ选择哪些路经需要更新使得从１到N的时间尽量少.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行: 三个空格分开的数: N, M, 和 K * 第2..M+1行: 第i+1行有三个空格分开的数：P1_i, P2_i, 和 T_i</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>第一行: 更新最多Ｋ条路经后的最短路长度．</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>分层图最短路 f[i][j]表示改变j条路径后 从1~i的最短距离</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m,k;
+int start,end;
+int head[200000];
+int next[200000];
+int to[200000];
+int val[200000];
+bool vis[20000][22];
+int f[20000][22];
+struct your
+{
+    int x,t;
+};
+int read()
+{
+    int sum=0;
+    char c;
+    c=getchar();
+    while(c==&apos; &apos;||c==&apos;\n&apos;)
+        c=getchar();
+    while(c&lt;=&apos;9&apos;&amp;&amp;c&gt;=&apos;0&apos;)
+        sum=(sum&lt;&lt;3)+(sum&lt;&lt;1)+(c-&apos;0&apos;),c=getchar();
+    return sum;
+}
+struct cmp
+{
+    bool operator()(const your j,const your k)
+    {
+        return f[j.x][j.t]&gt;f[k.x][k.t];
+    } 
+};
+priority_queue&lt;your,vector&lt;your&gt;,cmp&gt;q;
+void spfa()
+{
+    your nmp;
+    nmp.x=1;
+    nmp.t=0;
+    memset(f,0x3f,sizeof f);
+    f[1][0]=0;
+    vis[1][0]=1;
+    q.push(nmp);
+    while(q.size())
+    {
+        nmp=q.top();
+        q.pop();
+        vis[nmp.x][nmp.t]=false;
+        for(int i=head[nmp.x];i;i=next[i])
+        {
+            if(f[to[i]][nmp.t]&gt;f[nmp.x][nmp.t]+val[i])
+            {
+                f[to[i]][nmp.t]=f[nmp.x][nmp.t]+val[i];
+                if(!vis[to[i]][nmp.t])
+                {
+                    your tmp;
+                    tmp.x=to[i];
+                    tmp.t=nmp.t;
+                    vis[to[i]][nmp.t]=true;
+                    q.push(tmp);
+                }
+            }
+        }
+        if(nmp.t==k) continue;
+        for(int i=head[nmp.x];i;i=next[i])
+        {
+            if(f[to[i]][nmp.t+1]&gt;f[nmp.x][nmp.t])
+            {
+                f[to[i]][nmp.t+1]=f[nmp.x][nmp.t];
+                if(!vis[to[i]][nmp.t+1])
+                {
+                    your tmp;
+                    tmp.x=to[i];
+                    tmp.t=nmp.t+1;
+                    vis[to[i]][nmp.t+1]=true;
+                    q.push(tmp);
+                }
+            }
+        }
+    }
+}
+int tot;
+void add(int x,int y,int c)
+{
+    next[++tot]=head[x];
+    to[tot]=y;
+    val[tot]=c;
+    head[x]=tot;
+}
+int main()
+{
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y,c;
+        x=read();
+        y=read();
+        c=read();
+        add(x,y,c);
+        add(y,x,c);
+    }
+    spfa();
+    int ans=0x7f7f7f7f;
+    for(int i=0;i&lt;=k;i++)
+        ans=min(ans,f[n][i]);
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/USACO/" rel="tag"># USACO</a>
+              <a href="/tags/%E5%88%86%E5%B1%82%E5%9B%BE/" rel="tag"># 分层图</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/03/03/usaco-2014-dec-silver-1-piggy-back/" rel="prev" title="USACO 2014 Dec Silver 1.Piggy back">
+      <i class="fa fa-chevron-left"></i> USACO 2014 Dec Silver 1.Piggy back
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/03/04/usaco-2013-dec-gold-2-optimal-milking/" rel="next" title="USACO 2013 Dec Gold 2.Optimal Milking">
+      USACO 2013 Dec Gold 2.Optimal Milking <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionThe cows have once again tried to form a startup company, failing to remember from past experience that cows make terrible managers!The cows, conveniently numbered 1…N1…N (1≤N≤100,000)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ4756] [Usaco2017 Jan]Promotion Counting">
+<meta property="og:url" content="http://yoursite.com/2017/09/21/bzoj4756-usaco2017-janpromotion-counting/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionThe cows have once again tried to form a startup company, failing to remember from past experience that cows make terrible managers!The cows, conveniently numbered 1…N1…N (1≤N≤100,000)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-21T02:04:50.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.621Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="树状数组">
+<meta property="article:tag" content="USACO">
+<meta property="article:tag" content="dfs序">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/09/21/bzoj4756-usaco2017-janpromotion-counting/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ4756] [Usaco2017 Jan]Promotion Counting | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/21/bzoj4756-usaco2017-janpromotion-counting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ4756] [Usaco2017 Jan]Promotion Counting
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-21 10:04:50" itemprop="dateCreated datePublished" datetime="2017-09-21T10:04:50+08:00">2017-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4756" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>The cows have once again tried to form a startup company, failing to remember from past experience that cows make terrible managers!The cows, conveniently numbered 1…N1…N (1≤N≤100,000), organize the company as a tree, with cow 1 as the president (the root of the tree). Each cow except the president has a single manager (its “parent” in the tree). Each cow ii has a distinct proficiency rating, p(i), which describes how good she is at her job. If cow ii is an ancestor (e.g., a manager of a manager of a manager) of cow jj, then we say jj is a subordinate of ii. Unfortunately, the cows find that it is often the case that a manager has less proficiency than seve ral of her subordinates, in which case the manager should consider promoting some of her subordinate s. Your task is to help the cows figure out when this is happening. For each cow ii in the company, please count the number of subordinates jj where p(j)&gt;p(i). n只奶牛构成了一个树形的公司，每个奶牛有一个能力值pi，1号奶牛为树根。 问对于每个奶牛来说，它的子树中有几个能力值比它大的。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of input contains N The next N lines of input contain the proficiency ratings p(1)…p(N) for the cows. Each is a distinct integer in the range 1…1,000,000,000 The next N-1 lines describe the manager (parent) for cows 2…N Recall that cow 1 has no manager, being the president. n，表示有几只奶牛 n&lt;=100000 接下来n行为1-n号奶牛的能力值pi 接下来n-1行为2-n号奶牛的经理（树中的父亲）</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>Please print N lines of output. The ith line of output should tell the number of subordinates of cow ii with higher proficiency than cow i. 共n行，每行输出奶牛i的下属中有几个能力值比i大</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5
+804289384
+846930887
+681692778
+714636916
+957747794
+1
+1
+2
+3</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>2
+0
+1
+0
+0</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>dfs序是个好东西 但是不太会用 这道题直接树状数组+dfs序就可以了</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n;
+int head[100100],to[100100*2],net[100100*2];
+struct your
+{
+    long long val;
+    int id;
+}a[100100];
+int tot;
+void add(int x,int y)
+{
+    net[++tot]=head[x];
+    head[x]=tot;
+    to[tot]=y;
+}
+int in[100100],out[100100];
+int cnt;
+void dfs(int x)
+{
+    in[x]=++cnt;
+    for(int i=head[x];i;i=net[i])
+        dfs(to[i]);
+    out[x]=cnt;
+}
+int cmp(your j,your k)
+{
+    return j.val&gt;k.val;
+}
+int ans[100100],f[100100];
+int ask(int x)
+{
+    long long sum=0;
+    for(;x&lt;=n;x+=x&amp;-x) sum+=f[x];
+    return sum;
+}
+void update(int x)
+{
+    for(;x;x-=x&amp;-x) f[x]++;
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%lld&quot;,&amp;a[i].val),a[i].id=i;
+    for(int x,i=2;i&lt;=n;i++)
+        scanf(&quot;%d&quot;,&amp;x),add(x,i);
+    dfs(1);
+    sort(a+1,a+n+1,cmp);
+    for(int i=1;i&lt;=n;i++)
+    {
+        ans[a[i].id]=ask(in[a[i].id])-ask(out[a[i].id]+1);
+        update(in[a[i].id]);
+    }
+    for(int i=1;i&lt;=n;i++) printf(&quot;%d\n&quot;,ans[i]);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag"># 树状数组</a>
+              <a href="/tags/USACO/" rel="tag"># USACO</a>
+              <a href="/tags/dfs%E5%BA%8F/" rel="tag"># dfs序</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/21/bzoj4010-hnoi2015%E8%8F%9C%E8%82%B4%E5%88%B6%E4%BD%9C/" rel="prev" title="[BZOJ4010] [HNOI2015]菜肴制作">
+      <i class="fa fa-chevron-left"></i> [BZOJ4010] [HNOI2015]菜肴制作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/21/bzoj1722-usaco2006-mar-milk-team-select-%E4%BA%A7%E5%A5%B6%E6%AF%94%E8%B5%9B/" rel="next" title="[BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛">
+      [BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

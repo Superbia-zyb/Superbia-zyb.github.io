@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionN柱砖,希望有连续K柱的高度是一样的. 你可以选择以下两个动作 1:从某柱砖的顶端拿一块砖出来,丢掉不要了. 2:从仓库中拿出一块砖,放到另一柱.仓库无限大. 现在希望用最小次数的动作完成任务. Input第一行给出N,K. (1 ≤ k ≤ n ≤ 100000), 下面N行,每行代表这柱砖的高度.0 ≤ hi ≤ 1000000 Output最小的动作次数 Sa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1112] [POI2008]砖块Klo">
+<meta property="og:url" content="http://yoursite.com/2017/09/13/bzoj1112-poi2008%E7%A0%96%E5%9D%97klo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionN柱砖,希望有连续K柱的高度是一样的. 你可以选择以下两个动作 1:从某柱砖的顶端拿一块砖出来,丢掉不要了. 2:从仓库中拿出一块砖,放到另一柱.仓库无限大. 现在希望用最小次数的动作完成任务. Input第一行给出N,K. (1 ≤ k ≤ n ≤ 100000), 下面N行,每行代表这柱砖的高度.0 ≤ hi ≤ 1000000 Output最小的动作次数 Sa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-13T11:45:25.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.574Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="动态开点线段树">
+<meta property="article:tag" content="权值线段树">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/09/13/bzoj1112-poi2008%E7%A0%96%E5%9D%97klo/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1112] [POI2008]砖块Klo | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/13/bzoj1112-poi2008%E7%A0%96%E5%9D%97klo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1112] [POI2008]砖块Klo
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-13 19:45:25" itemprop="dateCreated datePublished" datetime="2017-09-13T19:45:25+08:00">2017-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1112" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>N柱砖,希望有连续K柱的高度是一样的. 你可以选择以下两个动作 1:从某柱砖的顶端拿一块砖出来,丢掉不要了. 2:从仓库中拿出一块砖,放到另一柱.仓库无限大. 现在希望用最小次数的动作完成任务.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行给出N,K. (1 ≤ k ≤ n ≤ 100000), 下面N行,每行代表这柱砖的高度.0 ≤ hi ≤ 1000000</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>最小的动作次数</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5 3
+3
+9
+2
+3
+1</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>2</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>最优情况是高度为区间中位数 (我不会证) 那么我们每枚举k个数 求出中位数 利用中位数求出答案 最后取最小值即可 令 $$lsize$$为小于等于中位数的数的个数 $$rsize$$为大于等于中位数的数的个数 $$lsum$$为小于等于中位数的数的和 $$rsum$$为大于等于中位数的数的和 $$tmp$$为中位数 $$ans=tmp\\times lsize-lsum+rsum-tmp\\times rsize$$ 这里使用动态开点权值线段树来求解中位数</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,k;
+struct your
+{
+    int x,y,size;
+    long long sum;
+}a[1000100*4];
+int val[100010];
+void build(int dx,int dy,int num)
+{
+    a[num].x=dx,a[num].y=dy;
+    if(dx==dy) return ;
+    int mid=(a[num].x+a[num].y)&gt;&gt;1;
+    build(dx,mid,num&lt;&lt;1),build(mid+1,dy,num&lt;&lt;1|1);
+}
+void update(int dx,int num,int c)
+{
+    if(a[num].x==dx&amp;&amp;a[num].y==dx)
+    {
+        a[num].size+=c;
+        a[num].sum=(long long) a[num].size*(dx-1);
+        return ;
+    }
+    int mid=(a[num].x+a[num].y)&gt;&gt;1;
+    if(dx&gt;mid) update(dx,num&lt;&lt;1|1,c);
+    else update(dx,num&lt;&lt;1,c);
+    a[num].size=a[num&lt;&lt;1].size+a[num&lt;&lt;1|1].size;
+    a[num].sum=a[num&lt;&lt;1].sum+a[num&lt;&lt;1|1].sum;
+}
+int getv(int dx,int num)
+{
+    if(a[num].x==a[num].y) return a[num].x;
+    if(dx&lt;=a[num&lt;&lt;1].size) return getv(dx,num&lt;&lt;1);
+    return getv(dx-a[num&lt;&lt;1].size,num&lt;&lt;1|1);
+}
+int getl(int dx,int num)
+{
+    if(dx&gt;=a[num].y) return a[num].size;
+    if(dx&lt;=a[num&lt;&lt;1].y) return getl(dx,num&lt;&lt;1);
+    else return a[num&lt;&lt;1].size+getl(dx,num&lt;&lt;1|1);
+}
+long long gets(int dx,int num)
+{
+    if(dx&gt;=a[num].y) return a[num].sum;
+    if(dx&lt;=a[num&lt;&lt;1].y) return gets(dx,num&lt;&lt;1);
+    else return a[num&lt;&lt;1].sum+gets(dx,num&lt;&lt;1|1);
+}
+long long value[100100],ans=100000000000000;
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;val[i]);
+    build(1,1000010,1);
+    for(int i=1;i&lt;=k;i++) update(val[i]+1,1,1);
+    for(int i=1;i&lt;=n;i++) value[i]=(long long)value[i-1]+val[i];
+    for(int i=k;i&lt;=n;i++)
+    {
+        int tmp=getv((k+1)&gt;&gt;1,1);
+        int lsize,rsize;
+        long long lsum,rsum;
+        lsize=getl(tmp,1),rsize=k-lsize;
+        lsum=gets(tmp,1),rsum=value[i]-value[i-k]-lsum;
+        tmp--;
+        long long nmp=(long long) tmp*lsize-lsum+rsum-(long long) tmp*rsize;
+        ans=min(ans,nmp);
+        if(i==n) continue;
+        update(val[i-k+1]+1,1,-1);
+        update(val[i+1]+1,1,1);
+    }
+    printf(&quot;%lld&quot;,ans);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 动态开点线段树</a>
+              <a href="/tags/%E6%9D%83%E5%80%BC%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 权值线段树</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/13/bzoj1121-poi2008%E6%BF%80%E5%85%89%E5%8F%91%E5%B0%84%E5%99%A8szk/" rel="prev" title="[BZOJ1121] [POI2008]激光发射器SZK">
+      <i class="fa fa-chevron-left"></i> [BZOJ1121] [POI2008]激光发射器SZK
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/13/bzoj2225-spoj-2371another-longest-increasing/" rel="next" title="[BZOJ2225] [Spoj 2371]Another Longest Increasing">
+      [BZOJ2225] [Spoj 2371]Another Longest Increasing <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

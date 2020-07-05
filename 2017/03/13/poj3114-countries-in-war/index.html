@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionIn the year 2050, after different attempts of the UN to maintain peace in the world, the third world war broke out. The importance of industrial, commercial and military secrets oblige">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ3114 Countries in War">
+<meta property="og:url" content="http://yoursite.com/2017/03/13/poj3114-countries-in-war/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionIn the year 2050, after different attempts of the UN to maintain peace in the world, the third world war broke out. The importance of industrial, commercial and military secrets oblige">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-03-13T11:45:39.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.268Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="spfa">
+<meta property="article:tag" content="tarjan">
+<meta property="article:tag" content="POJ">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/03/13/poj3114-countries-in-war/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>POJ3114 Countries in War | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析："><span class="nav-number">6.</span> <span class="nav-text">题目分析：</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/poj3114-countries-in-war/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          POJ3114 Countries in War
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-13 19:45:39" itemprop="dateCreated datePublished" datetime="2017-03-13T19:45:39+08:00">2017-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://poj.org/problem?id=3114" target="_blank" rel="noopener">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>In the year 2050, after different attempts of the UN to maintain peace in the world, the third world war broke out. The importance of industrial, commercial and military secrets obliges all the countries to use extremely sophisticated espionage services, so that each city in the world has at least one spy of each country. These spies need to communicate with other spies, informers as well as their headquarters during their actions. Unluckily there doesn’t exist a secure way for a spy to communicate during the war period, therefore the messages are always sent in code so that only the addressee is able to read the message and understand its meaning. The spies use the only service that functions during the war period, the post. Each city has a postal agency where the letters are sent. The letters can be sent directly to their destination or to other postal agencies, until the letter arrives at the postal agency of the destination city, if possible. The postal agency in city A can send a printed letter to the postal agency in city B if there is an agreement on sending letters, which determines the time, in hours, that a letter takes to reach city B from city A (and not necessarily the opposite). If there is no agreement between the agencies A and B, the agency A can try to send the letter to any agency so that the letter can reach its destination as early as possible Some agencies are connected with electronic communication media, such as satellites and optical fibers. Before the war, these connections could reach all the agencies, making that a letter could be sent instantly. But during the period of hostilities every country starts to control electronic communication and an agency can only send a letter to another agency by electronic media (or instantly) if they are in the same country. Two agencies, A and B, are in the same country if a printed letter sent from any one of the agencies can be delivered to the other one. The espionage service of your country has managed to obtain the content of all the agreements on sending messages existing in the world and desires to find out the minimum time to send a letter between different pairs of cities. Are you capable of helping them?</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The input contains several test cases. The first line of each test case contains two integer separated by a space, <em>N</em> (1 ≤ <em>N</em> ≤ 500) and <em>E</em> (0 ≤ <em>E</em> ≤ <em>N</em>2), indicating the numbers of cities (numbered from 1 to <em>N</em>) and of agreements on sending messages, respectively. Following them, then, <em>E</em> lines, each containing three integers separated by spaces, <em>X</em>, <em>Y</em> and <em>H</em> (1 ≤ <em>X</em>, <em>Y</em> ≤ <em>N</em>, 1 ≤ <em>H</em> ≤ 1000), indicating that there exist an agreement to send a printed letter from city <em>X</em> to city <em>Y</em>, and that such a letter will be delivered in <em>H</em> hours. After that, there will be a line with an integer <em>K</em> (0 ≤ <em>K</em> ≤ 100), the number of queries. Finally, there will be <em>K</em> lines, each representing a query and containing two integers separated by a space, <em>O</em> and <em>D</em> (1 ≤ <em>O</em>, <em>D</em> ≤ <em>N</em>). You must determine the minimum time to send a letter from city <em>O</em> to city <em>D</em>. The end of the input is indicated by <em>N</em> = 0.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each test case your program should produce <em>K</em> lines of output. The <em>I</em>-th line should contain an integer <em>M</em>, the minimum time, in hours, to send a letter in the <em>I</em>-th query. If there aren’t communication media between the cities of the query, you should print “Nao e possivel entregar a carta” (“It’s impossible to deliver the letter”). Print a blank line after each test case.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>4 5
+1 2 5
+2 1 10
+3 4 8
+4 3 7
+2 3 6
+5
+1 2
+1 3
+1 4
+4 3
+4 1
+3 3
+1 2 10
+2 3 1
+3 2 1
+3
+1 3
+3 1
+3 2
+0 0</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>0
+6
+6
+0
+Nao e possivel entregar a carta
+
+10
+Nao e possivel entregar a carta
+0</code></pre><h2 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h2><p>题目大意：给出一些城市之间的有向路，如果两个城市间互相连通，则说明这两个城市属于同一国家，传递邮件不需要时间。不在同一国家则需要时间。给出一些询问，输出俩城市间的最短路，若不能到达，则输出那句英文。 先用Tarjan缩点，再Spfa.</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+int w[505][505];
+int f[505][505];
+int head[505];
+int to[250005];
+int val[250005];
+int next[250005];
+int deep[505];
+int low[505];
+int color,time;
+bool vis[505];
+int stack[505];
+int belong[505];
+int tot;
+void init()
+{
+    color=0;
+    time=0;tot=0;
+    memset(vis,false,sizeof vis);
+    memset(stack,0,sizeof stack);
+    memset(low,0,sizeof low);
+    memset(belong,0,sizeof belong);
+    memset(deep,0,sizeof deep);
+    memset(to,0,sizeof to);
+    memset(val,0,sizeof val);
+    memset(next,0,sizeof next);
+    memset(head,0,sizeof head);
+    memset(w,0x3f,sizeof w);
+    memset(f,0x3f,sizeof f);
+}
+void add(int x,int y,int c)
+{
+    next[++tot]=head[x];
+    to[tot]=y;
+    val[tot]=c;
+    head[x]=tot;
+}
+void tarjan(int x)
+{
+    deep[x]=low[x]=++time;
+    stack[++stack[0]]=x;
+    vis[x]=true;
+    for(int i=head[x];i;i=next[i])
+    {
+        if(!deep[to[i]])
+        {
+            tarjan(to[i]);
+            low[x]=min(low[x],low[to[i]]);
+        }
+        else if(vis[to[i]])
+            low[x]=min(low[x],deep[to[i]]);
+    }
+    if(deep[x]==low[x])
+    {
+        color++;
+        int tmp;
+        do
+        {
+            tmp=stack[stack[0]--];
+            belong[tmp]=color;
+            vis[tmp]=false;
+        }while(tmp!=x);
+    }
+}
+bool visit[505];
+int dis[505];
+void spfa(int x)
+{
+    queue&lt;int&gt;q;
+    q.push(x);
+    memset(dis,0x3f,sizeof dis);
+    memset(visit,false,sizeof visit);
+    visit[x]=true;
+    dis[x]=0;
+    while(q.size())
+    {
+        int nmp=q.front();
+        q.pop();
+        visit[nmp]=false;
+        for(int i=1;i&lt;=color;i++)
+            if(dis[i]&gt;dis[nmp]+f[nmp][i])
+            {
+                dis[i]=dis[nmp]+f[nmp][i];
+                if(!visit[i])
+                {
+                    visit[i]=true;
+                    q.push(i);
+                }
+            }
+    }
+}
+int main()
+{
+    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)&amp;&amp;n!=0)
+    {
+        init();
+        for(int i=1;i&lt;=m;i++)
+        {
+            int x,y,c;
+            scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;c);
+            add(x,y,c);
+            w[x][y]=min(w[x][y],c);
+        } 
+        for(int i=1;i&lt;=n;i++)
+            if(!deep[i]) tarjan(i);
+        for(int i=1;i&lt;=n;i++) f[i][i]=0;
+        for(int i=1;i&lt;=n;i++)
+            for(int j=1;j&lt;=n;j++)
+                if(i!=j&amp;&amp;(belong[i]!=belong[j]))
+                    f[belong[i]][belong[j]]=min(f[belong[i]][belong[j]],w[i][j]);
+        int k;
+        scanf(&quot;%d&quot;,&amp;k);
+        for(int i=1;i&lt;=k;i++)
+        {
+            int x,y;
+            scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+            if(belong[x]==belong[y])
+                printf(&quot;0\n&quot;);
+            else
+            {
+                spfa(belong[x]);
+                if(dis[belong[y]]!=0x3f3f3f3f)
+                    printf(&quot;%d\n&quot;,dis[belong[y]]);
+                else printf(&quot;Nao e possivel entregar a carta\n&quot;);
+            }
+        } 
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/spfa/" rel="tag"># spfa</a>
+              <a href="/tags/tarjan/" rel="tag"># tarjan</a>
+              <a href="/tags/POJ/" rel="tag"># POJ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/03/13/scoi2005%E4%BA%92%E4%B8%8D%E4%BE%B5%E7%8A%AFking/" rel="prev" title="[BZOJ1087] [SCOI2005]互不侵犯King">
+      <i class="fa fa-chevron-left"></i> [BZOJ1087] [SCOI2005]互不侵犯King
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/03/13/poj3249-test-for-job/" rel="next" title="POJ3249 Test for Job">
+      POJ3249 Test for Job <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

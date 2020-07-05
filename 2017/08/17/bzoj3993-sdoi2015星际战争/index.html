@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description3333年，在银河系的某星球上，X军团和Y军团正在激烈地作战。在战斗的某一阶段，Y军团一共派遣了N个巨型机器人进攻X军团的阵地，其中第i个巨型机器人的装甲值为Ai。当一个巨型机器人的装甲值减少到0或者以下时，这个巨型机器人就被摧毁了。X军团有M个激光武器，其中第i个激光武器每秒可以削减一个巨型机器人Bi的装甲值。激光武器的攻击是连续的。这种激光武器非常奇怪，一个激光">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ3993] [SDOI2015]星际战争">
+<meta property="og:url" content="http://yoursite.com/2017/08/17/bzoj3993-sdoi2015%E6%98%9F%E9%99%85%E6%88%98%E4%BA%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description3333年，在银河系的某星球上，X军团和Y军团正在激烈地作战。在战斗的某一阶段，Y军团一共派遣了N个巨型机器人进攻X军团的阵地，其中第i个巨型机器人的装甲值为Ai。当一个巨型机器人的装甲值减少到0或者以下时，这个巨型机器人就被摧毁了。X军团有M个激光武器，其中第i个激光武器每秒可以削减一个巨型机器人Bi的装甲值。激光武器的攻击是连续的。这种激光武器非常奇怪，一个激光">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-08-17T02:03:55.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.499Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="省选题">
+<meta property="article:tag" content="最大流">
+<meta property="article:tag" content="二分答案">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/08/17/bzoj3993-sdoi2015%E6%98%9F%E9%99%85%E6%88%98%E4%BA%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ3993] [SDOI2015]星际战争 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">6.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">7.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/bzoj3993-sdoi2015%E6%98%9F%E9%99%85%E6%88%98%E4%BA%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ3993] [SDOI2015]星际战争
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-17 10:03:55" itemprop="dateCreated datePublished" datetime="2017-08-17T10:03:55+08:00">2017-08-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3993" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>3333年，在银河系的某星球上，X军团和Y军团正在激烈地作战。在战斗的某一阶段，Y军团一共派遣了N个巨型机器人进攻X军团的阵地，其中第i个巨型机器人的装甲值为Ai。当一个巨型机器人的装甲值减少到0或者以下时，这个巨型机器人就被摧毁了。X军团有M个激光武器，其中第i个激光武器每秒可以削减一个巨型机器人Bi的装甲值。激光武器的攻击是连续的。这种激光武器非常奇怪，一个激光武器只能攻击一些特定的敌人。Y军团看到自己的巨型机器人被X军团一个一个消灭，他们急需下达更多的指令。为了这个目标，Y军团需要知道X军团最少需要用多长时间才能将Y军团的所有巨型机器人摧毁。但是他们不会计算这个问题，因此向你求助。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行，两个整数，N、M。 第二行，N个整数，A1、A2…AN。 第三行，M个整数，B1、B2…BM。 接下来的M行，每行N个整数，这些整数均为0或者1。这部分中的第i行的第j个整数为0表示第i个激光武器不可以攻击第j个巨型机器人，为1表示第i个激光武器可以攻击第j个巨型机器人。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>一行，一个实数，表示X军团要摧毁Y军团的所有巨型机器人最少需要的时间。输出结果与标准答案的绝对误差不超过10-3即视为正确。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>2 2
+3 10
+4 6
+0 1
+1 1</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>1.300000</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>【样例说明1】 战斗开始后的前0.5秒，激光武器1攻击2号巨型机器人，激光武器2攻击1号巨型机器人。1号巨型机器人被完全摧毁，2号巨型机器人还剩余8的装甲值； 接下来的0.8秒，激光武器1、2同时攻击2号巨型机器人。2号巨型机器人被完全摧毁。 对于全部的数据，1&lt;=N, M&lt;=50，1&lt;=Ai&lt;=105，1&lt;=Bi&lt;=1000，输入数据保证X军团一定能摧毁Y军团的所有巨型机器人</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>二分时间 s向每个武器连时间*攻击 每个武器向能连的机器人连inf 每个机器人向t连装甲值 判断是否满流即可 注意精度问题QAQ</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+int tot=1,head[6010],to[100010],net[100010];
+double val[100010];
+int s,t;
+double a[100],b[100];
+int f[110][110];
+void add(int x,int y,double c)
+{
+    net[++tot]=head[x],head[x]=tot,to[tot]=y,val[tot]=c;
+    net[++tot]=head[y],head[y]=tot,to[tot]=x,val[tot]=0;
+}
+int dis[100010];
+int bfs()
+{
+    queue&lt;int&gt;q;
+    memset(dis,0,sizeof dis);
+    q.push(s);
+    dis[s]=1;
+    while(q.size())
+    {
+        int nmp=q.front();
+        q.pop();
+        for(int i=head[nmp];i;i=net[i])
+            if(val[i]&gt;0&amp;&amp;!dis[to[i]])
+            {
+                dis[to[i]]=dis[nmp]+1;
+                q.push(to[i]);
+                if(to[i]==t) return 1;
+            }
+    }
+    return 0;
+}
+double dinic(int x,double flow)
+{
+    double tmp,temp=flow;
+    if(x==t) return flow;
+    for(int i=head[x];i;i=net[i])
+        if(val[i]&gt;0&amp;&amp;dis[to[i]]==dis[x]+1)
+        {
+            tmp=dinic(to[i],min(val[i],temp));
+            if(tmp&lt;1e-7) dis[to[i]]=0;
+            temp-=tmp,val[i]-=tmp,val[i^1]+=tmp;
+            if(temp&lt;1e-7) break;
+        }
+    return flow-temp;
+}
+int check(double mid)
+{
+    memset(head,0,sizeof head);
+    tot=1;
+    s=0,t=n+m+1;
+    double sum=0;
+    for(int i=1;i&lt;=n;i++) add(i+m,t,a[i]),sum+=a[i];
+    for(int i=1;i&lt;=m;i++) add(s,i,b[i]*mid);
+    for(int i=1;i&lt;=m;i++)
+        for(int j=1;j&lt;=n;j++)
+            if(f[i][j]) add(i,j+m,10000000);
+    double ans=0;
+    while(bfs()) ans+=dinic(s,10000000);
+    return sum-ans&lt;=1e-7;
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lf&quot;,&amp;a[i]);
+    for(int i=1;i&lt;=m;i++) scanf(&quot;%lf&quot;,&amp;b[i]);
+    for(int i=1;i&lt;=m;i++)
+        for(int j=1;j&lt;=n;j++) 
+            scanf(&quot;%d&quot;,&amp;f[i][j]);
+    double l=0,r=6000000,mid;
+    int tot=100;
+    while(r-l&gt;1e-7)
+    {
+        mid=(l+r)/2;
+        if(check(mid)) r=mid;
+        else l=mid;
+    }
+    printf(&quot;%.6lf&quot;,r);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E7%9C%81%E9%80%89%E9%A2%98/" rel="tag"># 省选题</a>
+              <a href="/tags/%E6%9C%80%E5%A4%A7%E6%B5%81/" rel="tag"># 最大流</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" rel="tag"># 二分答案</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/08/17/bzoj1585-usaco2009-marearthquake-damage-2-%E5%9C%B0%E9%9C%87%E4%BC%A4%E5%AE%B3/" rel="prev" title="[BZOJ1585] [Usaco2009 Mar]Earthquake Damage 2 地震伤害">
+      <i class="fa fa-chevron-left"></i> [BZOJ1585] [Usaco2009 Mar]Earthquake Damage 2 地震伤害
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/08/17/bzoj1532-poi2005kos-dicing/" rel="next" title="[BZOJ1532] [POI2005]Kos-Dicing">
+      [BZOJ1532] [POI2005]Kos-Dicing <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

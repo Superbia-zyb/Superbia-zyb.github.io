@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionBessie and her sister Elsie want to travel from the barn to their favorite field, such that they leave at exactly the same time from the barn, and also arrive at exactly the same time">
+<meta property="og:type" content="article">
+<meta property="og:title" content="USACO 2015 Jan Silver 3.Meeting Time">
+<meta property="og:url" content="http://yoursite.com/2017/03/30/usaco-2015-jan-silver-3-meeting-time/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionBessie and her sister Elsie want to travel from the barn to their favorite field, such that they leave at exactly the same time from the barn, and also arrive at exactly the same time">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-03-30T02:54:05.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.295Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="USACO">
+<meta property="article:tag" content="拓扑排序">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/03/30/usaco-2015-jan-silver-3-meeting-time/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>USACO 2015 Jan Silver 3.Meeting Time | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">6.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析："><span class="nav-number">7.</span> <span class="nav-text">题目分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#f-to-i-j-f-nmp-j-w1-i-g-to-i-j-g-nmp-j-w2-i-f-1-0-g-1-0-1"><span class="nav-number">7.1.</span> <span class="nav-text">f[to[i]][j]|&#x3D;f[nmp][j-w1[i]];  g[to[i]][j]|&#x3D;g[nmp][j-w2[i]]; f[1][0]&#x3D;g[1][0]&#x3D;1;</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/usaco-2015-jan-silver-3-meeting-time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          USACO 2015 Jan Silver 3.Meeting Time
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-30 10:54:05" itemprop="dateCreated datePublished" datetime="2017-03-30T10:54:05+08:00">2017-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://oj.jdfz.com.cn/oldoj/problem.php?id=2925" target="_blank" rel="noopener">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Bessie and her sister Elsie want to travel from the barn to their favorite field, such that they leave at exactly the same time from the barn, and also arrive at exactly the same time at their favorite field. The farm is a collection of N fields (1 &lt;= N &lt;= 100) numbered 1..N, where field 1 contains the barn and field N is the favorite field. The farm is built on the side of a hill, with field X being higher in elevation than field Y if X &lt; Y.  An assortment of M paths connect pairs of fields.  However, since each path is rather steep, it can only be followed in a downhill direction. For example, a path connecting field 5 with field 8 could be followed in the 5 -&gt; 8 direction but not the other way, since this would be uphill.  Each pair of fields is connected by at most one path, so M &lt;= N(N-1)/2. It might take Bessie and Elsie different amounts of time to follow a path; for example, Bessie might take 10 units of time, and Elsie 20. Moreover, Bessie and Elsie only consume time when traveling on paths between fields – since they are in a hurry, they always travel through a field in essentially zero time, never waiting around anywhere. Please help determine the shortest amount of time Bessie and Elsie must take in order to reach their favorite field at exactly the same moment. 给出一个拓扑图，每条有向边有两个权值，有两个人从1出发到n，分别走这两种权值。问有没有权值使得这两个人都能走过这些权值到达n。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first input line contains N and M, separated by a space. Each of the following M lines describes a path using four integers A B C D, where A and B (with A &lt; B) are the fields connected by the path, C is the time required for Bessie to follow the path, and D is the time required for Elsie to follow the path.  Both C and D are in the range 1..100.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>A single integer, giving the minimum time required for Bessie and Elsie to travel to their favorite field and arrive at the same moment.If this is impossible, or if there is no way for Bessie or Elsie to reach the favorite field at all, output the word IMPOSSIBLE on a single line.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>3 3
+1 3 1 2
+1 2 1 2
+2 3 1 2</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>2</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>Bessie is twice as fast as Elsie on each path, but if Bessie takes the path 1-&gt;2-&gt;3 and Elsie takes the path 1-&gt;3 they will arrive at the same time.</p>
+<h2 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h2><p>拓扑排序+DP 两个bool数组代表分别用边权1，2 是否能从1到to[i] 并花费j</p>
+<h3 id="f-to-i-j-f-nmp-j-w1-i-g-to-i-j-g-nmp-j-w2-i-f-1-0-g-1-0-1"><a href="#f-to-i-j-f-nmp-j-w1-i-g-to-i-j-g-nmp-j-w2-i-f-1-0-g-1-0-1" class="headerlink" title="f[to[i]][j]|=f[nmp][j-w1[i]];  g[to[i]][j]|=g[nmp][j-w2[i]]; f[1][0]=g[1][0]=1;"></a><strong>f[to[i]][j]|=f[nmp][j-w1[i]];  g[to[i]][j]|=g[nmp][j-w2[i]]; f[1][0]=g[1][0]=1;</strong></h3><pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+int head[1000],to[100000],next[100000],w1[100000],w2[100000];
+int in[1000];
+int tot;
+void add(int x,int y,int c1,int c2)
+{
+    next[++tot]=head[x];
+    to[tot]=y;
+    head[x]=tot;
+    w1[tot]=c1;
+    w2[tot]=c2;
+}
+queue&lt;int&gt;q;
+int f[104][10010];
+int g[104][10010];
+void topusort()
+{
+    for(int i=1;i&lt;=n;i++)
+        if(!in[i]) q.push(i);
+    while(q.size())
+    {
+        int nmp=q.front();
+        q.pop();
+        for(int i=head[nmp];i;i=next[i])
+        {
+            if(!(--in[to[i]])) q.push(to[i]);
+            for(int j=w1[i];j&lt;=10000;j++)
+                f[to[i]][j]|=f[nmp][j-w1[i]]; 
+            for(int j=w2[i];j&lt;=10000;j++)
+                g[to[i]][j]|=g[nmp][j-w2[i]];
+        }
+    }
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    f[1][0]=g[1][0]=1;
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y,c1,c2;
+        scanf(&quot;%d%d%d%d&quot;,&amp;x,&amp;y,&amp;c1,&amp;c2);
+        add(x,y,c1,c2);
+        in[y]++;
+    }
+    topusort();
+    for(int i=0;i&lt;=10000;i++)
+    {
+        if(f[n][i]&amp;&amp;g[n][i])
+        {
+            printf(&quot;%d&quot;,i);
+            return 0;
+        }
+    }
+    printf(&quot;IMPOSSIBLE&quot;);
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+              <a href="/tags/USACO/" rel="tag"># USACO</a>
+              <a href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" rel="tag"># 拓扑排序</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/03/30/usaco-2011-open-gold-1-mowing-the-lawn/" rel="prev" title="USACO 2011 Open Gold 1.Mowing the Lawn">
+      <i class="fa fa-chevron-left"></i> USACO 2011 Open Gold 1.Mowing the Lawn
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/03/30/usaco-2010-dec-gold-1-cow-calisthenics/" rel="next" title="USACO 2010 Dec Gold 1.Cow Calisthenics">
+      USACO 2010 Dec Gold 1.Cow Calisthenics <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

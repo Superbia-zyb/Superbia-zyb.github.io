@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionAlice和Bob现在要乘飞机旅行，他们选择了一家相对便宜的航空公司。该航空公司一共在n个城市设有业务，设这些城市分别标记为0到n-1，一共有m种航线，每种航线连接两个城市，并且航线有一定的价格。Alice和Bob现在要从一个城市沿着航线到达另一个城市，途中可以进行转机。航空公司对他们这次旅行也推出优惠，他们可以免费在最多k种航线上搭乘飞机。那么Alice和Bob这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ2763] [JLOI2011]飞行路线">
+<meta property="og:url" content="http://yoursite.com/2017/02/25/jloi2011%E9%A3%9E%E8%A1%8C%E8%B7%AF%E7%BA%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionAlice和Bob现在要乘飞机旅行，他们选择了一家相对便宜的航空公司。该航空公司一共在n个城市设有业务，设这些城市分别标记为0到n-1，一共有m种航线，每种航线连接两个城市，并且航线有一定的价格。Alice和Bob现在要从一个城市沿着航线到达另一个城市，途中可以进行转机。航空公司对他们这次旅行也推出优惠，他们可以免费在最多k种航线上搭乘飞机。那么Alice和Bob这">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-02-25T10:28:39.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.234Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="省选题">
+<meta property="article:tag" content="spfa">
+<meta property="article:tag" content="分层图">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/02/25/jloi2011%E9%A3%9E%E8%A1%8C%E8%B7%AF%E7%BA%BF/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ2763] [JLOI2011]飞行路线 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">6.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析："><span class="nav-number">7.</span> <span class="nav-text">题目分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#f-to-i-j-min-f-to-i-j-f-i-j-val-i"><span class="nav-number">7.1.</span> <span class="nav-text">f[to[i]][j]&#x3D;min(f[to[i]][j],f[i][j]+val[i])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f-to-i-j-1-min-f-to-i-j-1-f-i-j-j-lt-k"><span class="nav-number">7.2.</span> <span class="nav-text">f[to[i]][j+1]&#x3D;min(f[to[i]][j+1],f[i][j]),(j&lt;k)</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/25/jloi2011%E9%A3%9E%E8%A1%8C%E8%B7%AF%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ2763] [JLOI2011]飞行路线
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-02-25 18:28:39" itemprop="dateCreated datePublished" datetime="2017-02-25T18:28:39+08:00">2017-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://oj.jdfz.com.cn/oldoj/problem.php?id=1972" target="_blank" rel="noopener">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Alice和Bob现在要乘飞机旅行，他们选择了一家相对便宜的航空公司。该航空公司一共在n个城市设有业务，设这些城市分别标记为0到n-1，一共有m种航线，每种航线连接两个城市，并且航线有一定的价格。Alice和Bob现在要从一个城市沿着航线到达另一个城市，途中可以进行转机。航空公司对他们这次旅行也推出优惠，他们可以免费在最多k种航线上搭乘飞机。那么Alice和Bob这次出行最少花费多少？</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>数据的第一行有三个整数，n,m,k，分别表示城市数，航线数和免费乘坐次数。</p>
+<p>第二行有两个整数，s,t，分别表示他们出行的起点城市编号和终点城市编号。(0&lt;=s,t&lt;n)</p>
+<p>接下来有m行，每行三个整数，a,b,c，表示存在一种航线，能从城市a到达城市b，或从城市b到达城市a，价格为c。(0&lt;=a,b&lt;n,a与b不相等，0&lt;=c&lt;=1000)</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>只有一行，包含一个整数，为最少花费。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5 6 1 
+0 4 
+0 1 5 
+1 2 5 
+2 3 5
+3 4 5
+2 3 3 
+0 2 100</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>8</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>对于30%的数据,2&lt;=n&lt;=50,1&lt;=m&lt;=300,k=0; 对于50%的数据,2&lt;=n&lt;=600,1&lt;=m&lt;=6000,0&lt;=k&lt;=1; 对于100%的数据,2&lt;=n&lt;=10000,1&lt;=m&lt;=50000,0&lt;=k&lt;=10.</p>
+<h2 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h2><p>第一道分层图最短路 f[to[i]][j]表示到了to[i]点,使用了j种免费航线的最短距离</p>
+<blockquote>
+<h3 id="f-to-i-j-min-f-to-i-j-f-i-j-val-i"><a href="#f-to-i-j-min-f-to-i-j-f-i-j-val-i" class="headerlink" title="f[to[i]][j]=min(f[to[i]][j],f[i][j]+val[i])"></a><strong>f[to[i]][j]=min(f[to[i]][j],f[i][j]+val[i])</strong></h3><h3 id="f-to-i-j-1-min-f-to-i-j-1-f-i-j-j-lt-k"><a href="#f-to-i-j-1-min-f-to-i-j-1-f-i-j-j-lt-k" class="headerlink" title="f[to[i]][j+1]=min(f[to[i]][j+1],f[i][j]),(j&lt;k)"></a><strong>f[to[i]][j+1]=min(f[to[i]][j+1],f[i][j]),(j&lt;k)</strong></h3></blockquote>
+<p>用Spfa进行转移 而且这题要堆优化</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m,k;
+int start,end;
+int head[200000];
+int next[200000];
+int to[200000];
+int val[200000];
+bool vis[20000][15];
+int f[20000][15];
+struct your
+{
+    int x,t;
+};
+int read()
+{
+    int sum=0;
+    char c;
+    c=getchar();
+    while(c==&apos; &apos;||c==&apos;\n&apos;)
+        c=getchar();
+    while(c&lt;=&apos;9&apos;&amp;&amp;c&gt;=&apos;0&apos;)
+        sum=(sum&lt;&lt;3)+(sum&lt;&lt;1)+(c-&apos;0&apos;),c=getchar();
+    return sum;
+}
+struct cmp
+{
+    bool operator()(const your j,const your k)
+    {
+        return f[j.x][j.t]&gt;f[k.x][k.t];
+    } 
+};
+priority_queue&lt;your,vector&lt;your&gt;,cmp&gt;q;
+void spfa()
+{
+    your nmp;
+    nmp.x=start;
+    nmp.t=0;
+    memset(f,0x3f,sizeof f);
+    f[start][0]=0;
+    vis[start][0]=1;
+    q.push(nmp);
+    while(q.size())
+    {
+        nmp=q.top();
+        q.pop();
+        vis[nmp.x][nmp.t]=false;
+        for(int i=head[nmp.x];i;i=next[i])
+            if(f[to[i]][nmp.t]&gt;f[nmp.x][nmp.t]+val[i])
+            {
+                f[to[i]][nmp.t]=f[nmp.x][nmp.t]+val[i];
+                if(!vis[to[i]][nmp.t])
+                {
+                    your tmp;
+                    tmp.x=to[i];
+                    tmp.t=nmp.t;
+                    vis[to[i]][nmp.t]=true;
+                    q.push(tmp);
+                }
+            }
+        if(nmp.t==k) continue;
+        for(int i=head[nmp.x];i;i=next[i])
+            if(f[to[i]][nmp.t+1]&gt;f[nmp.x][nmp.t])
+            {
+                f[to[i]][nmp.t+1]=f[nmp.x][nmp.t];
+                if(!vis[to[i]][nmp.t+1])
+                {
+                    your tmp;
+                    tmp.x=to[i];
+                    tmp.t=nmp.t+1;
+                    vis[to[i]][nmp.t+1]=true;
+                    q.push(tmp);
+                }
+            }
+    }
+}
+int tot;
+void add(int x,int y,int c)
+{
+    next[++tot]=head[x];
+    to[tot]=y;
+    val[tot]=c;
+    head[x]=tot;
+}
+int main()
+{
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+    scanf(&quot;%d%d&quot;,&amp;start,&amp;end);
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y,c;
+        x=read();
+        y=read();
+        c=read();
+        add(x,y,c);
+        add(y,x,c);
+    }
+    spfa();
+    int ans=0x7f7f7f7f;
+    for(int i=0;i&lt;=k;i++)
+        ans=min(ans,f[end][i]);
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E7%9C%81%E9%80%89%E9%A2%98/" rel="tag"># 省选题</a>
+              <a href="/tags/spfa/" rel="tag"># spfa</a>
+              <a href="/tags/%E5%88%86%E5%B1%82%E5%9B%BE/" rel="tag"># 分层图</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/02/25/cq-test-%E2%85%A0/" rel="prev" title="CQzhangyu test Ⅰ">
+      <i class="fa fa-chevron-left"></i> CQzhangyu test Ⅰ
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/03/02/jloi2014%E6%9D%BE%E9%BC%A0%E7%9A%84%E6%96%B0%E5%AE%B6/" rel="next" title="[BZOJ3631] [JLOI2014]松鼠的新家">
+      [BZOJ3631] [JLOI2014]松鼠的新家 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

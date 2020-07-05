@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionZxl有一次决定制造一条项链，她以非常便宜的价格买了一长条鲜艳的珊瑚珠子，她现在也有一个机器，能把这条珠子切成很多块（子串），每块有k（k&gt;0）个珠子，如果这条珠子的长度不是k的倍数，最后一块小于k的就不要拉（nc真浪费），保证珠子的长度为正整数。 Zxl喜欢多样的项链，为她应该怎样选择数字k来尽可能得到更多的不同的子串感到好奇，子串都是可以反转的，换句话说，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ2081] [Poi2010]Beads">
+<meta property="og:url" content="http://yoursite.com/2017/09/21/bzoj2081-poi2010beads/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionZxl有一次决定制造一条项链，她以非常便宜的价格买了一长条鲜艳的珊瑚珠子，她现在也有一个机器，能把这条珠子切成很多块（子串），每块有k（k&gt;0）个珠子，如果这条珠子的长度不是k的倍数，最后一块小于k的就不要拉（nc真浪费），保证珠子的长度为正整数。 Zxl喜欢多样的项链，为她应该怎样选择数字k来尽可能得到更多的不同的子串感到好奇，子串都是可以反转的，换句话说，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-21T02:27:04.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.623Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="二分答案">
+<meta property="article:tag" content="Hash">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/09/21/bzoj2081-poi2010beads/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ2081] [Poi2010]Beads | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/21/bzoj2081-poi2010beads/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ2081] [Poi2010]Beads
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-21 10:27:04" itemprop="dateCreated datePublished" datetime="2017-09-21T10:27:04+08:00">2017-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2081" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Zxl有一次决定制造一条项链，她以非常便宜的价格买了一长条鲜艳的珊瑚珠子，她现在也有一个机器，能把这条珠子切成很多块（子串），每块有k（k&gt;0）个珠子，如果这条珠子的长度不是k的倍数，最后一块小于k的就不要拉（nc真浪费），保证珠子的长度为正整数。 Zxl喜欢多样的项链，为她应该怎样选择数字k来尽可能得到更多的不同的子串感到好奇，子串都是可以反转的，换句话说，子串（1，2，3）和（3,2,1）是一样的。写一个程序，为Zxl决定最适合的k从而获得最多不同的子串。 例如：这一串珠子是： (1,1,1,2,2,2,3,3,3,1,2,3,3,1,2,2,1,3,3,2,1)， k=1的时候，我们得到3个不同的子串： (1),(2),(3) k=2的时候，我们得到6个不同的子串： (1,1),(1,2),(2,2),(3,3),(3,1),(2,3) k=3的时候，我们得到5个不同的子串： (1,1,1),(2,2,2),(3,3,3),(1,2,3),(3,1,2) k=4的时候，我们得到5个不同的子串： (1,1,1,2),(2,2,3,3),(3,1,2,3),(3,1,2,2),(1,3,3,2)</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>共有两行，第一行一个整数n代表珠子的长度，（n&lt;=200000），第二行是由空格分开的颜色ai（1&lt;=ai&lt;=n）。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>也有两行，第一行两个整数，第一个整数代表能获得的最大不同的子串个数，第二个整数代表能获得最大值的k的个数，第二行输出所有的k（中间有空格）。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>21
+1 1 1 2 2 2 3 3 3 1 2 3 3 1 2 2 1 3 3 2 1</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>6 1
+2</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>hash裸题 hash一遍正串 hash一遍反串 然后枚举答案 这题卡hash = = 从网上找了奇异的base和%数过了 注意剪枝 当i*ans&gt;n时跳出循环</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n;
+int seed=2333,mod=987654321;  
+int h[200100],g[200100];
+int val[200100];
+int po[200100];
+int ans,sp[200100];
+map&lt;int,int&gt;mp;
+int main()
+{   
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%d&quot;,&amp;val[i]);
+    po[0]=1;
+    for(int i=1;i&lt;=n;i++)
+        po[i]=((long long)po[i-1]*seed)%mod;
+    for(int i=1;i&lt;=n;i++)
+        h[i]=((long long)h[i-1]*seed+val[i])%mod;
+    for(int i=n;i&gt;=1;i--)
+        g[i]=((long long)g[i+1]*seed+val[i])%mod;
+    for(int i=1;i*ans&lt;=n;i++)
+    {
+        mp.clear();
+        int j=0;
+        int tot=0;
+        while(j+i&lt;=n)
+        {
+            int tmp=(h[j+i]-(long long)h[j]*po[i]%mod+mod)%mod;
+            int nmp=(g[j+1]-(long long)g[j+i+1]*po[i]%mod+mod)%mod;
+            if(!mp[tmp]||!mp[nmp])
+                tot++,mp[tmp]=1,mp[nmp]=1;
+            j+=i;
+        }
+        if(tot==ans) sp[++sp[0]]=i;
+        else if(tot&gt;ans) sp[0]=0,sp[++sp[0]]=i,ans=tot;
+    }       
+    printf(&quot;%d %d\n&quot;,ans,sp[0]);
+    for(int i=1;i&lt;=sp[0];i++)
+    {
+        printf(&quot;%d&quot;,sp[i]);
+        if(i!=sp[0]) printf(&quot; &quot;);
+    }
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" rel="tag"># 二分答案</a>
+              <a href="/tags/Hash/" rel="tag"># Hash</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/21/bzoj1722-usaco2006-mar-milk-team-select-%E4%BA%A7%E5%A5%B6%E6%AF%94%E8%B5%9B/" rel="prev" title="[BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛">
+      <i class="fa fa-chevron-left"></i> [BZOJ1722] [Usaco2006 Mar] Milk Team Select 产奶比赛
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/21/bzoj2796-poi2012fibonacci-representation/" rel="next" title="[BZOJ2796] [Poi2012]Fibonacci Representation">
+      [BZOJ2796] [Poi2012]Fibonacci Representation <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

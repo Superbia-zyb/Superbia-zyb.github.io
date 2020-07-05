@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 DescriptionAnton goes to school, his favorite lessons are arraystudying. He usually solves all the tasks pretty fast, but this time the teacher gave him a complicated one: given two arrays b and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces 734F Anton and School">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/codeforces-734f-anton-and-school/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 DescriptionAnton goes to school, his favorite lessons are arraystudying. He usually solves all the tasks pretty fast, but this time the teacher gave him a complicated one: given two arrays b and">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://codeforces.com/predownloaded/ee/37/ee37ea7305b400fe60af2d182922dd0d6c38794e.png">
+<meta property="article:published_time" content="2017-10-19T06:08:28.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.737Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="codeforces">
+<meta property="article:tag" content="位运算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://codeforces.com/predownloaded/ee/37/ee37ea7305b400fe60af2d182922dd0d6c38794e.png">
+
+<link rel="canonical" href="http://yoursite.com/2017/10/19/codeforces-734f-anton-and-school/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Codeforces 734F Anton and School | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input"><span class="nav-number">4.</span> <span class="nav-text">input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#output"><span class="nav-number">5.</span> <span class="nav-text">output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input-1"><span class="nav-number">6.</span> <span class="nav-text">input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#output-1"><span class="nav-number">7.</span> <span class="nav-text">output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">8.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/codeforces-734f-anton-and-school/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Codeforces 734F Anton and School
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-10-19 14:08:28" itemprop="dateCreated datePublished" datetime="2017-10-19T14:08:28+08:00">2017-10-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://codeforces.com/problemset/problem/734/F" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Anton goes to school, his favorite lessons are arraystudying. He usually solves all the tasks pretty fast, but this time the teacher gave him a complicated one: given two arrays b and c of length n, find array a, such that: <img src="http://codeforces.com/predownloaded/ee/37/ee37ea7305b400fe60af2d182922dd0d6c38794e.png" alt=""> where a and b means bitwise AND, while a or b means bitwise OR. Usually Anton is good in arraystudying, but this problem is too hard, so Anton asks you to help. 给你$$b[]$$和$$c[]$$，找到满足符合以下要求的$$a[]$$：$$ b[i]=\\sum\\limits\_{j=1}^{n}a[i] \\&amp; a[j],c[i]=\\sum\\limits\_{j=1}^{n}a[i]|a[j]$$ 有解输出$$a[]$$,无解输出-1</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains a single integers n (1 ≤ n ≤ 200 000) — the size of arrays b and c. The second line contains n integers bi (0 ≤ bi ≤ 109) — elements of the array b. Third line contains n integers ci (0 ≤ ci ≤ 109) — elements of the array c.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>If there is no solution, print  - 1. Otherwise, the only line of the output should contain n non-negative integers ai — elements of the array a. If there are multiple possible solutions, you may print any of them.</p>
+<h2 id="input"><a href="#input" class="headerlink" title="input"></a>input</h2><pre><code>4
+6 8 4 4
+16 22 10 10</code></pre><h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><pre><code>3 5 1 1 </code></pre><h2 id="input-1"><a href="#input-1" class="headerlink" title="input"></a>input</h2><pre><code>5
+8 25 14 7 16
+19 6 9 4 25</code></pre><h2 id="output-1"><a href="#output-1" class="headerlink" title="output"></a>output</h2><pre><code>-1</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>前置技能 $$ (x\\&amp;y) + (x|y) = (x+y) $$ 证明如下： 我们按位讨论 每一位可以分为4种情况 $$ \\, \\, \\, \\, \\,\\,\\,\\, 1 \\, 0 \\, 1 \\, 0 $$ $$ \\, \\, \\,\\,\\,\\, \\, \\, 1 \\, 0 \\, 0 \\, 1 $$ $$ \\&amp;\\,\\,\\, 1\\, 0 \\,0\\,0 $$ $$ \\, |\\,\\, \\,\\, \\, 1 \\, 0 \\, 1 \\, 1 $$ $$ +\\,\_{1}0 \\, 0 \\, 1 \\, 1$$ 于是我们把$$b[]$$和$$c[]$$加和，得到 $$ b[i]+c[i]=n \* a[i]+\\sum\\limits\_{j=1}^{n}a[j]$$ 令 $$Sum=\\sum\\limits\_{i=1}^{n} b[i]+c[i] $$ $$ Sum=\\sum\\limits\_{i=1}^{n} b[i]+c[i] =2\*n\\sum\\limits\_{j=1}^{n}a[j]$$ 所以$$ a[i]=\\frac{b[i]+c[i]- \\frac{Sum}{2\*n} }{n}$$，可以在$$O(n)$$内拿出$$a[]$$，并且$$a[]$$有且只有一个解。 但是$$a[i]$$是与$$b[i]+c[i]$$相关联的 我们还要检验$$b[i]$$，$$c[i]$$是否成立 我们$$O(n\*bit)$$预处理出所有$$a[i]$$的每一位$$1$$的个数，对于每个$$a[i]$$ 我们来拆位计算对应的$$b[i]$$，$$c[i]$$ 设现在枚举到第$$k$$位 如果$$a[i]\\&amp; (1 \\lt \\lt k)$$，对$$b[i]$$的贡献是$$num[k]\* 2^k $$，对$$c[i]$$的贡献是$$n\* 2^k $$。 否则，对$$b[i]$$的贡献是$$0 $$，对$$c[i]$$的贡献是$$num[k]\* 2^k $$。 所以： $$b[i]=\\sum\\limits\_{k=0}^{31}[a[i]\\&amp;(1\\lt\\lt k)]\*num[k]\*2^k$$ $$c[i]=\\sum\\limits\_{k=0}^{31}[a[i]\\&amp;(1\\lt\\lt k)]\*n\*2^k+[!(a[i]\\&amp;(1\\lt\\lt k))]\*num[k]\*2^k$$ 可以在$$O(n\*bit)$$时间内计算出$$b[]$$，$$c[]$$，之后$$check$$一下就好了</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+long long read()
+{
+    long long sum=0;
+    char c=getchar();
+    while(c&lt;&apos;0&apos;||c&gt;&apos;9&apos;) c=getchar();
+    while(c&gt;=&apos;0&apos;&amp;&amp;c&lt;=&apos;9&apos;) sum=sum*10+(c-&apos;0&apos;),c=getchar();
+    return sum;
+}
+int t,n;
+long long a[200005],b[200005],c[200005],sum[200005];
+int bits[50];
+void work()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    memset(sum,0,sizeof sum);
+    memset(bits,0,sizeof bits);
+    for(int i=1;i&lt;=n;i++) b[i]=read();
+    for(int i=1;i&lt;=n;i++) c[i]=read(),sum[i]=b[i]+c[i],sum[0]+=sum[i];
+    sum[0]/=2*n;
+    for(int i=1;i&lt;=n;i++) a[i]=(sum[i]-sum[0])/n;
+    for(int i=1;i&lt;=n;i++)
+      for(int j=0;j&lt;31;j++) bits[j]+=( a[i]&amp;(1ll&lt;&lt;j) )?1:0;
+    int flag=1;
+    for(int i=1;i&lt;=n;i++)
+    {
+        long long bsum=0,csum=0;
+        for(int j=0;j&lt;31;j++)
+        { 
+            bsum=bsum+(long long)(((a[i]&amp;(1ll&lt;&lt;j))?bits[j]:0)*(1ll&lt;&lt;j));
+            csum=csum+(long long)(((a[i]&amp;(1ll&lt;&lt;j))?n:bits[j])*(1ll&lt;&lt;j));
+        }
+        if(b[i]!=bsum||c[i]!=csum) { flag=0; break; }
+    }
+    if(flag) for(int i=1;i&lt;=n;i++) printf(&quot;%lld%c&quot;,a[i],i==n?&apos;\n&apos;:&apos; &apos;);
+    else printf(&quot;-1\n&quot;);
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;t);
+    while(t--) work();
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/codeforces/" rel="tag"># codeforces</a>
+              <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/10/19/bzoj3875-ahoi2014jsoi2014%E9%AA%91%E5%A3%AB%E6%B8%B8%E6%88%8F/" rel="prev" title="[BZOJ3875] [Ahoi2014&Jsoi2014]骑士游戏">
+      <i class="fa fa-chevron-left"></i> [BZOJ3875] [Ahoi2014&Jsoi2014]骑士游戏
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/19/codeforces-494d-birthday/" rel="next" title="Codeforces 494D Birthday">
+      Codeforces 494D Birthday <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

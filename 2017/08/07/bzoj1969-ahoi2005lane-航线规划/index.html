@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description对Samuel星球的探险已经取得了非常巨大的成就，于是科学家们将目光投向了Samuel星球所在的星系——一个巨大的由千百万星球构成的Samuel星系。 星际空间站的Samuel II巨型计算机经过长期探测，已经锁定了Samuel星系中许多星球的空间坐标，并对这些星球从1开始编号1、2、3……。 一些先遣飞船已经出发，在星球之间开辟探险航线。 探险航线是双向的，例如从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1969] [Ahoi2005]LANE 航线规划">
+<meta property="og:url" content="http://yoursite.com/2017/08/07/bzoj1969-ahoi2005lane-%E8%88%AA%E7%BA%BF%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description对Samuel星球的探险已经取得了非常巨大的成就，于是科学家们将目光投向了Samuel星球所在的星系——一个巨大的由千百万星球构成的Samuel星系。 星际空间站的Samuel II巨型计算机经过长期探测，已经锁定了Samuel星系中许多星球的空间坐标，并对这些星球从1开始编号1、2、3……。 一些先遣飞船已经出发，在星球之间开辟探险航线。 探险航线是双向的，例如从">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.lydsy.com/JudgeOnline/images/1969.jpg">
+<meta property="article:published_time" content="2017-08-07T15:49:24.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.472Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="省选题">
+<meta property="article:tag" content="树链剖分">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.lydsy.com/JudgeOnline/images/1969.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2017/08/07/bzoj1969-ahoi2005lane-%E8%88%AA%E7%BA%BF%E8%A7%84%E5%88%92/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1969] [Ahoi2005]LANE 航线规划 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/bzoj1969-ahoi2005lane-%E8%88%AA%E7%BA%BF%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1969] [Ahoi2005]LANE 航线规划
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-07 23:49:24" itemprop="dateCreated datePublished" datetime="2017-08-07T23:49:24+08:00">2017-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1969" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>对Samuel星球的探险已经取得了非常巨大的成就，于是科学家们将目光投向了Samuel星球所在的星系——一个巨大的由千百万星球构成的Samuel星系。 星际空间站的Samuel II巨型计算机经过长期探测，已经锁定了Samuel星系中许多星球的空间坐标，并对这些星球从1开始编号1、2、3……。 一些先遣飞船已经出发，在星球之间开辟探险航线。 探险航线是双向的，例如从1号星球到3号星球开辟探险航线，那么从3号星球到1号星球也可以使用这条航线。 例如下图所示： <img src="http://www.lydsy.com/JudgeOnline/images/1969.jpg" alt=""> 在5个星球之间，有5条探险航线。 A、B两星球之间，如果某条航线不存在，就无法从A星球抵达B星球，我们则称这条航线为关键航线。 显然上图中，1号与5号星球之间的关键航线有1条：即为4-5航线。 然而，在宇宙中一些未知的磁暴和行星的冲撞，使得已有的某些航线被破坏，随着越来越多的航线被破坏，探险飞船又不能及时回复这些航线，可见两个星球之间的关键航线会越来越多。 假设在上图中，航线4-2（从4号星球到2号星球）被破坏。此时，1号与5号星球之间的关键航线就有3条：1-3，3-4，4-5。 小联的任务是，不断关注航线被破坏的情况，并随时给出两个星球之间的关键航线数目。现在请你帮助完成。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行有两个整数N，M。表示有N个星球（1&lt; N &lt; 30000），初始时已经有M条航线（1 &lt; M &lt; 100000）。随后有M行，每行有两个不相同的整数A、B表示在星球A与B之间存在一条航线。接下来每行有三个整数C、A、B。C为1表示询问当前星球A和星球B之间有多少条关键航线；C为0表示在星球A和星球B之间的航线被破坏，当后面再遇到C为1的情况时，表示询问航线被破坏后，关键路径的情况，且航线破坏后不可恢复； C为-1表示输入文件结束，这时该行没有A,B的值。被破坏的航线数目与询问的次数总和不超过40000。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对每个C为1的询问，输出一行一个整数表示关键航线数目。 注意：我们保证无论航线如何被破坏，任意时刻任意两个星球都能够相互到达。在整个数据中，任意两个星球之间最多只可能存在一条直接的航线。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5 5
+1 2
+1 3
+3 4
+4 5
+4 2
+1 1 5
+0 4 2
+1 5 1
+-1</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>1
+3</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>由于没有加边操作，且保证了最后时刻图是联通的，所以我们可以离线处理，将删边转化为加边。 删除所有边以后剩下的是一个连通图，我们求出它的任意一棵生成树，一开始的树边一定是关键路径，那么加入一条边就相当于形成了一个环，即两点之间路径上所有的边不再为关键航线，打上区间标记。 然后按照逆时间顺序，将删除的边加上，处理询问。（需要先把原来连通图中非树边也加上） 查询时，看一下路径上有多少条未标记的边就行了。 于是问题转化为：将两点间的所有边染色、询问两点间多少条边没有被染色。使用树链剖分+线段树水过</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;map&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m,cnt;
+int head[30010],to[80010],net[80010];
+int deep[30010],size[30010],fa[30010],son[30010],top[30010],number[30010];
+struct way
+{
+    int x,y;
+    bool use;
+}edge[100100];
+struct ques
+{
+    int tmp,x,y;
+}q[100100];
+struct your
+{
+    int x,y,sum,add;
+}a[30010*5];
+int tot;
+void add(int x,int y) 
+{ 
+    net[++tot]=head[x],head[x]=tot,to[tot]=y; 
+}
+map&lt;pair&lt;int,int&gt;,int&gt;mp;
+
+int f[100100];
+int findx(int x) { return f[x]==x?x:f[x]=findx(f[x]); }
+void kru()
+{
+    for(int i=1;i&lt;=n;i++) f[i]=i;
+    int num=0;
+    for(int i=1;i&lt;=m;i++)
+    {
+        if(num==n-1) return ;
+        if(mp[make_pair(edge[i].x,edge[i].y)]) continue;
+        int dx=findx(edge[i].x),dy=findx(edge[i].y);
+        if(dx!=dy) f[dx]=dy,edge[i].use=1,add(edge[i].x,edge[i].y),add(edge[i].y,edge[i].x),num++;
+    }
+}
+void dfs(int x)
+{
+    deep[x]=deep[fa[x]]+1;
+    size[x]=1;
+    for(int i=head[x];i;i=net[i])
+        if(to[i]!=fa[x])
+        {
+            fa[to[i]]=x,dfs(to[i]);
+            size[x]+=size[to[i]];
+            if(size[son[x]]&lt;size[to[i]]) son[x]=to[i];
+        }
+}
+int num=0;
+void dfs2(int x,int temp)
+{
+    number[x]=++num,top[x]=temp;
+    if(son[x]) dfs2(son[x],temp);
+    for(int i=head[x];i;i=net[i])
+        if(to[i]!=fa[x]&amp;&amp;to[i]!=son[x]) dfs2(to[i],to[i]);
+}
+void build(int dx,int dy,int num)
+{
+    a[num].x=dx,a[num].y=dy;
+    if(dx==dy)
+    {
+        if(dx==1) a[num].sum=0;
+        else a[num].sum=1;
+        return ;
+    }
+    int mid=(dx+dy)&gt;&gt;1;
+    build(dx,mid,num&lt;&lt;1),build(mid+1,dy,num&lt;&lt;1|1);
+    a[num].sum=a[num&lt;&lt;1].sum+a[num&lt;&lt;1|1].sum;
+    return ;
+}
+void pushdown(int num)
+{
+    a[num].add=0;
+    a[num&lt;&lt;1].add=1,a[num&lt;&lt;1|1].add=1;
+    a[num&lt;&lt;1].sum=0,a[num&lt;&lt;1|1].sum=0;
+    return ;
+}
+void update(int dx,int dy,int num)
+{
+    if(a[num].x==dx&amp;&amp;a[num].y==dy)
+    {
+        a[num].add=1,a[num].sum=0;
+        return ;
+    }
+    if(a[num].add) pushdown(num);
+    int mid=(a[num].x+a[num].y)&gt;&gt;1;
+    if(dx&gt;mid) update(dx,dy,num&lt;&lt;1|1);
+    else if(dy&lt;=mid) update(dx,dy,num&lt;&lt;1);
+    else update(dx,mid,num&lt;&lt;1),update(mid+1,dy,num&lt;&lt;1|1);
+    a[num].sum=a[num&lt;&lt;1].sum+a[num&lt;&lt;1|1].sum;
+}
+int ask(int dx,int dy,int num)
+{
+    if(a[num].x==dx&amp;&amp;a[num].y==dy) return a[num].sum;
+    if(a[num].add) pushdown(num);
+    int mid=(a[num].x+a[num].y)&gt;&gt;1;
+    if(dx&gt;mid) return ask(dx,dy,num&lt;&lt;1|1);
+    else if(dy&lt;=mid) return ask(dx,dy,num&lt;&lt;1);
+    else  return ask(dx,mid,num&lt;&lt;1)+ask(mid+1,dy,num&lt;&lt;1|1);
+}
+void change(int x,int y)
+{
+    while(top[x]!=top[y])
+    {
+        if(deep[top[x]]&lt;deep[top[y]]) swap(x,y);
+        update(number[top[x]],number[x],1);
+        x=fa[top[x]];
+    }
+    if(x==y) return ;
+    if(deep[x]&gt;deep[y]) swap(x,y);
+    update(number[x]+1,number[y],1);
+}
+int find(int x,int y)
+{
+    int sum=0;
+    while(top[x]!=top[y])
+    {
+        if(deep[top[x]]&lt;deep[top[y]]) swap(x,y);
+        sum+=ask(number[top[x]],number[x],1);
+        x=fa[top[x]];
+    }
+    if(x==y) return sum;
+    if(deep[x]&gt;deep[y]) swap(x,y);
+    return sum+ask(number[x]+1,number[y],1);
+}
+int ans[100100];
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=m;i++) 
+    {
+        scanf(&quot;%d%d&quot;,&amp;edge[i].x,&amp;edge[i].y);
+        if(edge[i].x&gt;edge[i].y) swap(edge[i].x,edge[i].y);
+    }
+    while(1)
+    {
+        int tmp,x,y;
+        scanf(&quot;%d&quot;,&amp;tmp);
+        if(tmp==-1) break;
+        scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+        cnt++;
+        q[cnt].tmp=tmp,q[cnt].x=x,q[cnt].y=y;
+        if(q[cnt].x&gt;q[cnt].y) swap(q[cnt].x,q[cnt].y);
+        if(tmp==0) mp[make_pair(q[cnt].x,q[cnt].y)]=1;
+    }
+    kru();
+    dfs(1),dfs2(1,1),build(1,n,1);
+    for(int i=1;i&lt;=m;i++)
+        if(!edge[i].use&amp;&amp;!mp[make_pair(edge[i].x,edge[i].y)])
+            change(edge[i].x,edge[i].y);
+    for(int i=cnt;i&gt;=1;i--)
+    {
+        if(q[i].tmp!=1) change(q[i].x,q[i].y); 
+        else ans[i]=find(q[i].x,q[i].y);
+    }
+    for(int i=1;i&lt;=cnt;i++)
+        if(q[i].tmp==1) printf(&quot;%d\n&quot;,ans[i]);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E7%9C%81%E9%80%89%E9%A2%98/" rel="tag"># 省选题</a>
+              <a href="/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" rel="tag"># 树链剖分</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/08/07/bzoj3668-noi2014%E8%B5%B7%E5%BA%8A%E5%9B%B0%E9%9A%BE%E7%BB%BC%E5%90%88%E7%97%87/" rel="prev" title="[BZOJ3668] [Noi2014]起床困难综合症">
+      <i class="fa fa-chevron-left"></i> [BZOJ3668] [Noi2014]起床困难综合症
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/08/07/bzoj2819-nim/" rel="next" title="[BZOJ2819] Nim">
+      [BZOJ2819] Nim <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

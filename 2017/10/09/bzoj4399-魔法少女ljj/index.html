@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description在森林中见过会动的树，在沙漠中见过会动的仙人掌过后，魔法少女LJJ已经觉得自己见过世界上的所有稀奇古怪的事情了 LJJ感叹道“这里真是个迷人的绿色世界,空气清新、淡雅,到处散发着醉人的奶浆味；小猴在枝头悠来荡去,好不自在；各式各样的鲜花争相开放,各种树枝的枝头挂满沉甸甸的野果；鸟儿的歌声婉转动听,小河里飘着落下的花瓣真是人间仙境” SHY觉得LJJ还是太naive，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ4399] 魔法少女LJJ">
+<meta property="og:url" content="http://yoursite.com/2017/10/09/bzoj4399-%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3ljj/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description在森林中见过会动的树，在沙漠中见过会动的仙人掌过后，魔法少女LJJ已经觉得自己见过世界上的所有稀奇古怪的事情了 LJJ感叹道“这里真是个迷人的绿色世界,空气清新、淡雅,到处散发着醉人的奶浆味；小猴在枝头悠来荡去,好不自在；各式各样的鲜花争相开放,各种树枝的枝头挂满沉甸甸的野果；鸟儿的歌声婉转动听,小河里飘着落下的花瓣真是人间仙境” SHY觉得LJJ还是太naive，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-10-09T02:50:54.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.652Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="权值线段树">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/10/09/bzoj4399-%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3ljj/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ4399] 魔法少女LJJ | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">3.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">4.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">5.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/bzoj4399-%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3ljj/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ4399] 魔法少女LJJ
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-10-09 10:50:54" itemprop="dateCreated datePublished" datetime="2017-10-09T10:50:54+08:00">2017-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4399" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>在森林中见过会动的树，在沙漠中见过会动的仙人掌过后，魔法少女LJJ已经觉得自己见过世界上的所有稀奇古怪的事情了 LJJ感叹道“这里真是个迷人的绿色世界,空气清新、淡雅,到处散发着醉人的奶浆味；小猴在枝头悠来荡去,好不自在；各式各样的鲜花争相开放,各种树枝的枝头挂满沉甸甸的野果；鸟儿的歌声婉转动听,小河里飘着落下的花瓣真是人间仙境” SHY觉得LJJ还是太naive，一天，SHY带着自己心爱的图找到LJJ，对LJJ说：“既然你已经见识过动态树，动态仙人掌了，那么今天就来见识一下动态图吧” LJJ：“要支持什么操作？” SHY：“ 1.新建一个节点，权值为x。 2.连接两个节点。 3.将一个节点a所属于的联通快内权值小于x的所有节点权值变成x。 4.将一个节点a所属于的联通快内权值大于x的所有节点权值变成x。 5.询问一个节点a所属于的联通块内的第k小的权值是多少。 6.询问一个节点a所属联通快内所有节点权值之积与另一个节点b所属联通快内所有节点权值之积的大小。 7.询问a所在联通快内节点的数量 8.若两个节点a，b直接相连，将这条边断开。 9.若节点a存在，将这个点删去。 ” LJJ：“我可以离线吗？” SHY：“可以，每次操作是不加密的，” LJJ：“我可以暴力吗？” SHY：“自重” LJJ很郁闷，你能帮帮他吗</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行有一个正整数m，表示操作个数。 接下来m行，每行先给出1个正整数c。 若c=1，之后一个正整数x，表示新建一个权值为x的节点，并且节点编号为n+1（当前有n个节点）。 若c=2，之后两个正整数a，b，表示在a，b之间连接一条边。 若c=3，之后两个正整数a，x，表示a联通快内原本权值小于x的节点全部变成x。 若c=4，之后两个正整数a，x，表示a联通快内原本权值大于x的节点全部变成x。 若c=5，之后两个正整数a，k，表示询问a所属于的联通块内的第k小的权值是多少。 若c=6，之后两个正整数a，b，表示询问a所属联通快内所有节点权值之积与b所属联通快内所有节点权值之积的大小， 若a所属联通快内所有节点权值之积大于b所属联通快内所有节点权值之积，输出1，否则为0。 若c=7，之后一个正整数a，表示询问a所在联通块大小 若c=8，之后两个正整数a，b，表示断开a，b所连接的边。 若c=9，之后一个正整数a，表示断开a点的所有连边 具体输出格式见样例</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>12
+1 2
+1 3
+1 4
+1 5
+1 6
+2 1 2
+2 2 3
+2 3 4
+2 4 5
+9 1
+3 2 5
+5 3 4</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>6</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>对100%的数据 0&lt;=m&lt;=400000,c&lt;=7,所有出现的数均&lt;=1000000000,所有出现的点保证存在 请认真阅读题面</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>竟然c&lt;=7 = = 那就用并查集判断连通性 每个联通块内维护权值线段树 要求支持权值线段树区间更新 线段树合并 权值之积太大怎么办? 因为$$ log(xy)=log(x)+log(y)$$ 对积取log即可</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int m,n;
+int f[400010];
+int read()
+{
+    int sum=0;
+    char c=getchar();
+    while(c&lt;&apos;0&apos;||c&gt;&apos;9&apos;) c=getchar();
+    while(c&gt;=&apos;0&apos;&amp;&amp;c&lt;=&apos;9&apos;) sum=sum*10+(c-&apos;0&apos;),c=getchar();
+    return sum;
+}
+int find(int x)
+{ return f[x]==x?x:f[x]=find(f[x]); }
+struct your
+{
+    int lson,rson,size;
+    bool flag;
+    double sum;
+}a[400010*17];
+int root[400010];
+int tot;
+void pushdown(int x)
+{
+    if(a[x].lson) a[a[x].lson].flag=1;
+    if(a[x].rson) a[a[x].rson].flag=1;
+    a[a[x].lson].sum=a[a[x].rson].sum=0;
+    a[a[x].lson].size=a[a[x].rson].size=0;
+    a[x].flag=0;
+}
+void update(int dx,int l,int r,int c,int &amp;x)
+{
+    if(!x) x=++tot;
+    if(l==r) 
+    {
+        a[x].size+=c,a[x].sum+=log(dx)*c;
+        return ;
+    }
+    if(a[x].flag) pushdown(x);
+    int mid=(l+r)&gt;&gt;1;
+    if(dx&lt;=mid) update(dx,l,mid,c,a[x].lson);
+    else update(dx,mid+1,r,c,a[x].rson);
+    a[x].size=a[a[x].lson].size+a[a[x].rson].size;
+    a[x].sum=a[a[x].lson].sum+a[a[x].rson].sum;
+}
+void merge(int &amp;x,int y,int l,int r)
+{
+    if(!x||!y) { x=x+y; return ; }
+    if(l==r) 
+    { 
+        a[x].size+=a[y].size,a[x].sum+=a[y].sum; 
+        return ;
+    }
+    if(a[x].flag) pushdown(x);
+    if(a[y].flag) pushdown(y);
+    int mid=(l+r)&gt;&gt;1;
+    merge(a[x].lson,a[y].lson,l,mid),merge(a[x].rson,a[y].rson,mid+1,r);
+    a[x].size=a[a[x].lson].size+a[a[x].rson].size;
+    a[x].sum=a[a[x].lson].sum+a[a[x].rson].sum;
+} 
+void del(int dx,int dy,int l,int r,int x)
+{
+    if(!x||!a[x].size) return ;
+    if(dx&lt;=l&amp;&amp;r&lt;=dy) 
+    {
+        a[x].size=a[x].sum=0;
+        a[x].flag=1;
+        return ;
+    }
+    if(a[x].flag) pushdown(x);
+    int mid=(l+r)&gt;&gt;1;
+    if(dy&lt;=mid) del(dx,dy,l,mid,a[x].lson);
+    else if(dx&gt;mid) del(dx,dy,mid+1,r,a[x].rson);
+    else  del(dx,mid,l,mid,a[x].lson),del(mid+1,dy,mid+1,r,a[x].rson);
+    a[x].size=a[a[x].lson].size+a[a[x].rson].size;
+    a[x].sum=a[a[x].lson].sum+a[a[x].rson].sum;
+}
+int ask(int dx,int dy,int l,int r,int x)
+{
+    if(dx&lt;=l&amp;&amp;r&lt;=dy) return a[x].size;
+    if(a[x].flag) pushdown(x);
+    int mid=(l+r)&gt;&gt;1;
+    if(dy&lt;=mid) return ask(dx,dy,l,mid,a[x].lson);
+    else if(dx&gt;mid) return ask(dx,dy,mid+1,r,a[x].rson);
+    else return ask(dx,mid,l,mid,a[x].lson)+ask(mid+1,dy,mid+1,r,a[x].rson);
+}
+int find(int dx,int l,int r,int x)
+{
+    if(l==r) return l;
+    if(a[x].flag) pushdown(x);
+    int mid=(l+r)&gt;&gt;1;
+    if(a[a[x].lson].size&gt;=dx) return find(dx,l,mid,a[x].lson);
+    else return find(dx-a[a[x].lson].size,mid+1,r,a[x].rson);
+}
+int main()
+{
+    m=read();
+    for(int i=1;i&lt;=400000;i++) f[i]=i;
+    for(int tmp,x,y,c,i=1;i&lt;=m;i++)
+    {
+        tmp=read();
+        if(tmp==1) 
+        {
+            x=read();
+            update(x,1,1e9,1,root[++n]);
+        }
+        else if(tmp==2)
+        {
+            x=read(),y=read(),x=find(x),y=find(y);
+            if(x!=y) f[y]=x,merge(root[x],root[y],1,1e9);
+        }
+        else if(tmp==3)
+        {
+            x=read(),c=read(),x=find(x);
+            y=ask(1,c,1,1e9,root[x]);
+            del(1,c,1,1e9,root[x]),update(c,1,1e9,y,root[x]);
+        }
+        else if(tmp==4)
+        {
+            x=read(),c=read(),x=find(x);
+            y=ask(c,1e9,1,1e9,root[x]);
+            del(c,1e9,1,1e9,root[x]),update(c,1,1e9,y,root[x]);
+        }
+        else if(tmp==5)
+            x=read(),c=read(),printf(&quot;%d\n&quot;,find(c,1,1e9,root[find(x)]));
+        else if(tmp==6)
+        {
+            x=read(),y=read(),x=find(x),y=find(y);
+            printf(&quot;%d\n&quot;,a[root[x]].sum&gt;a[root[y]].sum);
+        }
+        else if(tmp==7)
+            x=read(),printf(&quot;%d\n&quot;,a[root[find(x)]].size);
+    }
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%9D%83%E5%80%BC%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 权值线段树</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/10/09/bzoj4870-shoi2017%E7%BB%84%E5%90%88%E6%95%B0%E9%97%AE%E9%A2%98/" rel="prev" title="[BZOJ4870] [Shoi2017]组合数问题">
+      <i class="fa fa-chevron-left"></i> [BZOJ4870] [Shoi2017]组合数问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/09/bzoj2521-shoi2010%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="next" title="[BZOJ2521] [Shoi2010]最小生成树">
+      [BZOJ2521] [Shoi2010]最小生成树 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

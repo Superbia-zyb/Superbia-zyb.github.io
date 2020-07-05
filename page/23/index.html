@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/23/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/23/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content index posts-expand">
+          
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj2301-haoi2011problem-b-bzoj1101-poi2007zap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj2301-haoi2011problem-b-bzoj1101-poi2007zap/" class="post-title-link" itemprop="url">[BZOJ2301] [HAOI2011]Problem b && [BZOJ1101] [POI2007]Zap &&[BZOJ2045] 双亲数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 14:08:30" itemprop="dateCreated datePublished" datetime="2017-08-14T14:08:30+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>对于给出的n个询问，每次求有多少个数对(x,y)，满足a≤x≤b，c≤y≤d，且gcd(x,y) = k，gcd(x,y)函数为x和y的最大公约数。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行一个整数n，接下来n行每行五个整数，分别表示a、b、c、d、k</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>共n行，每行一个整数表示满足要求的数对(x,y)的个数</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>2
+2 5 1 5 1
+1 5 1 5 2</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>14
+3</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>100%的数据满足：1≤n≤50000，1≤a≤b≤50000，1≤c≤d≤50000，1≤k≤50000</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>首先问题可以转化成 有多少个数对(x,y)，满足x≤n，y≤m，且$$gcd(x,y)=k$$ 接下来 将$$n/k$$,$$m/k$$ 问题转化为：求$$\\sum\_{i=1}^n\\sum\_{j=1}^m[gcd(i,j)==1],(n\\le m)$$ 推导过程如下： $$\\sum\_{i=1}^n\\sum\_{j=1}^m[gcd(i,j)==1]$$ $$ =\\sum\_{i=1}^n\\sum\_{j=1}^m\\sum\_{d|gcd(i,j)} \\mu(d)$$ $$ =\\sum\_{i=1}^n\\sum\_{j=1}^m\\sum\_{d|i,d|j} \\mu(d)$$ $$ =\\sum\_{d=1}^n\\mu(d)\\lfloor\\frac{n}{d}\\rfloor\\lfloor\\frac{m}{d}\\rfloor$$ 因为$$\\lfloor\\frac{n}{d}\\rfloor\\lfloor\\frac{m}{d}\\rfloor$$可以分块求 所以再维护一个$$\\mu()$$函数前缀和就好了</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int a,b,c,d,k;
+int miu[70000],prime[70000&gt;&gt;1];
+bool v[70000];
+void work()
+{
+    miu[1]=1;
+    for(int i=2;i&lt;=50000;i++)
+    {
+        if(!v[i]) prime[++prime[0]]=i,miu[i]=-1;
+        for(int j=1;j&lt;=prime[0]&amp;&amp;i*prime[j]&lt;=50000;j++)
+        {
+            v[i*prime[j]]=1;
+            if(i%prime[j]) miu[i*prime[j]]=-miu[i];
+            else
+            {
+                miu[i*prime[j]]=0;
+                break;
+            }
+        }
+    }
+    for(int i=1;i&lt;=50000;i++) miu[i]=miu[i-1]+miu[i];
+}
+int calc(int x,int y)
+{
+    if(x&gt;y) swap(x,y);
+    int sum=0,last=0;
+    for(int i=1;i&lt;=x;i=last+1)
+    {
+        last=min(x/(x/i),y/(y/i));
+        sum+=(miu[last]-miu[i-1])*(x/i)*(y/i);
+    }
+    return sum;
+}
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;,&amp;t);
+    work();
+    for(int i=1;i&lt;=t;i++)
+    {
+        int ans=0;
+        scanf(&quot;%d%d%d%d%d&quot;,&amp;a,&amp;b,&amp;c,&amp;d,&amp;k);
+        ans=calc(b/k,d/k);
+        ans-=calc((a-1)/k,d/k);
+        ans-=calc(b/k,(c-1)/k);
+        ans+=calc((a-1)/k,(c-1)/k);
+        printf(&quot;%d\n&quot;,ans);
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj1334-baltic2008elect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj1334-baltic2008elect/" class="post-title-link" itemprop="url">[BZOJ1334] [Baltic2008]Elect</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 13:37:39" itemprop="dateCreated datePublished" datetime="2017-08-14T13:37:39+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1334" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>N个政党要组成一个联合内阁，每个党都有自己的席位数. 现在希望你找出一种方案，你选中的党的席位数要大于总数的一半，并且联合内阁的席位数越多越好. 对于一个联合内阁，如果某个政党退出后，其它党的席位仍大于总数的一半，则这个政党被称为是多余的，这是不允许的.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行给出有多少个政党.其值小于等于300 下面给出每个政党的席位数.总席位数小于等于 100000</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>你的组阁方案中最多能占多少个席位.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>4
+1 3 2 4</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>7</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>选择第二个政党和第四个</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>一开始理解错了题意 以为总和指的是最终选出来的总和= = 那么直接就01背包转移即可 注意:从sum(总和)/2+a[i]-&gt;a[i]</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,sum,ans;
+int a[100100],f[100100];
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]),sum+=a[i];
+    sort(a+1,a+n+1);
+    f[0]=1;
+    for(int i=n;i&gt;=1;i--)
+        for(int j=sum/2+a[i];j&gt;=a[i];j--)
+            if(f[j-a[i]]) f[j]=1,ans=max(j,ans);
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj2929-poi1999%E6%B4%9E%E7%A9%B4%E6%94%80%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj2929-poi1999%E6%B4%9E%E7%A9%B4%E6%94%80%E8%A1%8C/" class="post-title-link" itemprop="url">[BZOJ2929] [Poi1999]洞穴攀行</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 13:32:49" itemprop="dateCreated datePublished" datetime="2017-08-14T13:32:49+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2929" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>洞穴学者在Byte Mountain的Grate Cave里组织了一次训练。训练中，每一位洞穴学者要从最高的一个室到达最底下的一个室。他们只能向下走。一条路上每一个连续的室都要比它的前一个低。此外，每一个洞穴学者都要从最高的室出发，沿不同的路走到最低的室。 限制： 1.起点连接的通道同一时间只能容纳一个人通过 2.终点连接的通道同一时间只能容纳一个人通过 3.其他边都很宽敞，同一时间可以容纳无限多的人 问：可以有多少个人同时参加训练？</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行有一个整数n(2&lt;=n&lt;=200)，等于洞穴中室的个数。用1~n给室标号，号码越大就在越下面。最高的室记为1，最低的室记为n。以下的n-1行是对通道的描述。第I+1行包含了与第I个室有通道的室（只有比标号比I大的室）。这一行中的第一个数是m,0&lt;=m&lt;=(n-i+1)，表示被描述的通道的个数。接着的m个数字是与第I个室有通道的室的编号。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出一个整数。它等于可以同时参加训练的洞穴学者的最大人数。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>12
+4 3 4 2 5
+1 8
+2 9 7
+2 6 11
+1 8
+2 9 10
+2 10 11
+1 12
+2 10 12
+1 12
+1 12</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>3</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>最大流傻题~ 直接按照题意模拟即可</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m,ans;
+int tot=1,head[210],to[80010],net[80010],val[80010];
+int s,t;
+void add(int x,int y,int c)
+{
+    net[++tot]=head[x],head[x]=tot,to[tot]=y,val[tot]=c;
+    net[++tot]=head[y],head[y]=tot,to[tot]=x,val[tot]=0;
+}
+int dis[80010];
+int bfs()
+{
+    queue&lt;int&gt;q;
+    while(!q.empty())q.pop();
+    memset(dis,0,sizeof dis);
+    q.push(s);
+    dis[s]=1;
+    while(q.size())
+    {
+        int nmp=q.front();
+        q.pop();
+        for(int i=head[nmp];i;i=net[i])
+            if(val[i]&gt;0&amp;&amp;!dis[to[i]])
+            {
+                dis[to[i]]=dis[nmp]+1;
+                q.push(to[i]);
+                if(to[i]==t) return 1;
+            }
+    }
+    return 0;
+}
+int dinic(int x,int flow)
+{
+    int tmp,temp=flow;
+    if(x==t) return flow;
+    for(int i=head[x];i;i=net[i])
+        if(val[i]&gt;0&amp;&amp;dis[to[i]]==dis[x]+1)
+        {
+            tmp=dinic(to[i],min(val[i],temp));
+            if(tmp==0) dis[to[i]]=0;
+            temp-=tmp,val[i]-=tmp,val[i^1]+=tmp;
+            if(!temp) break;
+        }
+    return flow-temp;
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    s=1,t=n;
+    for(int i=1;i&lt;n;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;m);
+        int x;
+        for(int j=1;j&lt;=m;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;x);
+            if(i==s||x==t) add(i,x,1);
+            else add(i,x,1&lt;&lt;30);
+        }
+    }
+    int ans=0;
+    while(bfs())
+        ans+=dinic(s,1&lt;&lt;30);
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj1497-noi2006%E6%9C%80%E5%A4%A7%E8%8E%B7%E5%88%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj1497-noi2006%E6%9C%80%E5%A4%A7%E8%8E%B7%E5%88%A9/" class="post-title-link" itemprop="url">[BZOJ1497] [NOI2006]最大获利</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 13:29:33" itemprop="dateCreated datePublished" datetime="2017-08-14T13:29:33+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1497" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>新的技术正冲击着手机通讯市场，对于各大运营商来说，这既是机遇，更是挑战。THU集团旗下的CS&amp;T通讯公司在新一代通讯技术血战的前夜，需要做太多的准备工作，仅就站址选择一项，就需要完成前期市场研究、站址勘测、最优化等项目。在前期市场调查和站址勘测之后，公司得到了一共N个可以作为通讯信号中转站的地址，而由于这些地址的地理位置差异，在不同的地方建造通讯中转站需要投入的成本也是不一样的，所幸在前期调查之后这些都是已知数据：建立第i个通讯中转站需要的成本为Pi（1≤i≤N）。另外公司调查得出了所有期望中的用户群，一共M个。关于第i个用户群的信息概括为Ai, Bi和Ci：这些用户会使用中转站Ai和中转站Bi进行通讯，公司可以获益Ci。（1≤i≤M, 1≤Ai, Bi≤N） THU集团的CS&amp;T公司可以有选择的建立一些中转站（投入成本），为一些用户提供服务并获得收益（获益之和）。那么如何选择最终建立的中转站才能让公司的净获利最大呢？（净获利 = 获益之和 - 投入成本之和）</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>输入文件中第一行有两个正整数N和M 。第二行中有N个整数描述每一个通讯中转站的建立成本，依次为P1, P2, …, PN 。以下M行，第(i + 2)行的三个数Ai, Bi和Ci描述第i个用户群的信息。所有变量的含义可以参见题目描述。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>你的程序只要向输出文件输出一个整数，表示公司可以得到的最大净获利。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5 5
+1 2 3 4 5
+1 2 3
+2 3 4
+1 3 3
+1 4 2
+4 5 3</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>4</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>【样例说明】选择建立1、2、3号中转站，则需要投入成本6，获利为10，因此得到最大收益4。【评分方法】本题没有部分分，你的程序的输出只有和我们的答案完全一致才能获得满分，否则不得分。【数据规模和约定】 80%的数据中：N≤200，M≤1 000。 100%的数据中：N≤5 000，M≤50 000，0≤Ci≤100，0≤Pi≤100。</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>裸的最大权闭和子图 具体讲解:<a href="https://ahackh.ac.cn/2017/05/09/noi2006%E6%9C%80%E5%A4%A7%E8%8E%B7%E5%88%A9-%E6%9C%80%E5%A4%A7%E6%9D%83%E9%97%AD%E5%90%88%E5%AD%90%E5%9B%BE%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener" title="传送门">传送门</a></p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m,ans;
+int tot=1,head[833333],to[833333],net[833333],val[833333];
+int s=0,t=833331;
+void add(int x,int y,int c)
+{
+    net[++tot]=head[x],head[x]=tot,to[tot]=y,val[tot]=c;
+    net[++tot]=head[y],head[y]=tot,to[tot]=x,val[tot]=0;
+}
+int dis[833333];
+int bfs()
+{
+    queue&lt;int&gt;q;
+    while(!q.empty())q.pop();
+    memset(dis,0,sizeof dis);
+    q.push(s);
+    dis[s]=1;
+    while(q.size())
+    {
+        int nmp=q.front();
+        q.pop();
+        for(int i=head[nmp];i;i=net[i])
+            if(val[i]&gt;0&amp;&amp;!dis[to[i]])
+            {
+                dis[to[i]]=dis[nmp]+1;
+                q.push(to[i]);
+                if(to[i]==t) return 1;
+            }
+    }
+    return 0;
+}
+int dinic(int x,int flow)
+{
+    int tmp,temp=flow;
+    if(x==t) return flow;
+    for(int i=head[x];i;i=net[i])
+        if(val[i]&gt;0&amp;&amp;dis[to[i]]==dis[x]+1)
+        {
+            tmp=dinic(to[i],min(val[i],temp));
+            if(tmp==0) dis[to[i]]=0;
+            temp-=tmp,val[i]-=tmp,val[i^1]+=tmp;
+            if(!temp) break;
+        }
+    return flow-temp;
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=n;i++)
+    {
+        int x;
+        scanf(&quot;%d&quot;,&amp;x);
+        add(i,t,x);
+    }
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y,c;
+        scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;c);
+        add(s,5000+i,c);
+        add(5000+i,x,1&lt;&lt;30);
+        add(5000+i,y,1&lt;&lt;30);
+        ans+=c;
+    }
+    while(bfs())
+    {
+        ans-=dinic(s,1&lt;&lt;30);
+    }
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj4292-pa2015rownanie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj4292-pa2015rownanie/" class="post-title-link" itemprop="url">[BZOJ4292] [PA2015]Równanie</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 13:20:30" itemprop="dateCreated datePublished" datetime="2017-08-14T13:20:30+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4292" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>对于一个正整数n，定义f(n)为它十进制下每一位数字的平方的和。现在给定三个正整数k,a,b，请求出满足a&lt;=n&lt;=b且k*f(n)=n的n的个数。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行包含三个正整数k,a,b(1&lt;=k,a,b&lt;=10^18,a&lt;=b)。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出一个整数，即满足条件的n的个数。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>51 5000 10000</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>3</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>注意到极限f(n)情况是1458 那么暴力判断一波~</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+long long k,a,b;
+int ans;
+int main()
+{
+    scanf(&quot;%lld%lld%lld&quot;,&amp;k,&amp;a,&amp;b);
+    for(int i=1;i&lt;=1458;i++)
+    {
+        long long x=k*i;
+        if(x&lt;a)  continue;
+        if(x&gt;b)  break;
+        int tmp=0;
+        while(x)    tmp+=(x%10)*(x%10),x/=10;
+        if(tmp==i)  ans++;
+    }
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj2430-poi2003chocolate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj2430-poi2003chocolate/" class="post-title-link" itemprop="url">[BZOJ2430] [Poi2003]Chocolate</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 13:15:48" itemprop="dateCreated datePublished" datetime="2017-08-14T13:15:48+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2430" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>有一块n*m的矩形巧克力，准备将它切成n*m块。巧克力上共有n-1条横线和m-1条竖线，你每次可以沿着其中的一条横线或竖线将巧克力切开，无论切割的长短，沿着每条横线切一次的代价依次为y1，y2，…，yn-1，而沿竖线切割的代价依次为x1，x2，…，xm-1。例如，对于下图6*4的巧克力， <img src="http://www.lydsy.com/JudgeOnline/upload/201108/11(2).jpg" alt=""> 我们先沿着三条横线切割，需要3刀，得到4条巧克力，然后再将这4条巧克力沿竖线切割，每条都需要5刀，则最终所花费的代价为y1+y2+y3+4*(x1+x2+x3+x4+x5)。 当然，上述简单切法不见得是最优切法，那么怎样切割该块巧克力，花费的代价最少呢？</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行为两个整数n和m。 接下来n-1行，每行一个整数，分别代表x1，x2，…，xn-1。 接下来m-1行，每行一个整数，分别代表y1，y2，…，ym-1。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出一整数，为切割巧克力的最小代价。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>6 4
+2
+1
+3
+1
+4
+4
+1
+2</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>42</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>30%的数据，n&lt;=100,m&lt;=100 100%的数据，n&lt;=10000，m&lt;=10000</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>首先明确一点 如果横着切1刀 那么需要竖着切两刀 那么按照代价从大到小排序 模拟切割的过程即可</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+struct your
+{
+    long long c;
+    int flag;
+}a[30000];
+long long cnt[2];
+int cmp(your j,your k)
+{
+    return j.c&gt;k.c;
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m),n--,m--;
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;a[i].c);
+    for(int i=1;i&lt;=m;i++) scanf(&quot;%lld&quot;,&amp;a[n+i].c),a[n+i].flag=1;
+    sort(a+1,a+n+m+1,cmp);
+    long long ans=0;
+    for(int i=1;i&lt;=n+m+1;i++)
+        ans+=a[i].c*(cnt[a[i].flag^1]+1),cnt[a[i].flag]++;
+    printf(&quot;%lld&quot;,ans);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj4385-poi2015wilcze-doly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj4385-poi2015wilcze-doly/" class="post-title-link" itemprop="url">[BZOJ4385] [POI2015]Wilcze doły</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 13:06:52" itemprop="dateCreated datePublished" datetime="2017-08-14T13:06:52+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4385" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>给定一个长度为n的序列，你有一次机会选中一段连续的长度不超过d的区间，将里面所有数字全部修改为0。 请找到最长的一段连续区间，使得该区间内所有数字之和不超过p。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行包含三个整数n,p,d(1&lt;=d&lt;=n&lt;=2000000，0&lt;=p&lt;=10^16)。 第二行包含n个正整数，依次表示序列中每个数w<a href="http://1<=w%5Bi%5D<=10%5E9">i</a>。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>包含一行一个正整数，即修改后能找到的最长的符合条件的区间的长度。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>9 7 2
+3 4 1 9 4 1 7 1 3</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>5</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p>将第4个和第5个数修改为0，然后可以选出区间[2,6]，总和为4+1+0+0+1=6。</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>先要预处理出每个点向左拓展出的最长(区间和不超过d)的区间和 我们想:假设我们选定了一段区间 如果这段区间和减去这段区间内的 最大的预处理 小于等于p 我们可以继续选对吧 然后我们用双指针去维护这个过程 同时单调队列维护一下这个区间内的最大预处理即可</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+using namespace std;
+int n,d,ans;
+int q[2000010];
+long long p,sum[2000010];
+int main()
+{
+    scanf(&quot;%d%lld%d&quot;,&amp;n,&amp;p,&amp;d);
+    int h=1,t=0,j=0;
+    for(int i=1;i&lt;=n;i++)    scanf(&quot;%d&quot;,&amp;sum[i]),sum[i]=sum[i-1]+sum[i];
+    ans=d;
+    for(int i=d;i&lt;=n;i++)
+    {
+        while(h&lt;=t&amp;&amp;sum[i]-sum[i-d]&gt;=sum[q[t]]-sum[q[t]-d])   t--;
+        q[++t]=i;
+        while(h&lt;=t&amp;&amp;sum[i]-sum[j]-sum[q[h]]+sum[q[h]-d]&gt;p)
+            if(q[h]&lt;(++j)+d) h++;
+        ans=max(ans,i-j);
+    }
+    printf(&quot;%d&quot;,ans);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/bzoj1270-beijingwc2008%E9%9B%B7%E6%B6%9B%E7%9A%84%E5%B0%8F%E7%8C%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/14/bzoj1270-beijingwc2008%E9%9B%B7%E6%B6%9B%E7%9A%84%E5%B0%8F%E7%8C%AB/" class="post-title-link" itemprop="url">[BZOJ1270] [BeijingWc2008]雷涛的小猫</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 12:48:53" itemprop="dateCreated datePublished" datetime="2017-08-14T12:48:53+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1270" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1270/1.jpg" alt="">)<img src="http://www.lydsy.com/JudgeOnline/images/1270/2.jpg" alt=""></p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1270/3.jpg" alt=""></p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1270/3.jpg" alt=""></p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1270/5.jpg" alt=""></p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>8</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1270/6.jpg" alt=""></p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>f[i][j]代表第j棵树在i高度时能获得的最多的柿子数目 这里使用了滚动数组 但其实并不用 是我看错数据范围了QAQ</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+bool f[3010][3010],v[3010];
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y;
+        scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+        f[x][y]=f[y][x]=1;
+    }
+    for(int i=1;i&lt;=n;i++)
+        if(!v[i])
+            for(int j=i+1;j&lt;=n;j++)
+                if(!v[j]&amp;&amp;!f[i][j])
+                {
+                    v[i]=1,v[j]=1;
+                    break;
+                }
+    int cnt=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+        if(!v[i]) printf(&quot;%d &quot;,i),cnt++;
+        if(cnt==n/3) break;
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/bzoj2802-poi2012warehouse-store/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/12/bzoj2802-poi2012warehouse-store/" class="post-title-link" itemprop="url">[BZOJ2802] [Poi2012]Warehouse Store</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-12 21:58:39" itemprop="dateCreated datePublished" datetime="2017-08-12T21:58:39+08:00">2017-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2802" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>有一家专卖一种商品的店，考虑连续的n天。 第i天上午会进货Ai件商品，中午的时候会有顾客需要购买Bi件商品，可以选择满足顾客的要求，或是无视掉他。 如果要满足顾客的需求，就必须要有足够的库存。问最多能够满足多少个顾客的需求。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行一个正整数n (n&lt;=250,000)。 第二行n个整数A1,A2,…An (0&lt;=Ai&lt;=10^9)。 第三行n个整数B1,B2,…Bn (0&lt;=Bi&lt;=10^9)。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>第一行一个正整数k，表示最多能满足k个顾客的需求。 第二行k个依次递增的正整数X1,X2,…,Xk，表示在第X1,X2,…,Xk天分别满足顾客的需求。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>6
+2 2 1 2 1 0
+1 2 2 3 4 4</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>3
+1 2 4</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>我们维护一个大根堆。从第一天开始往后扫，假如当日剩余库存量足够满足当日的需求订单的话，就标记满足这个订单，并将这个订单中购买商品的数量加入大根堆。若当日剩余库存量不够满足当日的需求订单，且大根堆堆顶的订单大小比当日的订单大小大的话，就弹出堆顶，标记满足当日的订单，并取消掉堆顶的订单，将当日的订单大小加入堆中。</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n;
+long long a[250010],b[250010];
+int use[250010];
+struct your
+{
+    long long c;
+    int id;
+};
+struct cmp
+{
+     bool operator()(your x,your y)
+    {
+        return x.c&lt;y.c;
+    }
+};
+priority_queue&lt;your,vector&lt;your&gt;,cmp&gt; q;
+long long now;
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;a[i]);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;b[i]);
+    for(int i=1;i&lt;=n;i++)
+    {
+        now+=a[i];
+        if(now&gt;=b[i])
+        {
+            your tmp;
+            tmp.id=i,tmp.c=b[i],now-=b[i],q.push(tmp),use[i]=1;
+        }
+        else
+        {
+            if(q.size()&amp;&amp;q.top().c&gt;b[i])
+            {
+                your tmp;
+                tmp=q.top(),q.pop();
+                now+=tmp.c,use[tmp.id]=0;
+                tmp.id=i,tmp.c=b[i],now-=b[i],q.push(tmp),use[i]=1;
+            }   
+        }
+    }
+    int ans=0;
+    for(int i=1;i&lt;=n;i++) ans+=(use[i]==1);
+    printf(&quot;%d\n&quot;,ans);     
+    for(int i=1;i&lt;=n;i++) if(use[i]) printf(&quot;%d &quot;,i);
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/bzoj2530-poi2011party/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/12/bzoj2530-poi2011party/" class="post-title-link" itemprop="url">[BZOJ2530] [Poi2011]Party</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-12 21:54:59" itemprop="dateCreated datePublished" datetime="2017-08-12T21:54:59+08:00">2017-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2530" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Byteasar intends to throw up a party. Naturally, he would like it to be a success. Furthermore, Byteasar is quite certain that to make it so it suffices if all invited guests know each other. He is currently trying to come up with a list of his friends he would like to invite. Byteasar has friends, where is divisible by 3. Fortunately, most of Byteasar’s friends know one another. Furthermore, Byteasar recalls that he once attended a party where there were2/3 n of his friends, and where everyone knew everyone else. Unfortunately, Byteasar does not quite remember anything else from that party… In particular, he has no idea which of his friends attended it. Byteasar does not feel obliged to throw a huge party, but he would like to invite at least n/3of his friends. He has no idea how to choose them, so he asks you for help. 给定一张N（保证N是3的倍数）个节点M条边的图，并且保证该图存在一个大小至少为2N/3的团。 请输出该图的任意一个大小为N/3的团。 一个团的定义为节点的一个子集，该子集中的点两两有直接连边。 输入： 第一行是两个整数N,M。 接下来有M行，每行两个整数A,B，表示A和B有连边。保证无重边。 输出： N/3个整数，表示你找到的团。 数据范围： 3&lt;=N&lt;=3000,[3/2 n(2/3 n -1)]/2&lt;=M&lt;=[n(n-1)/2]</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>In the first line of the standard input two integers, n and M(3&lt;=N&lt;=3000,[3/2 n(2/3 n -1)]/2&lt;=M&lt;=[n(n-1)/2]), are given, separated by a single space. These denote the number of Byteasar’s friends and the number of pairs of his friends who know each other, respectively. Byteasar’s friends are numbered from 1 to . Each of the following lines holds two integers separated by a single space. The numbers in line no.i+1(for i=1,2,…,m) are Ai and Bi(1&lt;=Ai&lt;Bi&lt;=N), separated by a single space, which denote that the persons Ai and Bi now each other. Every pair of numbers appears at most once on the input.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>In the first and only line of the standard output your program should print N/3numbers, separated by single spaces, in increasing order. These number should specify the numbers of Byteasar’s friends whom he should invite to the party. As there are multiple solutions, pick one arbitrarily.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>6 10
+2 5
+1 4
+1 5
+2 4
+1 3
+4 5
+4 6
+3 5
+3 4
+3 6</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>2 4</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>每次找一对没有连边的点对将其删掉 由于这对点之间没有连边，因此两个点不可能都存在于团中，也就是说我至少删掉了1个不在团中的点 那么不超过$$\\frac{1}{3}n$$次操作后所有不在团中的点都会被删掉 此时最多删掉了$$\\frac{2}{3}n$$个点 剩余的点构成了一个团，大小$$\\ge\\frac{1}{3}n$$，任选其中$$\\frac{1}{3}n$$个点输出即可 时间复杂度$$O(n^2)$$</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m;
+bool f[3010][3010],v[3010];
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y;
+        scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+        f[x][y]=f[y][x]=1;
+    }
+    for(int i=1;i&lt;=n;i++)
+        if(!v[i])
+            for(int j=i+1;j&lt;=n;j++)
+                if(!v[j]&amp;&amp;!f[i][j])
+                {
+                    v[i]=1,v[j]=1;
+                    break;
+                }
+    int cnt=0;
+    for(int i=1;i&lt;=n;i++)
+    {
+        if(!v[i]) printf(&quot;%d &quot;,i),cnt++;
+        if(cnt==n/3) break;
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/22/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/24/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

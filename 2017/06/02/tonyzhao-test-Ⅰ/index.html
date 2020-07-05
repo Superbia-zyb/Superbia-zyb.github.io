@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="还记得这场考试机房所有人都忘开足数组了QAQ  T1 运算题目描述：小花上了一节计算机课，听到老师讲到了“与运算”的概念，于是便自己展开了尝试。 她在纸上写下了 3 个数，并将他们两两进行二进制“与”运算，之后找到了最大的结果。 正当她开心之时，作为 JDFZ 高一鸡精扛把子的 Superbia 走了过来：这太菜了，数据这么弱， 再加大 100000 倍我也能做！ 小花不服气，便真的出了好多好多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tonyzhao test Ⅰ">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/tonyzhao-test-%E2%85%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="还记得这场考试机房所有人都忘开足数组了QAQ  T1 运算题目描述：小花上了一节计算机课，听到老师讲到了“与运算”的概念，于是便自己展开了尝试。 她在纸上写下了 3 个数，并将他们两两进行二进制“与”运算，之后找到了最大的结果。 正当她开心之时，作为 JDFZ 高一鸡精扛把子的 Superbia 走了过来：这太菜了，数据这么弱， 再加大 100000 倍我也能做！ 小花不服气，便真的出了好多好多">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-06-02T12:58:37.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:52:33.191Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="模拟赛总结">
+<meta property="article:tag" content="spfa">
+<meta property="article:tag" content="tarjan">
+<meta property="article:tag" content="最小生成树">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/06/02/tonyzhao-test-%E2%85%A0/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Tonyzhao test Ⅰ | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#T1-运算"><span class="nav-number">1.</span> <span class="nav-text">T1 运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述："><span class="nav-number">1.1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">1.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">1.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输入"><span class="nav-number">1.4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输出"><span class="nav-number">1.5.</span> <span class="nav-text">样例输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围"><span class="nav-number">1.6.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析："><span class="nav-number">1.7.</span> <span class="nav-text">题目分析：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#T2-道路"><span class="nav-number">2.</span> <span class="nav-text">T2 道路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述：-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式-1"><span class="nav-number">2.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式-1"><span class="nav-number">2.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输入-1"><span class="nav-number">2.4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输出-1"><span class="nav-number">2.5.</span> <span class="nav-text">样例输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围-1"><span class="nav-number">2.6.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析：-1"><span class="nav-number">2.7.</span> <span class="nav-text">题目分析：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#T3-小花"><span class="nav-number">3.</span> <span class="nav-text">T3 小花</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述：-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式-2"><span class="nav-number">3.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式-2"><span class="nav-number">3.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输入-2"><span class="nav-number">3.4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围-2"><span class="nav-number">3.5.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析：-2"><span class="nav-number">3.6.</span> <span class="nav-text">题目分析：</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/tonyzhao-test-%E2%85%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tonyzhao test Ⅰ
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-06-02 20:58:37" itemprop="dateCreated datePublished" datetime="2017-06-02T20:58:37+08:00">2017-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:52:33" itemprop="dateModified" datetime="2020-07-05T23:52:33+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>还记得这场考试机房所有人都忘开足数组了QAQ</p>
+</blockquote>
+<h1 id="T1-运算"><a href="#T1-运算" class="headerlink" title="T1 运算"></a>T1 运算</h1><h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>小花上了一节计算机课，听到老师讲到了“与运算”的概念，于是便自己展开了尝试。 她在纸上写下了 3 个数，并将他们两两进行二进制“与”运算，之后找到了最大的结果。 正当她开心之时，作为 JDFZ 高一鸡精扛把子的 Superbia 走了过来：这太菜了，数据这么弱， 再加大 100000 倍我也能做！ 小花不服气，便真的出了好多好多个数，问 Superbia 究竟哪两个数进行二进制下的与运算 结果最大。 Superbia 前一天晚上补作业补到了他出发上学前 1e-15s 所以他现在已经算不出来了，他请 求你帮他算一下。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行为元素个数 n。 第二行开始 n 行每行一个数 a[i]表示第 i 个元素。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>最大的与运算结果。</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><pre><code>3 8 10 2</code></pre><h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><pre><code>8</code></pre><h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>20%的数据保证 n&lt;=5000 100%的数据保证 n&lt;=3*10^5^ ，0&lt;=a[i]&lt;=10^9</p>
+<h2 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h2><p>二进制或运算的拓展性质 这里直接用出题人的题解</p>
+<blockquote>
+<p>我们知道”&amp;”运算是两个数二进制位上全为1则为1，有一个数或以上为0则为0. 我们同时也知道，(1&lt;&lt;20) &gt; (1&lt;&lt;20)-1 即： 100000000000000000000 大于 011111111111111111111 所以，我们可以从二进制位上的最高位（对于int可以用1&lt;&lt;30）开始向下枚举，必定有如果两个数在当前的最高位上相与为1则结果在此位上为1，使得相与的结果最大。 所以我们就进行枚举，如果有两个及以上的数字上我们制定的位上为1则说明答案一定从这些元素中选出，那么删去不合法的继续进行下一位的枚举，当只剩两个的时候恭喜你找到了OvO</p>
+</blockquote>
+<p>嗯就是这样 然而考场把原数列sort一下竟然骗A了 原来数据这么水QAQ 附上std代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">300010</span>],ans,n;</span><br><span class="line"><span class="keyword">bool</span> use[<span class="number">300010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"calc.in"</span> ,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"calc.out"</span> ,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp=<span class="number">1</span>&lt;&lt;i,cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="keyword">if</span>(!use[j]&amp;&amp;(a[j]&amp;tmp)) ++cnt;</span><br><span class="line">        <span class="keyword">if</span>(cnt&lt;<span class="number">2</span>) <span class="keyword">continue</span>;</span><br><span class="line">        ans^=(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="keyword">if</span>(!(a[j]&amp;(<span class="number">1</span>&lt;&lt;i))) use[j]=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="T2-道路"><a href="#T2-道路" class="headerlink" title="T2 道路"></a>T2 道路</h1><h2 id="题目描述：-1"><a href="#题目描述：-1" class="headerlink" title="题目描述："></a>题目描述：</h2><p>小花所在的学校十分先进。学校中一共有 n 个房间，这些房间之间有 m 条通道连接，因为 这些房间之间的距离可能会非常的长，所以这些通道使用了从隔壁学园都市进口的快速传输 技术，但是这项技术并不是十分完善，所以只能安全地单向进行传输。 值得注意的是，尽管每条通道传输都需要一定时间，但是也有例外：学校中有多个“教师办 公中心”，只要进入这些中心，便可以享受到最快速最便捷的传输，即在办公中心里进行传 输不需要消耗通道本应消耗的时间。当然小花是不担心时间的，但是学园都市又研发出了新 功能——在办公中心内进行传输所能提交的作业数是办公中心内房间的个数乘以办公中心 内能交作业最多的房间能交的作业个数，即办公中心内每个房间能交作业的数量以最多的为准。 可惜，记录办公中心地址的单子丢了，但是她从老师那里听说，所有的办公中心里的所有房 间都是可以互相（直接或间接）抵达的。 注意因为资源开发完全，所以不会出现一个区域房间之间可以相互抵达，但却不是办公中心 的情况。办公中心必然由多个房间组成。 小花想知道，对于给定的起点 S，小花应该如何走才能交最多的作业？请输出最多能交的作 业个数并输出交最多作业时经过的最少办公中心。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行 m,n,s 表示一共有 m 个房间，n 条通道，以 s 号房间作为起点。 第二行 m 个数表示每个房间可以上交的作业 a[i] 第三行开始的 n 行每行 2 个整数 x[i],y[i]表示从 x[i]到 y[i]号房间有一条通道。</p>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>一行两个整数，之间用空格分开，分别表示最多能交作业的个数以及经过的最少的办公中心。</p>
+<h2 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">7</span> <span class="number">1</span></span><br><span class="line"><span class="number">3</span> <span class="number">5</span> <span class="number">4</span> <span class="number">9</span> <span class="number">7</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">4</span> <span class="number">5</span></span><br><span class="line"><span class="number">3</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出"></a>样例输出</h2><pre><code>20 1</code></pre><h2 id="数据范围-1"><a href="#数据范围-1" class="headerlink" title="数据范围"></a>数据范围</h2><p>对于 30%的数据，保证 n&lt;=500,m&lt;=5000. 对于 100%的数据，保证 n&lt;=15000,m&lt;=200000. 同时有 30%的数据，保证学校中没有办公中心。</p>
+<h2 id="题目分析：-1"><a href="#题目分析：-1" class="headerlink" title="题目分析："></a>题目分析：</h2><p>首先注意这里： 有多个办公中心 并且办公中心里的所有房间都能互相到达 这显然是强连通分量嘛QAQ 所以我们先用tarjan 缩点 因为题目描述 所以tarjan 后的点的点权是强连通分量里{点权最大*点数} 然后我们跑spfa最长路 这里的更新需要注意一下 我们不仅需要从S到每个点的交作业数最多 还要经过最少的办公中心 并且要明确一点 办公中心由多个房间组成 所以spfa更新时要注意一下 最后 我们在跑完spfa后 枚举非s点取最优解就可以了</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n,m,tota,timee,color;
+struct your
+{
+    int next,to;
+}a[210000],b[210000];
+int heada[16000];
+int headb[16000];
+int totb;
+void add_a(int x,int y)
+{
+    a[++tota].next=heada[x];
+    a[tota].to=y;
+    heada[x]=tota;
+}
+void add_b(int x,int y)
+{
+    b[++totb].next=headb[x];
+    b[totb].to=y;
+    headb[x]=totb;
+}
+int v[16000],vv[16000],cnt[16000];
+int deep[16000],low[16000],belong[16000],st[16000],visit[16000];
+void tarjan(int x)
+{
+    low[x]=deep[x]=timee++;
+    visit[x]=true;
+    st[++st[0]]=x;
+    for(int i=heada[x];i;i=a[i].next)
+    {
+        if(!deep[a[i].to])
+        {
+            tarjan(a[i].to);
+            low[x]=min(low[x],low[a[i].to]);
+        }
+        else if(visit[a[i].to])
+            low[x]=min(low[x],deep[a[i].to]);
+    }
+    if(deep[x]==low[x])
+    {
+        int tmp;
+        color++;
+        do
+        {   
+            tmp=st[st[0]--];
+            cnt[color]++;
+            visit[tmp]=false;
+            belong[tmp]=color;
+            vv[color]=max(vv[color],v[tmp]);
+        }while(tmp!=x);
+    }
+}
+int S;
+int num[16000];
+bool book[16000];
+int dis[16000],in[16000];
+int ans,number;
+int calc(int x)
+{
+    return x&gt;1?1:0; 
+}
+int temp1,temp2;
+void spfa()
+{
+    queue&lt;int&gt;q;
+    memset(num,0x7f,sizeof num);
+    q.push(belong[S]);
+    book[belong[S]]=true;
+    if(cnt[belong[S]]&gt;1) num[belong[S]]=1;
+    else num[belong[S]]=0;
+    dis[belong[S]]=vv[belong[S]];
+    while(q.size())
+    {
+        int nmp=q.front();
+        q.pop();
+        book[nmp]=false;
+        for(int i=headb[nmp];i;i=b[i].next)
+        {
+            if(dis[b[i].to]&lt;dis[nmp]+vv[b[i].to])
+            {
+                dis[b[i].to]=dis[nmp]+vv[b[i].to];
+                num[b[i].to]=num[nmp]+calc(cnt[b[i].to]);
+                if(!book[b[i].to])
+                    q.push(b[i].to),book[b[i].to]=true;
+            }
+            if(dis[b[i].to]==dis[nmp]+vv[b[i].to]&amp;&amp;num[b[i].to]&gt;num[nmp]+calc(cnt[b[i].to]))
+            {
+                num[b[i].to]=num[nmp]+calc(cnt[b[i].to]);
+                if(!book[b[i].to]) book[b[i].to]=true,q.push(b[i].to);
+            }
+        }
+    }
+}
+void work()
+{
+    spfa();
+    for(int i=1;i&lt;=color;i++)
+    {
+        if(ans&lt;dis[i]) ans=dis[i],number=num[i];
+        if(ans==dis[i]&amp;&amp;num[i]&lt;number) number=num[i];
+    }
+    printf(&quot;%d %d&quot;,ans,number);
+}
+int main()
+{
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;S);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%d&quot;,&amp;v[i]);
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y;
+        scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+        add_a(x,y);
+    }
+    for(int i=1;i&lt;=n;i++)
+        if(!deep[i]) tarjan(i);
+    for(int i=1;i&lt;=color;i++)
+        vv[i]=vv[i]*cnt[i];
+    for(int i=1;i&lt;=n;i++)
+        for(int j=heada[i];j;j=a[j].next)
+            if(belong[i]!=belong[a[j].to])
+                add_b(belong[i],belong[a[j].to]),in[belong[a[j].to]]++;
+    work();
+    return 0;
+}</code></pre><h1 id="T3-小花"><a href="#T3-小花" class="headerlink" title="T3 小花"></a>T3 小花</h1><h2 id="题目描述：-2"><a href="#题目描述：-2" class="headerlink" title="题目描述："></a>题目描述：</h2><p>小花的名字叫小花，当然家里也要养一些花啦~ 小花养了好多好多盆小花，但是他们距离很远，所以会变的孤单，于是小花决定建立一个通 讯系统供他们通讯。 小花的花园里有 N 盆小花。因为小花家使用了从隔壁学园都市进口的运行在太空名为“织女 星一号”的卫星，可将 S 盆花联系在一起，他们之间可以互相通讯。除此之外还可以加装无 线电通讯设备，但是只通过无线电收发器通话的花之间的距离不能超过 D，这是受收发器的 功率限制。收发器的功率越高，通讯距离 D 会更远，但同时价格也会更贵。 收发器需要统一购买和安装，所以所有的花只能选择安装一种型号的收发器。换句话说，每 一对花之间的通讯距离都是同一个 D。 你的任务是确定收发器必须的最小通讯距离 D，使得每一对花之间至少有一条通讯路径（直接的或者间接的）。</p>
+<h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>第 1 行：2 个整数 S 和 P，S 表示可使用卫星通讯的小花数，P 表示小花的数量。 接下来 P 行，每行描述一盆花的平面坐标（x,y），以 m 为单位，整数。</p>
+<h2 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h2><p>实数 D，含义如上。精确到小数点后两位。</p>
+<h2 id="样例输入-2"><a href="#样例输入-2" class="headerlink" title="样例输入"></a>样例输入</h2><pre><code>212.13</code></pre><h2 id="数据范围-2"><a href="#数据范围-2" class="headerlink" title="数据范围"></a>数据范围</h2><p>对于 20%的数据，P=2，S=1 对于 100%的数据，1&lt;=S&lt;=100，S&lt;P&lt;=500，0&lt;=x，y&lt;=10000</p>
+<h2 id="题目分析：-2"><a href="#题目分析：-2" class="headerlink" title="题目分析："></a>题目分析：</h2><p>这题一开始看没什么思路 但是我们贪心的来想 我们现在能免费连接S盆花  那么一定是用连接着S盆花的机会来连接距离比较大的花 我们先假设用卫星将S盆花连接成了一个整体 然后剩下n-S盆花 那么这n-S盆花需要我们来花钱连了 那么我们要求的D就是剩下的n-S盆花中 能够使得所有花都连接的最小的最大距离 这里我们可以使用Kruskal求 但是 这么做对吗 很显然不对 虽然我们花钱把n-S的花连到了一起 但是所有的n盆花并不是一个整体 所以我们还要把他们连上 那么 D就是把两个集合连接在一起的边权 所以我们先处理出所有的边 然后用Kruskal求出第n-S条的边权就可以了</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+struct your
+{
+    int x,y;
+    double c;
+}a[300000];
+int tot;
+int x[600],y[600],f[600];
+int find(int x)
+{
+    if(f[x]==x) return x;
+    return f[x]=find(f[x]);
+}
+int n,m;
+int cmp(your j,your k)
+{
+    return j.c&lt;k.c;
+}
+void Kruskal()
+{
+    int cnt=0;
+    for(int i=1;i&lt;=tot;i++)
+    {
+        int dx=find(a[i].x),dy=find(a[i].y);
+        if(dx!=dy)
+            f[dx]=dy,cnt++;
+        if(cnt==n-m)
+        {
+            printf(&quot;%.2lf&quot;,a[i].c);
+            return ;
+        }
+    }
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;m,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+        scanf(&quot;%d%d&quot;,&amp;x[i],&amp;y[i]),f[i]=i;
+    for(int i=1;i&lt;=n;i++)
+        for(int j=i+1;j&lt;=n;j++)
+        {
+            tot++;
+            a[++tot].x=i;
+            a[tot].y=j;
+            a[tot].c=sqrt((x[j]-x[i])*(x[j]-x[i])+(y[j]-y[i])*(y[j]-y[i]));
+        }
+    sort(a+1,a+tot+1,cmp);
+    Kruskal();
+        return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E6%A8%A1%E6%8B%9F%E8%B5%9B%E6%80%BB%E7%BB%93/" rel="tag"># 模拟赛总结</a>
+              <a href="/tags/spfa/" rel="tag"># spfa</a>
+              <a href="/tags/tarjan/" rel="tag"># tarjan</a>
+              <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="tag"># 最小生成树</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/06/01/gxz-test-%E2%85%A0/" rel="prev" title="GXZ test Ⅰ">
+      <i class="fa fa-chevron-left"></i> GXZ test Ⅰ
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/06/06/bzoj2282-sdoi2011%E6%B6%88%E9%98%B2/" rel="next" title="[BZOJ2282] [Sdoi2011]消防">
+      [BZOJ2282] [Sdoi2011]消防 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

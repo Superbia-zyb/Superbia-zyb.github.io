@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description那N只可爱的奶牛刚刚学习了有关密码的许多算法，终于，她们创造出了属于奶牛的加密方法．由于她们并不是经验十足，她们的加密方法非常简单：第i只奶牛掌握着密码的第i个数字，起始的时候是Ci(0≤Ci &lt; 90000000).加密的时候，第i只奶牛会计算其他所有奶牛的数字和，并将这个数字和除以98765431取余．在所有奶牛计算完毕之后，每一只奶牛会用自己算得的数字代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1712] [Usaco2007 China]Summing Sums 加密">
+<meta property="og:url" content="http://yoursite.com/2017/10/09/bzoj1712-usaco2007-chinasumming-sums-%E5%8A%A0%E5%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description那N只可爱的奶牛刚刚学习了有关密码的许多算法，终于，她们创造出了属于奶牛的加密方法．由于她们并不是经验十足，她们的加密方法非常简单：第i只奶牛掌握着密码的第i个数字，起始的时候是Ci(0≤Ci &lt; 90000000).加密的时候，第i只奶牛会计算其他所有奶牛的数字和，并将这个数字和除以98765431取余．在所有奶牛计算完毕之后，每一只奶牛会用自己算得的数字代">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.lydsy.com/JudgeOnline/upload/201401/22(10).jpg">
+<meta property="article:published_time" content="2017-10-09T10:16:16.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.669Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="数学与数论">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.lydsy.com/JudgeOnline/upload/201401/22(10).jpg">
+
+<link rel="canonical" href="http://yoursite.com/2017/10/09/bzoj1712-usaco2007-chinasumming-sums-%E5%8A%A0%E5%AF%86/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1712] [Usaco2007 China]Summing Sums 加密 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/bzoj1712-usaco2007-chinasumming-sums-%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1712] [Usaco2007 China]Summing Sums 加密
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-10-09 18:16:16" itemprop="dateCreated datePublished" datetime="2017-10-09T18:16:16+08:00">2017-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1712" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>那N只可爱的奶牛刚刚学习了有关密码的许多算法，终于，她们创造出了属于奶牛的加密方法．由于她们并不是经验十足，她们的加密方法非常简单：第i只奶牛掌握着密码的第i个数字，起始的时候是Ci(0≤Ci &lt; 90000000).加密的时候，第i只奶牛会计算其他所有奶牛的数字和，并将这个数字和除以98765431取余．在所有奶牛计算完毕之后，每一只奶牛会用自己算得的数字代替原有的数字．也就是说， <img src="http://www.lydsy.com/JudgeOnline/upload/201401/22(10).jpg" alt=""> 这样，她们就完成了一次加密． 在十一月，奶牛们把这个加密法则告诉了驼鹿卡门，卡门惊呆了．之后，在一个浓雾弥漫的平安夜，卡门与奶牛们：“你们的算法十分原始，很容易就被人破解．所以你们要重复这个加密过程T(1≤T≤1414213562)次，才能达到加密效果．” 这回轮到奶牛们惊呆了．很显然，奶牛们特别讨厌做同样的无聊的事情很多次．经过了漫长的争论，卡门和奶牛们终于找到的解决办法：你被刚来加密这些数字．</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第1行输入N和T，之后N行每行一个整数表示初始的Ci．</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>共N行，每行一个整数，表示T次加密之后的Ci．</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>3 4
+1
+0
+4</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>26
+25
+29</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>手推几项 发现C[i]能O(1)推出来 听说可以矩阵乘法？</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std; 
+long long n;
+long long c[500100],sum,t;
+long long mod=98765431;
+long long ksm(long long x,long long y)
+{
+    x%=mod;
+    long long tmp=1;
+    while(y)
+    {
+        if(y&amp;1ll) tmp=(tmp*x)%mod;
+        y&gt;&gt;=1,x=(x*x)%mod;
+    }
+    return tmp;
+}
+long long calc(long long a,long long q,long long num)
+{ return (ksm(q,num)%mod*(a%mod)%mod-a+mod)%mod*ksm((q-1),mod-2)%mod; }
+int main()
+{   
+    scanf(&quot;%lld%lld&quot;,&amp;n,&amp;t);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;c[i]),sum=(sum+c[i])%mod;
+    for(int i=1;i&lt;=n;i++)
+    {
+        long long tmp;
+        if(t==1)
+        {
+            printf(&quot;%lld\n&quot;,(sum-c[i]+mod)%mod);
+            continue;
+        }
+        if((t-1)&amp;1ll)
+            tmp=((( c[i]%mod+calc( (n-1)*sum , (n-1)*(n-1) , t/2 )%mod)%mod-(calc( sum , (n-1)*(n-1), t/2 ) )%mod)+mod)%mod;
+        else
+            tmp=((( calc( sum , (n-1)*(n-1) , t/2+1 )%mod-c[i]+mod)%mod-(calc( (n-1)*sum , (n-1)*(n-1) , t/2) )%mod)+mod)%mod ;
+        printf(&quot;%lld\n&quot;,(tmp%mod+mod)%mod);
+    }
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E4%B8%8E%E6%95%B0%E8%AE%BA/" rel="tag"># 数学与数论</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/10/09/bzoj3798-%E7%89%B9%E6%AE%8A%E7%9A%84%E8%B4%A8%E6%95%B0/" rel="prev" title="[BZOJ3798] 特殊的质数">
+      <i class="fa fa-chevron-left"></i> [BZOJ3798] 特殊的质数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/09/bzoj1355-baltic2009radio-transmission/" rel="next" title="[BZOJ1355] [Baltic2009]Radio Transmission">
+      [BZOJ1355] [Baltic2009]Radio Transmission <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="Description给出N个点，让你画一个最小的包含所有点的圆。 Input先给出点的个数N,2&lt;&#x3D;N&lt;&#x3D;100000，再给出坐标Xi,Yi.(-10000.0&lt;&#x3D;xi,yi&lt;&#x3D;10000.0) Output输出圆的半径，及圆心的坐标 Sample Input6 8.0 9.0 4.0 7.5 1.0 2.0 5.1 8.7 9.0 2.0 4.5 1.0Sample O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1337&#x2F;1336&#x2F;2823] 最小圆覆盖">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/bzoj133713362823-%E6%9C%80%E5%B0%8F%E5%9C%86%E8%A6%86%E7%9B%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Description给出N个点，让你画一个最小的包含所有点的圆。 Input先给出点的个数N,2&lt;&#x3D;N&lt;&#x3D;100000，再给出坐标Xi,Yi.(-10000.0&lt;&#x3D;xi,yi&lt;&#x3D;10000.0) Output输出圆的半径，及圆心的坐标 Sample Input6 8.0 9.0 4.0 7.5 1.0 2.0 5.1 8.7 9.0 2.0 4.5 1.0Sample O">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-12T06:45:29.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.564Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="数学与数论">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/09/12/bzoj133713362823-%E6%9C%80%E5%B0%8F%E5%9C%86%E8%A6%86%E7%9B%96/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1337/1336/2823] 最小圆覆盖 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">6.</span> <span class="nav-text">题目分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以下内容转自commonc神犇的博客"><span class="nav-number">6.0.1.</span> <span class="nav-text">以下内容转自commonc神犇的博客</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/bzoj133713362823-%E6%9C%80%E5%B0%8F%E5%9C%86%E8%A6%86%E7%9B%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1337/1336/2823] 最小圆覆盖
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-12 14:45:29" itemprop="dateCreated datePublished" datetime="2017-09-12T14:45:29+08:00">2017-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>给出N个点，让你画一个最小的包含所有点的圆。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>先给出点的个数N,2&lt;=N&lt;=100000，再给出坐标Xi,Yi.(-10000.0&lt;=xi,yi&lt;=10000.0)</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出圆的半径，及圆心的坐标</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>6
+8.0 9.0
+4.0 7.5
+1.0 2.0
+5.1 8.7
+9.0 2.0
+4.5 1.0</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>5.00
+5.00 5.00</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>随机增量法太神辣 (其实刷只是为了PK+三倍经验)</p>
+<h4 id="以下内容转自commonc神犇的博客"><a href="#以下内容转自commonc神犇的博客" class="headerlink" title="以下内容转自commonc神犇的博客"></a><strong>以下内容转自commonc神犇的博客</strong></h4><hr>
+<p>算法目的：最小圆覆盖算法可以在线性时间复杂度内求出覆盖n个点的最小圆 算法步骤：      ①首先现将所有点随机排列      ②按顺序把点一个一个的加入（一步一步的求前i个点的最小覆盖圆），每加入一个点就进入③      ③如果发现当前i号点在当前的最小圆的外面，那么说明点i一定在前i个点的最小覆盖圆边界上，我们转到④来进一步确定这个圆，否则前i个点的最小覆盖圆与前i-1个点的最小覆盖圆是一样的，则不需要更新，返回②      ④此时已经确认点i一定在前i个点的最小覆盖圆的边界上了，那么我们可以把当前圆的圆心设为第i个点，半径为0，然后重新把前i-1个点加入这个圆中（类似上面的步骤，只不过这次我们提前确定了点i在圆上，目的是一步一步求出包含点i的前j个点的最小覆盖圆），每加入一个点就进入⑤      ⑤如果发现当前j号点在当前的最小圆的外面，那么说明点j也一定在前j个点（包括i）的最小覆盖圆边界上，我们转到⑥来再进一步确定这个圆，否则前j个点（包括i）的最小覆盖圆与前i-1个点（包括i）的最小覆盖圆是一样的，则不需要更新，返回④      ⑥此时已经确认点i，j一定在前j个点（包括i）的最小覆盖圆的边界上了，那么我们可以把当前圆的圆心设为第i个点与第j的点连线的中点，半径为到这两个点的距离（就是找一个覆盖这两个点的最小圆），然后重新把前j-1个点加入这个圆中（还是类似上面的步骤，只不过这次我们提前确定了两个点在圆上，目的是求出包含点i，j的前k个点的最小覆盖圆），每加入一个点就进入⑦      ⑦如果发现当前k号点在当前的最小圆的外面，那么说明点k也一定在前k个点（包括i，j）的最小覆盖圆边界上，我们不需要再进一步确定这个圆了（因为三个点能确定一个圆！），直接求出这三点共圆，否则前k个点（包括i，j）的最小覆盖圆与前k-1个点（包括i，j）的最小覆盖圆是一样的，则不需要更新。 时间复杂度：O(N) 空间复杂度：O(N)</p>
+<hr>
+<p>最后 最关键的部分 如何求出三点共圆的圆心坐标？ 公式： 假设三点坐标$$(x\_2,y\_2),(x\_2,y\_2),(x\_3,y\_3)$$ 圆心坐标$$(dx,dy)$$ 则： $$dx=\\frac{(x\_3^{\\:2}+y\_3^{\\:2}-x\_1^{\\:2}-y\_1^{\\:2})\\times(y\_1-y\_2)-(x\_2^{\\:2}+y\_2^{\\:2}-x\_1^{\\:2}-y\_1^{\\:2} )\\times(y\_1-y\_3)}{2(x\_1-x\_2)(y\_1-y\_3)-2(y\_1-y\_2)(x\_1-x\_3)}$$ $$dy=\\frac{(x\_3^{\\:2}+y\_3^{\\:2}-x\_1^{\\:2}-y\_1^{\\:2})\\times(x\_1-x\_2)-(x\_2^{\\:2}+y\_2^{\\:2}-x\_1^{\\:2}-y\_1^{\\:2} )\\times(x\_1-x\_3)}{2(y\_1-y\_2)(x\_1-x\_3)-2(x\_1-x\_2)(y\_1-y\_3)}$$</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n;
+struct your
+{
+    double x,y;
+}a[500010];
+double R;
+your O;
+double sqr(double x) { return x*x; }
+double dis(your x,your y)
+{
+    return sqrt(sqr(x.x-y.x)+sqr(x.y-y.y));
+}
+int incir(your x)
+{
+    if(dis(O,x)&lt;=R) return 1;
+    return 0;
+}
+your slove(your x,your y,your z)
+{
+    your tmp;
+    tmp.x=(sqr(z.x)+sqr(z.y)-sqr(x.x)-sqr(x.y))*(x.y-y.y)-(sqr(y.x)+sqr(y.y)-sqr(x.x)-sqr(x.y))*(x.y-z.y);
+    tmp.x/=2;
+    tmp.x/=(x.x-y.x)*(x.y-z.y)-(x.y-y.y)*(x.x-z.x);
+    tmp.y=(sqr(z.x)+sqr(z.y)-sqr(x.x)-sqr(x.y))*(x.x-y.x)-(sqr(y.x)+sqr(y.y)-sqr(x.x)-sqr(x.y))*(x.x-z.x);
+    tmp.y/=2;
+    tmp.y/=(x.y-y.y)*(x.x-z.x)-(x.x-y.x)*(x.y-z.y);
+    return tmp;
+}
+int main()
+{   
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lf%lf&quot;,&amp;a[i].x,&amp;a[i].y);
+    random_shuffle(a+1,a+n+1);
+    for(int i=1;i&lt;=n;i++)
+        if(!incir(a[i]))
+        {
+            O.x=a[i].x,O.y=a[i].y,R=0;
+            for(int j=1;j&lt;i;j++)
+                if(!incir(a[j]))
+                {
+                    O.x=(a[i].x+a[j].x)/2;
+                    O.y=(a[i].y+a[j].y)/2;
+                    R=dis(O,a[i]);
+                    for(int k=1;k&lt;j;k++)
+                        if(!incir(a[k]))
+                        {
+                            O=slove(a[i],a[j],a[k]);
+                            R=dis(a[i],O);
+                        }
+                }
+        }
+    printf(&quot;%.10lf\n%.10lf %.10lf&quot;,R,O.x,O.y);
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E4%B8%8E%E6%95%B0%E8%AE%BA/" rel="tag"># 数学与数论</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/11/bzoj2005-noi2010%E8%83%BD%E9%87%8F%E9%87%87%E9%9B%86/" rel="prev" title="[BZOJ2005] [Noi2010]能量采集">
+      <i class="fa fa-chevron-left"></i> [BZOJ2005] [Noi2010]能量采集
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/13/bzoj2396-%E7%A5%9E%E5%A5%87%E7%9A%84%E7%9F%A9%E9%98%B5/" rel="next" title="[BZOJ2396] 神奇的矩阵">
+      [BZOJ2396] 神奇的矩阵 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

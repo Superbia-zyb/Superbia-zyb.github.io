@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="题目描述 Description Input输入的第1 行包含两个数N 和M(M ≤20 000)，N 表示初始时数列中数的个数，M表示要进行的操作数目。 第2行包含N个数字，描述初始时的数列。 以下M行，每行一条命令，格式参见问题描述中的表格。 任何时刻数列中最多含有500 000个数，数列中任何一个数字均在[-1 000, 1 000]内。 插入的数字总数不超过4 000 000个，输入文件大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ1500] [NOI2005]维修数列">
+<meta property="og:url" content="http://yoursite.com/2017/08/28/bzoj1500-noi2005%E7%BB%B4%E4%BF%AE%E6%95%B0%E5%88%97/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 Description Input输入的第1 行包含两个数N 和M(M ≤20 000)，N 表示初始时数列中数的个数，M表示要进行的操作数目。 第2行包含N个数字，描述初始时的数列。 以下M行，每行一条命令，格式参见问题描述中的表格。 任何时刻数列中最多含有500 000个数，数列中任何一个数字均在[-1 000, 1 000]内。 插入的数字总数不超过4 000 000个，输入文件大">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.lydsy.com/JudgeOnline/images/1500_1.jpg">
+<meta property="og:image" content="http://www.lydsy.com/JudgeOnline/images/1500_2.jpg">
+<meta property="article:published_time" content="2017-08-28T10:45:13.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:41:15.534Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="splay">
+<meta property="article:tag" content="NOI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.lydsy.com/JudgeOnline/images/1500_1.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2017/08/28/bzoj1500-noi2005%E7%BB%B4%E4%BF%AE%E6%95%B0%E5%88%97/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[BZOJ1500] [NOI2005]维修数列 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HINT"><span class="nav-number">6.</span> <span class="nav-text">HINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">7.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">428</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/bzoj1500-noi2005%E7%BB%B4%E4%BF%AE%E6%95%B0%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ1500] [NOI2005]维修数列
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-28 18:45:13" itemprop="dateCreated datePublished" datetime="2017-08-28T18:45:13+08:00">2017-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:41:15" itemprop="dateModified" datetime="2020-07-05T23:41:15+08:00">2020-07-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1500" target="_blank" rel="noopener" title="题目描述">题目描述</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1500_1.jpg" alt=""></p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>输入的第1 行包含两个数N 和M(M ≤20 000)，N 表示初始时数列中数的个数，M表示要进行的操作数目。 第2行包含N个数字，描述初始时的数列。 以下M行，每行一条命令，格式参见问题描述中的表格。 任何时刻数列中最多含有500 000个数，数列中任何一个数字均在[-1 000, 1 000]内。 插入的数字总数不超过4 000 000个，输入文件大小不超过20MBytes。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于输入数据中的GET-SUM和MAX-SUM操作，向输出文件依次打印结果，每个答案（数字）占一行。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>9 8
+2 -6 3 5 1 -5 -3 6 3
+GET-SUM 5 4
+MAX-SUM
+INSERT 8 3 -5 7 2
+DELETE 12 1
+MAKE-SAME 3 3 2
+REVERSE 3 6
+GET-SUM 5 4
+MAX-SUM</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>-1
+10
+1
+10</code></pre><h2 id="HINT"><a href="#HINT" class="headerlink" title="HINT"></a>HINT</h2><p><img src="http://www.lydsy.com/JudgeOnline/images/1500_2.jpg" alt=""></p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>splay的题不用非旋treap写 那还是人么= = 这里保证了标记只对自己的儿子的儿子有效 至于自己的儿子 在打标记时就已经更新完了 学了一发O(n)建树 单调栈建树和递归建树 这里就只贴递归建树了 好些好用 还有这题卡内存 所以我们用一个队列来循环利用 不用的数组下标</p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+typedef pair&lt;int,int&gt; par;
+int n,m;
+int size[601010],lson[601010],rson[601010],key[601010],val[601010];
+int root,tot;
+int sum[601010],lmax[601010],rmax[601010],maxx[601010];
+int lazy[601010],add[601010];
+queue&lt;int&gt; q;
+void update(int x)
+{
+    size[x]=size[lson[x]]+size[rson[x]]+1;
+    sum[x]=sum[lson[x]]+sum[rson[x]]+val[x];
+    lmax[x]=rmax[x]=0,maxx[x]=-0x3f3f3f3f;
+    if(lson[x]) lmax[x]=max(lmax[x],lmax[lson[x]]);
+    lmax[x]=max(lmax[x],sum[lson[x]]+val[x]+lmax[rson[x]]);
+    if(rson[x]) rmax[x]=max(rmax[x],rmax[rson[x]]);
+    rmax[x]=max(rmax[x],sum[rson[x]]+val[x]+rmax[lson[x]]);
+    if(lson[x]) maxx[x]=max(maxx[x],maxx[lson[x]]);
+    if(rson[x]) maxx[x]=max(maxx[x],maxx[rson[x]]);
+    maxx[x]=max(maxx[x],rmax[lson[x]]+val[x]+lmax[rson[x]]);
+    return ;
+}
+void rev(int x)
+{
+    swap(lmax[x],rmax[x]);
+    swap(lson[x],rson[x]);
+    lazy[x]^=1;
+}
+void ad(int x,int c)
+{
+    sum[x]=size[x]*c;
+    if(c&gt;0) lmax[x]=rmax[x]=maxx[x]=size[x]*c;
+    else lmax[x]=rmax[x]=0,maxx[x]=c;
+    val[x]=add[x]=c;
+    return ;
+}
+void pushdown(int x)
+{
+    if(!x) return ;
+    if(add[x]!=0x3f3f3f3f)
+    {
+        if(lson[x]) sum[lson[x]]=size[lson[x]]*add[x],val[lson[x]]=add[lson[x]]=add[x];
+        if(rson[x]) sum[rson[x]]=size[rson[x]]*add[x],val[rson[x]]=add[rson[x]]=add[x];
+        if(add[x]&gt;0)
+        {
+            if(lson[x]) lmax[lson[x]]=rmax[lson[x]]=maxx[lson[x]]=size[lson[x]]*add[x];
+            if(rson[x]) lmax[rson[x]]=rmax[rson[x]]=maxx[rson[x]]=size[rson[x]]*add[x];
+        }
+        else
+        {
+            if(lson[x]) lmax[lson[x]]=rmax[lson[x]]=0,maxx[lson[x]]=add[x];
+            if(rson[x]) lmax[rson[x]]=rmax[rson[x]]=0,maxx[rson[x]]=add[x];
+        }
+        add[x]=0x3f3f3f3f;
+    }
+    if(lazy[x]) 
+    {
+        swap(lson[lson[x]],rson[lson[x]]);
+        swap(lson[rson[x]],rson[rson[x]]);
+        swap(lmax[lson[x]],rmax[lson[x]]);
+        swap(lmax[rson[x]],rmax[rson[x]]);
+        if(lson[x]) lazy[lson[x]]^=1;
+        if(rson[x]) lazy[rson[x]]^=1;
+        lazy[x]=0;
+    }
+    return ;
+}
+int merge(int x,int y)
+{
+    pushdown(x),pushdown(y);
+    if(x==0||y==0) return x|y;
+    if(key[x]&lt;key[y])
+    {
+        lson[y]=merge(x,lson[y]),update(y);
+        return y;
+    }
+    rson[x]=merge(rson[x],y),update(x);
+    return x;
+}
+par split(int x,int k)
+{
+    if(k==0) return make_pair(0,x);
+    pushdown(x);
+    int l=lson[x],r=rson[x];
+    if(k==size[lson[x]])
+    {
+        lson[x]=0,update(x);
+        return make_pair(l,x);
+    }
+    if(k==size[lson[x]]+1)
+    {
+        rson[x]=0,update(x);
+        return make_pair(x,r);
+    }
+    par t;
+    if(k&lt;size[lson[x]])
+    {
+        t=split(l,k);
+        lson[x]=t.second,update(x);
+        return make_pair(t.first,x);
+    }
+    else
+    {
+        t=split(r,k-size[lson[x]]-1);
+        rson[x]=t.first,update(x);
+        return make_pair(x,t.second);
+    }
+}
+int num[600100],sta[600100];
+char s[100];
+void newnode(int x,int c)
+{
+    val[x]=c,size[x]=1,key[x]=rand();
+    lmax[x]=rmax[x]=max(c,0),maxx[x]=sum[x]=c;
+    add[x]=0x3f3f3f3f;
+    return ;
+}
+int build(int l,int r)
+{
+    if(l==r) 
+    {
+        int nmp=q.front();
+        q.pop();
+        newnode(nmp,num[l]);
+        return nmp;
+    }
+    int mid=(l+r)&gt;&gt;1;
+    return merge(build(l,mid),build(mid+1,r));
+}
+void insert(int x,int y)
+{
+    for(int i=1;i&lt;=y;i++) scanf(&quot;%d&quot;,&amp;num[i]);
+    par t1=split(root,x);
+    root=merge(merge(t1.first,build(1,y)),t1.second);
+}
+void dfs(int x)
+{
+    if(!x) return ;
+    int l=lson[x],r=rson[x];
+    size[x]=lmax[x]=rmax[x]=maxx[x]=sum[x]=val[x]=0;
+    lazy[x]=0,add[x]=0x3f3f3f3f,lson[x]=rson[x]=0;
+    dfs(l),q.push(x),dfs(r);
+    return ;
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int x,i=1;i&lt;=n;i++)
+        scanf(&quot;%d&quot;,&amp;x),newnode(++tot,x),root=merge(root,tot);
+    for(int i=n+1;i&lt;=501010;i++) q.push(i);
+    for(int x,y,c,i=1;i&lt;=m;i++)
+    {
+        scanf(&quot;%s&quot;,&amp;s[0]);
+        if(s[2]==&apos;S&apos;) scanf(&quot;%d%d&quot;,&amp;x,&amp;y),insert(x,y);   
+        else if(s[2]==&apos;L&apos;)
+        {
+            scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+            par t1,t2;
+            t2=split(root,x+y-1),t1=split(t2.first,x-1);
+            dfs(t1.second);
+            root=merge(t1.first,t2.second);
+        }
+        else if(s[2]==&apos;K&apos;)
+        {
+            scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;c);
+            par t1,t2;
+            t2=split(root,x+y-1),t1=split(t2.first,x-1);
+            ad(t1.second,c);
+            root=merge(merge(t1.first,t1.second),t2.second);
+        }
+        else if(s[2]==&apos;V&apos;)
+        {
+            scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+            par t1,t2;
+            t2=split(root,x+y-1),t1=split(t2.first,x-1);
+            rev(t1.second);
+            root=merge(merge(t1.first,t1.second),t2.second);
+        }
+        else if(s[2]==&apos;T&apos;)
+        {
+            scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+            par t1,t2;
+            t2=split(root,x+y-1),t1=split(t2.first,x-1);
+            printf(&quot;%d\n&quot;,sum[t1.second]);
+            root=merge(merge(t1.first,t1.second),t2.second);
+        }
+        else if(s[2]==&apos;X&apos;) printf(&quot;%d\n&quot;,maxx[root]);
+    }   
+    return 0;
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/splay/" rel="tag"># splay</a>
+              <a href="/tags/NOI/" rel="tag"># NOI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/08/28/bzoj2096-poi2010pilots/" rel="prev" title="[BZOJ2096] [Poi2010]Pilots">
+      <i class="fa fa-chevron-left"></i> [BZOJ2096] [Poi2010]Pilots
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/08/28/bzoj1537-poi2005aut-the-bus/" rel="next" title="[BZOJ1537] [POI2005]Aut- The Bus">
+      [BZOJ1537] [POI2005]Aut- The Bus <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
