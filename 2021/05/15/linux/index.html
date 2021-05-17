@@ -221,7 +221,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/05/15/linux/106.png">
 <meta property="og:image" content="http://yoursite.com/2021/05/15/linux/107.png">
 <meta property="article:published_time" content="2021-05-15T13:27:21.000Z">
-<meta property="article:modified_time" content="2021-05-17T12:38:21.860Z">
+<meta property="article:modified_time" content="2021-05-17T12:52:58.366Z">
 <meta property="article:author" content="Superbia-zyb">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2021/05/15/linux/71.png">
@@ -492,7 +492,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6,180 字
+                  6,199 字
                 </span>
               
 
@@ -508,7 +508,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  25 分钟
+                  26 分钟
                 </span>
               
             </div>
@@ -636,9 +636,9 @@
 <h5 id="命令选项-l-统计行数"><a href="#命令选项-l-统计行数" class="headerlink" title="命令选项 -l ,统计行数"></a>命令选项 -l ,统计行数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -l file</span></span><br></pre></td></tr></table></figure>
 <h5 id="命令选项-c-统计字符数"><a href="#命令选项-c-统计字符数" class="headerlink" title="命令选项 -c ,统计字符数"></a>命令选项 -c ,统计字符数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -c file</span></span><br></pre></td></tr></table></figure>
 <h5 id="命令选项-w-统计字数"><a href="#命令选项-w-统计字数" class="headerlink" title="命令选项 -w ,统计字数"></a>命令选项 -w ,统计字数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -w file</span></span><br></pre></td></tr></table></figure>
-<h4 id="文件名替换"><a href="#文件名替换" class="headerlink" title="文件名替换"></a>文件名替换</h4><h5 id="匹配任意单个字符"><a href="#匹配任意单个字符" class="headerlink" title="?  ,匹配任意单个字符"></a>?  ,匹配任意单个字符</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls report report2 report22 2report<span class="variable">$ls</span> report? report2 <span class="variable">$ls</span> reprot?? report22 <span class="variable">$ls</span> ?report 2report</span></span><br></pre></td></tr></table></figure>
-<h5 id="匹配任意个字符，包括空串"><a href="#匹配任意个字符，包括空串" class="headerlink" title="*  ,匹配任意个字符，包括空串"></a>*  ,匹配任意个字符，包括空串</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls  report 23report 2report2<span class="variable">$ls</span> *report report 23report<span class="variable">$ls</span> 2*2 2report2</span></span><br></pre></td></tr></table></figure>
-<h5 id="list-匹配任意在list中的字符-list-匹配任意不在list中的字符"><a href="#list-匹配任意在list中的字符-list-匹配任意不在list中的字符" class="headerlink" title="[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符"></a>[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls report areport breport aa1 aa2 aa3<span class="variable">$ls</span> [ab]* areport breport aa1 aa2 aa3<span class="variable">$ls</span> [!ab]* report<span class="variable">$ls</span> *[1-3] aa1 aa2 aa3</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件名替换"><a href="#文件名替换" class="headerlink" title="文件名替换"></a>文件名替换</h4><h5 id="匹配任意单个字符"><a href="#匹配任意单个字符" class="headerlink" title="?  ,匹配任意单个字符"></a>?  ,匹配任意单个字符</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls </span></span><br><span class="line"> report report2 report22 2report</span><br><span class="line"><span class="meta">$</span><span class="bash">ls report? </span></span><br><span class="line"> report2 </span><br><span class="line"><span class="meta">$</span><span class="bash">ls reprot?? </span></span><br><span class="line"> report22 </span><br><span class="line"><span class="meta">$</span><span class="bash">ls ?report </span></span><br><span class="line"> 2report</span><br></pre></td></tr></table></figure>
+<h5 id="匹配任意个字符，包括空串"><a href="#匹配任意个字符，包括空串" class="headerlink" title="*  ,匹配任意个字符，包括空串"></a>*  ,匹配任意个字符，包括空串</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls  </span></span><br><span class="line"> report 23report 2report2</span><br><span class="line"><span class="meta">$</span><span class="bash">ls *report </span></span><br><span class="line"> report 23report</span><br><span class="line"><span class="meta">$</span><span class="bash">ls 2*2 </span></span><br><span class="line"> 2report2</span><br></pre></td></tr></table></figure>
+<h5 id="list-匹配任意在list中的字符-list-匹配任意不在list中的字符"><a href="#list-匹配任意在list中的字符-list-匹配任意不在list中的字符" class="headerlink" title="[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符"></a>[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls </span></span><br><span class="line"> report areport breport aa1 aa2 aa3</span><br><span class="line"><span class="meta">$</span><span class="bash">ls [ab]* </span></span><br><span class="line"> areport breport aa1 aa2 aa3</span><br><span class="line"><span class="meta">$</span><span class="bash">ls [!ab]* </span></span><br><span class="line"> report</span><br><span class="line"><span class="meta">$</span><span class="bash">ls *[1-3] </span></span><br><span class="line"> aa1 aa2 aa3</span><br></pre></td></tr></table></figure>
 <h5 id="隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分"><a href="#隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分" class="headerlink" title="隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分"></a>隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分</h5><p>CentOS 会显示出当前目录内容 与 父目录内容</p>
 <p><img src="/2021/05/15/linux/4.png" alt="1" style="zoom:70%;"></p>
 <p>与其他命令组合使用</p>
