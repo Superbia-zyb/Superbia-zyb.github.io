@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="UNIX 入门UNIX 文件系统磁盘组织 UNIX 文件类型普通文件：包含字节序列（程序代码，数据，文本）目录文件：包含关于其他文件的信息特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件目录目录是文件的一种组织方式    主目录：管理员在创建用户时为其分配的特定目录用户登录时，主动进入主目录，主目录名称通常与用户名相同 用户在其主目录下拥有读、写、执行权限 用户在其主目录下可以创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux">
+<meta property="og:url" content="http://yoursite.com/2021/05/15/linux/index.html">
+<meta property="og:site_name" content="Superbia-zyb">
+<meta property="og:description" content="UNIX 入门UNIX 文件系统磁盘组织 UNIX 文件类型普通文件：包含字节序列（程序代码，数据，文本）目录文件：包含关于其他文件的信息特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件目录目录是文件的一种组织方式    主目录：管理员在创建用户时为其分配的特定目录用户登录时，主动进入主目录，主目录名称通常与用户名相同 用户在其主目录下拥有读、写、执行权限 用户在其主目录下可以创建">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/62.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/64.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/63.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/60.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/61.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/59.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/53.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/51.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/52.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/54.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/55.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/56.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/57.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/58.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/12.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/13.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/16.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/18.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/17.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/19.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/20.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/21.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/22.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/23.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/24.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/25.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/26.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/27.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/36.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/28.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/29.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/30.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/32.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/31.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/33.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/37.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/38.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/39.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/40.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/41.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/42.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/43.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/44.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/45.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/46.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/47.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/48.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/49.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/50.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/65.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/68.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/69.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/67.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/66.png">
+<meta property="og:image" content="http://yoursite.com/2021/05/15/linux/70.png">
+<meta property="article:published_time" content="2021-05-15T13:27:21.000Z">
+<meta property="article:modified_time" content="2021-05-17T05:57:14.208Z">
+<meta property="article:author" content="Superbia-zyb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/05/15/linux/62.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/05/15/linux/"/>
+
+
+
+
+
+  <title>linux | Superbia-zyb</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Superbia-zyb</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/15/linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Superbia-zyb">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/zyb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Superbia-zyb">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-15T21:27:21+08:00">
+                2021-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,345 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="UNIX-入门"><a href="#UNIX-入门" class="headerlink" title="UNIX 入门"></a>UNIX 入门</h2><h2 id="UNIX-文件系统"><a href="#UNIX-文件系统" class="headerlink" title="UNIX 文件系统"></a>UNIX 文件系统</h2><h4 id="磁盘组织"><a href="#磁盘组织" class="headerlink" title="磁盘组织"></a>磁盘组织</h4><p><img src="/2021/05/15/linux/62.png" alt="59" style="zoom:60%;" align="left"></p>
+<h4 id="UNIX-文件类型"><a href="#UNIX-文件类型" class="headerlink" title="UNIX 文件类型"></a>UNIX 文件类型</h4><h5 id="普通文件：包含字节序列（程序代码，数据，文本）"><a href="#普通文件：包含字节序列（程序代码，数据，文本）" class="headerlink" title="普通文件：包含字节序列（程序代码，数据，文本）"></a>普通文件：包含字节序列（程序代码，数据，文本）</h5><h5 id="目录文件：包含关于其他文件的信息"><a href="#目录文件：包含关于其他文件的信息" class="headerlink" title="目录文件：包含关于其他文件的信息"></a>目录文件：包含关于其他文件的信息</h5><h5 id="特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件"><a href="#特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件" class="headerlink" title="特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件"></a>特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件</h5><h4 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h4><p>目录是文件的一种组织方式</p>
+<p><img src="/2021/05/15/linux/64.png" alt="64" style="zoom:60%;" align="lef"></p>
+<p><img src="/2021/05/15/linux/63.png" alt="63 (1)" style="zoom:80%;"> </p>
+<h5 id="主目录：管理员在创建用户时为其分配的特定目录"><a href="#主目录：管理员在创建用户时为其分配的特定目录" class="headerlink" title="主目录：管理员在创建用户时为其分配的特定目录"></a>主目录：管理员在创建用户时为其分配的特定目录</h5><p>用户登录时，主动进入主目录，主目录名称通常与用户名相同</p>
+<p>用户在其主目录下拥有读、写、执行权限</p>
+<p>用户在其主目录下可以创建多个子目录</p>
+<h5 id="工作目录：用户现在在文件系统中所在的目录"><a href="#工作目录：用户现在在文件系统中所在的目录" class="headerlink" title="工作目录：用户现在在文件系统中所在的目录"></a>工作目录：用户现在在文件系统中所在的目录</h5><h5 id="绝对路径：从根目录-开始，到达文件的路径"><a href="#绝对路径：从根目录-开始，到达文件的路径" class="headerlink" title="绝对路径：从根目录 / 开始，到达文件的路径"></a>绝对路径：从根目录 / 开始，到达文件的路径</h5><p><img src="/2021/05/15/linux/60.png" alt="59" style="zoom:45%;" align="left"></p>
+<h5 id="相对路径：从当前目录开始，到达文件的路径"><a href="#相对路径：从当前目录开始，到达文件的路径" class="headerlink" title="相对路径：从当前目录开始，到达文件的路径"></a>相对路径：从当前目录开始，到达文件的路径</h5><p><img src="/2021/05/15/linux/61.png" alt="59" style="zoom:45%;" align="left"></p>
+<h5 id="特殊："><a href="#特殊：" class="headerlink" title="特殊："></a>特殊：</h5><p>点（.）表示当前目录</p>
+<p>点点（..）表示当前目录的父目录</p>
+<h5 id="文件，目录，命名规则"><a href="#文件，目录，命名规则" class="headerlink" title="文件，目录，命名规则"></a>文件，目录，命名规则</h5><p><img src="/2021/05/15/linux/59.png" alt="59" style="zoom:50%;" align="left"></p>
+<h4 id="pwd命令-显示当前工作目录"><a href="#pwd命令-显示当前工作目录" class="headerlink" title="pwd命令 显示当前工作目录"></a>pwd命令 显示当前工作目录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">pwd</span></span></span><br><span class="line">/home/c21191511/work</span><br></pre></td></tr></table></figure>
+<h4 id="cd命令-改变工作目录"><a href="#cd命令-改变工作目录" class="headerlink" title="cd命令 改变工作目录"></a>cd命令 改变工作目录</h4><p>格式：cd [目录]  (绝对路径/相对路径)</p>
+<h5 id="cd-跳转到根目录"><a href="#cd-跳转到根目录" class="headerlink" title="cd /  跳转到根目录"></a>cd /  跳转到根目录</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">cd</span> /</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">pwd</span></span></span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+<h5 id="cd-、cd-、cd-HOME-返回主目录"><a href="#cd-、cd-、cd-HOME-返回主目录" class="headerlink" title="cd 、cd ~ 、cd $HOME 返回主目录"></a>cd 、cd ~ 、cd $HOME 返回主目录</h5><p>root用户，cd ~ 相当于 cd /root</p>
+<p>普通用户，cd ~ 相当于cd /home/当前用户名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$HOME</span></span></span><br><span class="line">/home/c21191511</span><br></pre></td></tr></table></figure>
+<h5 id="进入别人的主目录-拥有权限"><a href="#进入别人的主目录-拥有权限" class="headerlink" title="进入别人的主目录(拥有权限)"></a>进入别人的主目录(拥有权限)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">cd</span> ~c09190717</span></span><br><span class="line">-bash: cd: /home/c09190717: Permission denied</span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">cd</span> /home/c09190717</span></span><br><span class="line">-bash: cd: /home/c09190717: Permission denied</span><br></pre></td></tr></table></figure>
+<h5 id="cd-返回进入此目录之前所在目录"><a href="#cd-返回进入此目录之前所在目录" class="headerlink" title="cd - 返回进入此目录之前所在目录"></a>cd - 返回进入此目录之前所在目录</h5><h5 id="cd-进入当前目录"><a href="#cd-进入当前目录" class="headerlink" title="cd . 进入当前目录"></a>cd . 进入当前目录</h5><h5 id="cd-进入上一级目录"><a href="#cd-进入上一级目录" class="headerlink" title="cd .. 进入上一级目录"></a>cd .. 进入上一级目录</h5><h4 id="mkdir命令-创建目录"><a href="#mkdir命令-创建目录" class="headerlink" title="mkdir命令 创建目录"></a>mkdir命令 创建目录</h4><p>格式：mkdir dir dir2</p>
+<p><img src="/2021/05/15/linux/53.png" alt="51" style="zoom:80%;" align="left"></p>
+<h5 id="命令格式-p-创建多级目录"><a href="#命令格式-p-创建多级目录" class="headerlink" title="命令格式 -p  创建多级目录"></a>命令格式 -p  创建多级目录</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mkdir -p xx/yy/zz</span></span><br></pre></td></tr></table></figure>
+<h4 id="rm命令-删除文件"><a href="#rm命令-删除文件" class="headerlink" title="rm命令 删除文件"></a>rm命令 删除文件</h4><p>格式：rm file</p>
+<h5 id="命令选项-i-删除文件前确认"><a href="#命令选项-i-删除文件前确认" class="headerlink" title="命令选项 -i 删除文件前确认"></a>命令选项 -i 删除文件前确认</h5><h5 id="命令选项-r-删除指定文件夹及所有子文件，每步都确认"><a href="#命令选项-r-删除指定文件夹及所有子文件，每步都确认" class="headerlink" title="命令选项 -r 删除指定文件夹及所有子文件，每步都确认"></a>命令选项 -r 删除指定文件夹及所有子文件，每步都确认</h5><p><img src="/2021/05/15/linux/51.png" alt="51" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-rf-强制删除指定文件夹及所有子文件"><a href="#命令选项-rf-强制删除指定文件夹及所有子文件" class="headerlink" title="命令选项 -rf 强制删除指定文件夹及所有子文件"></a>命令选项 -rf 强制删除指定文件夹及所有子文件</h5><p><img src="/2021/05/15/linux/52.png" alt="52" style="zoom:80%;" align="left"></p>
+<h4 id="rmdir命令-删除目录"><a href="#rmdir命令-删除目录" class="headerlink" title="rmdir命令 删除目录"></a>rmdir命令 删除目录</h4><p>格式：rmdir  dir(只能为空目录)</p>
+<p><img src="/2021/05/15/linux/54.png" alt="52" style="zoom:80%;" align="left"></p>
+<h4 id="ls命令-显式指定目录内容"><a href="#ls命令-显式指定目录内容" class="headerlink" title="ls命令 显式指定目录内容"></a>ls命令 显式指定目录内容</h4><p>格式：ls dir</p>
+<h5 id="命令选项："><a href="#命令选项：" class="headerlink" title="命令选项："></a>命令选项：</h5><p><img src="/2021/05/15/linux/55.png" alt="52" style="zoom:50%;" align="left"></p>
+<p><img src="/2021/05/15/linux/56.png" alt="56" style="zoom:80%;"> </p>
+<h5 id="ls-l-长格式详解"><a href="#ls-l-长格式详解" class="headerlink" title="ls -l 长格式详解"></a>ls -l 长格式详解</h5><p><img src="/2021/05/15/linux/57.png" alt="57" style="zoom:150%;"></p>
+<h6 id="第一列："><a href="#第一列：" class="headerlink" title="第一列："></a>第一列：</h6><p><img src="/2021/05/15/linux/58.png" alt="58" style="zoom:80%;"></p>
+<h6 id="第二列：文件的链接数"><a href="#第二列：文件的链接数" class="headerlink" title="第二列：文件的链接数"></a>第二列：文件的链接数</h6><h6 id="第三列：文件的所有者"><a href="#第三列：文件的所有者" class="headerlink" title="第三列：文件的所有者"></a>第三列：文件的所有者</h6><p>通常与文件创建者用户名相同</p>
+<p>文件所有者发生转移，则两者不同</p>
+<h6 id="第四列：文件所属于的组"><a href="#第四列：文件所属于的组" class="headerlink" title="第四列：文件所属于的组"></a>第四列：文件所属于的组</h6><p>管理员创建的用户时，指定用户属于哪个组</p>
+<p>用户创建文件时，文件属于用户的组</p>
+<h6 id="第五列：文件大小-单位为字节"><a href="#第五列：文件大小-单位为字节" class="headerlink" title="第五列：文件大小 单位为字节"></a>第五列：文件大小 单位为字节</h6><h6 id="第六列：文件上一次修改的日期和时间"><a href="#第六列：文件上一次修改的日期和时间" class="headerlink" title="第六列：文件上一次修改的日期和时间"></a>第六列：文件上一次修改的日期和时间</h6><h6 id="第七列：文件名称"><a href="#第七列：文件名称" class="headerlink" title="第七列：文件名称"></a>第七列：文件名称</h6><h5 id="隐藏文件：文件以-开头"><a href="#隐藏文件：文件以-开头" class="headerlink" title="隐藏文件：文件以.开头"></a>隐藏文件：文件以.开头</h5><h4 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h4><p>command &gt; filename <strong>覆盖重定向</strong> (不存在则创建)</p>
+<p>command &gt;&gt; filename <strong>追加重定向</strong> (不存在则创建)</p>
+<h4 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h4><p>command &lt; filename <strong>命令行中使用</strong></p>
+<p>command &lt;&lt; filename <strong>脚本编程使用</strong></p>
+<h4 id="cat命令-显示文件内容"><a href="#cat命令-显示文件内容" class="headerlink" title="cat命令 显示文件内容"></a>cat命令 显示文件内容</h4><h5 id="默认："><a href="#默认：" class="headerlink" title="默认："></a>默认：</h5><p>标准输入读入 输出标准输出</p>
+<p>Ctrl + D结束</p>
+<h5 id="输入重定向-1"><a href="#输入重定向-1" class="headerlink" title="输入重定向"></a>输入重定向</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat &lt;  filename</span></span><br></pre></td></tr></table></figure>
+<h5 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat -n filename <span class="comment">#显示行号</span></span></span><br><span class="line">1 Hello world </span><br><span class="line">2 study hard</span><br></pre></td></tr></table></figure>
+<h5 id="cat创建文件-使用输出重定向"><a href="#cat创建文件-使用输出重定向" class="headerlink" title="cat创建文件(使用输出重定向)"></a>cat创建文件(使用输出重定向)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat &gt; filename </span></span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+<h5 id="文件追加输入"><a href="#文件追加输入" class="headerlink" title="文件追加输入"></a>文件追加输入</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat &gt;&gt; filename</span></span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+<h5 id="cat复制文件"><a href="#cat复制文件" class="headerlink" title="cat复制文件"></a>cat复制文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat filename &gt; filename2</span></span><br></pre></td></tr></table></figure>
+<h4 id="cp-复制-命令"><a href="#cp-复制-命令" class="headerlink" title="cp(复制)命令"></a>cp(复制)命令</h4><p>格式： command source target</p>
+<h5 id="cp-file-file2-创建文件副本"><a href="#cp-file-file2-创建文件副本" class="headerlink" title="cp file file2  ,创建文件副本"></a>cp file file2  ,创建文件副本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp profile profile2</span></span><br><span class="line"><span class="meta">$</span><span class="bash">cp /etc/profile profile2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">cp profile profile</span></span><br><span class="line">file cannot be copied onto itself</span><br></pre></td></tr></table></figure>
+<h5 id="cp-file-dir-将单个文件复制到其他目录"><a href="#cp-file-dir-将单个文件复制到其他目录" class="headerlink" title="cp file dir  ,将单个文件复制到其他目录"></a>cp file dir  ,将单个文件复制到其他目录</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp profile dir</span></span><br></pre></td></tr></table></figure>
+<h5 id="cp-file-file2-…-dir-将多个文件复制到其他目录"><a href="#cp-file-file2-…-dir-将多个文件复制到其他目录" class="headerlink" title="cp file file2 … dir  ,将多个文件复制到其他目录"></a>cp file file2 … dir  ,将多个文件复制到其他目录</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp profile profile2 profile3 dir</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-i-如果目标存在-确认是否覆盖"><a href="#命令选项-i-如果目标存在-确认是否覆盖" class="headerlink" title="命令选项 -i (如果目标存在 确认是否覆盖)"></a>命令选项 -i (如果目标存在 确认是否覆盖)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp -i Report memos cp: overwrite <span class="string">'memos/Report'</span> ? (y/n)</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-b-如果目标存在-则先创建该目标的副本，再移动"><a href="#命令选项-b-如果目标存在-则先创建该目标的副本，再移动" class="headerlink" title="命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)"></a>命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls memos Report <span class="variable">$cp</span> -b Report memos <span class="variable">$ls</span> memos Report Report~ <span class="comment">#(内容与原 memos 内的 Report 内容相同)</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-r-复制目录到新目录中"><a href="#命令选项-r-复制目录到新目录中" class="headerlink" title="命令选项 -r (复制目录到新目录中)"></a>命令选项 -r (复制目录到新目录中)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp -r ./memos ./memos~  <span class="comment">#创建目录副本</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="mv-移动-命令"><a href="#mv-移动-命令" class="headerlink" title="mv(移动)命令"></a>mv(移动)命令</h4><p>格式： command source target</p>
+<h5 id="mv-file-dir-将文件移到其他目录-非文件所在目录"><a href="#mv-file-dir-将文件移到其他目录-非文件所在目录" class="headerlink" title="mv file dir  ,将文件移到其他目录(非文件所在目录)"></a>mv file dir  ,将文件移到其他目录(非文件所在目录)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv Report memos</span></span><br></pre></td></tr></table></figure>
+<h5 id="mv-file-dir-file-dir2-改变文件名-目录名"><a href="#mv-file-dir-file-dir2-改变文件名-目录名" class="headerlink" title="mv file/dir  file/dir2  ,改变文件名/目录名"></a>mv file/dir  file/dir2  ,改变文件名/目录名</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv Report Report~<span class="variable">$mv</span> dir dir~</span></span><br></pre></td></tr></table></figure>
+<h5 id="mv-file-file2-…-dir-将文件批量移动到其他目录"><a href="#mv-file-file2-…-dir-将文件批量移动到其他目录" class="headerlink" title="mv file file2 … dir  ,将文件批量移动到其他目录"></a>mv file file2 … dir  ,将文件批量移动到其他目录</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv file file2 dir</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-i-如果目标存在-确认是否覆盖-1"><a href="#命令选项-i-如果目标存在-确认是否覆盖-1" class="headerlink" title="命令选项 -i (如果目标存在 确认是否覆盖)"></a>命令选项 -i (如果目标存在 确认是否覆盖)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv -i Report memos mv: overwrite <span class="string">'memos/Report'</span> ? (y/n)</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-b-如果目标存在-则先创建该目标的副本，再移动-1"><a href="#命令选项-b-如果目标存在-则先创建该目标的副本，再移动-1" class="headerlink" title="命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)"></a>命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv -b Report memos<span class="variable">$ls</span> memosReport Report~ <span class="comment">#(内容与原 memos 内的 Report 内容相同)</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-v-解释操作"><a href="#命令选项-v-解释操作" class="headerlink" title="命令选项 -v 解释操作"></a>命令选项 -v 解释操作</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv -v Report memos  Report -&gt; memos/Report</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-f-如果目标存在，则覆盖"><a href="#命令选项-f-如果目标存在，则覆盖" class="headerlink" title="命令选项 -f (如果目标存在，则覆盖)"></a>命令选项 -f (如果目标存在，则覆盖)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv -f Report memos</span></span><br></pre></td></tr></table></figure>
+<h4 id="ln-链接-命令"><a href="#ln-链接-命令" class="headerlink" title="ln(链接)命令"></a>ln(链接)命令</h4><p>格式： command source target</p>
+<p>ln命令 在 <strong>已存在文件</strong> 和 <strong>新文件名</strong> 之间创建链接</p>
+<h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p>在不同目录中频繁操作同一文件</p>
+<p>在每个目录中建立该文件的链接文件 通过链接文件对原文件进行操作</p>
+<p>链接文件不占用过多磁盘空间</p>
+<p><img src="/2021/05/15/linux/1.png" alt="1" style="zoom:60%;" align="left"></p>
+<h5 id="ln-file-file-指定链接文件名-创建链接文件"><a href="#ln-file-file-指定链接文件名-创建链接文件" class="headerlink" title="ln file file~(指定链接文件名)  ,创建链接文件"></a>ln file file~(指定链接文件名)  ,创建链接文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ln xxx yyy</span></span><br></pre></td></tr></table></figure>
+<h5 id="ln-file-file2-…-dir-在目录中创建链接文件"><a href="#ln-file-file2-…-dir-在目录中创建链接文件" class="headerlink" title="ln file file2 … dir  ,在目录中创建链接文件"></a>ln file file2 … dir  ,在目录中创建链接文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ln file file2 dir</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/05/15/linux/2.png" alt="1" style="zoom:70%;" align="left"></p>
+<h5 id="查看文件链接数"><a href="#查看文件链接数" class="headerlink" title="查看文件链接数"></a>查看文件链接数</h5><p><img src="/2021/05/15/linux/3.png" alt="1" style="zoom:70%;" align="left"></p>
+<p>硬链接</p>
+<p>软链接（符号链接）</p>
+<h4 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h4><p>wc命令计算一个或多个文件的行数，字数，字符数</p>
+<p>字：没有空格,Tab 分割的字符串</p>
+<h5 id="wc-file-统计单个文件"><a href="#wc-file-统计单个文件" class="headerlink" title="wc file  ,统计单个文件"></a>wc file  ,统计单个文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc myfirst 4 30 155 myfirst <span class="comment">#行 字 字符</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="wc-无参数-默认从键盘输入"><a href="#wc-无参数-默认从键盘输入" class="headerlink" title="wc  ,无参数 默认从键盘输入"></a>wc  ,无参数 默认从键盘输入</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc Hello world！</span></span><br></pre></td></tr></table></figure>
+<h5 id="wc-file-file2-…-统计多个文件"><a href="#wc-file-file2-…-统计多个文件" class="headerlink" title="wc file file2 … ,统计多个文件"></a>wc file file2 … ,统计多个文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc file file21 2 3 file2 3 4 file23 5 7 total</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-l-统计行数"><a href="#命令选项-l-统计行数" class="headerlink" title="命令选项 -l ,统计行数"></a>命令选项 -l ,统计行数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -l file</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-c-统计字符数"><a href="#命令选项-c-统计字符数" class="headerlink" title="命令选项 -c ,统计字符数"></a>命令选项 -c ,统计字符数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -c file</span></span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-w-统计字数"><a href="#命令选项-w-统计字数" class="headerlink" title="命令选项 -w ,统计字数"></a>命令选项 -w ,统计字数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -w file</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件名替换"><a href="#文件名替换" class="headerlink" title="文件名替换"></a>文件名替换</h4><h5 id="匹配任意单个字符"><a href="#匹配任意单个字符" class="headerlink" title="?  ,匹配任意单个字符"></a>?  ,匹配任意单个字符</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls report report2 report22 2report<span class="variable">$ls</span> report? report2 <span class="variable">$ls</span> reprot?? report22 <span class="variable">$ls</span> ?report 2report</span></span><br></pre></td></tr></table></figure>
+<h5 id="匹配任意个字符，包括空串"><a href="#匹配任意个字符，包括空串" class="headerlink" title="*  ,匹配任意个字符，包括空串"></a>*  ,匹配任意个字符，包括空串</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls  report 23report 2report2<span class="variable">$ls</span> *report report 23report<span class="variable">$ls</span> 2*2 2report2</span></span><br></pre></td></tr></table></figure>
+<h5 id="list-匹配任意在list中的字符-list-匹配任意不在list中的字符"><a href="#list-匹配任意在list中的字符-list-匹配任意不在list中的字符" class="headerlink" title="[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符"></a>[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls report areport breport aa1 aa2 aa3<span class="variable">$ls</span> [ab]* areport breport aa1 aa2 aa3<span class="variable">$ls</span> [!ab]* report<span class="variable">$ls</span> *[1-3] aa1 aa2 aa3</span></span><br></pre></td></tr></table></figure>
+<h5 id="隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分"><a href="#隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分" class="headerlink" title="隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分"></a>隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分</h5><p>CentOS 会显示出当前目录内容 与 父目录内容</p>
+<p><img src="/2021/05/15/linux/4.png" alt="1" style="zoom:70%;" align="left"></p>
+<p>与其他命令组合使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">rm *.*</span></span><br><span class="line"><span class="meta">$</span><span class="bash">rm report?</span></span><br><span class="line"><span class="meta">$</span><span class="bash">cp * ../backup</span></span><br><span class="line"><span class="meta">$</span><span class="bash">mv file[1-4] memos</span></span><br><span class="line"><span class="meta">$</span><span class="bash">rm report*  <span class="comment"># 删除格式为reportxxx的文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">rm report * <span class="comment"># 删除report下所有文件</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="find-命令"><a href="#find-命令" class="headerlink" title="find 命令"></a>find 命令</h4><p>格式： find 路径名 搜索选项 动作选项</p>
+<p>在层次目录中根据文件名或文件属性定位文件，并执行操作。</p>
+<h5 id="搜索选项-name-根据文件名查找文件"><a href="#搜索选项-name-根据文件名查找文件" class="headerlink" title="搜索选项 -name ,根据文件名查找文件"></a>搜索选项 -name ,根据文件名查找文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -name <span class="string">"*.c"</span> -<span class="built_in">print</span></span></span><br><span class="line">./1.c</span><br><span class="line">./2.c</span><br></pre></td></tr></table></figure>
+<h5 id="搜索选项-size-±n-根据文件大小查找文件"><a href="#搜索选项-size-±n-根据文件大小查找文件" class="headerlink" title="搜索选项 -size ±n ,根据文件大小查找文件"></a>搜索选项 -size ±n ,根据文件大小查找文件</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">b：代表 <span class="number">512</span> 位元组的区块（默认单位为 b）</span><br><span class="line">c：表示字节数</span><br><span class="line">k：表示KB （<span class="number">1024</span>字节）</span><br><span class="line">w：字 （<span class="number">2</span>字节）</span><br><span class="line">M：兆字节（<span class="number">1024</span>KB）</span><br><span class="line">G：千兆字节 （<span class="number">1024</span>MB）</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -size 20c -<span class="built_in">print</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="搜索选项-type-根据文件类型查找文件"><a href="#搜索选项-type-根据文件类型查找文件" class="headerlink" title="搜索选项 -type ,根据文件类型查找文件"></a>搜索选项 -type ,根据文件类型查找文件</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b：块设备文件。</span><br><span class="line">d：目录。</span><br><span class="line">c：字符设备文件。</span><br><span class="line">l：符号链接文件。</span><br><span class="line">f：普通文件。</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -<span class="built_in">type</span> f -<span class="built_in">print</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="搜索选项-atime-±n-根据最后访问日期-被读取或执行-查找文件"><a href="#搜索选项-atime-±n-根据最后访问日期-被读取或执行-查找文件" class="headerlink" title="搜索选项 -atime ±n ,根据最后访问日期(被读取或执行)查找文件"></a>搜索选项 -atime ±n ,根据最后访问日期(被读取或执行)查找文件</h5><p>n指据上一次访问所经过的天数(整数) ， +n 表示大于n ，-n 表示小于n</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -atime 1 -<span class="built_in">print</span>  <span class="comment">#24小时之外 48小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -atime -1 -<span class="built_in">print</span> <span class="comment">#24小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -atime +1 -<span class="built_in">print</span> <span class="comment">#48小时之外</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="搜索选项-mtime-±n-根据文件最后修改日期-内容被修改-查找文件"><a href="#搜索选项-mtime-±n-根据文件最后修改日期-内容被修改-查找文件" class="headerlink" title="搜索选项 -mtime ±n ,根据文件最后修改日期(内容被修改)查找文件"></a>搜索选项 -mtime ±n ,根据文件最后修改日期(内容被修改)查找文件</h5><p>n指文件最后被修改后经过的天数(整数) ， +n 表示大于n ，-n 表示小于n</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -mtime 1 -<span class="built_in">print</span>  <span class="comment">#24小时之外 48小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -mtime -1 -<span class="built_in">print</span> <span class="comment">#24小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -mtime +1 -<span class="built_in">print</span> <span class="comment">#48小时之外</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="搜索选项-newer-查找比指定文件更新的文件"><a href="#搜索选项-newer-查找比指定文件更新的文件" class="headerlink" title="搜索选项 -newer ,查找比指定文件更新的文件"></a>搜索选项 -newer ,查找比指定文件更新的文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find , -newer first.c -<span class="built_in">print</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="动作选项-print-打印找到的每个文件的路径名"><a href="#动作选项-print-打印找到的每个文件的路径名" class="headerlink" title="动作选项 -print ,打印找到的每个文件的路径名"></a>动作选项 -print ,打印找到的每个文件的路径名</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find <span class="variable">$HEME</span> -name first.c -<span class="built_in">print</span></span></span><br><span class="line"> /usr/david/first.c</span><br><span class="line"> /usr/david/source/first.c</span><br></pre></td></tr></table></figure>
+<h5 id="动作选项-exec-command-对找到的文件执行command"><a href="#动作选项-exec-command-对找到的文件执行command" class="headerlink" title="动作选项 -exec command {} \;  ,对找到的文件执行command"></a>动作选项 -exec command {} \;  ,对找到的文件执行command</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -name first.c -mtime +90  -<span class="built_in">exec</span> rm &#123;&#125; \;</span></span><br></pre></td></tr></table></figure>
+<h5 id="动作选项-ok-command-在执行command之前要求确认"><a href="#动作选项-ok-command-在执行command之前要求确认" class="headerlink" title="动作选项-ok command {} \;  ,在执行command之前要求确认"></a>动作选项-ok command {} \;  ,在执行command之前要求确认</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -name first.c -mtime +90  -ok rm &#123;&#125; \;</span></span><br></pre></td></tr></table></figure>
+<h4 id="head-命令"><a href="#head-命令" class="headerlink" title="head 命令"></a>head 命令</h4><p>格式：head 文件名</p>
+<p>显示文件头部若干行</p>
+<h5 id="命令选项-n-显示文件前n行"><a href="#命令选项-n-显示文件前n行" class="headerlink" title="命令选项 -n ,显示文件前n行"></a>命令选项 -n ,显示文件前n行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">head memo (默认显示MEMO前10行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">head -5 MEMO (显示MEMO前5行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">head -5 file[1-3](显示多个文件)</span></span><br></pre></td></tr></table></figure>
+<h4 id="tail-命令"><a href="#tail-命令" class="headerlink" title="tail 命令"></a>tail 命令</h4><p>格式：tail 文件名</p>
+<p>显示文件尾部若干行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">tail memo (默认显示MEMOb后10行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">tail -5 MEMO (显示MEMO后5行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">tail -5 file[1-3](显示多个文件)</span></span><br></pre></td></tr></table></figure>
+<h4 id="cut-命令"><a href="#cut-命令" class="headerlink" title="cut 命令"></a>cut 命令</h4><p>格式：cut 选项 文件名</p>
+<p>从文件中”取出“指定域</p>
+<h5 id="命令选项-f-指定域位置"><a href="#命令选项-f-指定域位置" class="headerlink" title="命令选项 -f ,指定域位置"></a>命令选项 -f ,指定域位置</h5><p>默认为Tab(制表符)</p>
+<p><img src="/2021/05/15/linux/5.png" alt="1" style="zoom:40%;" align="left"></p>
+<h5 id="命令选项-c-指定字符位置"><a href="#命令选项-c-指定字符位置" class="headerlink" title="命令选项 -c ,指定字符位置"></a>命令选项 -c ,指定字符位置</h5><p><img src="/2021/05/15/linux/6.png" alt="1" style="zoom:40%;" align="left"></p>
+<h5 id="命令选项-d-指定域分割字符"><a href="#命令选项-d-指定域分割字符" class="headerlink" title="命令选项 -d ,指定域分割字符"></a>命令选项 -d ,指定域分割字符</h5><p>空格 与 有意义字符需要用 “” 括起来</p>
+<p><img src="/2021/05/15/linux/7.png" alt="1" style="zoom:40%;" align="left"></p>
+<h4 id="paste-命令"><a href="#paste-命令" class="headerlink" title="paste 命令"></a>paste 命令</h4><p>格式：paste file file2</p>
+<p>逐行连接两个或多个文件</p>
+<h5 id="命令选项-d-指定具体分隔符-默认为Tab-制表符"><a href="#命令选项-d-指定具体分隔符-默认为Tab-制表符" class="headerlink" title="命令选项 -d ,指定具体分隔符,默认为Tab(制表符)"></a>命令选项 -d ,指定具体分隔符,默认为Tab(制表符)</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">paste -d : file file2</span></span><br><span class="line"> 1:2</span><br><span class="line"> 3:4</span><br><span class="line"><span class="meta">$</span><span class="bash">paste -d <span class="string">" "</span> file file2</span></span><br><span class="line"> 1 2</span><br><span class="line"> 3 4</span><br></pre></td></tr></table></figure>
+<h4 id="more-命令"><a href="#more-命令" class="headerlink" title="more 命令"></a>more 命令</h4><p>格式：more 文件名</p>
+<p>分页查看文件内容</p>
+<h5 id="命令选项-n-每屏显示n行"><a href="#命令选项-n-每屏显示n行" class="headerlink" title="命令选项 -n ,每屏显示n行"></a>命令选项 -n ,每屏显示n行</h5><h5 id="命令选项-n-从第n行开始显示"><a href="#命令选项-n-从第n行开始显示" class="headerlink" title="命令选项 +n ,从第n行开始显示"></a>命令选项 +n ,从第n行开始显示</h5><h5 id="命令选项-pattern-在每个文档显示前搜寻该字串-pattern-然后从该字串之后开始显示"><a href="#命令选项-pattern-在每个文档显示前搜寻该字串-pattern-然后从该字串之后开始显示" class="headerlink" title="命令选项 +/pattern ,在每个文档显示前搜寻该字串(pattern),然后从该字串之后开始显示"></a>命令选项 +/pattern ,在每个文档显示前搜寻该字串(pattern),然后从该字串之后开始显示</h5><h5 id="命令选项-c-在显示每页前清屏"><a href="#命令选项-c-在显示每页前清屏" class="headerlink" title="命令选项 -c ,在显示每页前清屏"></a>命令选项 -c ,在显示每页前清屏</h5><h5 id="命令选项-d-显示提示"><a href="#命令选项-d-显示提示" class="headerlink" title="命令选项 -d ,显示提示"></a>命令选项 -d ,显示提示</h5><p>在画面下方显示 [Press space to continue, ‘q’ to quit.] </p>
+<p>如果使用者按错键，则会显示 [Press ‘h’ for instructions.] </p>
+<h5 id="命令控制键"><a href="#命令控制键" class="headerlink" title="命令控制键"></a>命令控制键</h5><ol>
+<li>Enter 向下n行，需要定义。默认为1行</li>
+<li>Ctrl+F 向下滚动一屏</li>
+<li>空格键 向下滚动一屏</li>
+<li>Ctrl+B 返回上一屏</li>
+<li>q Q 退出more命令</li>
+</ol>
+<h4 id="less-命令"><a href="#less-命令" class="headerlink" title="less 命令"></a>less 命令</h4><p>格式：less 文件名</p>
+<p>分页查看文件内容，允许在文件中向后 向前移动</p>
+<h4 id="UNXI-文件系统原理"><a href="#UNXI-文件系统原理" class="headerlink" title="UNXI 文件系统原理"></a>UNXI 文件系统原理</h4><p>UNIX系统将每个文件名与一个整数(i 节点号)相关联,并用文件的i节点号 标识每个文件</p>
+<p>表面： 用户通过文件名，打开文件</p>
+<p>实际：系统找到文件名对应的i节点号， 通过i节点号找到文件的i节点项，再根据i节点项信息找到文件数据所在块(block)，读出数据</p>
+<h5 id="ls-i-查看文件i节点号"><a href="#ls-i-查看文件i节点号" class="headerlink" title="ls -i ,查看文件i节点号"></a>ls -i ,查看文件i节点号</h5><p><img src="/2021/05/15/linux/8.png" alt="8" style="zoom:80%;" align="left"></p>
+<p>复制，不改变文件i节点号</p>
+<p><img src="/2021/05/15/linux/9.png" alt="9" style="zoom:80%;" align="left"></p>
+<p>重命名，不改变文件i节点号</p>
+<p><img src="/2021/05/15/linux/10.png" alt="10" style="zoom:80%;" align="left"></p>
+<p>移动，不改变文件i节点号</p>
+<p><img src="/2021/05/15/linux/11.png" alt="10" style="zoom:80%;" align="left"></p>
+<p>链接，不改变文件i节点号</p>
+<p><img src="/2021/05/15/linux/12.png" alt="10" style="zoom:75%;" align="left"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="/2021/05/15/linux/13.png" alt="10" style="zoom:90%;"></p>
+<h5 id="用户与Shell交互"><a href="#用户与Shell交互" class="headerlink" title="用户与Shell交互"></a>用户与Shell交互</h5><p><img src="/2021/05/15/linux/16.png" alt="14" style="zoom:80%;"></p>
+<h5 id="启动Shell"><a href="#启动Shell" class="headerlink" title="启动Shell"></a>启动Shell</h5><p>用户成功登录系统：Shell 启动</p>
+<p>用户退出：Shell 进程结束</p>
+<p><img src="/2021/05/15/linux/18.png" alt="14" style="zoom:70%;"></p>
+<p><img src="/2021/05/15/linux/17.png" alt="14" style="zoom:70%;"></p>
+<h4 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h4><p>将消息参数显示在终端上，没有参数则输出空行. </p>
+<p>echo参数可以无限长</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> hello</span></span><br><span class="line"> hello</span><br></pre></td></tr></table></figure>
+<h5 id="命令选项-n-输出不换行"><a href="#命令选项-n-输出不换行" class="headerlink" title="命令选项 -n  ,输出不换行"></a>命令选项 -n  ,输出不换行</h5><p><img src="/2021/05/15/linux/19.png" alt="19" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-e-解释反斜杠引导的转义字符，转义符号用””扩起"><a href="#命令选项-e-解释反斜杠引导的转义字符，转义符号用””扩起" class="headerlink" title="命令选项 -e  ,解释反斜杠引导的转义字符，转义符号用””扩起"></a>命令选项 -e  ,解释反斜杠引导的转义字符，转义符号用””扩起</h5><p><img src="/2021/05/15/linux/20.png" alt="20" style="zoom:50%;" align="left"></p>
+<p><img src="/2021/05/15/linux/21.png" alt="21" style="zoom:80%;" align="left"></p>
+<h4 id="消除元字符特殊含义"><a href="#消除元字符特殊含义" class="headerlink" title="消除元字符特殊含义"></a>消除元字符特殊含义</h4><h5 id="将其后一个元字符解释为一个普通字符"><a href="#将其后一个元字符解释为一个普通字符" class="headerlink" title="\ 将其后一个元字符解释为一个普通字符"></a>\ 将其后一个元字符解释为一个普通字符</h5><p><img src="/2021/05/15/linux/22.png" alt="22" style="zoom:80%;" align="left"></p>
+<h5 id="“”-取消-除-’-外的元字符特殊含义-双引号中保留空格-Tab等"><a href="#“”-取消-除-’-外的元字符特殊含义-双引号中保留空格-Tab等" class="headerlink" title="“” 取消 除 $,’,\ 外的元字符特殊含义 ,双引号中保留空格,Tab等"></a>“” 取消 除 $,’,\ 外的元字符特殊含义 ,双引号中保留空格,Tab等</h5><p><img src="/2021/05/15/linux/23.png" alt="23" style="zoom:80%;" align="left"></p>
+<h5 id="’-‘-单引号中任何字符都失去特殊含义-单引号中保留空格-Tab等"><a href="#’-‘-单引号中任何字符都失去特殊含义-单引号中保留空格-Tab等" class="headerlink" title="’ ‘ 单引号中任何字符都失去特殊含义 ,单引号中保留空格,Tab等"></a>’ ‘ 单引号中任何字符都失去特殊含义 ,单引号中保留空格,Tab等</h5><p><img src="/2021/05/15/linux/24.png" alt="24" style="zoom:80%;" align="left"></p>
+<h4 id="Shell-变量"><a href="#Shell-变量" class="headerlink" title="Shell 变量"></a>Shell 变量</h4><p>Shell 为响应客户请求，保存一些信息到Shell变量中</p>
+<p>变量有名称，可以通过赋值来控制或定制系统环境</p>
+<p><img src="/2021/05/15/linux/25.png" alt="25" style="zoom:50%;" align="left"></p>
+<h4 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h4><p>查看当前使用的Shell变量</p>
+<p><img src="/2021/05/15/linux/26.png" alt="26" style="zoom:75%;" align="left"></p>
+<h4 id="unset命令"><a href="#unset命令" class="headerlink" title="unset命令"></a>unset命令</h4><p>删除不需要的变量</p>
+<p><img src="/2021/05/15/linux/27.png" alt="27" style="zoom:80%;" align="left"></p>
+<h4 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h4><p>变量名=变量值(字符串) <strong>等号左右不能有空格</strong></p>
+<p>变量前加’$’ 使用echo命令显示变量值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">name=<span class="string">"Hello world"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">age=10</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$age</span></span></span><br><span class="line"> 10</span><br></pre></td></tr></table></figure>
+<p><strong>做不到将转义字符赋值给变量 再使用echo输出</strong></p>
+<p><img src="/2021/05/15/linux/36.png" alt="36" style="zoom:90%;"></p>
+<h4 id="Shell标准变量"><a href="#Shell标准变量" class="headerlink" title="Shell标准变量"></a>Shell标准变量</h4><p><img src="/2021/05/15/linux/28.png" alt="28" style="zoom: 50%;" align="left"></p>
+<h4 id="HOME-变量"><a href="#HOME-变量" class="headerlink" title="HOME 变量"></a>HOME 变量</h4><p>保存用户主目录； 用于其他命令定位主目录</p>
+<p><img src="/2021/05/15/linux/29.png" alt="29" style="zoom:75%;" align="left"></p>
+<h4 id="PATH-变量"><a href="#PATH-变量" class="headerlink" title="PATH 变量"></a>PATH 变量</h4><p>设置Shell 定位命令(程序) 时所要查找的目录名</p>
+<p>路径串中以 : 分隔</p>
+<p><img src="/2021/05/15/linux/30.png" alt="30" style="zoom:80%;" align="left"></p>
+<h4 id="PS1-变量"><a href="#PS1-变量" class="headerlink" title="PS1 变量"></a>PS1 变量</h4><p>设置作为Shell顶层命令提示符的字符串</p>
+<p>PS1=”提示符”</p>
+<p>可以对不同段设置不同颜色</p>
+<p><img src="/2021/05/15/linux/32.png" alt="32"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;35m\]\h\[\e[0m\] \[\e[1;33m\]\W\[\e[0m\]]\$</span><br></pre></td></tr></table></figure>
+<h5 id="PS1可使用的转义序列"><a href="#PS1可使用的转义序列" class="headerlink" title="PS1可使用的转义序列"></a>PS1可使用的转义序列</h5><p><img src="/2021/05/15/linux/31.png" alt="31" style="zoom:45%;" align="left"> </p>
+<p><img src="/2021/05/15/linux/33.png" alt="33" style="zoom:80%;" align="left"></p>
+<h4 id="PS2-变量"><a href="#PS2-变量" class="headerlink" title="PS2 变量"></a>PS2 变量</h4><p>命令提示符2</p>
+<p>用户尚未输入完命令前 按下[Return] 后显示的命令提示符 ，默认为 &gt;</p>
+<h4 id="SHELL-变量"><a href="#SHELL-变量" class="headerlink" title="SHELL 变量"></a>SHELL 变量</h4><p>设置登录shell的完整路径</p>
+<h4 id="TERM-变量"><a href="#TERM-变量" class="headerlink" title="TERM 变量"></a>TERM 变量</h4><p>设置终端类型</p>
+<p><img src="/2021/05/15/linux/37.png" alt="37" style="zoom:80%;" align="left"></p>
+<h4 id="执行命令：重音符号"><a href="#执行命令：重音符号" class="headerlink" title="执行命令：重音符号 `"></a>执行命令：重音符号 `</h4><p><img src="/2021/05/15/linux/38.png" alt="38" style="zoom:90%;" align="left"></p>
+<h4 id="命令序列：使用分号"><a href="#命令序列：使用分号" class="headerlink" title="命令序列：使用分号"></a>命令序列：使用分号</h4><p>shell 从左往右执行</p>
+<p><img src="/2021/05/15/linux/39.png" alt="39" style="zoom:80%;" align="left"></p>
+<h4 id="命令编组：使用括号"><a href="#命令编组：使用括号" class="headerlink" title="命令编组：使用括号"></a>命令编组：使用括号</h4><p>编组命令可以被重定向</p>
+<p><img src="/2021/05/15/linux/40.png" alt="40" style="zoom:80%;" align="left"></p>
+<h4 id="后台处理：使用-amp-符号"><a href="#后台处理：使用-amp-符号" class="headerlink" title="后台处理：使用&amp;符号"></a>后台处理：使用&amp;符号</h4><p><img src="/2021/05/15/linux/41.png" alt="41" style="zoom:40%;" align="left"></p>
+<p>command &amp; command2 &amp;…</p>
+<p>（显示分配的进程号 ：1328）</p>
+<p><img src="/2021/05/15/linux/42.png" alt="42" style="zoom:80%;" align="left"></p>
+<h4 id="链接命令："><a href="#链接命令：" class="headerlink" title="链接命令：|"></a>链接命令：|</h4><p>将一个进程的标准输出作为另一个进程的标准输入</p>
+<p>command A | command B</p>
+<p><img src="/2021/05/15/linux/43.png" alt="43" style="zoom:80%;" align="left"></p>
+<h4 id="延时命令：sleep"><a href="#延时命令：sleep" class="headerlink" title="延时命令：sleep"></a>延时命令：sleep</h4><p>sleep n</p>
+<h4 id="ps命令：获得系统中活动进程的状态"><a href="#ps命令：获得系统中活动进程的状态" class="headerlink" title="ps命令：获得系统中活动进程的状态"></a>ps命令：获得系统中活动进程的状态</h4><p>PID：进程ID </p>
+<p>TTY：控制进程的终端号</p>
+<p>TIME：进程已运行的时间(S)</p>
+<p>CMD：命令名</p>
+<p><img src="/2021/05/15/linux/44.png" alt="43" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-e-显示所有进程"><a href="#命令选项-e-显示所有进程" class="headerlink" title="命令选项 -e 显示所有进程"></a>命令选项 -e 显示所有进程</h5><h5 id="命令选项-f-显示完整格式的信息"><a href="#命令选项-f-显示完整格式的信息" class="headerlink" title="命令选项 -f 显示完整格式的信息"></a>命令选项 -f 显示完整格式的信息</h5><p><img src="/2021/05/15/linux/45.png" alt="43" style="zoom:70%;" align="left"></p>
+<h4 id="kill命令：终止进程"><a href="#kill命令：终止进程" class="headerlink" title="kill命令：终止进程"></a>kill命令：终止进程</h4><p>发信号给指定进程，进行进程间通信</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> -l</span></span><br><span class="line"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP</span><br><span class="line"> 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1</span><br><span class="line">11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM</span><br><span class="line">16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP</span><br><span class="line">21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ</span><br><span class="line">26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR</span><br><span class="line">31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3</span><br><span class="line">38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8</span><br><span class="line">43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13</span><br><span class="line">48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12</span><br><span class="line">53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7</span><br><span class="line">58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2</span><br><span class="line">63) SIGRTMAX-1  64) SIGRTMAX</span><br></pre></td></tr></table></figure>
+<p>kill [-signal] PID , 信号名/号码  进程号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> [-15] 5025 默认信号，正常方式终止进程</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> -9 5025 强制终止进程</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> -9 0 <span class="comment">#PID为0 终止所有与Shell有关的进程</span></span></span><br></pre></td></tr></table></figure>
+<p>用户只能终止自己的进程，管理员可以终止任何进程</p>
+<h4 id="nohub命令-：保持执行"><a href="#nohub命令-：保持执行" class="headerlink" title="nohub命令 ：保持执行"></a>nohub命令 ：保持执行</h4><p>用户退出系统时，后台进程不被终止</p>
+<p>nohup command &amp;</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bash -c 'sleep 120; echo "job done" '&amp;</span><br></pre></td></tr></table></figure>
+<h4 id="tee命令：分离输出"><a href="#tee命令：分离输出" class="headerlink" title="tee命令：分离输出"></a>tee命令：分离输出</h4><p>与 | 一起使用</p>
+<p>⬇ 输出到屏幕，输出到file</p>
+<p><img src="/2021/05/15/linux/46.png" alt="46" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-a-追加输出"><a href="#命令选项-a-追加输出" class="headerlink" title="命令选项 -a 追加输出"></a>命令选项 -a 追加输出</h5><p><img src="/2021/05/15/linux/47.png" alt="46" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-i-忽略中断信号，不对中断信号做出响应"><a href="#命令选项-i-忽略中断信号，不对中断信号做出响应" class="headerlink" title="命令选项 -i 忽略中断信号，不对中断信号做出响应"></a>命令选项 -i 忽略中断信号，不对中断信号做出响应</h5><h4 id="grep命令：文件搜索"><a href="#grep命令：文件搜索" class="headerlink" title="grep命令：文件搜索"></a>grep命令：文件搜索</h4><p>在一个文件 或 一系列文件中查找特定格式(正则表达式 ,RE)</p>
+<p>格式：grep pattern file</p>
+<p><img src="/2021/05/15/linux/48.png" alt="48" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-c-只显示每个文件中包含匹配样式的行数"><a href="#命令选项-c-只显示每个文件中包含匹配样式的行数" class="headerlink" title="命令选项 -c 只显示每个文件中包含匹配样式的行数"></a>命令选项 -c 只显示每个文件中包含匹配样式的行数</h5><h5 id="命令选项-i-搜索匹配时忽略大小写"><a href="#命令选项-i-搜索匹配时忽略大小写" class="headerlink" title="命令选项 -i 搜索匹配时忽略大小写"></a>命令选项 -i 搜索匹配时忽略大小写</h5><h5 id="命令选项-l-只显示具有匹配的行的文件名，而不显示匹配行"><a href="#命令选项-l-只显示具有匹配的行的文件名，而不显示匹配行" class="headerlink" title="命令选项 -l 只显示具有匹配的行的文件名，而不显示匹配行"></a>命令选项 -l 只显示具有匹配的行的文件名，而不显示匹配行</h5><h5 id="命令选项-n-每个输出前显示行号"><a href="#命令选项-n-每个输出前显示行号" class="headerlink" title="命令选项 -n 每个输出前显示行号"></a>命令选项 -n 每个输出前显示行号</h5><h5 id="命令选项-v-仅显示不匹配的行"><a href="#命令选项-v-仅显示不匹配的行" class="headerlink" title="命令选项 -v 仅显示不匹配的行"></a>命令选项 -v 仅显示不匹配的行</h5><h5 id="命令选项-w-需要完全匹配"><a href="#命令选项-w-需要完全匹配" class="headerlink" title="命令选项 -w 需要完全匹配"></a>命令选项 -w 需要完全匹配</h5><p><img src="/2021/05/15/linux/49.png" alt="49" style="zoom:80%;" align="left"></p>
+<h4 id="sed命令：替换"><a href="#sed命令：替换" class="headerlink" title="sed命令：替换"></a>sed命令：替换</h4><h4 id="sort命令：文本排序"><a href="#sort命令：文本排序" class="headerlink" title="sort命令：文本排序"></a>sort命令：文本排序</h4><p>对文件内容按照字母或数字顺序排序</p>
+<p>格式：sort file</p>
+<h5 id="命令选项-b-忽略前导空格"><a href="#命令选项-b-忽略前导空格" class="headerlink" title="命令选项 -b 忽略前导空格"></a>命令选项 -b 忽略前导空格</h5><h5 id="命令选项-d-字典顺序排序，忽略标点符号-控制字符"><a href="#命令选项-d-字典顺序排序，忽略标点符号-控制字符" class="headerlink" title="命令选项 -d 字典顺序排序，忽略标点符号 控制字符"></a>命令选项 -d 字典顺序排序，忽略标点符号 控制字符</h5><h5 id="命令选项-f-忽略大小写区别"><a href="#命令选项-f-忽略大小写区别" class="headerlink" title="命令选项 -f 忽略大小写区别"></a>命令选项 -f 忽略大小写区别</h5><h5 id="命令选项-n-数字以数值排序，包括负数和小数"><a href="#命令选项-n-数字以数值排序，包括负数和小数" class="headerlink" title="命令选项 -n 数字以数值排序，包括负数和小数"></a>命令选项 -n 数字以数值排序，包括负数和小数</h5><h5 id="命令选项-o-将输出存储到指定文件中"><a href="#命令选项-o-将输出存储到指定文件中" class="headerlink" title="命令选项 -o 将输出存储到指定文件中"></a>命令选项 -o 将输出存储到指定文件中</h5><h5 id="命令选项-r-倒序排序，由升序变为降序"><a href="#命令选项-r-倒序排序，由升序变为降序" class="headerlink" title="命令选项 -r 倒序排序，由升序变为降序"></a>命令选项 -r 倒序排序，由升序变为降序</h5><h5 id="命令选项-k-按照指定字段排序"><a href="#命令选项-k-按照指定字段排序" class="headerlink" title="命令选项 -k 按照指定字段排序"></a>命令选项 -k 按照指定字段排序</h5><p>前提：文件按相应格式建立，默认为空格或制表符</p>
+<h5 id="命令选项-t-指定一个用来区分键位值得字符来比较"><a href="#命令选项-t-指定一个用来区分键位值得字符来比较" class="headerlink" title="命令选项 -t 指定一个用来区分键位值得字符来比较"></a>命令选项 -t 指定一个用来区分键位值得字符来比较</h5><p><img src="/2021/05/15/linux/50.png" alt="50" style="zoom:80%;" align="left"></p>
+<h4 id="Shell-环境配置文件"><a href="#Shell-环境配置文件" class="headerlink" title="Shell 环境配置文件"></a>Shell 环境配置文件</h4><h5 id="系统配置文件：全局性，适用所有用户"><a href="#系统配置文件：全局性，适用所有用户" class="headerlink" title="系统配置文件：全局性，适用所有用户"></a>系统配置文件：全局性，适用所有用户</h5><ul>
+<li>/etc/profile  设置系统整体环境与自启动程序；登录时执行</li>
+<li>/etc/bashrc  设置系统整体函数与缩写；打开bash时执行</li>
+</ul>
+<h5 id="用户配置文件：局部性，适用于某个用户"><a href="#用户配置文件：局部性，适用于某个用户" class="headerlink" title="用户配置文件：局部性，适用于某个用户"></a>用户配置文件：局部性，适用于某个用户</h5><ul>
+<li>~/.bash_profile  设置登陆用户的bash环境；执行~/.bashrc</li>
+<li>~/.bashrc            设置当前用户的bash环境；执行/etc/bashrc</li>
+<li>~/.bash_logout   用户退出bash时执行</li>
+</ul>
+<h4 id="登录Shell-与-非登录Shell"><a href="#登录Shell-与-非登录Shell" class="headerlink" title="登录Shell 与 非登录Shell"></a>登录Shell 与 非登录Shell</h4><p><img src="/2021/05/15/linux/65.png" alt="50" style="zoom:40%;" align="left"></p>
+<h4 id="配置文件功能"><a href="#配置文件功能" class="headerlink" title="配置文件功能"></a>配置文件功能</h4><h5 id="etc-profile"><a href="#etc-profile" class="headerlink" title="/etc/profile"></a>/etc/profile</h5><p><img src="/2021/05/15/linux/68.png" alt="68" style="zoom:80%;"></p>
+<h5 id="etc-bashrc-：配置系统函数与缩写"><a href="#etc-bashrc-：配置系统函数与缩写" class="headerlink" title="/etc/bashrc ：配置系统函数与缩写"></a>/etc/bashrc ：配置系统函数与缩写</h5><p><img src="/2021/05/15/linux/69.png" alt="69 (1)" style="zoom:80%;"></p>
+<h5 id="export-使一系列shell变量作用于子Shell"><a href="#export-使一系列shell变量作用于子Shell" class="headerlink" title="export 使一系列shell变量作用于子Shell"></a>export 使一系列shell变量作用于子Shell</h5><h4 id="alias命令-为命令起别名"><a href="#alias命令-为命令起别名" class="headerlink" title="alias命令 为命令起别名"></a>alias命令 为命令起别名</h4><p>格式：alias 别名=命令名</p>
+<p><img src="/2021/05/15/linux/67.png" alt="50" style="zoom:80%;" align="left"></p>
+<h5 id="命令选项-p-查看已有别名"><a href="#命令选项-p-查看已有别名" class="headerlink" title="命令选项 -p 查看已有别名"></a>命令选项 -p 查看已有别名</h5><p><img src="/2021/05/15/linux/66.png" alt="50" style="zoom:80%;" align="left"></p>
+<h4 id="unalias命令-删除别名"><a href="#unalias命令-删除别名" class="headerlink" title="unalias命令 删除别名"></a>unalias命令 删除别名</h4><p>格式：unalias 别名</p>
+<h4 id="UNIX进程：一个正在执行的程序"><a href="#UNIX进程：一个正在执行的程序" class="headerlink" title="UNIX进程：一个正在执行的程序"></a>UNIX进程：一个正在执行的程序</h4><h5 id="进程表：为了掌握进程信息，系统为每个进程创建维护进程表"><a href="#进程表：为了掌握进程信息，系统为每个进程创建维护进程表" class="headerlink" title="进程表：为了掌握进程信息，系统为每个进程创建维护进程表"></a>进程表：为了掌握进程信息，系统为每个进程创建维护进程表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[进程表]</span><br><span class="line">A--&gt;B[进程号]</span><br><span class="line">A--&gt;C[进程状态:就绪&#x2F;等待]</span><br><span class="line">A--&gt;D[进程等待的事件号]</span><br><span class="line">A--&gt;E[系统数据区地址]</span><br></pre></td></tr></table></figure>
+<h5 id="管理进程"><a href="#管理进程" class="headerlink" title="管理进程"></a>管理进程</h5><p><img src="/2021/05/15/linux/70.png" alt="70" style="zoom:80%;"></p>
+<h2 id="Shell-编程"><a href="#Shell-编程" class="headerlink" title="Shell 编程"></a>Shell 编程</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/15/linux/linux/" rel="next" title="linux">
+                <i class="fa fa-chevron-left"></i> linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/zyb.jpg"
+                alt="Superbia-zyb" />
+            
+              <p class="site-author-name" itemprop="name">Superbia-zyb</p>
+              <p class="site-description motion-element" itemprop="description">人生在世,有感动就足够了</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UNIX-入门"><span class="nav-number">1.</span> <span class="nav-text">UNIX 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UNIX-文件系统"><span class="nav-number">2.</span> <span class="nav-text">UNIX 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#磁盘组织"><span class="nav-number">2.0.1.</span> <span class="nav-text">磁盘组织</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNIX-文件类型"><span class="nav-number">2.0.2.</span> <span class="nav-text">UNIX 文件类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#普通文件：包含字节序列（程序代码，数据，文本）"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">普通文件：包含字节序列（程序代码，数据，文本）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#目录文件：包含关于其他文件的信息"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">目录文件：包含关于其他文件的信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目录"><span class="nav-number">2.0.3.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主目录：管理员在创建用户时为其分配的特定目录"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">主目录：管理员在创建用户时为其分配的特定目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#工作目录：用户现在在文件系统中所在的目录"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">工作目录：用户现在在文件系统中所在的目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绝对路径：从根目录-开始，到达文件的路径"><span class="nav-number">2.0.3.3.</span> <span class="nav-text">绝对路径：从根目录 &#x2F; 开始，到达文件的路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#相对路径：从当前目录开始，到达文件的路径"><span class="nav-number">2.0.3.4.</span> <span class="nav-text">相对路径：从当前目录开始，到达文件的路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊："><span class="nav-number">2.0.3.5.</span> <span class="nav-text">特殊：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件，目录，命名规则"><span class="nav-number">2.0.3.6.</span> <span class="nav-text">文件，目录，命名规则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pwd命令-显示当前工作目录"><span class="nav-number">2.0.4.</span> <span class="nav-text">pwd命令 显示当前工作目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cd命令-改变工作目录"><span class="nav-number">2.0.5.</span> <span class="nav-text">cd命令 改变工作目录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cd-跳转到根目录"><span class="nav-number">2.0.5.1.</span> <span class="nav-text">cd &#x2F;  跳转到根目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd-、cd-、cd-HOME-返回主目录"><span class="nav-number">2.0.5.2.</span> <span class="nav-text">cd 、cd ~ 、cd $HOME 返回主目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进入别人的主目录-拥有权限"><span class="nav-number">2.0.5.3.</span> <span class="nav-text">进入别人的主目录(拥有权限)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd-返回进入此目录之前所在目录"><span class="nav-number">2.0.5.4.</span> <span class="nav-text">cd - 返回进入此目录之前所在目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd-进入当前目录"><span class="nav-number">2.0.5.5.</span> <span class="nav-text">cd . 进入当前目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd-进入上一级目录"><span class="nav-number">2.0.5.6.</span> <span class="nav-text">cd .. 进入上一级目录</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mkdir命令-创建目录"><span class="nav-number">2.0.6.</span> <span class="nav-text">mkdir命令 创建目录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令格式-p-创建多级目录"><span class="nav-number">2.0.6.1.</span> <span class="nav-text">命令格式 -p  创建多级目录</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rm命令-删除文件"><span class="nav-number">2.0.7.</span> <span class="nav-text">rm命令 删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-i-删除文件前确认"><span class="nav-number">2.0.7.1.</span> <span class="nav-text">命令选项 -i 删除文件前确认</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-r-删除指定文件夹及所有子文件，每步都确认"><span class="nav-number">2.0.7.2.</span> <span class="nav-text">命令选项 -r 删除指定文件夹及所有子文件，每步都确认</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-rf-强制删除指定文件夹及所有子文件"><span class="nav-number">2.0.7.3.</span> <span class="nav-text">命令选项 -rf 强制删除指定文件夹及所有子文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rmdir命令-删除目录"><span class="nav-number">2.0.8.</span> <span class="nav-text">rmdir命令 删除目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ls命令-显式指定目录内容"><span class="nav-number">2.0.9.</span> <span class="nav-text">ls命令 显式指定目录内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项："><span class="nav-number">2.0.9.1.</span> <span class="nav-text">命令选项：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ls-l-长格式详解"><span class="nav-number">2.0.9.2.</span> <span class="nav-text">ls -l 长格式详解</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#第一列："><span class="nav-number">2.0.9.2.1.</span> <span class="nav-text">第一列：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第二列：文件的链接数"><span class="nav-number">2.0.9.2.2.</span> <span class="nav-text">第二列：文件的链接数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第三列：文件的所有者"><span class="nav-number">2.0.9.2.3.</span> <span class="nav-text">第三列：文件的所有者</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第四列：文件所属于的组"><span class="nav-number">2.0.9.2.4.</span> <span class="nav-text">第四列：文件所属于的组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第五列：文件大小-单位为字节"><span class="nav-number">2.0.9.2.5.</span> <span class="nav-text">第五列：文件大小 单位为字节</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第六列：文件上一次修改的日期和时间"><span class="nav-number">2.0.9.2.6.</span> <span class="nav-text">第六列：文件上一次修改的日期和时间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第七列：文件名称"><span class="nav-number">2.0.9.2.7.</span> <span class="nav-text">第七列：文件名称</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#隐藏文件：文件以-开头"><span class="nav-number">2.0.9.3.</span> <span class="nav-text">隐藏文件：文件以.开头</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出重定向"><span class="nav-number">2.0.10.</span> <span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入重定向"><span class="nav-number">2.0.11.</span> <span class="nav-text">输入重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cat命令-显示文件内容"><span class="nav-number">2.0.12.</span> <span class="nav-text">cat命令 显示文件内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#默认："><span class="nav-number">2.0.12.1.</span> <span class="nav-text">默认：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入重定向-1"><span class="nav-number">2.0.12.2.</span> <span class="nav-text">输入重定向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#选项："><span class="nav-number">2.0.12.3.</span> <span class="nav-text">选项：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cat创建文件-使用输出重定向"><span class="nav-number">2.0.12.4.</span> <span class="nav-text">cat创建文件(使用输出重定向)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件追加输入"><span class="nav-number">2.0.12.5.</span> <span class="nav-text">文件追加输入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cat复制文件"><span class="nav-number">2.0.12.6.</span> <span class="nav-text">cat复制文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cp-复制-命令"><span class="nav-number">2.0.13.</span> <span class="nav-text">cp(复制)命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cp-file-file2-创建文件副本"><span class="nav-number">2.0.13.1.</span> <span class="nav-text">cp file file2  ,创建文件副本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cp-file-dir-将单个文件复制到其他目录"><span class="nav-number">2.0.13.2.</span> <span class="nav-text">cp file dir  ,将单个文件复制到其他目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cp-file-file2-…-dir-将多个文件复制到其他目录"><span class="nav-number">2.0.13.3.</span> <span class="nav-text">cp file file2 … dir  ,将多个文件复制到其他目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-i-如果目标存在-确认是否覆盖"><span class="nav-number">2.0.13.4.</span> <span class="nav-text">命令选项 -i (如果目标存在 确认是否覆盖)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-b-如果目标存在-则先创建该目标的副本，再移动"><span class="nav-number">2.0.13.5.</span> <span class="nav-text">命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-r-复制目录到新目录中"><span class="nav-number">2.0.13.6.</span> <span class="nav-text">命令选项 -r (复制目录到新目录中)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mv-移动-命令"><span class="nav-number">2.0.14.</span> <span class="nav-text">mv(移动)命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mv-file-dir-将文件移到其他目录-非文件所在目录"><span class="nav-number">2.0.14.1.</span> <span class="nav-text">mv file dir  ,将文件移到其他目录(非文件所在目录)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mv-file-dir-file-dir2-改变文件名-目录名"><span class="nav-number">2.0.14.2.</span> <span class="nav-text">mv file&#x2F;dir  file&#x2F;dir2  ,改变文件名&#x2F;目录名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mv-file-file2-…-dir-将文件批量移动到其他目录"><span class="nav-number">2.0.14.3.</span> <span class="nav-text">mv file file2 … dir  ,将文件批量移动到其他目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-i-如果目标存在-确认是否覆盖-1"><span class="nav-number">2.0.14.4.</span> <span class="nav-text">命令选项 -i (如果目标存在 确认是否覆盖)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-b-如果目标存在-则先创建该目标的副本，再移动-1"><span class="nav-number">2.0.14.5.</span> <span class="nav-text">命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-v-解释操作"><span class="nav-number">2.0.14.6.</span> <span class="nav-text">命令选项 -v 解释操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-f-如果目标存在，则覆盖"><span class="nav-number">2.0.14.7.</span> <span class="nav-text">命令选项 -f (如果目标存在，则覆盖)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ln-链接-命令"><span class="nav-number">2.0.15.</span> <span class="nav-text">ln(链接)命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景"><span class="nav-number">2.0.15.1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ln-file-file-指定链接文件名-创建链接文件"><span class="nav-number">2.0.15.2.</span> <span class="nav-text">ln file file~(指定链接文件名)  ,创建链接文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ln-file-file2-…-dir-在目录中创建链接文件"><span class="nav-number">2.0.15.3.</span> <span class="nav-text">ln file file2 … dir  ,在目录中创建链接文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看文件链接数"><span class="nav-number">2.0.15.4.</span> <span class="nav-text">查看文件链接数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wc命令"><span class="nav-number">2.0.16.</span> <span class="nav-text">wc命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#wc-file-统计单个文件"><span class="nav-number">2.0.16.1.</span> <span class="nav-text">wc file  ,统计单个文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#wc-无参数-默认从键盘输入"><span class="nav-number">2.0.16.2.</span> <span class="nav-text">wc  ,无参数 默认从键盘输入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#wc-file-file2-…-统计多个文件"><span class="nav-number">2.0.16.3.</span> <span class="nav-text">wc file file2 … ,统计多个文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-l-统计行数"><span class="nav-number">2.0.16.4.</span> <span class="nav-text">命令选项 -l ,统计行数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-c-统计字符数"><span class="nav-number">2.0.16.5.</span> <span class="nav-text">命令选项 -c ,统计字符数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-w-统计字数"><span class="nav-number">2.0.16.6.</span> <span class="nav-text">命令选项 -w ,统计字数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件名替换"><span class="nav-number">2.0.17.</span> <span class="nav-text">文件名替换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#匹配任意单个字符"><span class="nav-number">2.0.17.1.</span> <span class="nav-text">?  ,匹配任意单个字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#匹配任意个字符，包括空串"><span class="nav-number">2.0.17.2.</span> <span class="nav-text">*  ,匹配任意个字符，包括空串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#list-匹配任意在list中的字符-list-匹配任意不在list中的字符"><span class="nav-number">2.0.17.3.</span> <span class="nav-text">[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分"><span class="nav-number">2.0.17.4.</span> <span class="nav-text">隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find-命令"><span class="nav-number">2.0.18.</span> <span class="nav-text">find 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索选项-name-根据文件名查找文件"><span class="nav-number">2.0.18.1.</span> <span class="nav-text">搜索选项 -name ,根据文件名查找文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索选项-size-±n-根据文件大小查找文件"><span class="nav-number">2.0.18.2.</span> <span class="nav-text">搜索选项 -size ±n ,根据文件大小查找文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索选项-type-根据文件类型查找文件"><span class="nav-number">2.0.18.3.</span> <span class="nav-text">搜索选项 -type ,根据文件类型查找文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索选项-atime-±n-根据最后访问日期-被读取或执行-查找文件"><span class="nav-number">2.0.18.4.</span> <span class="nav-text">搜索选项 -atime ±n ,根据最后访问日期(被读取或执行)查找文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索选项-mtime-±n-根据文件最后修改日期-内容被修改-查找文件"><span class="nav-number">2.0.18.5.</span> <span class="nav-text">搜索选项 -mtime ±n ,根据文件最后修改日期(内容被修改)查找文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索选项-newer-查找比指定文件更新的文件"><span class="nav-number">2.0.18.6.</span> <span class="nav-text">搜索选项 -newer ,查找比指定文件更新的文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动作选项-print-打印找到的每个文件的路径名"><span class="nav-number">2.0.18.7.</span> <span class="nav-text">动作选项 -print ,打印找到的每个文件的路径名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动作选项-exec-command-对找到的文件执行command"><span class="nav-number">2.0.18.8.</span> <span class="nav-text">动作选项 -exec command {} \;  ,对找到的文件执行command</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动作选项-ok-command-在执行command之前要求确认"><span class="nav-number">2.0.18.9.</span> <span class="nav-text">动作选项-ok command {} \;  ,在执行command之前要求确认</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#head-命令"><span class="nav-number">2.0.19.</span> <span class="nav-text">head 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-n-显示文件前n行"><span class="nav-number">2.0.19.1.</span> <span class="nav-text">命令选项 -n ,显示文件前n行</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tail-命令"><span class="nav-number">2.0.20.</span> <span class="nav-text">tail 命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cut-命令"><span class="nav-number">2.0.21.</span> <span class="nav-text">cut 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-f-指定域位置"><span class="nav-number">2.0.21.1.</span> <span class="nav-text">命令选项 -f ,指定域位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-c-指定字符位置"><span class="nav-number">2.0.21.2.</span> <span class="nav-text">命令选项 -c ,指定字符位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-d-指定域分割字符"><span class="nav-number">2.0.21.3.</span> <span class="nav-text">命令选项 -d ,指定域分割字符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#paste-命令"><span class="nav-number">2.0.22.</span> <span class="nav-text">paste 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-d-指定具体分隔符-默认为Tab-制表符"><span class="nav-number">2.0.22.1.</span> <span class="nav-text">命令选项 -d ,指定具体分隔符,默认为Tab(制表符)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-命令"><span class="nav-number">2.0.23.</span> <span class="nav-text">more 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-n-每屏显示n行"><span class="nav-number">2.0.23.1.</span> <span class="nav-text">命令选项 -n ,每屏显示n行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-n-从第n行开始显示"><span class="nav-number">2.0.23.2.</span> <span class="nav-text">命令选项 +n ,从第n行开始显示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-pattern-在每个文档显示前搜寻该字串-pattern-然后从该字串之后开始显示"><span class="nav-number">2.0.23.3.</span> <span class="nav-text">命令选项 +&#x2F;pattern ,在每个文档显示前搜寻该字串(pattern),然后从该字串之后开始显示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-c-在显示每页前清屏"><span class="nav-number">2.0.23.4.</span> <span class="nav-text">命令选项 -c ,在显示每页前清屏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-d-显示提示"><span class="nav-number">2.0.23.5.</span> <span class="nav-text">命令选项 -d ,显示提示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令控制键"><span class="nav-number">2.0.23.6.</span> <span class="nav-text">命令控制键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#less-命令"><span class="nav-number">2.0.24.</span> <span class="nav-text">less 命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNXI-文件系统原理"><span class="nav-number">2.0.25.</span> <span class="nav-text">UNXI 文件系统原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ls-i-查看文件i节点号"><span class="nav-number">2.0.25.1.</span> <span class="nav-text">ls -i ,查看文件i节点号</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell"><span class="nav-number">3.</span> <span class="nav-text">Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用户与Shell交互"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">用户与Shell交互</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动Shell"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">启动Shell</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#echo命令"><span class="nav-number">3.0.1.</span> <span class="nav-text">echo命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-n-输出不换行"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">命令选项 -n  ,输出不换行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-e-解释反斜杠引导的转义字符，转义符号用””扩起"><span class="nav-number">3.0.1.2.</span> <span class="nav-text">命令选项 -e  ,解释反斜杠引导的转义字符，转义符号用””扩起</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消除元字符特殊含义"><span class="nav-number">3.0.2.</span> <span class="nav-text">消除元字符特殊含义</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#将其后一个元字符解释为一个普通字符"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">\ 将其后一个元字符解释为一个普通字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#“”-取消-除-’-外的元字符特殊含义-双引号中保留空格-Tab等"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">“” 取消 除 $,’,\ 外的元字符特殊含义 ,双引号中保留空格,Tab等</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#’-‘-单引号中任何字符都失去特殊含义-单引号中保留空格-Tab等"><span class="nav-number">3.0.2.3.</span> <span class="nav-text">’ ‘ 单引号中任何字符都失去特殊含义 ,单引号中保留空格,Tab等</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shell-变量"><span class="nav-number">3.0.3.</span> <span class="nav-text">Shell 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set命令"><span class="nav-number">3.0.4.</span> <span class="nav-text">set命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unset命令"><span class="nav-number">3.0.5.</span> <span class="nav-text">unset命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量赋值"><span class="nav-number">3.0.6.</span> <span class="nav-text">变量赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shell标准变量"><span class="nav-number">3.0.7.</span> <span class="nav-text">Shell标准变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HOME-变量"><span class="nav-number">3.0.8.</span> <span class="nav-text">HOME 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PATH-变量"><span class="nav-number">3.0.9.</span> <span class="nav-text">PATH 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PS1-变量"><span class="nav-number">3.0.10.</span> <span class="nav-text">PS1 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PS1可使用的转义序列"><span class="nav-number">3.0.10.1.</span> <span class="nav-text">PS1可使用的转义序列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PS2-变量"><span class="nav-number">3.0.11.</span> <span class="nav-text">PS2 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SHELL-变量"><span class="nav-number">3.0.12.</span> <span class="nav-text">SHELL 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TERM-变量"><span class="nav-number">3.0.13.</span> <span class="nav-text">TERM 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行命令：重音符号"><span class="nav-number">3.0.14.</span> <span class="nav-text">执行命令：重音符号 &#96;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令序列：使用分号"><span class="nav-number">3.0.15.</span> <span class="nav-text">命令序列：使用分号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令编组：使用括号"><span class="nav-number">3.0.16.</span> <span class="nav-text">命令编组：使用括号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台处理：使用-amp-符号"><span class="nav-number">3.0.17.</span> <span class="nav-text">后台处理：使用&amp;符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链接命令："><span class="nav-number">3.0.18.</span> <span class="nav-text">链接命令：|</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延时命令：sleep"><span class="nav-number">3.0.19.</span> <span class="nav-text">延时命令：sleep</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ps命令：获得系统中活动进程的状态"><span class="nav-number">3.0.20.</span> <span class="nav-text">ps命令：获得系统中活动进程的状态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-e-显示所有进程"><span class="nav-number">3.0.20.1.</span> <span class="nav-text">命令选项 -e 显示所有进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-f-显示完整格式的信息"><span class="nav-number">3.0.20.2.</span> <span class="nav-text">命令选项 -f 显示完整格式的信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kill命令：终止进程"><span class="nav-number">3.0.21.</span> <span class="nav-text">kill命令：终止进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nohub命令-：保持执行"><span class="nav-number">3.0.22.</span> <span class="nav-text">nohub命令 ：保持执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tee命令：分离输出"><span class="nav-number">3.0.23.</span> <span class="nav-text">tee命令：分离输出</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-a-追加输出"><span class="nav-number">3.0.23.1.</span> <span class="nav-text">命令选项 -a 追加输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-i-忽略中断信号，不对中断信号做出响应"><span class="nav-number">3.0.23.2.</span> <span class="nav-text">命令选项 -i 忽略中断信号，不对中断信号做出响应</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grep命令：文件搜索"><span class="nav-number">3.0.24.</span> <span class="nav-text">grep命令：文件搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-c-只显示每个文件中包含匹配样式的行数"><span class="nav-number">3.0.24.1.</span> <span class="nav-text">命令选项 -c 只显示每个文件中包含匹配样式的行数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-i-搜索匹配时忽略大小写"><span class="nav-number">3.0.24.2.</span> <span class="nav-text">命令选项 -i 搜索匹配时忽略大小写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-l-只显示具有匹配的行的文件名，而不显示匹配行"><span class="nav-number">3.0.24.3.</span> <span class="nav-text">命令选项 -l 只显示具有匹配的行的文件名，而不显示匹配行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-n-每个输出前显示行号"><span class="nav-number">3.0.24.4.</span> <span class="nav-text">命令选项 -n 每个输出前显示行号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-v-仅显示不匹配的行"><span class="nav-number">3.0.24.5.</span> <span class="nav-text">命令选项 -v 仅显示不匹配的行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-w-需要完全匹配"><span class="nav-number">3.0.24.6.</span> <span class="nav-text">命令选项 -w 需要完全匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sed命令：替换"><span class="nav-number">3.0.25.</span> <span class="nav-text">sed命令：替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort命令：文本排序"><span class="nav-number">3.0.26.</span> <span class="nav-text">sort命令：文本排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-b-忽略前导空格"><span class="nav-number">3.0.26.1.</span> <span class="nav-text">命令选项 -b 忽略前导空格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-d-字典顺序排序，忽略标点符号-控制字符"><span class="nav-number">3.0.26.2.</span> <span class="nav-text">命令选项 -d 字典顺序排序，忽略标点符号 控制字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-f-忽略大小写区别"><span class="nav-number">3.0.26.3.</span> <span class="nav-text">命令选项 -f 忽略大小写区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-n-数字以数值排序，包括负数和小数"><span class="nav-number">3.0.26.4.</span> <span class="nav-text">命令选项 -n 数字以数值排序，包括负数和小数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-o-将输出存储到指定文件中"><span class="nav-number">3.0.26.5.</span> <span class="nav-text">命令选项 -o 将输出存储到指定文件中</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-r-倒序排序，由升序变为降序"><span class="nav-number">3.0.26.6.</span> <span class="nav-text">命令选项 -r 倒序排序，由升序变为降序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-k-按照指定字段排序"><span class="nav-number">3.0.26.7.</span> <span class="nav-text">命令选项 -k 按照指定字段排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-t-指定一个用来区分键位值得字符来比较"><span class="nav-number">3.0.26.8.</span> <span class="nav-text">命令选项 -t 指定一个用来区分键位值得字符来比较</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shell-环境配置文件"><span class="nav-number">3.0.27.</span> <span class="nav-text">Shell 环境配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#系统配置文件：全局性，适用所有用户"><span class="nav-number">3.0.27.1.</span> <span class="nav-text">系统配置文件：全局性，适用所有用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户配置文件：局部性，适用于某个用户"><span class="nav-number">3.0.27.2.</span> <span class="nav-text">用户配置文件：局部性，适用于某个用户</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录Shell-与-非登录Shell"><span class="nav-number">3.0.28.</span> <span class="nav-text">登录Shell 与 非登录Shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件功能"><span class="nav-number">3.0.29.</span> <span class="nav-text">配置文件功能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#etc-profile"><span class="nav-number">3.0.29.1.</span> <span class="nav-text">&#x2F;etc&#x2F;profile</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#etc-bashrc-：配置系统函数与缩写"><span class="nav-number">3.0.29.2.</span> <span class="nav-text">&#x2F;etc&#x2F;bashrc ：配置系统函数与缩写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#export-使一系列shell变量作用于子Shell"><span class="nav-number">3.0.29.3.</span> <span class="nav-text">export 使一系列shell变量作用于子Shell</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alias命令-为命令起别名"><span class="nav-number">3.0.30.</span> <span class="nav-text">alias命令 为命令起别名</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令选项-p-查看已有别名"><span class="nav-number">3.0.30.1.</span> <span class="nav-text">命令选项 -p 查看已有别名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unalias命令-删除别名"><span class="nav-number">3.0.31.</span> <span class="nav-text">unalias命令 删除别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNIX进程：一个正在执行的程序"><span class="nav-number">3.0.32.</span> <span class="nav-text">UNIX进程：一个正在执行的程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进程表：为了掌握进程信息，系统为每个进程创建维护进程表"><span class="nav-number">3.0.32.1.</span> <span class="nav-text">进程表：为了掌握进程信息，系统为每个进程创建维护进程表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#管理进程"><span class="nav-number">3.0.32.2.</span> <span class="nav-text">管理进程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-编程"><span class="nav-number">4.</span> <span class="nav-text">Shell 编程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Superbia-zyb</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">26.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
