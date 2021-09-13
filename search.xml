@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>人工智能基础 | 智能Agent</title>
+    <url>/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/</url>
+    <content><![CDATA[<h4 id="text-Agent-与环境"><a href="#text-Agent-与环境" class="headerlink" title="$\text{Agent}$与环境"></a>$\text{Agent}$与环境</h4><p>$\text{Agent}$通过<strong>传感器</strong>感知环境，并通过<strong>执行器</strong>对所处环境产生影响。</p>
+<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/1.png" alt="1" style="zoom: 80%;">
+
+<p>感知序列：指 $\text{Agent}$ 所收到的<strong>所有输入数据的完整历史</strong>。</p>
+<p>$\text{Agent}$在任何时刻的行动依赖于到那个时刻为止，该$\text{Agent}$的<strong>整个感知序列</strong>。 <strong>$\text{Agent}$函数</strong>描述了$\text{Agent}$的行为，它将任何给定感知序列映射为行动，$\text{Agent}$函数通过$\text{Agent}$程序实现。</p>
+<h4 id="什么是理性？"><a href="#什么是理性？" class="headerlink" title="什么是理性？"></a>什么是理性？</h4><h5 id="理性"><a href="#理性" class="headerlink" title="理性"></a>理性</h5><p>判断$\text{Agent}$理性的标准</p>
+<ul>
+<li>定义成功标准的性能度量，评价$\text{Agent}$在环境中的行为表现</li>
+<li>$\text{Agent}$对任务环境的先验知识</li>
+<li>$\text{Agent}$可以完成的行动</li>
+<li>$\text{Agent}$截止到此时的感知序列</li>
+</ul>
+<p>理性$\text{Agent}$：对每一个可能的感知序列，根据已知的感知序列提供的证据和$\text{Agent}$具有的先验知识，理性$\text{Agent}$应该选择能使其性能度量最大化的行为。</p>
+<h5 id="全知者，学习，自主性"><a href="#全知者，学习，自主性" class="headerlink" title="全知者，学习，自主性"></a>全知者，学习，自主性</h5><p>理性不等于全知。理性使期望的性能最大化，完美使实际的性能最大化。</p>
+<p>$\text{Agent}$应从它所感知的信息中尽可能多的<strong>学习</strong>。</p>
+<p>如果$\text{Agent}$依赖于设计人员的先验知识，而不是自身的感知信息我们说该$\text{Agent}$<strong>缺乏自主性</strong>。</p>
+<h4 id="任务环境"><a href="#任务环境" class="headerlink" title="任务环境"></a>任务环境</h4><p>PEAS描述：Performance（性能度量)，Environment(环境)，Actuators(执行器)，Sensors(传感器)</p>
+<p>任务环境的性质：</p>
+<ul>
+<li><p>完全可观察的 vs 部分可观察的 （传感器不精确，或缺少部分数据）</p>
+</li>
+<li><p>单$\text{Agent}$ vs 多$\text{Agent}$（竞争性，合作性）</p>
+</li>
+<li><p>确定的 vs 随机的</p>
+<p>  如果环境的下一个状态完全取决于当前状态和$\text{Agent}$执行的动作，那么我们说该环境是确定的。否则，它是随机的。</p>
+</li>
+<li><p>片段式的 vs 延续式的</p>
+</li>
+<li><p>静态的 vs 动态的</p>
+</li>
+<li><p>离散的 vs 连续的</p>
+</li>
+<li><p>已知的 vs 未知的 （对于$\text{Agent}$知识状态）</p>
+</li>
+</ul>
+<h4 id="text-Agent-的结构"><a href="#text-Agent-的结构" class="headerlink" title="$\text{Agent}$的结构"></a>$\text{Agent}$的结构</h4><p>假设该程序要在某个具备物理传感器和执行器的计算装置上运行,我们称为体系结构.<br>$$<br>\text{Agent} = \text{体系结构}+\text{程序}<br>$$</p>
+<h5 id="text-Agent-程序：-text-Agent-函数的实现"><a href="#text-Agent-程序：-text-Agent-函数的实现" class="headerlink" title="$\text{Agent}$程序：$\text{Agent}$函数的实现"></a>$\text{Agent}$程序：$\text{Agent}$函数的实现</h5><p>输入：传感器得到的当前感知信息</p>
+<p>输出：执行器需要的当前执行动作</p>
+<p>表驱动：构建对于每个可能感知序列的适当行动的函数表。</p>
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/2.jpg"></p>
+<h4 id="简单反射-text-Agent"><a href="#简单反射-text-Agent" class="headerlink" title="简单反射$\text{Agent}$"></a>简单反射$\text{Agent}$</h4><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/3.jpg" style="zoom:70%;">
+
+<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/4.jpg" style="zoom:80%;">
+
+<p>基于当前感知选择行动，不关注感知历史，需要环境完全可观察。</p>
+<h4 id="基于模型的反射-text-Agent"><a href="#基于模型的反射-text-Agent" class="headerlink" title="基于模型的反射$\text{Agent}$"></a>基于模型的反射$\text{Agent}$</h4><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/5.jpg" style="zoom:75%;">
+
+<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/6.jpg" style="zoom:85%;">
+
+<p>$\text{Agent}$根据感知历史维持内部状态。</p>
+<p>增加两种知识：世界是如何独立于$\text{Agent}$而发展的信息；$\text{Agent}$自身的行动如何影响世界的信息。（世界模型）</p>
+<h4 id="基于目标的-text-Agent"><a href="#基于目标的-text-Agent" class="headerlink" title="基于目标的$\text{Agent}$"></a>基于目标的$\text{Agent}$</h4><p>$\text{Agent}$可以通过<strong>搜索</strong>与<strong>规划</strong>，寻找达到$\text{Agent}$目标的行动序列。</p>
+<p>基于目标的$\text{Agent}$会进行推理。</p>
+<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/7.jpg" style="zoom:70%;">
+
+<h4 id="基于效用的-text-Agent"><a href="#基于效用的-text-Agent" class="headerlink" title="基于效用的$\text{Agent}$"></a>基于效用的$\text{Agent}$</h4><p>$\text{Agent}$的<strong>效用函数</strong>是性能度量的内在化。</p>
+<p>基于效用的$\text{Agent}$选择使其<strong>期望效用</strong>最大化的行动。</p>
+<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/8.jpg" style="zoom:75%;">
+
+<h4 id="学习-text-Agent"><a href="#学习-text-Agent" class="headerlink" title="学习$\text{Agent}$"></a>学习$\text{Agent}$</h4><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/9.jpg" style="zoom:75%;">
+
+<p>四大组件：学习元件，性能元件，评判元件，问题产生器。</p>
+<ul>
+<li>学习元件：通过评判元件，改进提高。</li>
+<li>性能元件：负责选择外部行动，接受感知信息并决策($\text{Agent}$本身)。</li>
+<li>评判元件：评价并反馈$\text{Agent}$行为的好与坏。</li>
+<li>问题产生器：负责可以得到新的和有信息的经验的行动提议。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>决策树</title>
+    <url>/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/</url>
+    <content><![CDATA[<h4 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h4><img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/15.png" alt="15" style="zoom:80%;">
+
+
+
+<p>决策树是一种基本的分类与回归方法 它可以认为是 if-then 规则的集合，也可以认为是定义在特征空间与类空间上的条件概率分布。</p>
+<p>决策树是一种自上而下，对样本数据进行树形分类的过程，由节点和有向边组成。节点分为内部节点和叶节点，每个内部节点表示一个特征或属性，叶节点表示类别，边代表划分的条件。从顶部节点开始，所有样本聚在一起，经过根节点的划分，样本被分到不同的子节点中，再根据子节点的特征进一步划分，直至所有样本都被归到某个类别。</p>
+<p>构建决策树就是一个递归的选择内部节点，计算划分条件的边，最后到达叶子节点的过程。</p>
+<h4 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h4><h5 id="信息量："><a href="#信息量：" class="headerlink" title="信息量："></a>信息量：</h5><p>一个事件 $x_i$ 发生的概率为 $P(x_i)$ 那么信息量定义为 : $l(x_i)=-log(p(x_i))$</p>
+<p>事件发生的概率越大 带来的信息量就越小</p>
+<h5 id="熵：-度量随机变量的不确定性"><a href="#熵：-度量随机变量的不确定性" class="headerlink" title="熵： 度量随机变量的不确定性"></a>熵： 度量随机变量的不确定性</h5><p>设 $X$ 为取有限个数的离散型随机变量 且 $P(X=x_i)=p_i$</p>
+<p>则： $H(x)= -\sum\limits_{i=1}^{n}p_il_i= -\sum\limits_{i=1}^{n}p_i \log{p_i}$ . 因为只与 $X$ 的分布有关,也记作 $H(p)$</p>
+<p>分布为伯努利分布时,即$\begin{cases}P(X=1)=p \P(x=0)=1-p \end{cases} , \ 0\le p \le 1$ , $H(p)=-p\log_2p-(1-p)log_2(1-p)$      </p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/1.png" alt="1" style="zoom:85%;">
+
+<p>信息熵是计算所有类别的所有可能值包含的信息期望 </p>
+<h5 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h5><p>设有随机变量$(X,Y)$ 其联合概率分布为<br>$$<br>P(X=x_i,Y=y_i)=p_{i,j}, \ \ i=1,2,…n; \ \ j=1,2,…,m;<br>$$<br>条件熵 $H(Y|X)$ 表示在已知随机变量 $X$ 的条件下随机变量 $Y$ 的不确定性. </p>
+<p>随机变量 $X$ 给定的条件下随机变量 $Y$ 的条件熵 $H(Y|X)$ 定义为 $X$ 给定条件下 $Y$ 的条件概率分布的熵对 $X$ 的数学期望</p>
+<p>$$<br>H(Y|X)=\sum\limits_{i=1}^np_iH(Y|X=x_i) \ ,\ p_i=P(X=x_i)\ ,\ i=1,2,…,n<br>$$</p>
+<p>当熵,条件熵中的概率有数据估计得到时,所对应的熵称作经验熵,条件熵称作经验条件熵.</p>
+<h5 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h5><p>信息增益表示: 知道特征 $X$ 的信息而使得类 $Y$ 的信息的不确定性减少的程度.</p>
+<p>特征 $A$ 对训练数据集 $D$ 的信息增益 $g(D,A)$ ,定义为集合 $D$ 的经验熵 $H(D)$ 与特征 $A$ 给定条件下 $D$ 的经验条件熵 $H(D|A)$ 之差,即：<br>$$<br>g(D,A)=H(D)-H(D|A)<br>$$<br>不同的特征往往具有不同的信息增益,信息增益大的特征具有更强的分类能力</p>
+<p>设训练数据集为  $|D|$ 表示其样本容量(个数) . 设有 $K$ 个类 $C_k ,\ \ k=1,2,…,K $ , $|C_k|$ 为属于类 $C_k$ 的样本个数 $\sum\limits_{k=1}^{K}|C_k|=|D| $  .设特征 $A$ 有 $n$ 个不同的取值 ${a_1,…a_n}$ , 根据特征 $A$ 的取值将 $D$ 划分为 $n$ 个自己 $D_1…D_n$ , $|D_i|$ 为 $|D_i|$的样本个数 $\sum\limits_{i=1}^{n}|D_i|=|D|$ .记自己 $D_i$ 中属于类 $C_k$ 的样本的集合为 $D_{ik}$ ,  记子集 $D_i$ 中属于类 $C_k$ 的样本的集合为 $D_{ik}$ 即 $D_{ik}=D_i \cap C_k  , $$|D_{ik}|$ 为 $D_{ik} $的样本个数. </p>
+<p>则: 数据集 $D$ 的经验熵 $H(D)$为：<br>$$<br>H(D)=-\sum\limits_{k=1}^{K}\frac{|C_k|}{|D|}\log_2\frac{|C_k|}{|D|}<br>$$</p>
+<p>特征值 $A$ 对数据集 $D$ 的经验条件熵 $H(D|A)$ 为：<br>$$<br>H(D|A)=\sum\limits_{i=1}^{n}\frac{|D_i|}{|D|}H(D_i)=-\sum\limits_{i=1}^{n}\frac{|D_i|}{|D|}\sum\limits_{k=1}^{K}\frac{|D_{ik}|}{|D_i|}\log_2\frac{|D_{ik}|}{|D_i|}<br>$$</p>
+<p>信息增益：$g(D,A)=H(D)-H(D|A)$</p>
+<p>信息增益越大 则意味使用特征值 $A$ 来进行划分的效果越好</p>
+<h5 id="信息增益比"><a href="#信息增益比" class="headerlink" title="信息增益比"></a>信息增益比</h5><p>特征 $A$ 对训练数据集 $D$ 的信息增益比 $g_R(D,A)$ 定义为其信息增益 $g(D,A)$ 与训练数据集 $D$ 关于特征 $A$ 的值的熵 $H_A(D)$ 之比,即<br>$$<br>\begin{align}<br>&amp;g_R(D,A)=\frac{g(D,A)}{H_A(D)} \<br>&amp;H_A(D)=-\sum\limits_{i=1}^{n}\frac{|D_i|}{|D|} \log_2\frac{|D_i|}{|D|}<br>\end{align}<br>$$</p>
+<h4 id="决策树的生成"><a href="#决策树的生成" class="headerlink" title="决策树的生成"></a>决策树的生成</h4><h5 id="ID3-算法"><a href="#ID3-算法" class="headerlink" title="ID3 算法"></a>ID3 算法</h5><p>按照信息增益来递归建树:</p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/3.png" alt="3" style="zoom:85%;">
+
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/4.png" alt="4" style="zoom:80%;">
+
+<p>ID3算法的缺点是：信息增益偏向取值较多的特征</p>
+<p>原因：当特征的取值较多时，根据此特征划分更容易得到纯度更高的子集，因此划分之后的熵更低，由于划分前的熵是一定的，因此信息增益更大，信息增益更偏向取值较多的特征。</p>
+<h5 id="C4-5-算法"><a href="#C4-5-算法" class="headerlink" title="C4,5 算法"></a>C4,5 算法</h5><p>按照信息增益比来递归建树:</p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/2.png" alt="2" style="zoom:80%;">
+
+<h4 id="决策树的剪枝"><a href="#决策树的剪枝" class="headerlink" title="决策树的剪枝"></a>决策树的剪枝</h4><h5 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h5><p>以线性回归与逻辑斯蒂回归为例</p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/10.png" alt="10" style="zoom:70%;">
+
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/9.png" alt="9" style="zoom:85%;">
+
+<p>过度拟合的问题通常发生在变量（特征）过多的时候。这种情况下训练出的方程总是能很好的拟合训练数据，也就是说，我们的损失函数可能非常接近于 0 或者就为 0。</p>
+<p>但是，这样的曲线过度拟合训练数据，会导致它无法泛化到新的数据样本中</p>
+<h5 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h5><p>设树 $T$ 的叶节点个数为 $|T|$ ,$t$ 是树 $T$ 的叶节点 该叶节点 $t$ 有 $N_t$ 个样本点,其中 $k$ 类的样本点 $N_{tk}$ 个 , $k=1,2…,K$, $H_{t}(T) $ 为叶节点 $t$ 熵的经验熵,$\alpha \ge 0$ 为参数 则决策树的损失函数可以定义为<br>$$<br>\begin{align}<br>C_{\alpha}(T) &amp;=\sum\limits_{t=1}^{|T|} N_tH_t(T)+\alpha|T| \<br>&amp;=\sum\limits_{t=1}^{|T|}\sum\limits_{k=1}^{K}N_{tk}\log\frac{N_{tk}}{N_t}+\alpha|T| \ &amp;=C(T)+\alpha|T|<br>\end{align}<br>$$</p>
+<p>$C(T)$ 表示对训练数据的预测误差 ，即模型与训练数据的拟合程度， $|T|$ 表示模型复杂度，参数 $\alpha$ 控制二者之间的影响。较大的 $\alpha$ 促使选择较简单的模型，较小的 $\alpha$ 促使选择较复杂的模型。  $\alpha=0$ 表示只考虑模型与训练数据的拟合程度，不考虑模型的复杂度</p>
+<p>这个时候我们求 $C_{\alpha}(T)$ 的最小值，此时一方面要求拟合程度尽可能高，另一方面是希望复杂度尽可能低</p>
+<p>但是二者是矛盾的 因为拟合程度越高 意味着模型越复杂，因此 $\alpha$参数 作为调节，起到很重要的作用</p>
+<h5 id="预剪枝与后剪枝"><a href="#预剪枝与后剪枝" class="headerlink" title="预剪枝与后剪枝"></a>预剪枝与后剪枝</h5><p>预剪枝：在决策树生成过程中 对每个结点划分前先进行估计  若当前节点划分不能带来泛化性能提升 停止划分并标记为叶结点</p>
+<p>预剪枝原则有：</p>
+<ol>
+<li>节点达到完全纯度；</li>
+<li>树的深度达到用户所要的深度；</li>
+<li>节点中样本个数少于用户指定个数；</li>
+<li>不纯度指标下降的最大幅度小于用户指定的幅度。</li>
+</ol>
+<p>后剪枝：从训练集生成一颗完整的决策树，然后自底向上对非叶节点考察 若将该结点对应的子树替换为叶节点能带来泛化性能提升 则将该子树替换为叶节点</p>
+<p>（留出法 交叉验证等） </p>
+<p>   <img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/12.png" alt="12" style="zoom: 80%;">             <img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/13.png" alt="13" style="zoom: 80%;"> </p>
+<p>​                                           <img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/14.png" alt="14" style="zoom: 80%;"></p>
+<p>后剪枝算法相比预剪枝算法会保留更多分支, 泛化性能优于预剪枝决策树 , 但训练时间开销相对大很多</p>
+<h5 id="剪枝算法-（-alpha-已知-）"><a href="#剪枝算法-（-alpha-已知-）" class="headerlink" title="剪枝算法 （ $\alpha$ 已知 ）"></a>剪枝算法 （ $\alpha$ 已知 ）</h5><p>计算出每个点的经验熵 ，从叶子节点向父亲节点回缩</p>
+<p>设回缩前的整体树为 $T_A$ 回缩后的整体树为 $T_B$ ，若 $C_{\alpha}(T_A) \ge C_{\alpha}(T_B)$ , 说明复杂度在其中起到关键的作用，而损失函数起的作用很小，简单来说就是剪枝前的叶节点并没有很好的提高准确度但是却带来更复杂的树，因此可以考虑剪去这个节点</p>
+<p>​                                                         <img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/5.png" alt="5" style="zoom: 80%;">        </p>
+<h4 id="CART-二叉树"><a href="#CART-二叉树" class="headerlink" title="CART(二叉树)"></a>CART(二叉树)</h4><h5 id="生成回归决策树"><a href="#生成回归决策树" class="headerlink" title="生成回归决策树"></a>生成回归决策树</h5><p>特征空间划分为 $M$ 个单元 $R_1…R_M$  并每个单元上都具有输出值 $c_m$ 则回归树模型为<br>$$<br>f(x)=\sum\limits_{m=1}^Mc_mI(x\in R_m)<br>$$</p>
+<p>使用平方误差：$\sum\limits_{x_i\in R_m} (y_i-f(x_i))^2$ 来表示回归树对训练数据的预测误差,用平方误差最小的原则来求解每个单元的最优输出</p>
+<p>单元 $R_m$ 上的 $c_m$ 的最优值 $\hat{c}_ m$ 是 $R_m$ 上所有 $x_i$ 对应的输出 $y_i$ 的均值，即 $\hat{c}_ m = ave(y_i|x_i\in R_m)$</p>
+<p>证明： 假设有 $n$ 个变量 $x$ 属于 $R_m$<br>$$<br>\begin{align}<br>\sum\limits_{x_i\in R_m} (y_i-f(x_i))^2 &amp;= \sum\limits_{i=1}^{n}(y_i-c_m)^2 \ &amp;= n(c_m)^2-(2\sum\limits_{i=1}^{n}y_i)c_m+\sum\limits_{i=1}^{n} y_i^2<br>\end{align} \ 解得:当c_m=\frac{1}{n}\sum\limits_{i=1}^{n}y_i 时 ,平方误差取得最小值\ (\sum\limits_{i=1}^{n}y_i^2)-\frac{1}{n}(\sum_{i=1}^{n}y_i)^2<br>$$</p>
+<p>最小二乘回归树生成方法：</p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/6.png" alt="6" style="zoom:90%;">
+
+<h5 id="生成分类决策树"><a href="#生成分类决策树" class="headerlink" title="生成分类决策树"></a>生成分类决策树</h5><p>基尼指数: 分类中假设有 $K$ 个类 样本点属于第 $k$ 类的概率为 $p_k$ 则概率分布的基尼指数定义为<br>$$<br>Gini(p)=\sum\limits_{k=1}^{K}p_k(1-p_k)=1-\sum\limits_{k=1}^{K}p_k^2<br>$$<br>对于二类分类问题,设样本点属于第一类的概率为 $p$ ,则概率分布的基尼指数为 $Gini(p)=2p(1-p)$</p>
+<p>对于给定的样本集合 $D$ ,其基尼指数为<br>$$<br>Gini(D)=1-\sum\limits_{k=1}^{K}(\frac{|C_k|}{|D|})^2<br>$$</p>
+<p>假设样本集合 $D$ 根据特征值 $A$ 是否能取某一可能值 $a$ 被分割为 $D_1$ $D_2$两部分 即<br>$$<br>D_1={(x,y)\in D | A(x)=a}\ ,D_2=D-D_1<br>$$<br>则在特征值 $A$ 的条件下 集合 $D$ 的基尼指数定义为<br>$$<br>Gini(D,A)=\frac{|D_1|}{|D|}Gini(D_1)+\frac{|D_2|}{|D|}Gini(D_2)<br>$$</p>
+<p>基尼指数 $Gini(D)$ 表示集合 $D$ 的不确定性 </p>
+<p>基尼指数 $Gini(D,A)$ 表示经过 $A=a$ 的分割后 集合 $D$ 的不确定性</p>
+<p>基尼指数直观上反映了从数据集随机抽取两个样本 其类别标记不一致的概率，基尼指数越大 样本的不确定性越大 </p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/7.png" alt="7" style="zoom:80%;">
+
+<h5 id="CART剪枝（-alpha-未知）"><a href="#CART剪枝（-alpha-未知）" class="headerlink" title="CART剪枝（$\alpha$ 未知）"></a>CART剪枝（$\alpha$ 未知）</h5><p>$CART$ 剪枝算法由两步组成：</p>
+<p>$1) :$ 从 由生成算法产生的决策树 $T_0$ 底端开始剪枝，直到 $T_0$ 的根节点 形成一个子树序列 ${ T_0,T_1…T_n }$</p>
+<p>剪枝的过程中 计算子树的损失函数：</p>
+<p>$$<br>\begin{align}<br>C_{\alpha}(T) =C(T)+\alpha|T|<br>\end{align}<br>$$</p>
+<p>$T$ 为任意子树，$C(T)$ 为对训练数据的预测误差，比如基尼指数，$|T|$ 为子树 $T$ 的叶子节点个数，$\alpha \leq 0$ 为参数，$C_{\alpha}(T)$ 为参数是 $\alpha$ 时的子树 $T$ 的整体损失，$|T|$ 衡量树的复杂度，参数$\alpha$ 权衡训练数据的拟合程度与树的复杂度</p>
+<p>对于固定的 $\alpha$ 一定存在使损失函数 $C_{\alpha}(T)$ 最小的子树,表示为 $T_{\alpha}$ ,并且唯一. 当 $\alpha$ 偏大的时候 最优子树 $T_{\alpha}$ 偏小； 当 $\alpha$ 偏小的时候 最优子树 $T_{\alpha}$ 偏大. 当 $\alpha=0$ ，整体树最优. 当 $\alpha \rightarrow 0 $ ，根节点组成的单节点树最优</p>
+<p>经证明: 可以使用递归的方法进行剪枝, 将 $\alpha$ 从小增大排序，$ 0 = a_0 &lt; a_1 &lt; … &lt; a_n &lt; +\infty $ ,产生一系列区间 $ [ a_i,a_{i+1} ) ,i=0,1,..,n$ . 剪枝得到的,与区间 $\alpha \in [a_i , a_{i+1}) ,i=0,1,..,n $  对应的子树序列 ${ T_0,T_1,…T_n }$ 序列中的子树是嵌套的</p>
+<p>具体： 从整体树 $T_0$ 开始剪枝. 对 $T_0$ 的任意内部节点 $t$ ，以 $t$ 为单节点树的损失函数是: $C_{\alpha}(t)=C(t)+\alpha$ ,以 $t$ 为根节点的子树 $T_t$ 的损失函数是 $C_{\alpha}(T_{t})=C(T_t)+\alpha|T_{t}|$. 当 $\alpha=\frac{C(t)-C(T_t)}{|T_t|-1}$, $T_t$ 与 $t$ 有相同的损失函数值， 而 $t$ 的节点更少,因此更可取（<strong>奥卡姆剃刀准则</strong>）,对 $T_t$ 进行剪枝. </p>
+<p>所以 对 $T_0$ 中每一内部节点 $t$ 计算 $g(t)=\frac{C(t)-C(T_t)}{|T_t|-1}$, 表示为见之后整体损失函数减少的程度. 在 $T_0$ 中减去 $g(t)$ 最小的 $T_t$ 将得到的子树作为 $T_1$ , 同时将最小的 $g(t)$ 设为 $\alpha_1$. $T_1$ 为区间 $[\alpha_1,\alpha_2)$ 的最优子树</p>
+<p>如此反复 直至得到根节点</p>
+<p>$2) :$ 通过交叉验证, 在独立的验证数据集上对  $ T_0,T_1,…T_n$ 测试每颗子树的平方误差或基尼指数，平方误差或基尼指数最小的决策树被认为是最优的决策树，当最优决策树确定时， 对应的 $\alpha$ 随之确定。  </p>
+<img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/8.png" alt="8" style="zoom:80%;">
+
+<h5 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h5><img src="/2021/02/19/%E5%86%B3%E7%AD%96%E6%A0%91/11.png" alt="11" style="zoom:85%;">
+
+<h5 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h5><p>现实中常会遇到不完整样本，即样本某些属性值缺失。</p>
+<p>需要解决：</p>
+<ol>
+<li><p>如何在属性值缺失的情况下进行划分属性选择 </p>
+</li>
+<li><p>给定划分属性 若样本在该属性上的值缺失，如何对样本进行划分</p>
+</li>
+</ol>
+<p>给定训练集 $D$ 和属性 $a$ ，令 $\tilde{D}$ 表示 $D$ 中在属性 $a$ 上没有缺失值的样本子集。</p>
+<p>对问题 $1$ , 我们只能通过 $\tilde{D}$  来判断属性 $a$ 的优劣。 假定属性 $a$ 有 $V$ 个可取值 ${ a^1,a^2…,a^V}$ , 令 $\tilde{D}^v$ 表示 $\tilde{D}$ 中在属性 $a$ 上取值为 $a^v$ 的样本子集， $\tilde{D}<em>k$ 表示 $\tilde{D}$ 中属于第 $k$ 类 $(k=1,2,…,|\gamma|)$ 的样本子集， 显然有：$\begin{cases} \tilde{D} = \bigcup</em>{k=1}^{|\gamma|} \tilde{D} \ \tilde{D} = \bigcup_{v=1}^{V}\tilde{D}^v  \end{cases}$   . 假设为每个样本 $x$ 赋予一个权值 $w_x$ (根节点中个样本权重初始化为 $1$) </p>
+<p>定义：<br>$$<br>\begin{align}<br>\rho &amp;=\frac{\sum_{x \in \tilde{D}}w_x}{\sum_{x \in D}w_x} \<br>\tilde{p}<em>k &amp;= \frac{\sum</em>{x \in \tilde{D}<em>k}w_x}{\sum</em>{x \in \tilde{D}}w_x} \ \ \ (1\le k \le |\gamma|) \<br>\tilde{r}<em>v &amp;=\frac{\sum</em>{x\in \tilde{D}^v}w_x}{\sum_{x \in \tilde{D}}w_x} \ \ \ (1\le v \le V)<br>\end{align}<br>$$<br>对于属性 $a$ ,  $\rho$ 表示无缺失值样本所占比例，$\tilde{p}<em>k$ 表示无缺失值样本中第 $k$ 类所占的比例，$\tilde{r}<em>v$ 表示无缺失值样本中在属性 $a$ 上取值 $a^v$ 的样本所占的比例 。 显然有：$\begin{cases}\sum</em>{k=1}^{|\gamma|} \tilde{p} _ {k=1} \ \sum</em>{v=1}^{V}\tilde{r} _ {v=1} \end{cases}$</p>
+<p>于是 将信息增益的计算式推广为：<br>$$<br>\begin{align}<br>g(D,A)<br>&amp;=\rho \times g(\tilde{D},A) \<br>&amp;=\rho \times (H(\tilde{D})-\sum\limits_{v=1}^{V}\tilde{r} _ v H(\tilde{D}<em>v)) \<br>H(\tilde{D}) &amp;= -\sum\limits</em>{k=1}^{|\gamma|}\tilde{p} _ k\log_2\tilde{p} _ k<br>\end{align}<br>$$<br>对问题 $2$ , 若样本 $x$ 在划分属性 $a$ 上的取值已知，则将 $x$ 划入与其取值对应的子节点，且样本权值在子结点中保持为 $w_x$ . 若样本 $x$ 在划分属性 $a$ 上的取值未知，则将 $x$ 同时划入所有子节点，且样本权值在与属性值 $a^v$ 对应的子结点中调整为 $\tilde{r} _ v \cdot w_x$ ，即让同一个样本以不同的概率进入到不同的子节点当中去</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>数论笔记</title>
+    <url>/2020/07/10/%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h5 id="积性函数"><a href="#积性函数" class="headerlink" title="积性函数"></a>积性函数</h5><h5 id="元函数"><a href="#元函数" class="headerlink" title="元函数"></a>元函数</h5><h5 id="恒等函数"><a href="#恒等函数" class="headerlink" title="恒等函数"></a>恒等函数</h5><h5 id="除数函数"><a href="#除数函数" class="headerlink" title="除数函数"></a>除数函数</h5><h5 id="幂函数：-Id-k-n-n-k"><a href="#幂函数：-Id-k-n-n-k" class="headerlink" title="幂函数：$Id_k(n)=n^k$"></a>幂函数：$Id_k(n)=n^k$</h5><h5 id="约数个数"><a href="#约数个数" class="headerlink" title="约数个数"></a>约数个数</h5><h5 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h5><h5 id="莫比乌斯函数"><a href="#莫比乌斯函数" class="headerlink" title="莫比乌斯函数"></a>莫比乌斯函数</h5><h5 id="狄利克雷卷积"><a href="#狄利克雷卷积" class="headerlink" title="狄利克雷卷积"></a>狄利克雷卷积</h5><h5 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h5><h5 id="线性筛"><a href="#线性筛" class="headerlink" title="线性筛"></a>线性筛</h5><h5 id="杜教筛"><a href="#杜教筛" class="headerlink" title="杜教筛"></a>杜教筛</h5><h5 id="区间筛"><a href="#区间筛" class="headerlink" title="区间筛"></a>区间筛</h5><h5 id="N-的标准分解"><a href="#N-的标准分解" class="headerlink" title="$N!$ 的标准分解"></a>$N!$ 的标准分解</h5><h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><h5 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h5><h5 id="阶"><a href="#阶" class="headerlink" title="阶"></a>阶</h5><h5 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h5><h5 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h5><h5 id="同余方程"><a href="#同余方程" class="headerlink" title="同余方程"></a>同余方程</h5><h5 id="同余方程组"><a href="#同余方程组" class="headerlink" title="同余方程组"></a>同余方程组</h5><h5 id="高次同余方程"><a href="#高次同余方程" class="headerlink" title="高次同余方程"></a>高次同余方程</h5><h5 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h5><h5 id="扩展中国剩余定理"><a href="#扩展中国剩余定理" class="headerlink" title="扩展中国剩余定理"></a>扩展中国剩余定理</h5><h5 id="组合数取模"><a href="#组合数取模" class="headerlink" title="组合数取模"></a>组合数取模</h5><h6 id="Lucas-定理"><a href="#Lucas-定理" class="headerlink" title="$Lucas$ 定理"></a>$Lucas$ 定理</h6><h5 id="十进制快速幂"><a href="#十进制快速幂" class="headerlink" title="十进制快速幂"></a>十进制快速幂</h5><h5 id="自然数幂方和"><a href="#自然数幂方和" class="headerlink" title="自然数幂方和"></a>自然数幂方和</h5><h5 id="BSGS-离散对数"><a href="#BSGS-离散对数" class="headerlink" title="$[BSGS]$ 离散对数"></a>$[BSGS]$ 离散对数</h5><h5 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h5><h5 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h5><h5 id="欧拉反演"><a href="#欧拉反演" class="headerlink" title="欧拉反演"></a>欧拉反演</h5><h5 id="上升幂-下降幂"><a href="#上升幂-下降幂" class="headerlink" title="上升幂 下降幂"></a>上升幂 下降幂</h5><h5 id="Pollard-ρ"><a href="#Pollard-ρ" class="headerlink" title="Pollard-ρ"></a>Pollard-ρ</h5><h5 id="Miller-Rabin"><a href="#Miller-Rabin" class="headerlink" title="Miller-Rabin"></a>Miller-Rabin</h5>]]></content>
+  </entry>
+  <entry>
+    <title>图与网络(离散笔记)</title>
+    <url>/2020/07/11/%E5%9B%BE%E4%B8%8E%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h4 id="图"><a href="#图" class="headerlink" title="图"></a>图</h4><h4 id="树"><a href="#树" class="headerlink" title="树"></a>树</h4><h4 id="欧拉路-欧拉图"><a href="#欧拉路-欧拉图" class="headerlink" title="欧拉路 欧拉图"></a>欧拉路 欧拉图</h4><h5 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h5><p>设 $G$ 是有向图,$G$ 中一条 $Euler$ 路,就是一条有向路$(e_1, … , e_n)$,其中 $fin(e_n)=init(e_1)$ ,而且 $G$ 中每条弧在此有向路中恰出现一次。<br>如果有向图 $G$ 中存在着 $Euler$ 路,就称为 $Euler$ 图。 </p>
+<p>设 $G$ 是有向图:</p>
+<ol>
+<li>称 $G$ 中点 $v$ 是孤立的,如果 $v$ 的输入和输出次数全为 $0$</li>
+<li>称 $G$ 是平衡的,如果 $G$ 中每点 $v$,都有有限的输入次数和输出次数,而且输入次数和输出次数相等。 </li>
+</ol>
+<h5 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h5><ol>
+<li>有限平衡有向图,弧数必有限</li>
+<li>有向图若存在欧拉路,则必平衡</li>
+<li>欧拉图如果没有孤立点,则必强连通</li>
+<li>欧拉图中每个点的度一定为偶数</li>
+</ol>
+<h5 id="判定欧拉图的充要条件"><a href="#判定欧拉图的充要条件" class="headerlink" title="判定欧拉图的充要条件"></a>判定欧拉图的充要条件</h5><p>设 $G$ 是无孤立点的有限有向图。于是,$G$ 有 $Euler$ 路当且仅当 $G$ 是平衡的,并且强连通</p>
+<h5 id="欧拉路转化为有向树"><a href="#欧拉路转化为有向树" class="headerlink" title="欧拉路转化为有向树"></a>欧拉路转化为有向树</h5><p>设 $G$ 是无孤立点的有限有向图,并且 $G$ 有一条 $Euler$ 路 $(e_1 , … , e_m)$</p>
+<ol>
+<li>令 $r=fin(e_m)=init(e_1)$</li>
+<li>对每个点 $v \neq r$,令 $e[v]=e_i$ ,其中 $i=max { j \ |\ init(e_j)=v }$</li>
+</ol>
+<p>于是,$G$ 的全部点和全部弧 $ { e[v] \ | \ v\neq r }$ 作成的有向图 $G’$ ,是一个以 $r$ 为根的有向树。 </p>
+<img src="/2020/07/11/%E5%9B%BE%E4%B8%8E%E7%BD%91%E7%BB%9C/1.png" style="zoom: 67%;">
+
+<h5 id="有向树转化为欧拉路"><a href="#有向树转化为欧拉路" class="headerlink" title="有向树转化为欧拉路"></a>有向树转化为欧拉路</h5><p>设 $G$ 是有限平衡有向图,$G’$ 是 $G$ 的有向支撑树<br>设 $G’$ 的根为 $r$ ,$G’$ 中点 $v(\neq r)$ 发出的弧为 $e[v]$<br>设 $e_1$ 是 $r$ 在 $G$ 中发出的任一条弧,对从 $e_1$开始的任一条有向路: $L=(e_1, e_2, … , e_m)$<br>若满足：</p>
+<ol>
+<li>$e_j \neq e_k$ ,当 $j\neq k$ 时。</li>
+<li> $e_j = e[v]$ 当且仅当 $init(e_j)=v$ 并且 $G$ 中由 $v$ 发出的弧都出现在 $(e_1, … , e_j)$中。</li>
+<li> $L$ 终止在 $e_m$ 当且仅当 $G$ 中从 $e_m$ 的终点发出的弧 都已经在 $L$ 中出现。</li>
+</ol>
+<p>则有向路 $L$ 是一条 $Euler$路。 </p>
+<h4 id="哈密顿路-哈密顿图"><a href="#哈密顿路-哈密顿图" class="headerlink" title="哈密顿路 哈密顿图"></a>哈密顿路 哈密顿图</h4><h5 id="定义：-1"><a href="#定义：-1" class="headerlink" title="定义："></a>定义：</h5><p>设 $G=(P, L)$ 是有限图,$(v_1, … , v_n)$ 是 $G$ 中一条路。如果 $G$ 中每点恰在此路中出现一次,则称此路为 $Hamilton$ 路。<br>如果 $G$ 中每点,除 $v_1$ 外,恰在此路中出现一次,而 $v_1=v_n $,则此路称为 $Hamilton$ 回路。<br>如果 $G$ 中有一条 $Hamilton$ 回路,则称 $G$ 为 $Hamilton$ 图。<br>显然,由 $m$个节点构成的完全图 $K_m$ 是 $Hamilton$ 图。</p>
+<h5 id="性质：-1"><a href="#性质：-1" class="headerlink" title="性质："></a>性质：</h5><ol>
+<li>若图中有一点的度为 $1$ ,则无 $Hamilton$ 回路</li>
+<li>若图中有一点的度为 $0$ ,则既无 $Hamilton$ 路,又无 $Hamilton$ 回路。</li>
+<li>设图中有一点的度为 $2$ ,若有 $Hamilton$ 回路,则以此点为端点的两条边均出现在此回路中。</li>
+<li>设图中有一点的度大于 $2$,若有 $Hamilton$ 回路,则只用其中的两条边。 </li>
+<li>$Hamilton$ 路是 $G$ 的支撑子树,恰有 $n-1$ 条边。</li>
+<li>$Hamilton$ 回路是 $G$ 的支撑子图,恰有 $n$ 条边。</li>
+</ol>
+<h5 id="闭合图"><a href="#闭合图" class="headerlink" title="闭合图"></a>闭合图</h5><p>设 $G$ 是有限图。反复连接 $G$ 中不相邻的并且其度之和不小于 $\gamma$ 的点对，直到没有这样的点对为止。<br>最后所得的图称为 $G$ 的闭合图，记为 $C(G)$ 。<br>有向图 $G$ 的闭合图 $C(G)$是唯一确定的<br>2. 若在图 $G$ 中删去 $n$ 个点及与之相连的边，所得图的分支数大于 $n$ ，则 $G$ 不是 $Hamilton$ 图</p>
+<h5 id="判定哈密顿图的必要条件"><a href="#判定哈密顿图的必要条件" class="headerlink" title="判定哈密顿图的必要条件"></a>判定哈密顿图的必要条件</h5><ol>
+<li>如果图 $G=(P, L)$ 是 $Hamilton$ 图，则对 $P(G)$ 的任一非空子集 $S$ , 都有 $W(G－S) \leq |S|$<br> 其中：<br> $|S|$ 表示集合 $S$ 的元素数，<br> $G－S$ 表示在 $G$ 中删除S中的点以及以 $S$ 中的点为端点的所有边而剩下的图，<br> $W(G－S)$ 表示图 $G－S$ 的连通分支数。 </li>
+</ol>
+<h5 id="判定哈密顿图的充分条件"><a href="#判定哈密顿图的充分条件" class="headerlink" title="判定哈密顿图的充分条件"></a>判定哈密顿图的充分条件</h5><ol>
+<li>若 $G=(P, L)$ 是有限图，$\gamma \geq 3 ,\delta \geq \frac{\gamma}{2}$ ，则 $G$ 是 $Hamilton$ 图。<br> 其中：<br> $\gamma $ 表示图 $G$ 中点数，即 $\gamma =|P(G)|$ ，<br> $\delta $ 表示图 $G$ 中点的最小度。</li>
+<li> 设 $G$ 是有限图, 若 $C(G)$ 是完全图，则 $G$ 是 $Hamilton$ 图。</li>
+<li>若一个图 $G$ 的任意两点度数之和 $≥ n-1$，$n=|P(G)|≥3$，则该图有 $Hamilton$ 路。<br> <strong>证明</strong>：<br> 向图 $G$ 中增加一个点 $v$ ，并且连接 $v$ 点与 $G$ 中已有的 $n$ 个点，设得到的图为 $G’$ , 这样：$G’$ 中点 $v$ 的度为 $n$ $G$ 中的 $n$ 个点在 $G’$ 中的度分别增加了 $1$<br> 从而有：<br> $G’$ 中来自 $G$ 的任意两个点的度数之和 $≥ n-1+1+1=n+1$<br> 而 $G’$ 中 $v$ 点与其他任意点的度数之和 $≥ n+1$<br> 这样，$G’$ 中任意两点度数之和 $≥ n+1=|P(G’)|$<br> 则 $G’$ 的闭合图是完全图，所以得出 $G’$ 是 $Hamilton$ 图，则 $G’$ 中有 $Hamilton$ 回路</li>
+<li>设有限图 $G$ 的度序列$($即 $G$ 的各点的度,按非降序排成的序列$)$为$(d_1,d_2,…,d_{\gamma})$,其中$d_1\leq d_2\leq … \leq d_{\gamma},\gamma \geq 3 $.<br>如果不存在这样的 $m, m\leq \gamma/2$ ，并使得 $d_m \leq m ,   d_{\gamma -m}\leq \gamma -m $ , 则 $G$ 是 $Hamilton$ 图。</li>
+</ol>
+<img src="/2020/07/11/%E5%9B%BE%E4%B8%8E%E7%BD%91%E7%BB%9C/2.png" style="zoom: 60%;">
+
+<h5 id="判定哈密顿图的充要条件"><a href="#判定哈密顿图的充要条件" class="headerlink" title="判定哈密顿图的充要条件"></a>判定哈密顿图的充要条件</h5><ol>
+<li>设 $G$ 是有限图，$u$, $v$ 是 $G$ 中不相邻的两点，<br> 并且满足： $d(u)+d(v) \geq \gamma$<br> 则 $G$ 是 $Hamilton$ 图的充要条件是 $G \cup { u v } $ 是 $Hamilton$ 图。</li>
+<li>有限图 $G$ 是 $Hamilton$ 图的充要条件是闭合图 $C(G)$ 是 $Hamilton$ 图。 </li>
+</ol>
+<h5 id="补图"><a href="#补图" class="headerlink" title="补图"></a>补图</h5><p>设 $G$，$H$ 是两个有限图，如果 $P(G)=P(H)$ ，并且对 $G$ ，$H$ 中任意两点 $u、v$ ，$u$ 和 $v$ 在 $G$ 中相邻当且仅当它们在 $H$ 中不相邻，则称 $G$ 是 $H $ 的补图，$H$ 是 $G$ 的补图，可以将 $G$ 记为 $H^c$，也可将 $H$ 记为 $G^c$。 </p>
+<h5 id="连接图"><a href="#连接图" class="headerlink" title="连接图"></a>连接图</h5><p>设 $G$ ，$H$ 是两个无公共点的有限图。将 $G$ 的每个点和 $H$ 的每个点都用边连接起来得到的图，称为 $G$ 与 $H$ 的连接图</p>
+<p>用 $K_m$ 表示由 $m$ 个点组成的完全图。<br>将如下三个图 ，从左到右顺序连接起来构成的连接图记为 $C_{m,n}$   ($1 \leq m &lt; \frac{n}{2}$ )</p>
+<p>$$<br>K_m^c \longleftrightarrow K_m \longleftrightarrow K_{n-2m}<br>$$</p>
+<p>这是 $K_2^c \longleftrightarrow K_2 \longleftrightarrow K_3$ 的具体图 <img src="/2020/07/11/%E5%9B%BE%E4%B8%8E%E7%BD%91%E7%BB%9C/3.png" style="zoom: 80%;"><br>若 $1 \leq m &lt; \frac{n}{2}$  ，则图 $C_{m,n}$ 是非 $Hamilton$ 图</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>旋转曲面与投影曲线</title>
+    <url>/2020/07/06/%E6%97%8B%E8%BD%AC%E6%9B%B2%E9%9D%A2%E4%B8%8E%E6%8A%95%E5%BD%B1%E6%9B%B2%E7%BA%BF/</url>
+    <content><![CDATA[<h5 id="在空间解析几何这一章节中，求解旋转曲面，投影柱面与投影曲线的部分十分重要-。"><a href="#在空间解析几何这一章节中，求解旋转曲面，投影柱面与投影曲线的部分十分重要-。" class="headerlink" title="在空间解析几何这一章节中，求解旋转曲面，投影柱面与投影曲线的部分十分重要 。"></a>在空间解析几何这一章节中，求解旋转曲面，投影柱面与投影曲线的部分十分重要 。</h5><h5 id="在查阅了一些资料后，对书上的内容进行拓展，并做出总结。"><a href="#在查阅了一些资料后，对书上的内容进行拓展，并做出总结。" class="headerlink" title="在查阅了一些资料后，对书上的内容进行拓展，并做出总结。"></a>在查阅了一些资料后，对书上的内容进行拓展，并做出总结。</h5><h4 id="1-旋转曲面"><a href="#1-旋转曲面" class="headerlink" title="1.旋转曲面"></a>1.旋转曲面</h4><h5 id="PART-Ⅰ"><a href="#PART-Ⅰ" class="headerlink" title="PART (Ⅰ)"></a>PART (Ⅰ)</h5><p> 在空间，<strong>一条曲线 $\Gamma$ 绕着定直线 $l$ 旋转一周所生成的曲面</strong>叫做旋转曲面。曲线 $\Gamma$ 叫做旋转曲线的母线，定直线 $l$ 叫做旋转曲面的旋转轴，简称轴。<strong>母线上任意一点绕旋转轴旋转的轨迹</strong>是一个圆，称为旋转曲面的纬圆。</p>
+<h5 id="PART-Ⅱ"><a href="#PART-Ⅱ" class="headerlink" title="PART (Ⅱ)"></a>PART (Ⅱ)</h5><p>在空间直角坐标系中，设旋转曲面的母线为$<br>\begin{align}<br>    \Gamma: \begin{cases} F_1(x,y,z)=0 \<br>                    F_2(x,y,z)=0<br>        \end{cases}<br>\end{align}$，旋转轴为 $l: \frac{x-x_0}{A}=\frac{y-y_0}{B}=\frac{z-z_0}{C}$,该直线经过$P_0(x_0,y_0,z_0)$,并且方向向量为$(A,B,C)$。</p>
+<p>设$M_1(x_1,y_1,z_1)$为母线上任意一点，那么过$M_1(x_1,y_1,z_1)$的纬圆 ，可以看作过$M_1$且垂直于旋转轴 $l$ 的平面与以$P_0(x_0,y_0,z_0)$为球心，$|P_0M_1|$ 为半径的球的交线。所以过$M_1(x_1,y_1,z_1)$的纬圆方程为</p>
+<p>$$<br>\begin{cases} A(x-x_1)+B(y-y_1)+C(z-z_1)=0 \ (x-x_0)^2+(y-y_0)^2+(z-z_0)^2 = (x_1-x_0)^2+(y_1-y_0)^2+(z_1-z_0)^2\end{cases}<br>$$</p>
+<p>当 $M_1$遍历整个母线 $\Gamma$ 时，就能得出旋转曲面的所有纬圆，这些纬圆生成旋转曲面。</p>
+<p>又因为$M_1$在母线上，所以有$\begin{cases} F_1(x_1,y_1,z_1)=0 \<br>                    F_2(x_1,y_1,z_1)=0 \end{cases} $，与纬圆方程联立，并消去参数$x_1,y_1,x_1$，最后可得到三元方程$F(x,y,z)=0$ , 即为所求的旋转曲面方程 。</p>
+<p>另一种方法 ，设垂直于旋转轴 $l$ 的平面与旋转轴的交点为 $M_0$  ，过 $M_1$ 的纬圆就是以 $M_0$ 为球心，以 $|M_0M_1|$ 为半径(即 $M_1$ 到旋转轴 $l$ 的距离) 的球与该平面的交线。</p>
+<h5 id="PART-Ⅲ"><a href="#PART-Ⅲ" class="headerlink" title="PART (Ⅲ)"></a>PART (Ⅲ)</h5><p>通过求解一般情况下的旋转曲面方程的方法，可以得到以下特殊情况的结论</p>
+<h6 id="1-母线-Gamma-与旋转轴-l-在同一坐标平面内"><a href="#1-母线-Gamma-与旋转轴-l-在同一坐标平面内" class="headerlink" title="(1) 母线 $\Gamma$ 与旋转轴 $l$ 在同一坐标平面内"></a>(1) 母线 $\Gamma$ 与旋转轴 $l$ 在同一坐标平面内</h6><p>设母线 $\Gamma： \begin{cases} F(x,y)=0 \ z=0 \end{cases}$， 旋转轴 $l:\begin{cases} Ax+By+C=0 \ z=0 \end{cases}$, 所得旋转曲面方程为<br>$$<br>F(x-A\frac{Ax+By+C\pm\sqrt{(Ax+By+C)^2+(A^2+B^2)z^2}}{A^2+B^2},\  \ \ \ \ \ \ \ \ \ \ \ \ \ y-B\frac{Ax+By+C\pm\sqrt{(Ax+By+C)^2+(A^2+B^2)z^2}}{A^2+B^2} )= 0 <br>$$</p>
+<h6 id="2-母线-Gamma-与旋转轴-l-在同一坐标平面内，且旋转轴-l-与坐标轴平行"><a href="#2-母线-Gamma-与旋转轴-l-在同一坐标平面内，且旋转轴-l-与坐标轴平行" class="headerlink" title="(2) 母线 $\Gamma$ 与旋转轴 $l$ 在同一坐标平面内，且旋转轴 $l$ 与坐标轴平行"></a>(2) 母线 $\Gamma$ 与旋转轴 $l$ 在同一坐标平面内，且旋转轴 $l$ 与坐标轴平行</h6><p>设母线 $\Gamma : \begin{cases} F(x,y)=0 \ z=0 \end{cases}$，旋转轴 $l : \begin{cases} y=b \ z=0 \end{cases}$ 和 $ \begin{cases} x=a \ z=0 \end{cases}$,所得旋转曲面方程分别为 :<br>$$<br>F(x,b\pm \sqrt{(y-b^2)+z^2})=0<br>$$</p>
+<p>$$<br>F(a\pm \sqrt{(x-a)^2+z^2},y)=0<br>$$</p>
+<div style="page-break-after: always;"></div>
+
+<h6 id="3-母线-Gamma-与旋转轴-l-在同一坐标平面内，且旋转轴-l-为坐标轴"><a href="#3-母线-Gamma-与旋转轴-l-在同一坐标平面内，且旋转轴-l-为坐标轴" class="headerlink" title="(3) 母线 $\Gamma$ 与旋转轴 $l$ 在同一坐标平面内，且旋转轴 $l$ 为坐标轴"></a>(3) 母线 $\Gamma$ 与旋转轴 $l$ 在同一坐标平面内，且旋转轴 $l$ 为坐标轴</h6><p>由情况(2)可知，令 $b=a=0$，可得曲线 $\Gamma$ 绕 $x$ 轴, $y$ 轴旋转时的旋转曲面方程分别为:<br>$$<br>F(x,\pm \sqrt{y^2+z^2} )=0 \<br>    F(\pm \sqrt{x^2+z^2},y )=0<br>$$</p>
+<h4 id="2-投影柱面与投影曲线"><a href="#2-投影柱面与投影曲线" class="headerlink" title="2.投影柱面与投影曲线"></a>2.投影柱面与投影曲线</h4><h5 id="PART-Ⅰ-1"><a href="#PART-Ⅰ-1" class="headerlink" title="PART (Ⅰ)"></a>PART (Ⅰ)</h5><p>在空间，过一条曲线 $\Gamma$ 上每一点作平面 $\pi$ 的垂线，这些垂线形成了一个母线垂直于平面 $\pi$ 的 ，且准线为曲线 $\Gamma$ 的柱面 $n$ ，<strong>这个柱面称为空间曲线 $\Gamma$ 关于平面 $\pi$ 的投影柱面</strong>，<strong>该投影柱面与平面 $\pi$ 的交线 叫做曲线 $\Gamma$ 在平面 $\pi$ 上的投影。</strong></p>
+<h5 id="PART-Ⅱ-1"><a href="#PART-Ⅱ-1" class="headerlink" title="PART (Ⅱ)"></a>PART (Ⅱ)</h5><p>设一般平面 $\  \pi:Ax+By+Cz+D=0 $</p>
+<h6 id="1"><a href="#1" class="headerlink" title="(1)"></a>(1)</h6><p>设曲线 $\Gamma : \begin{cases} F_1(x,y,z)=0 \ F_2(x,y,z)=0 \end{cases}$ ，即柱面 $n$ 的准线 。易知，柱面 $n$ 的母线方向 $l:(A,B,C)$ 。</p>
+<p>设 $M(x,y,z)$为柱面上一点，则存在准线上一点 $M_0(x_0,y_0,z_0)$ ，满足点 $M$ 位于过点 $M_0$，且以 $l$ 为方向向量的直线上。</p>
+<p>所以，有 $\begin{cases} F_1(x_0,y_0,z_0)=0 \ F_2(x_0,y_0,z_0)=0  \end{cases}$ ，$\begin{cases} x=x_0+At \ y=y_0+Bt \ z=z_0+Ct \end{cases} (t\ 为参数)$ ，消去参数$x_0,y_0,z_0,t$，可得到三元方程$F(x,y,z)=0$ ，即为所求投影柱面 $n$。</p>
+<p>因此，所求的投影曲线方程为$\begin{cases} F(x,y,z)=0 \ Ax+By+Cz+D=0 \end{cases} $</p>
+<h6 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h6><p>设曲线 $\Gamma : \begin{cases} x=x(t) \ y=y(t) \ z=z(t) \end{cases} \ (\alpha \leq t \leq\beta)$，其中 $t$ 为参数。</p>
+<p>投影曲线，也可以看成是经过曲线 $\Gamma$ 上的每一点做平面 $\pi$ 的垂直线与 $P$ 的交点的集合。 </p>
+<p>设 $M(x(t),y(t),z(t))$ 为曲线上一点，则作经过 $M$ 的垂直线方程为 $\frac{x-x(t)}{A} = \frac{y-y(t)}{B} = \frac{z-z(t)}{C}$，</p>
+<p>化为参数方程:$\begin{cases} x=x(t)+sA \ y=y(t)+sB \z=z(t)+sC \end{cases}$，其中 $s$ 为参数。代入平面 $\pi$ 的方程中，求出对应的参数 $s_0$<br>$$<br>s_0 = -\frac{Ax(t)+By(t)+Cz(t)+D}{A^2+B^2+C^2}<br>$$<br>于是得到投影点的坐标：<br>$$<br>\begin{cases} x=x(t)+s_0A \ y=y(t)+s_0B \z=z(t)+s_0C\\end{cases} \ (\alpha \leq t \leq\beta)<br>$$</p>
+<div style="page-break-after: always;"></div>
+
+<h5 id="PART-Ⅲ-1"><a href="#PART-Ⅲ-1" class="headerlink" title="PART (Ⅲ)"></a>PART (Ⅲ)</h5><p>考虑如何求解空间曲线在坐标面上的投影 （以平面 $Oxy$ 为例）</p>
+<h6 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h6><p>设曲线 $\Gamma : \begin{cases} F_1(x,y,z)=0 \ F_2(x,y,z)=0 \end{cases}$ </p>
+<p>令$\begin{cases} A=B=D=0 \C=1 \end{cases}$，根据 <strong>PARTⅡ</strong>_(1)，得到$\begin{cases} x=x_0 \ y=y_0 \ z=z_0+t\end{cases}$ 消去 $z_0,t$ 后，得到投影柱面方程 $F(x,y)=0$ </p>
+<p>将其与平面 $Oxy$ 联立，得到投影曲线方程 ：$ \begin{cases} F(x,y)=0 \z=0 \end{cases}$</p>
+<h6 id="2-1"><a href="#2-1" class="headerlink" title="(2)"></a>(2)</h6><p>设曲线 $\Gamma : \begin{cases} x=x(t) \ y=y(t) \ z=z(t) \end{cases} \ (\alpha \leq t \leq\beta)$，其中 $t$ 为参数。</p>
+<p>令$\begin{cases} A=B=D=0 \C=1 \end{cases}$，根据 <strong>PARTⅡ</strong>_(2)，得到投影曲线方程：$\begin{cases} x=x(t) \ y=y(t) \z=z(t)+s_0C=0\\end{cases} \ (\alpha \leq t \leq \beta)$</p>
+<h5 id="PART-Ⅳ"><a href="#PART-Ⅳ" class="headerlink" title="PART (Ⅳ)"></a>PART (Ⅳ)</h5><p>求解投影曲线时，要注意变量是否有限制范围。</p>
+<p>例如：求曲线 $\Gamma : \begin{cases} x^2 +y^2+(z-1)^2=1 \ \ \ \ \ \ \ \ \ \ \ ① \ 2x^2+y^2-y+(z-1)^2=1 \ \ ② \end{cases}$ 在平面$Oxy$上的投影曲线方程 </p>
+<p>我们按照上述方法解题，得到投影曲线的方程:$\begin{cases} x^2-y=0 \ z=0 \end{cases}$</p>
+<p>实际上，因为曲线的变量有着限制范围，我们得到的投影曲线也有着限制范围：</p>
+<p> <img src="/2020/07/06/%E6%97%8B%E8%BD%AC%E6%9B%B2%E9%9D%A2%E4%B8%8E%E6%8A%95%E5%BD%B1%E6%9B%B2%E7%BA%BF/1.png" alt="1" style="zoom: 50%;">                    <img src="/2020/07/06/%E6%97%8B%E8%BD%AC%E6%9B%B2%E9%9D%A2%E4%B8%8E%E6%8A%95%E5%BD%B1%E6%9B%B2%E7%BA%BF/2.png" alt="`Y8{_ZV$PYDI4NCFR$%V1PD" style="zoom: 33%;">   </p>
+<p>由 ① 式可得 : $x^2+y^2 \leq 1 $ ，且 $ x^2-y=0 $ 解得 : $0\leq y\leq \frac{\sqrt{5}-1}{2} $</p>
+<p>所以：得到投影曲线的方程应为 : $\begin{cases} x^2-y=0 \ z=0 \end{cases}   \ \ \ 0\leq y\leq \frac{\sqrt{5}-1}{2} $</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux</title>
+    <url>/2021/05/15/linux/</url>
+    <content><![CDATA[<h2 id="UNIX-入门"><a href="#UNIX-入门" class="headerlink" title="UNIX 入门"></a>UNIX 入门</h2><h4 id="与UNIX建立连接"><a href="#与UNIX建立连接" class="headerlink" title="与UNIX建立连接"></a>与UNIX建立连接</h4><img src="/2021/05/15/linux/71.png" alt="71" style="zoom:70%;">
+
+<p>登录 需要登录名与口令</p>
+<h5 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h5><p>管理员：#</p>
+<p>普通用户：$</p>
+<h5 id="passwd命令-修改或创建口令"><a href="#passwd命令-修改或创建口令" class="headerlink" title="passwd命令 修改或创建口令"></a>passwd命令 修改或创建口令</h5><p>修改自己的口令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">passwd</span></span><br></pre></td></tr></table></figure>
+
+<p>修改别人的口令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">passwd username</span></span><br></pre></td></tr></table></figure>
+
+<p>只有root能创建口令，root创建普通用户后，为其分配初始口令</p>
+<h5 id="退出系统"><a href="#退出系统" class="headerlink" title="退出系统"></a>退出系统</h5><ul>
+<li>exit</li>
+<li>logout</li>
+<li>[Ctrl+d]</li>
+</ul>
+<h4 id="date命令-在屏幕显示当前日期、时间"><a href="#date命令-在屏幕显示当前日期、时间" class="headerlink" title="date命令 在屏幕显示当前日期、时间"></a>date命令 在屏幕显示当前日期、时间</h4><img src="/2021/05/15/linux/72.png" alt="72" style="zoom:80%;">
+
+<h4 id="who命令-列出当前登录到系统的所有用户的登录名、终端号、登陆时间"><a href="#who命令-列出当前登录到系统的所有用户的登录名、终端号、登陆时间" class="headerlink" title="who命令 列出当前登录到系统的所有用户的登录名、终端号、登陆时间"></a>who命令 列出当前登录到系统的所有用户的登录名、终端号、登陆时间</h4><img src="/2021/05/15/linux/73.png" alt="72" style="zoom:80%;">
+
+<h4 id="who-am-i命令-显示终端上登陆用户的信息"><a href="#who-am-i命令-显示终端上登陆用户的信息" class="headerlink" title="who am i命令 显示终端上登陆用户的信息"></a>who am i命令 显示终端上登陆用户的信息</h4><img src="/2021/05/15/linux/74.png" alt="72" style="zoom:80%;">
+
+<h4 id="cal命令-显式指定年份的日历表"><a href="#cal命令-显式指定年份的日历表" class="headerlink" title="cal命令 显式指定年份的日历表"></a>cal命令 显式指定年份的日历表</h4><img src="/2021/05/15/linux/75.png" alt="75" style="zoom:80%;">
+
+<h5 id="cal-month-year-：显示指定年月的日历表"><a href="#cal-month-year-：显示指定年月的日历表" class="headerlink" title="cal month year ：显示指定年月的日历表"></a>cal month year ：显示指定年月的日历表</h5><img src="/2021/05/15/linux/76.png" alt="72" style="zoom:80%;">
+
+
+
+<h4 id="help命令-提供内部命令帮助信息"><a href="#help命令-提供内部命令帮助信息" class="headerlink" title="help命令 提供内部命令帮助信息"></a>help命令 提供内部命令帮助信息</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[c21191511@dell-PowerEdge-T440 ~]$help</span><br><span class="line">GNU bash, version 4.4.19(1)-release (x86_64-redhat-linux-gnu)</span><br><span class="line">These shell commands are defined internally.  Type `help&#x27; to see this list.</span><br><span class="line">Type `help name&#x27; to find out more about the function `name&#x27;.</span><br><span class="line">Use `info bash&#x27; to find out more about the shell in general.</span><br><span class="line">Use `man -k&#x27; or `info&#x27; to find out more about commands not in this list.</span><br><span class="line"></span><br><span class="line">A star (*) next to a name means that the command is disabled.</span><br><span class="line"></span><br><span class="line"> job_spec [&amp;]                            history [-c] [-d offset] [n] or hist&gt;</span><br><span class="line"> (( expression ))                        if COMMANDS; then COMMANDS; [ elif C&gt;</span><br><span class="line"> . filename [arguments]                  jobs [-lnprs] [jobspec ...] or jobs &gt;</span><br><span class="line"> :                                       kill [-s sigspec | -n signum | -sigs&gt;</span><br><span class="line"> [ arg... ]                              let arg [arg ...]</span><br><span class="line"> [[ expression ]]                        local [option] name[=value] ...</span><br><span class="line"> alias [-p] [name[=value] ... ]          logout [n]</span><br><span class="line"> bg [job_spec ...]                       mapfile [-d delim] [-n count] [-O or&gt;</span><br><span class="line"> bind [-lpsvPSVX] [-m keymap] [-f file&gt;  popd [-n] [+N | -N]</span><br><span class="line"> break [n]                               printf [-v var] format [arguments]</span><br><span class="line"> builtin [shell-builtin [arg ...]]       pushd [-n] [+N | -N | dir]</span><br><span class="line"> caller [expr]                           pwd [-LP]</span><br><span class="line"> case WORD in [PATTERN [| PATTERN]...)&gt;  read [-ers] [-a array] [-d delim] [-&gt;</span><br><span class="line"> cd [-L|[-P [-e]] [-@]] [dir]            readarray [-n count] [-O origin] [-s&gt;</span><br><span class="line"> command [-pVv] command [arg ...]        readonly [-aAf] [name[=value] ...] o&gt;</span><br><span class="line"> compgen [-abcdefgjksuv] [-o option] [&gt;  return [n]</span><br><span class="line"> complete [-abcdefgjksuv] [-pr] [-DE] &gt;  select NAME [in WORDS ... ;] do COMM&gt;</span><br><span class="line"> compopt [-o|+o option] [-DE] [name ..&gt;  set [-abefhkmnptuvxBCHP] [-o option-&gt;</span><br><span class="line"> continue [n]                            shift [n]</span><br><span class="line"> coproc [NAME] command [redirections]    shopt [-pqsu] [-o] [optname ...]</span><br><span class="line"> declare [-aAfFgilnrtux] [-p] [name[=v&gt;  source filename [arguments]</span><br><span class="line"> dirs [-clpv] [+N] [-N]                  suspend [-f]</span><br><span class="line"> disown [-h] [-ar] [jobspec ... | pid &gt;  test [expr]</span><br><span class="line"> echo [-neE] [arg ...]                   time [-p] pipeline</span><br><span class="line"> enable [-a] [-dnps] [-f filename] [na&gt;  times</span><br><span class="line"> eval [arg ...]                          trap [-lp] [[arg] signal_spec ...]</span><br><span class="line"> exec [-cl] [-a name] [command [argume&gt;  true</span><br><span class="line"> exit [n]                                type [-afptP] name [name ...]</span><br><span class="line"> export [-fn] [name[=value] ...] or ex&gt;  typeset [-aAfFgilnrtux] [-p] name[=v&gt;</span><br><span class="line"> false                                   ulimit [-SHabcdefiklmnpqrstuvxPT] [l&gt;</span><br><span class="line"> fc [-e ename] [-lnr] [first] [last] o&gt;  umask [-p] [-S] [mode]</span><br><span class="line"> fg [job_spec]                           unalias [-a] name [name ...]</span><br><span class="line"> for NAME [in WORDS ... ] ; do COMMAND&gt;  unset [-f] [-v] [-n] [name ...]</span><br><span class="line"> for (( exp1; exp2; exp3 )); do COMMAN&gt;  until COMMANDS; do COMMANDS; done</span><br><span class="line"> function name &#123; COMMANDS ; &#125; or name &gt;  variables - Names and meanings of so&gt;</span><br><span class="line"> getopts optstring name [arg]            wait [-n] [id ...]</span><br><span class="line"> hash [-lr] [-p pathname] [-dt] [name &gt;  while COMMANDS; do COMMANDS; done</span><br><span class="line"> help [-dms] [pattern ...]               &#123; COMMANDS ; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="man命令-提供-内外部-命令帮助信息"><a href="#man命令-提供-内外部-命令帮助信息" class="headerlink" title="man命令 提供(内外部)命令帮助信息"></a>man命令 提供(内外部)命令帮助信息</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$mam cat</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/05/15/linux/77.png" alt="77" style="zoom:80%;">
+
+
+
+<h5 id="man命令中翻页，移行"><a href="#man命令中翻页，移行" class="headerlink" title="man命令中翻页，移行"></a>man命令中翻页，移行</h5><p>翻页：后翻一页 空格；前翻一页 b；</p>
+<p>移行：后移一行 回车；前移一行 k；</p>
+<p>退出：q</p>
+<h4 id="更正键盘输入错误"><a href="#更正键盘输入错误" class="headerlink" title="更正键盘输入错误"></a>更正键盘输入错误</h4><h5 id="删除单个字符：Backspace-和-Ctrl-h"><a href="#删除单个字符：Backspace-和-Ctrl-h" class="headerlink" title="删除单个字符：Backspace 和 [Ctrl+h]"></a>删除单个字符：Backspace 和 [Ctrl+h]</h5><h5 id="删除一行：-Ctrl-u"><a href="#删除一行：-Ctrl-u" class="headerlink" title="删除一行：[Ctrl+u]"></a>删除一行：[Ctrl+u]</h5><h5 id="中断程序运行：-Ctrl-c"><a href="#中断程序运行：-Ctrl-c" class="headerlink" title="中断程序运行：[Ctrl+c]"></a>中断程序运行：[Ctrl+c]</h5><h2 id="UNIX-文件系统"><a href="#UNIX-文件系统" class="headerlink" title="UNIX 文件系统"></a>UNIX 文件系统</h2><h4 id="磁盘组织"><a href="#磁盘组织" class="headerlink" title="磁盘组织"></a>磁盘组织</h4><img src="/2021/05/15/linux/62.png" alt="59" style="zoom:60%;">
+
+<h4 id="UNIX-文件类型"><a href="#UNIX-文件类型" class="headerlink" title="UNIX 文件类型"></a>UNIX 文件类型</h4><h5 id="普通文件：包含字节序列（程序代码，数据，文本）"><a href="#普通文件：包含字节序列（程序代码，数据，文本）" class="headerlink" title="普通文件：包含字节序列（程序代码，数据，文本）"></a>普通文件：包含字节序列（程序代码，数据，文本）</h5><h5 id="目录文件：包含关于其他文件的信息"><a href="#目录文件：包含关于其他文件的信息" class="headerlink" title="目录文件：包含关于其他文件的信息"></a>目录文件：包含关于其他文件的信息</h5><h5 id="特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件"><a href="#特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件" class="headerlink" title="特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件"></a>特殊文件：包含与外部设备相联系的信息，系统中每个设备对应一个文件</h5><h4 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h4><p>目录是文件的一种组织方式</p>
+<img src="/2021/05/15/linux/64.png" alt="64" style="zoom:60%;" align="lef">
+
+<img src="/2021/05/15/linux/63.png" alt="63 (1)" style="zoom:80%;"> 
+
+<h5 id="主目录：管理员在创建用户时为其分配的特定目录"><a href="#主目录：管理员在创建用户时为其分配的特定目录" class="headerlink" title="主目录：管理员在创建用户时为其分配的特定目录"></a>主目录：管理员在创建用户时为其分配的特定目录</h5><p>用户登录时，主动进入主目录，主目录名称通常与用户名相同</p>
+<p>用户在其主目录下拥有读、写、执行权限</p>
+<p>用户在其主目录下可以创建多个子目录</p>
+<h5 id="工作目录：用户现在在文件系统中所在的目录"><a href="#工作目录：用户现在在文件系统中所在的目录" class="headerlink" title="工作目录：用户现在在文件系统中所在的目录"></a>工作目录：用户现在在文件系统中所在的目录</h5><h5 id="绝对路径：从根目录-开始，到达文件的路径"><a href="#绝对路径：从根目录-开始，到达文件的路径" class="headerlink" title="绝对路径：从根目录 / 开始，到达文件的路径"></a>绝对路径：从根目录 / 开始，到达文件的路径</h5><img src="/2021/05/15/linux/60.png" alt="59" style="zoom:45%;">
+
+<h5 id="相对路径：从当前目录开始，到达文件的路径"><a href="#相对路径：从当前目录开始，到达文件的路径" class="headerlink" title="相对路径：从当前目录开始，到达文件的路径"></a>相对路径：从当前目录开始，到达文件的路径</h5><img src="/2021/05/15/linux/61.png" alt="59" style="zoom:45%;">
+
+<h5 id="特殊："><a href="#特殊：" class="headerlink" title="特殊："></a>特殊：</h5><p>点（.）表示当前目录</p>
+<p>点点（..）表示当前目录的父目录</p>
+<h5 id="文件，目录，命名规则"><a href="#文件，目录，命名规则" class="headerlink" title="文件，目录，命名规则"></a>文件，目录，命名规则</h5><img src="/2021/05/15/linux/59.png" alt="59" style="zoom:50%;">
+
+<h4 id="pwd命令-显示当前工作目录"><a href="#pwd命令-显示当前工作目录" class="headerlink" title="pwd命令 显示当前工作目录"></a>pwd命令 显示当前工作目录</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">pwd</span></span></span><br><span class="line">/home/c21191511/work</span><br></pre></td></tr></table></figure>
+
+<h4 id="cd命令-改变工作目录"><a href="#cd命令-改变工作目录" class="headerlink" title="cd命令 改变工作目录"></a>cd命令 改变工作目录</h4><p>格式：cd [目录]  (绝对路径/相对路径)</p>
+<h5 id="cd-跳转到根目录"><a href="#cd-跳转到根目录" class="headerlink" title="cd /  跳转到根目录"></a>cd /  跳转到根目录</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">cd</span> /</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">pwd</span></span></span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<h5 id="cd-、cd-、cd-HOME-返回主目录"><a href="#cd-、cd-、cd-HOME-返回主目录" class="headerlink" title="cd 、cd ~ 、cd $HOME 返回主目录"></a>cd 、cd ~ 、cd $HOME 返回主目录</h5><p>root用户，cd ~ 相当于 cd /root</p>
+<p>普通用户，cd ~ 相当于cd /home/当前用户名</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$HOME</span></span></span><br><span class="line">/home/c21191511</span><br></pre></td></tr></table></figure>
+
+<h5 id="进入别人的主目录-拥有权限"><a href="#进入别人的主目录-拥有权限" class="headerlink" title="进入别人的主目录(拥有权限)"></a>进入别人的主目录(拥有权限)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">cd</span> ~c09190717</span></span><br><span class="line">-bash: cd: /home/c09190717: Permission denied</span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">cd</span> /home/c09190717</span></span><br><span class="line">-bash: cd: /home/c09190717: Permission denied</span><br></pre></td></tr></table></figure>
+
+<h5 id="cd-返回进入此目录之前所在目录"><a href="#cd-返回进入此目录之前所在目录" class="headerlink" title="cd - 返回进入此目录之前所在目录"></a>cd - 返回进入此目录之前所在目录</h5><h5 id="cd-进入当前目录"><a href="#cd-进入当前目录" class="headerlink" title="cd . 进入当前目录"></a>cd . 进入当前目录</h5><h5 id="cd-进入上一级目录"><a href="#cd-进入上一级目录" class="headerlink" title="cd .. 进入上一级目录"></a>cd .. 进入上一级目录</h5><h4 id="mkdir命令-创建目录"><a href="#mkdir命令-创建目录" class="headerlink" title="mkdir命令 创建目录"></a>mkdir命令 创建目录</h4><p>格式：mkdir dir dir2</p>
+<img src="/2021/05/15/linux/53.png" alt="51" style="zoom:80%;">
+
+<h5 id="命令格式-p-创建多级目录"><a href="#命令格式-p-创建多级目录" class="headerlink" title="命令格式 -p  创建多级目录"></a>命令格式 -p  创建多级目录</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mkdir -p xx/yy/zz</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="rm命令-删除文件"><a href="#rm命令-删除文件" class="headerlink" title="rm命令 删除文件"></a>rm命令 删除文件</h4><p>格式：rm file</p>
+<h5 id="命令选项-i-删除文件前确认"><a href="#命令选项-i-删除文件前确认" class="headerlink" title="命令选项 -i 删除文件前确认"></a>命令选项 -i 删除文件前确认</h5><h5 id="命令选项-r-删除指定文件夹及所有子文件，每步都确认"><a href="#命令选项-r-删除指定文件夹及所有子文件，每步都确认" class="headerlink" title="命令选项 -r 删除指定文件夹及所有子文件，每步都确认"></a>命令选项 -r 删除指定文件夹及所有子文件，每步都确认</h5><img src="/2021/05/15/linux/51.png" alt="51" style="zoom:80%;">
+
+<h5 id="命令选项-rf-强制删除指定文件夹及所有子文件"><a href="#命令选项-rf-强制删除指定文件夹及所有子文件" class="headerlink" title="命令选项 -rf 强制删除指定文件夹及所有子文件"></a>命令选项 -rf 强制删除指定文件夹及所有子文件</h5><img src="/2021/05/15/linux/52.png" alt="52" style="zoom:80%;">
+
+<h4 id="rmdir命令-删除目录"><a href="#rmdir命令-删除目录" class="headerlink" title="rmdir命令 删除目录"></a>rmdir命令 删除目录</h4><p>格式：rmdir  dir(只能为空目录)</p>
+<img src="/2021/05/15/linux/54.png" alt="52" style="zoom:80%;">
+
+<h4 id="ls命令-显式指定目录内容"><a href="#ls命令-显式指定目录内容" class="headerlink" title="ls命令 显式指定目录内容"></a>ls命令 显式指定目录内容</h4><p>格式：ls dir</p>
+<h5 id="命令选项："><a href="#命令选项：" class="headerlink" title="命令选项："></a>命令选项：</h5><img src="/2021/05/15/linux/55.png" alt="52" style="zoom:50%;">
+
+<img src="/2021/05/15/linux/56.png" alt="56" style="zoom:80%;"> 
+
+<h5 id="ls-l-长格式详解"><a href="#ls-l-长格式详解" class="headerlink" title="ls -l 长格式详解"></a>ls -l 长格式详解</h5><img src="/2021/05/15/linux/57.png" alt="57" style="zoom:150%;">
+
+<h6 id="第一列："><a href="#第一列：" class="headerlink" title="第一列："></a>第一列：</h6><img src="/2021/05/15/linux/58.png" alt="58" style="zoom:80%;">
+
+<h6 id="第二列：文件的链接数"><a href="#第二列：文件的链接数" class="headerlink" title="第二列：文件的链接数"></a>第二列：文件的链接数</h6><h6 id="第三列：文件的所有者"><a href="#第三列：文件的所有者" class="headerlink" title="第三列：文件的所有者"></a>第三列：文件的所有者</h6><p>通常与文件创建者用户名相同</p>
+<p>文件所有者发生转移，则两者不同</p>
+<h6 id="第四列：文件所属于的组"><a href="#第四列：文件所属于的组" class="headerlink" title="第四列：文件所属于的组"></a>第四列：文件所属于的组</h6><p>管理员创建的用户时，指定用户属于哪个组</p>
+<p>用户创建文件时，文件属于用户的组</p>
+<h6 id="第五列：文件大小-单位为字节"><a href="#第五列：文件大小-单位为字节" class="headerlink" title="第五列：文件大小 单位为字节"></a>第五列：文件大小 单位为字节</h6><h6 id="第六列：文件上一次修改的日期和时间"><a href="#第六列：文件上一次修改的日期和时间" class="headerlink" title="第六列：文件上一次修改的日期和时间"></a>第六列：文件上一次修改的日期和时间</h6><h6 id="第七列：文件名称"><a href="#第七列：文件名称" class="headerlink" title="第七列：文件名称"></a>第七列：文件名称</h6><h5 id="隐藏文件：文件以-开头"><a href="#隐藏文件：文件以-开头" class="headerlink" title="隐藏文件：文件以.开头"></a>隐藏文件：文件以.开头</h5><h4 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h4><p>command &gt; filename <strong>覆盖重定向</strong> (不存在则创建)</p>
+<p>command &gt;&gt; filename <strong>追加重定向</strong> (不存在则创建)</p>
+<h4 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h4><p>command &lt; filename <strong>命令行中使用</strong></p>
+<p>command &lt;&lt; filename <strong>脚本编程使用</strong></p>
+<h4 id="cat命令-显示文件内容"><a href="#cat命令-显示文件内容" class="headerlink" title="cat命令 显示文件内容"></a>cat命令 显示文件内容</h4><h5 id="默认："><a href="#默认：" class="headerlink" title="默认："></a>默认：</h5><p>标准输入读入 输出标准输出</p>
+<p>Ctrl + D结束</p>
+<h5 id="输入重定向-1"><a href="#输入重定向-1" class="headerlink" title="输入重定向"></a>输入重定向</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat &lt;  filename</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat -n filename <span class="comment">#显示行号</span></span></span><br><span class="line">1 Hello world </span><br><span class="line">2 study hard</span><br></pre></td></tr></table></figure>
+
+<h5 id="cat创建文件-使用输出重定向"><a href="#cat创建文件-使用输出重定向" class="headerlink" title="cat创建文件(使用输出重定向)"></a>cat创建文件(使用输出重定向)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat &gt; filename</span> </span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+
+<h5 id="文件追加输入"><a href="#文件追加输入" class="headerlink" title="文件追加输入"></a>文件追加输入</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat &gt;&gt; filename</span></span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+
+<h5 id="cat复制文件"><a href="#cat复制文件" class="headerlink" title="cat复制文件"></a>cat复制文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat filename &gt; filename2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="cp-复制-命令"><a href="#cp-复制-命令" class="headerlink" title="cp(复制)命令"></a>cp(复制)命令</h4><p>格式： command source target</p>
+<h5 id="cp-file-file2-创建文件副本"><a href="#cp-file-file2-创建文件副本" class="headerlink" title="cp file file2  ,创建文件副本"></a>cp file file2  ,创建文件副本</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp profile profile2</span></span><br><span class="line"><span class="meta">$</span><span class="bash">cp /etc/profile profile2</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash">cp profile profile</span></span><br><span class="line">file cannot be copied onto itself</span><br></pre></td></tr></table></figure>
+
+<h5 id="cp-file-dir-将单个文件复制到其他目录"><a href="#cp-file-dir-将单个文件复制到其他目录" class="headerlink" title="cp file dir  ,将单个文件复制到其他目录"></a>cp file dir  ,将单个文件复制到其他目录</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp profile dir</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="cp-file-file2-…-dir-将多个文件复制到其他目录"><a href="#cp-file-file2-…-dir-将多个文件复制到其他目录" class="headerlink" title="cp file file2 … dir  ,将多个文件复制到其他目录"></a>cp file file2 … dir  ,将多个文件复制到其他目录</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp profile profile2 profile3 dir</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-i-如果目标存在-确认是否覆盖"><a href="#命令选项-i-如果目标存在-确认是否覆盖" class="headerlink" title="命令选项 -i (如果目标存在 确认是否覆盖)"></a>命令选项 -i (如果目标存在 确认是否覆盖)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp -i Report memos cp: overwrite <span class="string">&#x27;memos/Report&#x27;</span> ? (y/n)</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-b-如果目标存在-则先创建该目标的副本，再移动"><a href="#命令选项-b-如果目标存在-则先创建该目标的副本，再移动" class="headerlink" title="命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)"></a>命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls memos Report <span class="variable">$cp</span> -b Report memos <span class="variable">$ls</span> memos Report Report~ <span class="comment">#(内容与原 memos 内的 Report 内容相同)</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-r-复制目录到新目录中"><a href="#命令选项-r-复制目录到新目录中" class="headerlink" title="命令选项 -r (复制目录到新目录中)"></a>命令选项 -r (复制目录到新目录中)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cp -r ./memos ./memos~  <span class="comment">#创建目录副本</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="mv-移动-命令"><a href="#mv-移动-命令" class="headerlink" title="mv(移动)命令"></a>mv(移动)命令</h4><p>格式： command source target</p>
+<h5 id="mv-file-dir-将文件移到其他目录-非文件所在目录"><a href="#mv-file-dir-将文件移到其他目录-非文件所在目录" class="headerlink" title="mv file dir  ,将文件移到其他目录(非文件所在目录)"></a>mv file dir  ,将文件移到其他目录(非文件所在目录)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv Report memos</span> </span><br></pre></td></tr></table></figure>
+
+<h5 id="mv-file-dir-file-dir2-改变文件名-目录名"><a href="#mv-file-dir-file-dir2-改变文件名-目录名" class="headerlink" title="mv file/dir  file/dir2  ,改变文件名/目录名"></a>mv file/dir  file/dir2  ,改变文件名/目录名</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv Report Report~<span class="variable">$mv</span> dir dir~</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mv-file-file2-…-dir-将文件批量移动到其他目录"><a href="#mv-file-file2-…-dir-将文件批量移动到其他目录" class="headerlink" title="mv file file2 … dir  ,将文件批量移动到其他目录"></a>mv file file2 … dir  ,将文件批量移动到其他目录</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv file file2 dir</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-i-如果目标存在-确认是否覆盖-1"><a href="#命令选项-i-如果目标存在-确认是否覆盖-1" class="headerlink" title="命令选项 -i (如果目标存在 确认是否覆盖)"></a>命令选项 -i (如果目标存在 确认是否覆盖)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv -i Report memos mv: overwrite <span class="string">&#x27;memos/Report&#x27;</span> ? (y/n)</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-b-如果目标存在-则先创建该目标的副本，再移动-1"><a href="#命令选项-b-如果目标存在-则先创建该目标的副本，再移动-1" class="headerlink" title="命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)"></a>命令选项 -b (如果目标存在 则先创建该目标的副本，再移动)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv -b Report memos<span class="variable">$ls</span> memosReport Report~ <span class="comment">#(内容与原 memos 内的 Report 内容相同)</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-v-解释操作"><a href="#命令选项-v-解释操作" class="headerlink" title="命令选项 -v 解释操作"></a>命令选项 -v 解释操作</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">mv -v Report memos  Report -&gt; memos/Report</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-f-如果目标存在，则覆盖"><a href="#命令选项-f-如果目标存在，则覆盖" class="headerlink" title="命令选项 -f (如果目标存在，则覆盖)"></a>命令选项 -f (如果目标存在，则覆盖)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv -f Report memos</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ln-链接-命令"><a href="#ln-链接-命令" class="headerlink" title="ln(链接)命令"></a>ln(链接)命令</h4><p>格式： command source target</p>
+<p>ln命令 在 <strong>已存在文件</strong> 和 <strong>新文件名</strong> 之间创建链接</p>
+<h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p>在不同目录中频繁操作同一文件</p>
+<p>在每个目录中建立该文件的链接文件 通过链接文件对原文件进行操作</p>
+<p>链接文件不占用过多磁盘空间</p>
+<img src="/2021/05/15/linux/1.png" alt="1" style="zoom:60%;">
+
+<h5 id="ln-file-file-指定链接文件名-创建链接文件"><a href="#ln-file-file-指定链接文件名-创建链接文件" class="headerlink" title="ln file file~(指定链接文件名)  ,创建链接文件"></a>ln file file~(指定链接文件名)  ,创建链接文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ln xxx yyy</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="ln-file-file2-…-dir-在目录中创建链接文件"><a href="#ln-file-file2-…-dir-在目录中创建链接文件" class="headerlink" title="ln file file2 … dir  ,在目录中创建链接文件"></a>ln file file2 … dir  ,在目录中创建链接文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ln file file2 dir</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2021/05/15/linux/2.png" alt="1" style="zoom:70%;">
+
+<h5 id="查看文件链接数"><a href="#查看文件链接数" class="headerlink" title="查看文件链接数"></a>查看文件链接数</h5><img src="/2021/05/15/linux/3.png" alt="1" style="zoom:70%;">
+
+<p>硬链接</p>
+<p>软链接（符号链接）</p>
+<h4 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h4><p>wc命令计算一个或多个文件的行数，字数，字符数</p>
+<p>字：没有空格,Tab 分割的字符串</p>
+<h5 id="wc-file-统计单个文件"><a href="#wc-file-统计单个文件" class="headerlink" title="wc file  ,统计单个文件"></a>wc file  ,统计单个文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc myfirst 4 30 155 myfirst <span class="comment">#行 字 字符</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="wc-无参数-默认从键盘输入"><a href="#wc-无参数-默认从键盘输入" class="headerlink" title="wc  ,无参数 默认从键盘输入"></a>wc  ,无参数 默认从键盘输入</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc Hello world！</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="wc-file-file2-…-统计多个文件"><a href="#wc-file-file2-…-统计多个文件" class="headerlink" title="wc file file2 … ,统计多个文件"></a>wc file file2 … ,统计多个文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc file file21 2 3 file2 3 4 file23 5 7 total</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-l-统计行数"><a href="#命令选项-l-统计行数" class="headerlink" title="命令选项 -l ,统计行数"></a>命令选项 -l ,统计行数</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -l file</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-c-统计字符数"><a href="#命令选项-c-统计字符数" class="headerlink" title="命令选项 -c ,统计字符数"></a>命令选项 -c ,统计字符数</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -c file</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-w-统计字数"><a href="#命令选项-w-统计字数" class="headerlink" title="命令选项 -w ,统计字数"></a>命令选项 -w ,统计字数</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">wc -w file</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="文件名替换"><a href="#文件名替换" class="headerlink" title="文件名替换"></a>文件名替换</h4><h5 id="匹配任意单个字符"><a href="#匹配任意单个字符" class="headerlink" title="?  ,匹配任意单个字符"></a>?  ,匹配任意单个字符</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls</span> </span><br><span class="line"> report report2 report22 2report</span><br><span class="line"><span class="meta">$</span><span class="bash">ls report?</span> </span><br><span class="line"> report2 </span><br><span class="line"><span class="meta">$</span><span class="bash">ls reprot??</span> </span><br><span class="line"> report22 </span><br><span class="line"><span class="meta">$</span><span class="bash">ls ?report</span> </span><br><span class="line"> 2report</span><br></pre></td></tr></table></figure>
+
+<h5 id="匹配任意个字符，包括空串"><a href="#匹配任意个字符，包括空串" class="headerlink" title="*  ,匹配任意个字符，包括空串"></a>*  ,匹配任意个字符，包括空串</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls</span>  </span><br><span class="line"> report 23report 2report2</span><br><span class="line"><span class="meta">$</span><span class="bash">ls *report</span> </span><br><span class="line"> report 23report</span><br><span class="line"><span class="meta">$</span><span class="bash">ls 2*2</span> </span><br><span class="line"> 2report2</span><br></pre></td></tr></table></figure>
+
+<h5 id="list-匹配任意在list中的字符-list-匹配任意不在list中的字符"><a href="#list-匹配任意在list中的字符-list-匹配任意不在list中的字符" class="headerlink" title="[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符"></a>[list]  ,匹配任意在list中的字符 ; [!list]  ,匹配任意不在list中的字符</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls</span> </span><br><span class="line"> report areport breport aa1 aa2 aa3</span><br><span class="line"><span class="meta">$</span><span class="bash">ls [ab]*</span> </span><br><span class="line"> areport breport aa1 aa2 aa3</span><br><span class="line"><span class="meta">$</span><span class="bash">ls [!ab]*</span> </span><br><span class="line"> report</span><br><span class="line"><span class="meta">$</span><span class="bash">ls *[1-3]</span> </span><br><span class="line"> aa1 aa2 aa3</span><br></pre></td></tr></table></figure>
+
+<h5 id="隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分"><a href="#隐藏文件-使用通配符显示隐藏文件，要将-作为指定模式一部分" class="headerlink" title="隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分"></a>隐藏文件 使用通配符显示隐藏文件，要将.作为指定模式一部分</h5><p>CentOS 会显示出当前目录内容 与 父目录内容</p>
+<img src="/2021/05/15/linux/4.png" alt="1" style="zoom:70%;">
+
+<p>与其他命令组合使用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">rm *.*</span></span><br><span class="line"><span class="meta">$</span><span class="bash">rm report?</span></span><br><span class="line"><span class="meta">$</span><span class="bash">cp * ../backup</span></span><br><span class="line"><span class="meta">$</span><span class="bash">mv file[1-4] memos</span></span><br><span class="line"><span class="meta">$</span><span class="bash">rm report*  <span class="comment"># 删除格式为reportxxx的文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">rm report * <span class="comment"># 删除report下所有文件</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="find-命令"><a href="#find-命令" class="headerlink" title="find 命令"></a>find 命令</h4><p>格式： find 路径名 搜索选项 动作选项</p>
+<p>在层次目录中根据文件名或文件属性定位文件，并执行操作。</p>
+<h5 id="搜索选项-name-根据文件名查找文件"><a href="#搜索选项-name-根据文件名查找文件" class="headerlink" title="搜索选项 -name ,根据文件名查找文件"></a>搜索选项 -name ,根据文件名查找文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -name <span class="string">&quot;*.c&quot;</span> -<span class="built_in">print</span></span></span><br><span class="line">./1.c</span><br><span class="line">./2.c</span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索选项-size-±n-根据文件大小查找文件"><a href="#搜索选项-size-±n-根据文件大小查找文件" class="headerlink" title="搜索选项 -size ±n ,根据文件大小查找文件"></a>搜索选项 -size ±n ,根据文件大小查找文件</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">b：代表 <span class="number">512</span> 位元组的区块（默认单位为 b）</span><br><span class="line">c：表示字节数</span><br><span class="line">k：表示KB （<span class="number">1024</span>字节）</span><br><span class="line">w：字 （<span class="number">2</span>字节）</span><br><span class="line">M：兆字节（<span class="number">1024</span>KB）</span><br><span class="line">G：千兆字节 （<span class="number">1024</span>MB）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -size 20c -<span class="built_in">print</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索选项-type-根据文件类型查找文件"><a href="#搜索选项-type-根据文件类型查找文件" class="headerlink" title="搜索选项 -type ,根据文件类型查找文件"></a>搜索选项 -type ,根据文件类型查找文件</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">b：块设备文件。</span><br><span class="line">d：目录。</span><br><span class="line">c：字符设备文件。</span><br><span class="line">l：符号链接文件。</span><br><span class="line">f：普通文件。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -<span class="built_in">type</span> f -<span class="built_in">print</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索选项-atime-±n-根据最后访问日期-被读取或执行-查找文件"><a href="#搜索选项-atime-±n-根据最后访问日期-被读取或执行-查找文件" class="headerlink" title="搜索选项 -atime ±n ,根据最后访问日期(被读取或执行)查找文件"></a>搜索选项 -atime ±n ,根据最后访问日期(被读取或执行)查找文件</h5><p>n指据上一次访问所经过的天数(整数) ， +n 表示大于n ，-n 表示小于n</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -atime 1 -<span class="built_in">print</span>  <span class="comment">#24小时之外 48小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -atime -1 -<span class="built_in">print</span> <span class="comment">#24小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -atime +1 -<span class="built_in">print</span> <span class="comment">#48小时之外</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索选项-mtime-±n-根据文件最后修改日期-内容被修改-查找文件"><a href="#搜索选项-mtime-±n-根据文件最后修改日期-内容被修改-查找文件" class="headerlink" title="搜索选项 -mtime ±n ,根据文件最后修改日期(内容被修改)查找文件"></a>搜索选项 -mtime ±n ,根据文件最后修改日期(内容被修改)查找文件</h5><p>n指文件最后被修改后经过的天数(整数) ， +n 表示大于n ，-n 表示小于n</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -mtime 1 -<span class="built_in">print</span>  <span class="comment">#24小时之外 48小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -mtime -1 -<span class="built_in">print</span> <span class="comment">#24小时之内</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">find . -mtime +1 -<span class="built_in">print</span> <span class="comment">#48小时之外</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索选项-newer-查找比指定文件更新的文件"><a href="#搜索选项-newer-查找比指定文件更新的文件" class="headerlink" title="搜索选项 -newer ,查找比指定文件更新的文件"></a>搜索选项 -newer ,查找比指定文件更新的文件</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find , -newer first.c -<span class="built_in">print</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="动作选项-print-打印找到的每个文件的路径名"><a href="#动作选项-print-打印找到的每个文件的路径名" class="headerlink" title="动作选项 -print ,打印找到的每个文件的路径名"></a>动作选项 -print ,打印找到的每个文件的路径名</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find <span class="variable">$HEME</span> -name first.c -<span class="built_in">print</span></span></span><br><span class="line"> /usr/david/first.c</span><br><span class="line"> /usr/david/source/first.c</span><br></pre></td></tr></table></figure>
+
+<h5 id="动作选项-exec-command-对找到的文件执行command"><a href="#动作选项-exec-command-对找到的文件执行command" class="headerlink" title="动作选项 -exec command {} ;  ,对找到的文件执行command"></a>动作选项 -exec command {} ;  ,对找到的文件执行command</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -name first.c -mtime +90  -<span class="built_in">exec</span> rm &#123;&#125; \;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="动作选项-ok-command-在执行command之前要求确认"><a href="#动作选项-ok-command-在执行command之前要求确认" class="headerlink" title="动作选项-ok command {} ;  ,在执行command之前要求确认"></a>动作选项-ok command {} ;  ,在执行command之前要求确认</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">find . -name first.c -mtime +90  -ok rm &#123;&#125; \;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="head-命令"><a href="#head-命令" class="headerlink" title="head 命令"></a>head 命令</h4><p>格式：head 文件名</p>
+<p>显示文件头部若干行</p>
+<h5 id="命令选项-n-显示文件前n行"><a href="#命令选项-n-显示文件前n行" class="headerlink" title="命令选项 -n ,显示文件前n行"></a>命令选项 -n ,显示文件前n行</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">head memo (默认显示MEMO前10行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">head -5 MEMO (显示MEMO前5行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">head -5 file[1-3](显示多个文件)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="tail-命令"><a href="#tail-命令" class="headerlink" title="tail 命令"></a>tail 命令</h4><p>格式：tail 文件名</p>
+<p>显示文件尾部若干行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">tail memo (默认显示MEMOb后10行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">tail -5 MEMO (显示MEMO后5行)</span></span><br><span class="line"><span class="meta">$</span><span class="bash">tail -5 file[1-3](显示多个文件)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="cut-命令"><a href="#cut-命令" class="headerlink" title="cut 命令"></a>cut 命令</h4><p>格式：cut 选项 文件名</p>
+<p>从文件中”取出“指定域</p>
+<h5 id="命令选项-f-指定域位置"><a href="#命令选项-f-指定域位置" class="headerlink" title="命令选项 -f ,指定域位置"></a>命令选项 -f ,指定域位置</h5><p>默认为Tab(制表符)</p>
+<img src="/2021/05/15/linux/5.png" alt="1" style="zoom:40%;">
+
+<h5 id="命令选项-c-指定字符位置"><a href="#命令选项-c-指定字符位置" class="headerlink" title="命令选项 -c ,指定字符位置"></a>命令选项 -c ,指定字符位置</h5><img src="/2021/05/15/linux/6.png" alt="1" style="zoom:40%;">
+
+<h5 id="命令选项-d-指定域分割字符"><a href="#命令选项-d-指定域分割字符" class="headerlink" title="命令选项 -d ,指定域分割字符"></a>命令选项 -d ,指定域分割字符</h5><p>空格 与 有意义字符需要用 “” 括起来</p>
+<img src="/2021/05/15/linux/7.png" alt="1" style="zoom:40%;">
+
+<h4 id="paste-命令"><a href="#paste-命令" class="headerlink" title="paste 命令"></a>paste 命令</h4><p>格式：paste file file2</p>
+<p>逐行连接两个或多个文件</p>
+<h5 id="命令选项-d-指定具体分隔符-默认为Tab-制表符"><a href="#命令选项-d-指定具体分隔符-默认为Tab-制表符" class="headerlink" title="命令选项 -d ,指定具体分隔符,默认为Tab(制表符)"></a>命令选项 -d ,指定具体分隔符,默认为Tab(制表符)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">paste -d : file file2</span></span><br><span class="line"> 1:2</span><br><span class="line"> 3:4</span><br><span class="line"><span class="meta">$</span><span class="bash">paste -d <span class="string">&quot; &quot;</span> file file2</span></span><br><span class="line"> 1 2</span><br><span class="line"> 3 4</span><br></pre></td></tr></table></figure>
+
+<h4 id="more-命令"><a href="#more-命令" class="headerlink" title="more 命令"></a>more 命令</h4><p>格式：more 文件名</p>
+<p>分页查看文件内容</p>
+<h5 id="命令选项-n-每屏显示n行"><a href="#命令选项-n-每屏显示n行" class="headerlink" title="命令选项 -n ,每屏显示n行"></a>命令选项 -n ,每屏显示n行</h5><h5 id="命令选项-n-从第n行开始显示"><a href="#命令选项-n-从第n行开始显示" class="headerlink" title="命令选项 +n ,从第n行开始显示"></a>命令选项 +n ,从第n行开始显示</h5><h5 id="命令选项-pattern-在每个文档显示前搜寻该字串-pattern-然后从该字串之后开始显示"><a href="#命令选项-pattern-在每个文档显示前搜寻该字串-pattern-然后从该字串之后开始显示" class="headerlink" title="命令选项 +/pattern ,在每个文档显示前搜寻该字串(pattern),然后从该字串之后开始显示"></a>命令选项 +/pattern ,在每个文档显示前搜寻该字串(pattern),然后从该字串之后开始显示</h5><h5 id="命令选项-c-在显示每页前清屏"><a href="#命令选项-c-在显示每页前清屏" class="headerlink" title="命令选项 -c ,在显示每页前清屏"></a>命令选项 -c ,在显示每页前清屏</h5><h5 id="命令选项-d-显示提示"><a href="#命令选项-d-显示提示" class="headerlink" title="命令选项 -d ,显示提示"></a>命令选项 -d ,显示提示</h5><p>在画面下方显示 [Press space to continue, ‘q’ to quit.] </p>
+<p>如果使用者按错键，则会显示 [Press ‘h’ for instructions.] </p>
+<h5 id="命令控制键"><a href="#命令控制键" class="headerlink" title="命令控制键"></a>命令控制键</h5><ol>
+<li>Enter 向下n行，需要定义。默认为1行</li>
+<li>Ctrl+F 向下滚动一屏</li>
+<li>空格键 向下滚动一屏</li>
+<li>Ctrl+B 返回上一屏</li>
+<li>q Q 退出more命令</li>
+</ol>
+<h4 id="less-命令"><a href="#less-命令" class="headerlink" title="less 命令"></a>less 命令</h4><p>格式：less 文件名</p>
+<p>分页查看文件内容，允许在文件中向后 向前移动</p>
+<h4 id="UNXI-文件系统原理"><a href="#UNXI-文件系统原理" class="headerlink" title="UNXI 文件系统原理"></a>UNXI 文件系统原理</h4><p>UNIX系统将每个文件名与一个整数(i 节点号)相关联,并用文件的i节点号 标识每个文件</p>
+<p>表面： 用户通过文件名，打开文件</p>
+<p>实际：系统找到文件名对应的i节点号， 通过i节点号找到文件的i节点项，再根据i节点项信息找到文件数据所在块(block)，读出数据</p>
+<h5 id="ls-i-查看文件i节点号"><a href="#ls-i-查看文件i节点号" class="headerlink" title="ls -i ,查看文件i节点号"></a>ls -i ,查看文件i节点号</h5><img src="/2021/05/15/linux/8.png" alt="8" style="zoom:80%;">
+
+<p>复制，不改变文件i节点号</p>
+<img src="/2021/05/15/linux/9.png" alt="9" style="zoom:80%;">
+
+<p>重命名，不改变文件i节点号</p>
+<img src="/2021/05/15/linux/10.png" alt="10" style="zoom:80%;">
+
+<p>移动，不改变文件i节点号</p>
+<img src="/2021/05/15/linux/11.png" alt="10" style="zoom:80%;">
+
+<p>链接，不改变文件i节点号</p>
+<img src="/2021/05/15/linux/12.png" alt="10" style="zoom:75%;">
+
+
+
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h4 id="Shell-概述"><a href="#Shell-概述" class="headerlink" title="Shell 概述"></a>Shell 概述</h4><img src="/2021/05/15/linux/78.png" alt="78" style="zoom: 65%;">
+
+<h4 id="Shell种类："><a href="#Shell种类：" class="headerlink" title="Shell种类："></a>Shell种类：</h4><p>Shell有很多种，在/bin目录中</p>
+<img src="/2021/05/15/linux/79.png" alt="79" style="zoom:60%;">
+
+<h4 id="更改用户Shell"><a href="#更改用户Shell" class="headerlink" title="更改用户Shell"></a>更改用户Shell</h4><p>方法：当前Shell中键入新的Shell名字</p>
+<p>原理：创建当前Shell子进程，在子进程中运行新的Shell</p>
+<img src="/2021/05/15/linux/80.png" alt="80" style="zoom:80%;">
+
+<p>永久改变Shell：修改账户配置文件，chsh命令</p>
+<h4 id="功能详解："><a href="#功能详解：" class="headerlink" title="功能详解："></a>功能详解：</h4><img src="/2021/05/15/linux/13.png" alt="10" style="zoom:90%;">
+
+<h4 id="用户与Shell交互"><a href="#用户与Shell交互" class="headerlink" title="用户与Shell交互"></a>用户与Shell交互</h4><img src="/2021/05/15/linux/16.png" alt="14" style="zoom:80%;">
+
+<h4 id="登录过程"><a href="#登录过程" class="headerlink" title="登录过程"></a>登录过程</h4><p>用户成功登录系统：Shell 启动</p>
+<p>用户退出：Shell 进程结束</p>
+<h5 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h5><img src="/2021/05/15/linux/81.png" alt="81" style="zoom:60%;">
+
+<h5 id="登录："><a href="#登录：" class="headerlink" title="登录："></a>登录：</h5><img src="/2021/05/15/linux/82.png" alt="82" style="zoom:70%;">
+
+<img src="/2021/05/15/linux/18.png" alt="14" style="zoom:70%;">
+
+<img src="/2021/05/15/linux/17.png" alt="14" style="zoom:70%;">
+
+<h4 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h4><p>将消息参数显示在终端上，没有参数则输出空行. </p>
+<p>echo参数可以无限长</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> hello</span></span><br><span class="line"> hello</span><br></pre></td></tr></table></figure>
+
+<h5 id="命令选项-n-输出不换行"><a href="#命令选项-n-输出不换行" class="headerlink" title="命令选项 -n  ,输出不换行"></a>命令选项 -n  ,输出不换行</h5><img src="/2021/05/15/linux/19.png" alt="19" style="zoom:80%;">
+
+<h5 id="命令选项-e-解释反斜杠引导的转义字符，转义符号用””扩起"><a href="#命令选项-e-解释反斜杠引导的转义字符，转义符号用””扩起" class="headerlink" title="命令选项 -e  ,解释反斜杠引导的转义字符，转义符号用””扩起"></a>命令选项 -e  ,解释反斜杠引导的转义字符，转义符号用””扩起</h5><img src="/2021/05/15/linux/20.png" alt="20" style="zoom:50%;">
+
+
+
+<img src="/2021/05/15/linux/21.png" alt="21" style="zoom:80%;">
+
+
+
+<h4 id="消除元字符特殊含义"><a href="#消除元字符特殊含义" class="headerlink" title="消除元字符特殊含义"></a>消除元字符特殊含义</h4><h5 id="将其后一个元字符解释为一个普通字符"><a href="#将其后一个元字符解释为一个普通字符" class="headerlink" title="\ 将其后一个元字符解释为一个普通字符"></a>\ 将其后一个元字符解释为一个普通字符</h5><img src="/2021/05/15/linux/22.png" alt="22" style="zoom:80%;">
+
+<h5 id="“”-取消-除-’-外的元字符特殊含义-双引号中保留空格-Tab等"><a href="#“”-取消-除-’-外的元字符特殊含义-双引号中保留空格-Tab等" class="headerlink" title="“” 取消 除 $,’,\ 外的元字符特殊含义 ,双引号中保留空格,Tab等"></a>“” 取消 除 $,’,\ 外的元字符特殊含义 ,双引号中保留空格,Tab等</h5><img src="/2021/05/15/linux/23.png" alt="23" style="zoom:80%;">
+
+<h5 id="’-‘-单引号中任何字符都失去特殊含义-单引号中保留空格-Tab等"><a href="#’-‘-单引号中任何字符都失去特殊含义-单引号中保留空格-Tab等" class="headerlink" title="’ ‘ 单引号中任何字符都失去特殊含义 ,单引号中保留空格,Tab等"></a>’ ‘ 单引号中任何字符都失去特殊含义 ,单引号中保留空格,Tab等</h5><img src="/2021/05/15/linux/24.png" alt="24" style="zoom:80%;">
+
+
+
+<h4 id="Shell-变量"><a href="#Shell-变量" class="headerlink" title="Shell 变量"></a>Shell 变量</h4><p>Shell 为响应客户请求，保存一些信息到Shell变量中</p>
+<p>变量有名称，可以通过赋值来控制或定制系统环境</p>
+<img src="/2021/05/15/linux/25.png" alt="25" style="zoom:50%;" align="left">
+
+<h4 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h4><p>查看当前使用的Shell变量</p>
+<img src="/2021/05/15/linux/26.png" alt="26" style="zoom:75%;" align="left">
+
+<h4 id="unset命令"><a href="#unset命令" class="headerlink" title="unset命令"></a>unset命令</h4><p>删除不需要的变量</p>
+<img src="/2021/05/15/linux/27.png" alt="27" style="zoom:80%;">
+
+<h4 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h4><p>变量名=变量值(字符串) <strong>等号左右不能有空格</strong></p>
+<p>变量前加’$’ 使用echo命令显示变量值</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">name=<span class="string">&quot;Hello world&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">age=10</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$age</span></span></span><br><span class="line"> 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>做不到将转义字符赋值给变量 再使用echo输出</strong></p>
+<img src="/2021/05/15/linux/36.png" alt="36" style="zoom:90%;">
+
+<h4 id="Shell标准变量"><a href="#Shell标准变量" class="headerlink" title="Shell标准变量"></a>Shell标准变量</h4><img src="/2021/05/15/linux/28.png" alt="28" style="zoom: 50%;">
+
+<h4 id="HOME-变量"><a href="#HOME-变量" class="headerlink" title="HOME 变量"></a>HOME 变量</h4><p>保存用户主目录； 用于其他命令定位主目录</p>
+<img src="/2021/05/15/linux/29.png" alt="29" style="zoom:75%;">
+
+<h4 id="PATH-变量"><a href="#PATH-变量" class="headerlink" title="PATH 变量"></a>PATH 变量</h4><p>设置Shell 定位命令(程序) 时所要查找的目录名</p>
+<p>路径串中以 : 分隔</p>
+<img src="/2021/05/15/linux/30.png" alt="30" style="zoom:80%;">
+
+<h4 id="PS1-变量"><a href="#PS1-变量" class="headerlink" title="PS1 变量"></a>PS1 变量</h4><p>设置作为Shell顶层命令提示符的字符串</p>
+<p>PS1=”提示符”</p>
+<p>可以对不同段设置不同颜色</p>
+<p><img src="/2021/05/15/linux/32.png" alt="32"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[\[\e[1;32m\]\u\[\e[0m\]@\[\e[1;35m\]\h\[\e[0m\] \[\e[1;33m\]\W\[\e[0m\]]\$</span><br></pre></td></tr></table></figure>
+
+<h5 id="PS1可使用的转义序列"><a href="#PS1可使用的转义序列" class="headerlink" title="PS1可使用的转义序列"></a>PS1可使用的转义序列</h5><img src="/2021/05/15/linux/31.png" alt="31" style="zoom:45%;"> 
+
+<img src="/2021/05/15/linux/33.png" alt="33" style="zoom:80%;">
+
+<h4 id="PS2-变量"><a href="#PS2-变量" class="headerlink" title="PS2 变量"></a>PS2 变量</h4><p>命令提示符2</p>
+<p>用户尚未输入完命令前 按下[Return] 后显示的命令提示符 ，默认为 &gt;</p>
+<h4 id="SHELL-变量"><a href="#SHELL-变量" class="headerlink" title="SHELL 变量"></a>SHELL 变量</h4><p>设置登录shell的完整路径</p>
+<h4 id="TERM-变量"><a href="#TERM-变量" class="headerlink" title="TERM 变量"></a>TERM 变量</h4><p>设置终端类型</p>
+<img src="/2021/05/15/linux/37.png" alt="37" style="zoom:80%;">
+
+<h4 id="执行命令-重音符号"><a href="#执行命令-重音符号" class="headerlink" title="执行命令 重音符号 `"></a>执行命令 重音符号 `</h4><img src="/2021/05/15/linux/38.png" alt="38" style="zoom:90%;">
+
+<h4 id="命令序列：使用分号"><a href="#命令序列：使用分号" class="headerlink" title="命令序列：使用分号"></a>命令序列：使用分号</h4><p>shell 从左往右执行</p>
+<img src="/2021/05/15/linux/39.png" alt="39" style="zoom:80%;">
+
+<h4 id="命令编组：使用括号"><a href="#命令编组：使用括号" class="headerlink" title="命令编组：使用括号"></a>命令编组：使用括号</h4><p>编组命令可以被重定向</p>
+<img src="/2021/05/15/linux/40.png" alt="40" style="zoom:80%;">
+
+<h4 id="后台处理：使用-amp-符号"><a href="#后台处理：使用-amp-符号" class="headerlink" title="后台处理：使用&amp;符号"></a>后台处理：使用&amp;符号</h4><img src="/2021/05/15/linux/41.png" alt="41" style="zoom:40%;">
+
+<p>command &amp; command2 &amp;…</p>
+<p>（显示分配的进程号 ：1328）</p>
+<img src="/2021/05/15/linux/42.png" alt="42" style="zoom:80%;">
+
+
+
+<h4 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令 |"></a>链接命令 |</h4><p>将一个进程的标准输出作为另一个进程的标准输入</p>
+<p>command A | command B</p>
+<img src="/2021/05/15/linux/43.png" alt="43" style="zoom:80%;">
+
+<h4 id="延时命令-sleep"><a href="#延时命令-sleep" class="headerlink" title="延时命令 sleep"></a>延时命令 sleep</h4><p>sleep n</p>
+<h4 id="ps命令-获得系统中活动进程的状态"><a href="#ps命令-获得系统中活动进程的状态" class="headerlink" title="ps命令 获得系统中活动进程的状态"></a>ps命令 获得系统中活动进程的状态</h4><p>PID：进程ID </p>
+<p>TTY：控制进程的终端号</p>
+<p>TIME：进程已运行的时间(S)</p>
+<p>CMD：命令名</p>
+<img src="/2021/05/15/linux/44.png" alt="43" style="zoom:80%;">
+
+<h5 id="命令选项-e-显示所有进程"><a href="#命令选项-e-显示所有进程" class="headerlink" title="命令选项 -e 显示所有进程"></a>命令选项 -e 显示所有进程</h5><h5 id="命令选项-f-显示完整格式的信息"><a href="#命令选项-f-显示完整格式的信息" class="headerlink" title="命令选项 -f 显示完整格式的信息"></a>命令选项 -f 显示完整格式的信息</h5><img src="/2021/05/15/linux/45.png" alt="43" style="zoom:70%;">
+
+<h5 id="ps-aux-显示所有进程，并显示完整格式"><a href="#ps-aux-显示所有进程，并显示完整格式" class="headerlink" title="ps aux 显示所有进程，并显示完整格式"></a>ps aux 显示所有进程，并显示完整格式</h5><img src="/2021/05/15/linux/83.png" alt="83" style="zoom:80%;">
+
+<h4 id="kill命令-终止进程"><a href="#kill命令-终止进程" class="headerlink" title="kill命令 终止进程"></a>kill命令 终止进程</h4><p>发信号给指定进程，进行进程间通信</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> -l</span></span><br><span class="line"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP</span><br><span class="line"> 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1</span><br><span class="line">11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM</span><br><span class="line">16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP</span><br><span class="line">21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ</span><br><span class="line">26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR</span><br><span class="line">31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3</span><br><span class="line">38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8</span><br><span class="line">43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13</span><br><span class="line">48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12</span><br><span class="line">53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7</span><br><span class="line">58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2</span><br><span class="line">63) SIGRTMAX-1  64) SIGRTMAX</span><br></pre></td></tr></table></figure>
+
+<p>kill [-signal] PID , 信号名/号码  进程号</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> [-15] 5025 默认信号，正常方式终止进程</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> -9 5025 强制终止进程</span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="built_in">kill</span> -9 0 <span class="comment">#PID为0 终止所有与Shell有关的进程</span></span></span><br></pre></td></tr></table></figure>
+
+<p>用户只能终止自己的进程，管理员可以终止任何进程</p>
+<h4 id="nohub命令-：保持执行"><a href="#nohub命令-：保持执行" class="headerlink" title="nohub命令 ：保持执行"></a>nohub命令 ：保持执行</h4><p>用户退出系统时，后台进程不被终止</p>
+<p>nohup command &amp;</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nohup bash -c &#x27;sleep 120; echo &quot;job done&quot; &#x27;&amp;</span><br></pre></td></tr></table></figure>
+
+<h4 id="tee命令-分离输出"><a href="#tee命令-分离输出" class="headerlink" title="tee命令 分离输出"></a>tee命令 分离输出</h4><p>与 | 一起使用</p>
+<p>⬇ 输出到屏幕，输出到file</p>
+<img src="/2021/05/15/linux/46.png" alt="46" style="zoom:80%;">
+
+<h5 id="命令选项-a-追加输出"><a href="#命令选项-a-追加输出" class="headerlink" title="命令选项 -a 追加输出"></a>命令选项 -a 追加输出</h5><img src="/2021/05/15/linux/47.png" alt="46" style="zoom:80%;">
+
+<h5 id="命令选项-i-忽略中断信号，不对中断信号做出响应"><a href="#命令选项-i-忽略中断信号，不对中断信号做出响应" class="headerlink" title="命令选项 -i 忽略中断信号，不对中断信号做出响应"></a>命令选项 -i 忽略中断信号，不对中断信号做出响应</h5><h4 id="grep命令-文件搜索"><a href="#grep命令-文件搜索" class="headerlink" title="grep命令 文件搜索"></a>grep命令 文件搜索</h4><p>在一个文件 或 一系列文件中查找特定格式(正则表达式 ,RE)</p>
+<p>格式：grep pattern file</p>
+<img src="/2021/05/15/linux/48.png" alt="48" style="zoom:80%;">
+
+<h5 id="命令选项-c-只显示每个文件中包含匹配样式的行数"><a href="#命令选项-c-只显示每个文件中包含匹配样式的行数" class="headerlink" title="命令选项 -c 只显示每个文件中包含匹配样式的行数"></a>命令选项 -c 只显示每个文件中包含匹配样式的行数</h5><h5 id="命令选项-i-搜索匹配时忽略大小写"><a href="#命令选项-i-搜索匹配时忽略大小写" class="headerlink" title="命令选项 -i 搜索匹配时忽略大小写"></a>命令选项 -i 搜索匹配时忽略大小写</h5><h5 id="命令选项-l-只显示具有匹配的行的文件名，而不显示匹配行"><a href="#命令选项-l-只显示具有匹配的行的文件名，而不显示匹配行" class="headerlink" title="命令选项 -l 只显示具有匹配的行的文件名，而不显示匹配行"></a>命令选项 -l 只显示具有匹配的行的文件名，而不显示匹配行</h5><h5 id="命令选项-n-每个输出前显示行号"><a href="#命令选项-n-每个输出前显示行号" class="headerlink" title="命令选项 -n 每个输出前显示行号"></a>命令选项 -n 每个输出前显示行号</h5><h5 id="命令选项-v-仅显示不匹配的行"><a href="#命令选项-v-仅显示不匹配的行" class="headerlink" title="命令选项 -v 仅显示不匹配的行"></a>命令选项 -v 仅显示不匹配的行</h5><h5 id="命令选项-w-需要完全匹配"><a href="#命令选项-w-需要完全匹配" class="headerlink" title="命令选项 -w 需要完全匹配"></a>命令选项 -w 需要完全匹配</h5><img src="/2021/05/15/linux/49.png" alt="49" style="zoom:80%;">
+
+<h4 id="sed命令-替换"><a href="#sed命令-替换" class="headerlink" title="sed命令 替换"></a>sed命令 替换</h4><h4 id="sort命令-文本排序"><a href="#sort命令-文本排序" class="headerlink" title="sort命令 文本排序"></a>sort命令 文本排序</h4><p>对文件内容按照字母或数字顺序排序</p>
+<p>格式：sort file</p>
+<h5 id="命令选项-b-忽略前导空格"><a href="#命令选项-b-忽略前导空格" class="headerlink" title="命令选项 -b 忽略前导空格"></a>命令选项 -b 忽略前导空格</h5><h5 id="命令选项-d-字典顺序排序，忽略标点符号-控制字符"><a href="#命令选项-d-字典顺序排序，忽略标点符号-控制字符" class="headerlink" title="命令选项 -d 字典顺序排序，忽略标点符号 控制字符"></a>命令选项 -d 字典顺序排序，忽略标点符号 控制字符</h5><h5 id="命令选项-f-忽略大小写区别"><a href="#命令选项-f-忽略大小写区别" class="headerlink" title="命令选项 -f 忽略大小写区别"></a>命令选项 -f 忽略大小写区别</h5><h5 id="命令选项-n-数字以数值排序，包括负数和小数"><a href="#命令选项-n-数字以数值排序，包括负数和小数" class="headerlink" title="命令选项 -n 数字以数值排序，包括负数和小数"></a>命令选项 -n 数字以数值排序，包括负数和小数</h5><h5 id="命令选项-o-将输出存储到指定文件中"><a href="#命令选项-o-将输出存储到指定文件中" class="headerlink" title="命令选项 -o 将输出存储到指定文件中"></a>命令选项 -o 将输出存储到指定文件中</h5><h5 id="命令选项-r-倒序排序，由升序变为降序"><a href="#命令选项-r-倒序排序，由升序变为降序" class="headerlink" title="命令选项 -r 倒序排序，由升序变为降序"></a>命令选项 -r 倒序排序，由升序变为降序</h5><h5 id="命令选项-k-按照指定字段排序"><a href="#命令选项-k-按照指定字段排序" class="headerlink" title="命令选项 -k 按照指定字段排序"></a>命令选项 -k 按照指定字段排序</h5><p>前提：文件按相应格式建立，默认为空格或制表符</p>
+<h5 id="命令选项-t-指定一个用来区分键位值得字符来比较"><a href="#命令选项-t-指定一个用来区分键位值得字符来比较" class="headerlink" title="命令选项 -t 指定一个用来区分键位值得字符来比较"></a>命令选项 -t 指定一个用来区分键位值得字符来比较</h5><img src="/2021/05/15/linux/50.png" alt="50" style="zoom:80%;">
+
+<h4 id="df命令-列出文件系统磁盘空间使用情况"><a href="#df命令-列出文件系统磁盘空间使用情况" class="headerlink" title="df命令 列出文件系统磁盘空间使用情况"></a>df命令 列出文件系统磁盘空间使用情况</h4><h5 id="df-h-以易读方式显示"><a href="#df-h-以易读方式显示" class="headerlink" title="df -h 以易读方式显示"></a>df -h 以易读方式显示</h5><img src="/2021/05/15/linux/84.png" alt="84" style="zoom:80%;">
+
+<h4 id="du命令-显示目录和文件占用磁盘块情况"><a href="#du命令-显示目录和文件占用磁盘块情况" class="headerlink" title="du命令 显示目录和文件占用磁盘块情况"></a>du命令 显示目录和文件占用磁盘块情况</h4><p>格式：du 选项 目录</p>
+<p>显示目录，及子目录（无文件）存储空间使用情况（单位：块）</p>
+<img src="/2021/05/15/linux/85.png" alt="85" style="zoom:80%;">
+
+<h5 id="命令选项-a-显示目录中-目录和文件占用情况"><a href="#命令选项-a-显示目录中-目录和文件占用情况" class="headerlink" title="命令选项 -a  ,显示目录中 目录和文件占用情况"></a>命令选项 -a  ,显示目录中 目录和文件占用情况</h5><img src="/2021/05/15/linux/86.png" alt="86" style="zoom:80%;">
+
+<h5 id="命令选项-b-以字节为单位，显示当前目录子目录存储空间使用情况"><a href="#命令选项-b-以字节为单位，显示当前目录子目录存储空间使用情况" class="headerlink" title="命令选项 -b  ,以字节为单位，显示当前目录子目录存储空间使用情况"></a>命令选项 -b  ,以字节为单位，显示当前目录子目录存储空间使用情况</h5><img src="/2021/05/15/linux/87.png" alt="86" style="zoom:80%;">
+
+<h5 id="命令选项-s-显示指定目录-不显示子目录"><a href="#命令选项-s-显示指定目录-不显示子目录" class="headerlink" title="命令选项 -s  ,显示指定目录  不显示子目录"></a>命令选项 -s  ,显示指定目录  不显示子目录</h5><img src="/2021/05/15/linux/88.png" alt="88" style="zoom:80%;">
+
+<h4 id="at命令-在指定时间执行一个-或一组命令"><a href="#at命令-在指定时间执行一个-或一组命令" class="headerlink" title="at命令 在指定时间执行一个 或一组命令"></a>at命令 在指定时间执行一个 或一组命令</h4><img src="/2021/05/15/linux/89.png" alt="89" style="zoom:80%;">
+
+<h5 id="命令选项-l-列出所有at命令提交的作业"><a href="#命令选项-l-列出所有at命令提交的作业" class="headerlink" title="命令选项 -l  ,列出所有at命令提交的作业"></a>命令选项 -l  ,列出所有at命令提交的作业</h5><h5 id="命令选项-m-作业完成时向用户发送一条确认信息"><a href="#命令选项-m-作业完成时向用户发送一条确认信息" class="headerlink" title="命令选项 -m  ,作业完成时向用户发送一条确认信息"></a>命令选项 -m  ,作业完成时向用户发送一条确认信息</h5><h5 id="命令选项-r-从at调度作业中删除指定的作业号"><a href="#命令选项-r-从at调度作业中删除指定的作业号" class="headerlink" title="命令选项 -r  ,从at调度作业中删除指定的作业号"></a>命令选项 -r  ,从at调度作业中删除指定的作业号</h5><h4 id="type命令-判断一个命令是外部程序-命令，还是内部命令"><a href="#type命令-判断一个命令是外部程序-命令，还是内部命令" class="headerlink" title="type命令 判断一个命令是外部程序/命令，还是内部命令"></a>type命令 判断一个命令是外部程序/命令，还是内部命令</h4><img src="/2021/05/15/linux/90.png" alt="88" style="zoom:80%;">
+
+<h5 id="命令选项-a-查看所有可能情况"><a href="#命令选项-a-查看所有可能情况" class="headerlink" title="命令选项 -a 查看所有可能情况"></a>命令选项 -a 查看所有可能情况</h5><img src="/2021/05/15/linux/91.png" alt="88" style="zoom:80%;">
+
+
+
+<h4 id="time命令-计时程序"><a href="#time命令-计时程序" class="headerlink" title="time命令 计时程序"></a>time命令 计时程序</h4><p>格式：time command</p>
+<img src="/2021/05/15/linux/92.png" alt="88" style="zoom:80%;">
+
+<ul>
+<li>real时间：从命令行开始执行到运行完毕的时间间隔</li>
+<li>user时间：命令运行在用户态的cpu时间</li>
+<li>sys时间：命令运行在核心态的cpu时间</li>
+</ul>
+<h4 id="tar命令-将一组文件复制到一个文件中"><a href="#tar命令-将一组文件复制到一个文件中" class="headerlink" title="tar命令 将一组文件复制到一个文件中"></a>tar命令 将一组文件复制到一个文件中</h4><h5 id="打包文件：tar-cvf-tarname-file-dir"><a href="#打包文件：tar-cvf-tarname-file-dir" class="headerlink" title="打包文件：tar -cvf tarname file dir"></a>打包文件：tar -cvf tarname file dir</h5><p>-cvf：创建存档文件+显示打包文件信息+指定生成存档文件名</p>
+<img src="/2021/05/15/linux/93.png" alt="88" style="zoom:80%;">
+
+<h5 id="显示打包文件：tar-tvf-tarname"><a href="#显示打包文件：tar-tvf-tarname" class="headerlink" title="显示打包文件：tar -tvf tarname"></a>显示打包文件：tar -tvf tarname</h5><p>-tvf：列出存档文件内容+显示包中文件详细信息+指定存档文件名</p>
+<img src="/2021/05/15/linux/94.png" alt="88" style="zoom:80%;">
+
+<h5 id="解包包中所有文件：tar-xvf-tarname"><a href="#解包包中所有文件：tar-xvf-tarname" class="headerlink" title="解包包中所有文件：tar -xvf tarname"></a>解包包中所有文件：tar -xvf tarname</h5><p>-xvf：还原被打包文件+显示打包文件信息+指定存档文件名</p>
+<img src="/2021/05/15/linux/95.png" alt="88" style="zoom:80%;">
+
+<h5 id="解包包中指定文件：tar-xvf-tarname-file"><a href="#解包包中指定文件：tar-xvf-tarname-file" class="headerlink" title="解包包中指定文件：tar -xvf tarname file"></a>解包包中指定文件：tar -xvf tarname file</h5><img src="/2021/05/15/linux/96.png" alt="88" style="zoom:70%;">
+
+
+
+<h4 id="UNIX-系统安全"><a href="#UNIX-系统安全" class="headerlink" title="UNIX 系统安全"></a>UNIX 系统安全</h4><ul>
+<li>确保未授权用户不能得到系统访问权限</li>
+<li>确保授权用户不能修改系统或其他用户文件</li>
+<li>授予某些用户一定特权</li>
+</ul>
+<h5 id="口令保护"><a href="#口令保护" class="headerlink" title="口令保护"></a>口令保护</h5><img src="/2021/05/15/linux/97.png" alt="97" style="zoom:50%;">
+
+<h5 id="文件保护"><a href="#文件保护" class="headerlink" title="文件保护"></a>文件保护</h5><img src="/2021/05/15/linux/98.png" alt="97" style="zoom:60%;">
+
+<h5 id="目录访问权限"><a href="#目录访问权限" class="headerlink" title="目录访问权限"></a>目录访问权限</h5><img src="/2021/05/15/linux/99.png" alt="97" style="zoom:50%;">
+
+<h5 id="超级用户"><a href="#超级用户" class="headerlink" title="超级用户"></a>超级用户</h5><img src="/2021/05/15/linux/100.png" alt="97" style="zoom:70%;">
+
+
+
+<h4 id="Shell-环境配置文件"><a href="#Shell-环境配置文件" class="headerlink" title="Shell 环境配置文件"></a>Shell 环境配置文件</h4><h5 id="系统配置文件：全局性，适用所有用户"><a href="#系统配置文件：全局性，适用所有用户" class="headerlink" title="系统配置文件：全局性，适用所有用户"></a>系统配置文件：全局性，适用所有用户</h5><ul>
+<li>/etc/profile  设置系统整体环境与自启动程序；登录时执行</li>
+<li>/etc/bashrc  设置系统整体函数与缩写；打开bash时执行</li>
+</ul>
+<h5 id="用户配置文件：局部性，适用于某个用户"><a href="#用户配置文件：局部性，适用于某个用户" class="headerlink" title="用户配置文件：局部性，适用于某个用户"></a>用户配置文件：局部性，适用于某个用户</h5><ul>
+<li><del>/.bash_profile  设置登陆用户的bash环境；执行</del>/.bashrc</li>
+<li>~/.bashrc            设置当前用户的bash环境；执行/etc/bashrc</li>
+<li>~/.bash_logout   用户退出bash时执行</li>
+</ul>
+<h4 id="登录Shell-与-非登录Shell"><a href="#登录Shell-与-非登录Shell" class="headerlink" title="登录Shell 与 非登录Shell"></a>登录Shell 与 非登录Shell</h4><img src="/2021/05/15/linux/65.png" alt="50" style="zoom:40%;">
+
+<h4 id="配置文件功能"><a href="#配置文件功能" class="headerlink" title="配置文件功能"></a>配置文件功能</h4><h5 id="etc-profile"><a href="#etc-profile" class="headerlink" title="/etc/profile"></a>/etc/profile</h5><img src="/2021/05/15/linux/68.png" alt="68" style="zoom:80%;">
+
+<h5 id="etc-bashrc-：配置系统函数与缩写"><a href="#etc-bashrc-：配置系统函数与缩写" class="headerlink" title="/etc/bashrc ：配置系统函数与缩写"></a>/etc/bashrc ：配置系统函数与缩写</h5><img src="/2021/05/15/linux/69.png" alt="69 (1)" style="zoom:80%;">
+
+<h5 id="export-使一系列shell变量作用于子Shell"><a href="#export-使一系列shell变量作用于子Shell" class="headerlink" title="export 使一系列shell变量作用于子Shell"></a>export 使一系列shell变量作用于子Shell</h5><h4 id="alias命令-为命令起别名"><a href="#alias命令-为命令起别名" class="headerlink" title="alias命令 为命令起别名"></a>alias命令 为命令起别名</h4><p>格式：alias 别名=命令名</p>
+<img src="/2021/05/15/linux/67.png" alt="50" style="zoom:80%;">
+
+<h5 id="命令选项-p-查看已有别名"><a href="#命令选项-p-查看已有别名" class="headerlink" title="命令选项 -p 查看已有别名"></a>命令选项 -p 查看已有别名</h5><img src="/2021/05/15/linux/66.png" alt="50" style="zoom:80%;">
+
+<h4 id="unalias命令-删除别名"><a href="#unalias命令-删除别名" class="headerlink" title="unalias命令 删除别名"></a>unalias命令 删除别名</h4><p>格式：unalias 别名</p>
+<h4 id="UNIX进程：一个正在执行的程序"><a href="#UNIX进程：一个正在执行的程序" class="headerlink" title="UNIX进程：一个正在执行的程序"></a>UNIX进程：一个正在执行的程序</h4><h5 id="进程表：为了掌握进程信息，系统为每个进程创建维护进程表"><a href="#进程表：为了掌握进程信息，系统为每个进程创建维护进程表" class="headerlink" title="进程表：为了掌握进程信息，系统为每个进程创建维护进程表"></a>进程表：为了掌握进程信息，系统为每个进程创建维护进程表</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[进程表]</span><br><span class="line">A--&gt;B[进程号]</span><br><span class="line">A--&gt;C[进程状态:就绪/等待]</span><br><span class="line">A--&gt;D[进程等待的事件号]</span><br><span class="line">A--&gt;E[系统数据区地址]</span><br></pre></td></tr></table></figure>
+
+<h5 id="管理进程"><a href="#管理进程" class="headerlink" title="管理进程"></a>管理进程</h5><img src="/2021/05/15/linux/70.png" alt="70" style="zoom:80%;">
+
+
+
+<h2 id="Shell-编程"><a href="#Shell-编程" class="headerlink" title="Shell 编程"></a>Shell 编程</h2><h2 id="Vi编辑器"><a href="#Vi编辑器" class="headerlink" title="Vi编辑器"></a>Vi编辑器</h2><h4 id="vi工作模式"><a href="#vi工作模式" class="headerlink" title="vi工作模式"></a>vi工作模式</h4><img src="/2021/05/15/linux/101.png" alt="101" style="zoom:70%;">
+
+<h5 id="状态栏"><a href="#状态栏" class="headerlink" title="状态栏"></a>状态栏</h5><p>屏幕最底部一行，反馈用户操作结果，错误/其他信息在状态栏显示</p>
+<img src="/2021/05/15/linux/102.png" alt="88" style="zoom:80%;">
+
+<h4 id="工作模式切换"><a href="#工作模式切换" class="headerlink" title="工作模式切换"></a>工作模式切换</h4><img src="/2021/05/15/linux/103.png" alt="88" style="zoom:65%;">
+
+<h4 id="文本输入模式："><a href="#文本输入模式：" class="headerlink" title="文本输入模式："></a>文本输入模式：</h4><ul>
+<li>按 <strong>i</strong> ，进入文本输入模式</li>
+<li>按 <strong>BackSpace</strong> 或 <strong>[Ctrl + h]</strong> 删除字符</li>
+<li>按 <strong>Enter</strong> 进入下一行</li>
+</ul>
+<h4 id="命令模式："><a href="#命令模式：" class="headerlink" title="命令模式："></a>命令模式：</h4><p>按 <strong>ESC</strong> 进入命令模式</p>
+<h5 id="命令模式➡文本输入模式"><a href="#命令模式➡文本输入模式" class="headerlink" title="命令模式➡文本输入模式"></a>命令模式➡文本输入模式</h5><img src="/2021/05/15/linux/104.png" alt="88" style="zoom:70%;">
+
+<h5 id="命令模式下光标移动"><a href="#命令模式下光标移动" class="headerlink" title="命令模式下光标移动"></a>命令模式下光标移动</h5><p>上下左右：</p>
+<ul>
+<li><strong>h</strong>、<strong>j</strong>、<strong>k</strong>、<strong>l</strong> ; </li>
+<li>⬆、⬇、⬅、➡</li>
+</ul>
+<img src="/2021/05/15/linux/105.png" alt="105 (1)" style="zoom:90%;">
+
+<h6 id="dw-：删除一个单词"><a href="#dw-：删除一个单词" class="headerlink" title="dw ：删除一个单词"></a>dw ：删除一个单词</h6><h6 id="数字-名令：2-h-3-dd-2-dw-…"><a href="#数字-名令：2-h-3-dd-2-dw-…" class="headerlink" title="数字+名令：2 h; 3 dd; 2 dw …"></a>数字+名令：2 h; 3 dd; 2 dw …</h6><h5 id="搜索字符串"><a href="#搜索字符串" class="headerlink" title="搜索字符串"></a>搜索字符串</h5><ul>
+<li><p>linux：从光标所在位置<strong>向后</strong>查找字符串</p>
+</li>
+<li><p>?linux：从光标所在位置<strong>向前</strong>查找字符串</p>
+</li>
+<li><p>n：下一个匹配，与命令搜索方向相同</p>
+</li>
+<li><p>N：下一个匹配，命令搜索方向相反</p>
+</li>
+</ul>
+<h5 id="退出Vi"><a href="#退出Vi" class="headerlink" title="退出Vi"></a>退出Vi</h5><ul>
+<li>:wq 保存文件并退出</li>
+<li>:x    保存文件并退出</li>
+<li>ZZ   保存文件并退出</li>
+<li>:q    未修改文件，退出；修改文件未保存，不允许推出 </li>
+<li>:q!   不保存直接退出</li>
+</ul>
+<h4 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h4><img src="/2021/05/15/linux/106.png" alt style="zoom:60%;">
+
+<h4 id="编辑多个文件"><a href="#编辑多个文件" class="headerlink" title="编辑多个文件"></a>编辑多个文件</h4><h5 id="r-文件名：指定文件副本插入当前文件光标下一行"><a href="#r-文件名：指定文件副本插入当前文件光标下一行" class="headerlink" title="r 文件名：指定文件副本插入当前文件光标下一行"></a>r 文件名：指定文件副本插入当前文件光标下一行</h5><p>只载入指定文件副本，不改变源文件</p>
+<h5 id="a-b-w-文件名：将文件的一部分写到另一个文件"><a href="#a-b-w-文件名：将文件的一部分写到另一个文件" class="headerlink" title="[a,b] w 文件名：将文件的一部分写到另一个文件"></a>[a,b] w 文件名：将文件的一部分写到另一个文件</h5><h4 id="重排文本"><a href="#重排文本" class="headerlink" title="重排文本"></a>重排文本</h4><h5 id="d：删除指定位置文本，并保存到缓冲区"><a href="#d：删除指定位置文本，并保存到缓冲区" class="headerlink" title="d：删除指定位置文本，并保存到缓冲区"></a>d：删除指定位置文本，并保存到缓冲区</h5><h5 id="y：复制指定位置文本到缓冲区"><a href="#y：复制指定位置文本到缓冲区" class="headerlink" title="y：复制指定位置文本到缓冲区"></a>y：复制指定位置文本到缓冲区</h5><h5 id="P：将指定缓冲区的内容放在当前光标位置之上"><a href="#P：将指定缓冲区的内容放在当前光标位置之上" class="headerlink" title="P：将指定缓冲区的内容放在当前光标位置之上"></a>P：将指定缓冲区的内容放在当前光标位置之上</h5><h5 id="p：将指定缓冲区的内容放在当前光标位置之下"><a href="#p：将指定缓冲区的内容放在当前光标位置之下" class="headerlink" title="p：将指定缓冲区的内容放在当前光标位置之下"></a>p：将指定缓冲区的内容放在当前光标位置之下</h5><h5 id="c：删除文本并使vi进入文本输入模式"><a href="#c：删除文本并使vi进入文本输入模式" class="headerlink" title="c：删除文本并使vi进入文本输入模式"></a>c：删除文本并使vi进入文本输入模式</h5><h5 id="dd-P-p：删除当前行，将被删除行放置在光标之上-下"><a href="#dd-P-p：删除当前行，将被删除行放置在光标之上-下" class="headerlink" title="dd + P/p：删除当前行，将被删除行放置在光标之上/下"></a>dd + P/p：删除当前行，将被删除行放置在光标之上/下</h5><h5 id="yy-P-p：复制当前行，将被复制行放置在光标之上-下"><a href="#yy-P-p：复制当前行，将被复制行放置在光标之上-下" class="headerlink" title="yy + P/p：复制当前行，将被复制行放置在光标之上/下"></a>yy + P/p：复制当前行，将被复制行放置在光标之上/下</h5><h4 id="使用操作符与域控制键-0-等"><a href="#使用操作符与域控制键-0-等" class="headerlink" title="使用操作符与域控制键(0 $ 等)"></a>使用操作符与域控制键(0 $ 等)</h4><h4 id="光标定位键"><a href="#光标定位键" class="headerlink" title="光标定位键"></a>光标定位键</h4><h5 id="翻页："><a href="#翻页：" class="headerlink" title="翻页："></a>翻页：</h5><ul>
+<li><p>[Ctrl+d] 向下翻半页</p>
+</li>
+<li><p>[Ctrl+u] 向上翻半页</p>
+</li>
+<li><p>[Ctrl+f] 向下翻一页</p>
+</li>
+<li><p>[Ctrl+b] 向上翻一页</p>
+</li>
+</ul>
+<h5 id="光标移动到首行：1G-，gg，-1"><a href="#光标移动到首行：1G-，gg，-1" class="headerlink" title="光标移动到首行：1G ，gg，:1"></a>光标移动到首行：1G ，gg，:1</h5><h5 id="光标移动到第n行：-n"><a href="#光标移动到第n行：-n" class="headerlink" title="光标移动到第n行： :n"></a>光标移动到第n行： :n</h5><h5 id="光标移动到文件尾：G"><a href="#光标移动到文件尾：G" class="headerlink" title="光标移动到文件尾：G"></a>光标移动到文件尾：G</h5><h5 id="n-G-：光标移动到第n行"><a href="#n-G-：光标移动到第n行" class="headerlink" title="n+G ：光标移动到第n行"></a>n+G ：光标移动到第n行</h5><h5 id="Ctrl-g-获取当前行号"><a href="#Ctrl-g-获取当前行号" class="headerlink" title="[Ctrl+g] 获取当前行号"></a>[Ctrl+g] 获取当前行号</h5><img src="/2021/05/15/linux/107.png" alt="88" style="zoom:80%;">
+
+
+
+<h4 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…."></a>未完待续….</h4>]]></content>
+  </entry>
+  <entry>
+    <title>物理复习笔记</title>
+    <url>/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h3 id="力学"><a href="#力学" class="headerlink" title="力学"></a>力学</h3><h4 id="质点运动的描述"><a href="#质点运动的描述" class="headerlink" title="质点运动的描述"></a>质点运动的描述</h4><h5 id="质心："><a href="#质心：" class="headerlink" title="质心："></a>质心：</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/11.png" style="zoom: 80%;"> 
+##### 参考系与坐标系
+
+<h5 id="位矢：-r-x-cdot-i-y-cdot-j-z-cdot-k-r-sqrt-x-2-y-2-z-2"><a href="#位矢：-r-x-cdot-i-y-cdot-j-z-cdot-k-r-sqrt-x-2-y-2-z-2" class="headerlink" title="位矢：$r=x\cdot i+y\cdot j+z\cdot k\ \ ,\ |r|=\sqrt{x^2+y^2+z^2}$"></a>位矢：$r=x\cdot i+y\cdot j+z\cdot k\ \ ,\ |r|=\sqrt{x^2+y^2+z^2}$</h5><h5 id="方向余弦：-cos-alpha-frac-x-r-cos-beta-frac-y-r-cos-gamma-frac-z-r-cos-2-alpha-cos-2-beta-cos-2-gamma-1"><a href="#方向余弦：-cos-alpha-frac-x-r-cos-beta-frac-y-r-cos-gamma-frac-z-r-cos-2-alpha-cos-2-beta-cos-2-gamma-1" class="headerlink" title="方向余弦：$cos \alpha=\frac{x}{r}\ ,\ cos\beta= \frac{y}{r}\ ,\ cos\gamma=\frac{z}{r}\ ,\ cos^2\alpha+cos^2\beta+cos^2\gamma=1 $"></a>方向余弦：$cos \alpha=\frac{x}{r}\ ,\ cos\beta= \frac{y}{r}\ ,\ cos\gamma=\frac{z}{r}\ ,\ cos^2\alpha+cos^2\beta+cos^2\gamma=1 $</h5><h5 id="运动学方程：-r-r-t-x-t-cdot-i-y-t-cdot-j-z-t-cdot-k-begin-cases-x-x-t-y-y-t-z-z-t-end-cases"><a href="#运动学方程：-r-r-t-x-t-cdot-i-y-t-cdot-j-z-t-cdot-k-begin-cases-x-x-t-y-y-t-z-z-t-end-cases" class="headerlink" title="运动学方程： $r=r(t)=x(t)\cdot i+y(t)\cdot j+z(t)\cdot k\ ,\ \begin{cases} x=x(t)\y=y(t)\z=z(t)\end{cases}$"></a>运动学方程： $r=r(t)=x(t)\cdot i+y(t)\cdot j+z(t)\cdot k\ ,\ \begin{cases} x=x(t)\y=y(t)\z=z(t)\end{cases}$</h5><h5 id="位移：有：-r-B-r-A-overrightarrow-AB-overrightarrow-AB-Delta-r"><a href="#位移：有：-r-B-r-A-overrightarrow-AB-overrightarrow-AB-Delta-r" class="headerlink" title="位移：有：$r_B=r_A+\overrightarrow{AB} \ ,\ \overrightarrow{AB}=\Delta r$"></a>位移：有：$r_B=r_A+\overrightarrow{AB} \ ,\ \overrightarrow{AB}=\Delta r$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/1.png" style="zoom: 80%;"> 
+##### 速度：
+1. 速度：$v=\frac{dr}{dt}=\frac{d}{dt}(xi+yj+zk)=\frac{dx}{dt}i+\frac{dy}{dt}j+\frac{dz}{dt}k\ ,\ |v|=\sqrt{v_x^2+v_y^2+v_z^2}$
+2. 平均速度：$\overline{v}=\frac{\Delta r}{\Delta t}$
+3. 瞬时速度：$v=\lim \limits_{\Delta t\rightarrow 0} \frac{\Delta r}{\Delta t}=\frac{dr}{dt}\ ,\ |v|=|\frac{dr}{dt}|=\lim\limits_{\Delta{t} \to0  }\frac{\Delta{s} }{\Delta{t}}=\frac{ds}{dt} $
+
+<h5 id="加速度：有：-Delta-v-v-B-v-A"><a href="#加速度：有：-Delta-v-v-B-v-A" class="headerlink" title="加速度：有：$\Delta{v}=v_B-v_A\ $"></a>加速度：有：$\Delta{v}=v_B-v_A\ $</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/2.png" style="zoom: 80%;"> 
+
+<ol>
+<li>加速度：$a=\frac{dv}{dt}=\frac{d^2x}{dt^2}i+\frac{d^2y}{dt^2}j+\frac{d^2z}{dt^2}k\ ,\ |a|=\sqrt{a^2_x+a_y^2+a_z^2}$</li>
+<li>平均加速度：$ \overline{a}=\frac{\Delta{v}}{\Delta{t}}$</li>
+<li>瞬时加速度：$ \lim\limits_{\Delta t\to 0}\frac{\Delta v}{\Delta t}=\frac{dv}{dt}=\frac{d^2r}{dt^2}$</li>
+</ol>
+<h4 id="圆周运动"><a href="#圆周运动" class="headerlink" title="圆周运动"></a>圆周运动</h4><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/3.png" style="zoom: 80%;"> 
+
+<h5 id="加速度"><a href="#加速度" class="headerlink" title="加速度"></a>加速度</h5><ol>
+<li>加速度：$a=\frac{d}{dt}(ve_t)=\frac{dv}{dt}e_t+v\frac{de_t}{dt}=\frac{dv}{dt}e_t+\frac{v^2}{R}e_n$</li>
+<li>切向加速度：$a_t=\frac{dv}{dt}e_t$</li>
+<li>法向加速度: $a_n=\frac{v^2}R{e_n}$</li>
+</ol>
+<p>$|a|=\sqrt{a_t^2+a_n^2}=\sqrt{(\frac{dv}{dt})^2+(\frac{v^2}{R})^2 }\ ,\ \varphi=\arctan\frac{a_t}{a_n}$</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/4.png" style="zoom: 80%;"> 
+
+<h5 id="角位置：-theta"><a href="#角位置：-theta" class="headerlink" title="角位置：$\theta$"></a>角位置：$\theta$</h5><h5 id="角位移：-Delta-theta"><a href="#角位移：-Delta-theta" class="headerlink" title="角位移：$\Delta\theta$"></a>角位移：$\Delta\theta$</h5><h5 id="角速度"><a href="#角速度" class="headerlink" title="角速度"></a>角速度</h5><ol>
+<li>平均角速度：$\overline{\omega}=\frac{\Delta\theta}{\Delta t}$</li>
+<li>瞬时角速度：$ \omega =\lim\limits_{\Delta t\to 0}\frac{\Delta \theta}{\Delta t}=\frac{d\theta}{dt}$</li>
+</ol>
+<h5 id="角加速度"><a href="#角加速度" class="headerlink" title="角加速度"></a>角加速度</h5><ol>
+<li>平均角加速度：$\overline{\beta}=\frac{\Delta \omega}{\Delta t}$</li>
+<li>瞬时角加速度：$\beta=\lim\limits_{\Delta t\to 0}\frac{\Delta \omega}{\Delta t}=\frac{dw}{dt}=\frac{d^2\theta}{dt^2}$</li>
+</ol>
+<h5 id="角量与线量的关系：-begin-cases-v-R-omega-a-t-R-beta-a-n-frac-v-2-R-v-omega-R-omega-2-end-cases"><a href="#角量与线量的关系：-begin-cases-v-R-omega-a-t-R-beta-a-n-frac-v-2-R-v-omega-R-omega-2-end-cases" class="headerlink" title="角量与线量的关系：$\begin{cases} v=R\omega \ a_t=R\beta \ a_n=\frac{v^2}{R}=v\omega=R\omega^2 \end{cases}$"></a>角量与线量的关系：$\begin{cases} v=R\omega \ a_t=R\beta \ a_n=\frac{v^2}{R}=v\omega=R\omega^2 \end{cases}$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/5.png" style="zoom: 80%;"> 
+
+<h5 id="曲线运动的加速度：-begin-cases-a-n-frac-v-2-rho-a-t-frac-dv-dt-e-t-a-a-n-a-t-end-cases"><a href="#曲线运动的加速度：-begin-cases-a-n-frac-v-2-rho-a-t-frac-dv-dt-e-t-a-a-n-a-t-end-cases" class="headerlink" title="曲线运动的加速度：$\begin{cases}a_n=\frac{v^2}{\rho} \ a_t=\frac{dv}{dt}e_t \ a=a_n+a_t \end{cases}$"></a>曲线运动的加速度：$\begin{cases}a_n=\frac{v^2}{\rho} \ a_t=\frac{dv}{dt}e_t \ a=a_n+a_t \end{cases}$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/6.png" style="zoom: 80%;"> 
+
+<h4 id="质点运动的基本定律"><a href="#质点运动的基本定律" class="headerlink" title="质点运动的基本定律"></a>质点运动的基本定律</h4><h5 id="牛顿运动定律"><a href="#牛顿运动定律" class="headerlink" title="牛顿运动定律"></a>牛顿运动定律</h5><ol>
+<li>牛顿第一定律</li>
+<li>牛顿第二定律</li>
+<li>牛顿第三定律</li>
+</ol>
+<h5 id="动量"><a href="#动量" class="headerlink" title="动量"></a>动量</h5><h5 id="动量定理"><a href="#动量定理" class="headerlink" title="动量定理"></a>动量定理</h5><h5 id="动量守恒定律"><a href="#动量守恒定律" class="headerlink" title="动量守恒定律"></a>动量守恒定律</h5><h5 id="功-功率"><a href="#功-功率" class="headerlink" title="功,功率"></a>功,功率</h5><h5 id="动能定理"><a href="#动能定理" class="headerlink" title="动能定理"></a>动能定理</h5><h5 id="势能"><a href="#势能" class="headerlink" title="势能"></a>势能</h5><h5 id="机械能守恒定律"><a href="#机械能守恒定律" class="headerlink" title="机械能守恒定律"></a>机械能守恒定律</h5><h5 id="能量守恒定律"><a href="#能量守恒定律" class="headerlink" title="能量守恒定律"></a>能量守恒定律</h5><h5 id="角动量：-L-pr-mvr"><a href="#角动量：-L-pr-mvr" class="headerlink" title="角动量：$L=pr=mvr$"></a>角动量：$L=pr=mvr$</h5><h5 id="角动量定理：-M-r-times-F-frac-dL-dt"><a href="#角动量定理：-M-r-times-F-frac-dL-dt" class="headerlink" title="角动量定理：$M=r\times F=\frac{dL}{dt}$"></a>角动量定理：$M=r\times F=\frac{dL}{dt}$</h5><h4 id="刚体的定轴转动基本定律"><a href="#刚体的定轴转动基本定律" class="headerlink" title="刚体的定轴转动基本定律"></a>刚体的定轴转动基本定律</h4><div align="center">
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/7.png" style="zoom: 80%;"><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/8.png" style="zoom: 80%;"> 
+</div>
+
+<h5 id="力矩：-begin-cases-M-0-r-times-F-M-z-F-2r-sin-varphi-F-2d-end-cases"><a href="#力矩：-begin-cases-M-0-r-times-F-M-z-F-2r-sin-varphi-F-2d-end-cases" class="headerlink" title="力矩： $\begin{cases} M_0=r\times F \ M_z=F_2r\sin\varphi=F_2d \end{cases}$"></a>力矩： $\begin{cases} M_0=r\times F \ M_z=F_2r\sin\varphi=F_2d \end{cases}$</h5><h5 id="角速度矢量：-v-omega-times-r"><a href="#角速度矢量：-v-omega-times-r" class="headerlink" title="角速度矢量：$ v=\omega\times r$"></a>角速度矢量：$ v=\omega\times r$</h5><h5 id="转动惯量：-J-sum-limits-i-Delta-m-ir-i-2-int-r-2dm-dm-begin-cases-rho-dV-sigma-dS-lambda-dl-end-cases"><a href="#转动惯量：-J-sum-limits-i-Delta-m-ir-i-2-int-r-2dm-dm-begin-cases-rho-dV-sigma-dS-lambda-dl-end-cases" class="headerlink" title="转动惯量：$J=\sum\limits_{i}\Delta m_ir_i^2=\int r^2dm \ ,\ dm=\begin{cases} \rho dV\ \sigma dS \ \lambda dl \end{cases}$"></a>转动惯量：$J=\sum\limits_{i}\Delta m_ir_i^2=\int r^2dm \ ,\ dm=\begin{cases} \rho dV\ \sigma dS \ \lambda dl \end{cases}$</h5><h5 id="转动定律：-M-J-beta-J-frac-d-omega-dt"><a href="#转动定律：-M-J-beta-J-frac-d-omega-dt" class="headerlink" title="转动定律：$M=J\beta=J\frac{d\omega}{dt} $"></a>转动定律：$M=J\beta=J\frac{d\omega}{dt} $</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/9.png" style="zoom: 80%;"> 
+
+<h5 id="动量矩定理："><a href="#动量矩定理：" class="headerlink" title="动量矩定理："></a>动量矩定理：</h5><p>有：$Mdt=Jd\omega \to \int^{t_2} _ {t_1} Mdt=J\omega_2-J\omega_1=L_2-L_1$</p>
+<p>动量矩(角动量)：$L=J\omega$</p>
+<h5 id="动量矩守恒定理：合外力矩为-0-时-物体动量矩保持不变"><a href="#动量矩守恒定理：合外力矩为-0-时-物体动量矩保持不变" class="headerlink" title="动量矩守恒定理：合外力矩为 $0$ 时, 物体动量矩保持不变"></a>动量矩守恒定理：合外力矩为 $0$ 时, 物体动量矩保持不变</h5><h5 id="刚体定轴转动的动能定理"><a href="#刚体定轴转动的动能定理" class="headerlink" title="刚体定轴转动的动能定理"></a>刚体定轴转动的动能定理</h5><ol>
+<li>力矩的功：$A=\sum\limits_{i}A_i=\int ^{\theta} _ {\theta_0} (\sum_\limits{i}M_i) d\theta $ <img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/10.png" style="zoom: 80%;"> </li>
+<li>转动动能：$E_k=\sum\frac{1}{2} \Delta m_iv_i^2 =\frac{1}{2}J\omega^2$</li>
+<li>刚体定轴转动的动能定理：$A = \int_{\theta_1}^{\theta_2}M d\theta=\frac{1}{2}J\omega_2^2-\frac{1}{2} Jw_1^2 $</li>
+</ol>
+<h5 id="刚体定轴转动的机械能守恒定律"><a href="#刚体定轴转动的机械能守恒定律" class="headerlink" title="刚体定轴转动的机械能守恒定律"></a>刚体定轴转动的机械能守恒定律</h5><p>刚体的重力势能：$\begin{cases} E_p=\sum \Delta m_i g h_i=g\sum \Delta m_i h_i\ \ \ h_C=\frac{\sum \Delta m_i h_i}{m} \end{cases} \to E_p=mgh_C $</p>
+<h3 id="静电场"><a href="#静电场" class="headerlink" title="静电场"></a>静电场</h3><h4 id="电荷-库仑定律"><a href="#电荷-库仑定律" class="headerlink" title="电荷 库仑定律"></a>电荷 库仑定律</h4><p>库仑定律：$\overrightarrow{F}=\frac{q_1q_2}{4\pi\epsilon_0 r^2}\overrightarrow{e_r}\ ,\  \epsilon_0=\frac{1}{4\pi k}$</p>
+<p>叠加定理：$F=\sum F_i$ </p>
+<h4 id="静电场-电场强度"><a href="#静电场-电场强度" class="headerlink" title="静电场 电场强度"></a>静电场 电场强度</h4><p>电场强度：$\begin{cases} E=\frac{F}{q_0} \ \overrightarrow{E}=\frac{q}{4\pi\epsilon_0 r^2}\overrightarrow{e_r}\ \overrightarrow{E}=\int dE =\frac{1}{4\pi \epsilon_0 }\int\frac{dq}{r^2} \overrightarrow{e_r}\end{cases}$</p>
+<p>场强叠加原理：$E=\sum E_i$</p>
+<h5 id="电场对电荷的作用力：-F-Eq"><a href="#电场对电荷的作用力：-F-Eq" class="headerlink" title="电场对电荷的作用力：$F=Eq$"></a>电场对电荷的作用力：$F=Eq$</h5><h5 id="电场线-电场强度通量"><a href="#电场线-电场强度通量" class="headerlink" title="电场线 电场强度通量"></a>电场线 电场强度通量</h5><p>电场强度通量：$\begin{cases} \Psi_E=E\cdot S=E\cos\theta S\  \Psi_E=\iint\limits_S E\cos\theta dS=\iint\limits_S E\cdot dS \end{cases}$</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/12.png" style="zoom: 60%;"> 
+
+
+<h4 id="静电场的高斯定理：-iint-limits-S-E-cdot-dS-frac-sum-limits-iq-i-epsilon-0"><a href="#静电场的高斯定理：-iint-limits-S-E-cdot-dS-frac-sum-limits-iq-i-epsilon-0" class="headerlink" title="静电场的高斯定理：$ \iint  \limits_S E\cdot dS=\frac{\sum\limits_iq_i }{\epsilon_0}$"></a>静电场的高斯定理：$ \iint  \limits_S E\cdot dS=\frac{\sum\limits_iq_i }{\epsilon_0}$</h4><h4 id="静电场的环路定理-电势"><a href="#静电场的环路定理-电势" class="headerlink" title="静电场的环路定理 电势"></a>静电场的环路定理 电势</h4><h5 id="静电场力做功：-A-a-b-int-a-b-F-cdot-dl-frac-qq-0-4-pi-epsilon-0-frac-1-r-a-frac-1-r-b"><a href="#静电场力做功：-A-a-b-int-a-b-F-cdot-dl-frac-qq-0-4-pi-epsilon-0-frac-1-r-a-frac-1-r-b" class="headerlink" title="静电场力做功：$A_{a,b}=\int_{a}^{b} F\cdot dl=\frac{qq_0}{4\pi \epsilon_0}(\frac{1}{r_a}-\frac{1}{r_b})$"></a>静电场力做功：$A_{a,b}=\int_{a}^{b} F\cdot dl=\frac{qq_0}{4\pi \epsilon_0}(\frac{1}{r_a}-\frac{1}{r_b})$</h5><h5 id="静电场的环路定理：-oint-limits-L-E-cdot-dl-0"><a href="#静电场的环路定理：-oint-limits-L-E-cdot-dl-0" class="headerlink" title="静电场的环路定理：$\oint\limits_{L} E \cdot dl=0$"></a>静电场的环路定理：$\oint\limits_{L} E \cdot dl=0$</h5><h5 id="电势能：-W-a-A-a-infty-q-0-int-a-infty-E-cdot-dl"><a href="#电势能：-W-a-A-a-infty-q-0-int-a-infty-E-cdot-dl" class="headerlink" title="电势能：$W_a=A_{a\ \infty}=q_0\int_{a}^{\infty} E\cdot dl$"></a>电势能：$W_a=A_{a\ \infty}=q_0\int_{a}^{\infty} E\cdot dl$</h5><h5 id="电势：-V-a-frac-W-a-q-0-int-a-infty-E-cdot-dl"><a href="#电势：-V-a-frac-W-a-q-0-int-a-infty-E-cdot-dl" class="headerlink" title="电势：$V_a=\frac{W_a}{q_0}=\int_{a}^{\infty}E\cdot dl$"></a>电势：$V_a=\frac{W_a}{q_0}=\int_{a}^{\infty}E\cdot dl$</h5><h5 id="电势叠加原理：-V-p-sum-V-i"><a href="#电势叠加原理：-V-p-sum-V-i" class="headerlink" title="电势叠加原理：$V_p=\sum V_i$"></a>电势叠加原理：$V_p=\sum V_i$</h5><h5 id="电势差-电压-：-U-ab-V-a-V-b-frac-W-a-q-0-frac-W-b-q-0-int-b-a-E-cdot-dl"><a href="#电势差-电压-：-U-ab-V-a-V-b-frac-W-a-q-0-frac-W-b-q-0-int-b-a-E-cdot-dl" class="headerlink" title="电势差(电压)：$U_{ab}=V_a-V_b=\frac{W_a}{q_0}-\frac{W_b}{q_0}=\int_{b}^{a}E\cdot dl$"></a>电势差(电压)：$U_{ab}=V_a-V_b=\frac{W_a}{q_0}-\frac{W_b}{q_0}=\int_{b}^{a}E\cdot dl$</h5><h5 id="电场力做功：-A-ab-q-0-V-a-V-b"><a href="#电场力做功：-A-ab-q-0-V-a-V-b" class="headerlink" title="电场力做功：$A_{ab}=q_0(V_a-V_b)$"></a>电场力做功：$A_{ab}=q_0(V_a-V_b)$</h5><h5 id="电势的计算：-begin-cases-V-P-frac-q-4-pi-epsilon-0-r-V-p-int-frac-dq-4-pi-epsilon-0-r-end-cases"><a href="#电势的计算：-begin-cases-V-P-frac-q-4-pi-epsilon-0-r-V-p-int-frac-dq-4-pi-epsilon-0-r-end-cases" class="headerlink" title="电势的计算：$\begin{cases} V_P=\frac{q}{4\pi \epsilon_0 r} \ V_p=\int \frac{dq}{4\pi \epsilon_0 r}\end{cases}$"></a>电势的计算：$\begin{cases} V_P=\frac{q}{4\pi \epsilon_0 r} \ V_p=\int \frac{dq}{4\pi \epsilon_0 r}\end{cases}$</h5><h4 id="电场强度与电势的关系：-begin-cases-E-frac-dV-dn-e-n-nabla-V-E-E-xi-E-yj-E-zk-frac-partial-V-partial-x-i-frac-partial-V-partial-y-js-frac-partial-V-partial-z-k-end-cases"><a href="#电场强度与电势的关系：-begin-cases-E-frac-dV-dn-e-n-nabla-V-E-E-xi-E-yj-E-zk-frac-partial-V-partial-x-i-frac-partial-V-partial-y-js-frac-partial-V-partial-z-k-end-cases" class="headerlink" title="电场强度与电势的关系：$\begin{cases}E=-\frac{dV}{dn}e_n=-\nabla V \E=E_xi+E_yj+E_zk =-(\frac{\partial V}{\partial x}i+\frac{\partial V}{\partial y}js+\frac{\partial V}{\partial z}k)\end{cases}$"></a>电场强度与电势的关系：$\begin{cases}E=-\frac{dV}{dn}e_n=-\nabla V \E=E_xi+E_yj+E_zk =-(\frac{\partial V}{\partial x}i+\frac{\partial V}{\partial y}js+\frac{\partial V}{\partial z}k)\end{cases}$</h4><h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><h5 id="电偶极子"><a href="#电偶极子" class="headerlink" title="电偶极子"></a>电偶极子</h5><h5 id="均匀带电直线"><a href="#均匀带电直线" class="headerlink" title="均匀带电直线"></a>均匀带电直线</h5><p>$$<br>E=\frac{\lambda l}{2\pi\epsilon_0 a(4a^2+l^2)^{\frac{1}{2}}}<br>$$</p>
+<p>无限长：<br>$$<br>E=\frac{\lambda}{2\pi \epsilon_0 a}<br>$$</p>
+<h5 id="带电圆环"><a href="#带电圆环" class="headerlink" title="带电圆环"></a>带电圆环</h5><p>$$<br>E=\frac{qx}{4\pi \epsilon_0(R^2+x^2)^{\frac{3}{2}}}<br>$$</p>
+<h5 id="带电圆盘"><a href="#带电圆盘" class="headerlink" title="带电圆盘"></a>带电圆盘</h5><p>$$<br>E=\frac{\sigma }{2\epsilon_0}[1-\frac{x}{\sqrt{R^2+x^2}}]<br>$$</p>
+<h5 id="无限大平板"><a href="#无限大平板" class="headerlink" title="无限大平板"></a>无限大平板</h5><p>$$<br>E=\frac{\sigma}{2\epsilon_0}<br>$$</p>
+<h5 id="电荷均匀分布的球面"><a href="#电荷均匀分布的球面" class="headerlink" title="电荷均匀分布的球面"></a>电荷均匀分布的球面</h5><h5 id="电荷均匀分布的球体"><a href="#电荷均匀分布的球体" class="headerlink" title="电荷均匀分布的球体"></a>电荷均匀分布的球体</h5><h5 id="均匀带电无限长圆柱体"><a href="#均匀带电无限长圆柱体" class="headerlink" title="均匀带电无限长圆柱体"></a>均匀带电无限长圆柱体</h5><h5 id="均匀带电无限大平面"><a href="#均匀带电无限大平面" class="headerlink" title="均匀带电无限大平面"></a>均匀带电无限大平面</h5><h4 id="静电场中的导体"><a href="#静电场中的导体" class="headerlink" title="静电场中的导体"></a>静电场中的导体</h4><h5 id="导体的静电平衡：导体中没有电荷做任何定向运动的状态，导体内任意点满足：-E-0"><a href="#导体的静电平衡：导体中没有电荷做任何定向运动的状态，导体内任意点满足：-E-0" class="headerlink" title="导体的静电平衡：导体中没有电荷做任何定向运动的状态，导体内任意点满足： $E=0$"></a>导体的静电平衡：导体中没有电荷做任何定向运动的状态，导体内任意点满足： $E=0$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/13.png" style="zoom: 80%;"> 
+
+<h5 id="静电平衡时导体上的电荷分布"><a href="#静电平衡时导体上的电荷分布" class="headerlink" title="静电平衡时导体上的电荷分布"></a>静电平衡时导体上的电荷分布</h5><ol>
+<li>电荷分布：导体内部没有净电荷存在电荷只能分布于导体的外表面</li>
+<li>电荷面密度与场强的关系：$\begin{cases} \iint\limits_s E \cdot dS =E\Delta S = \frac{\sigma\Delta S}{\epsilon_0}\ E=\frac{\sigma}{\epsilon_0} e_n \ ,\ \sigma\to电荷面密度 \end{cases}$<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/14.png" style="zoom: 80%;"> </li>
+</ol>
+<h5 id="静电屏蔽"><a href="#静电屏蔽" class="headerlink" title="静电屏蔽"></a>静电屏蔽</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/15.png" style="zoom: 70%;"> 
+
+<h4 id="电容器的电容"><a href="#电容器的电容" class="headerlink" title="电容器的电容"></a>电容器的电容</h4><h5 id="孤立导体的电容：-C-frac-q-V-4-pi-epsilon-0-R"><a href="#孤立导体的电容：-C-frac-q-V-4-pi-epsilon-0-R" class="headerlink" title="孤立导体的电容： $C=\frac{q}{V}=4\pi \epsilon_0 R$"></a>孤立导体的电容： $C=\frac{q}{V}=4\pi \epsilon_0 R$</h5><h5 id="电容器的电容：-C-frac-q-V-A-V-B"><a href="#电容器的电容：-C-frac-q-V-A-V-B" class="headerlink" title="电容器的电容： $C=\frac{q}{V_A-V_B}$"></a>电容器的电容： $C=\frac{q}{V_A-V_B}$</h5><p>介质的相对电容率：$\epsilon_r=\frac{C}{C_0}$</p>
+<p>平行板电容器：$\begin{cases}E=\frac{\sigma}{\epsilon_0} \ U_{AB}=V_A-V_B=Ed=\frac{\sigma}{\epsilon_0}d\ C=\frac{q}{U_{AB}}=\frac{\sigma S}{U_{AB}}=\frac{\epsilon_0S}{d} \end{cases}$</p>
+<p>圆柱形电容器：$\begin{cases}E=\frac{\lambda}{2\pi \epsilon_0 r}e_r \ U_{AB}=\int _ {R_A}^{R_B} E\cdot dr =\frac{\lambda}{2\pi\epsilon_0 }\ln\frac{R_B}{R_A} \ C=\frac{q}{U_{AB}}=\frac{\lambda l}{U_{AB}}=\frac{2 \epsilon_0 l}{\ln\frac{R_B}{R_A}} \end{cases}$</p>
+<p>球形电容器：$\begin{cases}E=\frac{q}{4\pi\epsilon_0 r^2} e_r\ U_{AB}=\int_{R_A}^{R_B}E\cdot dr=\frac{q}{4\pi\epsilon_0}(\frac{1}{R_A}-\frac{1}{R_B}) \C=\frac{q}{U_{AB}} =4\pi \epsilon_0 \frac{R_AR_B}{R_B-R_A} \ ,=4\pi\epsilon_0 R_A\ \ (R\to \infty)\end{cases}$ </p>
+<h5 id="电容器的串联和并联"><a href="#电容器的串联和并联" class="headerlink" title="电容器的串联和并联"></a>电容器的串联和并联</h5><ol>
+<li>电容器的串联：$\frac{1}{C}=\frac{1}{C_1}+…+\frac{1}{C_n}$</li>
+<li>电容器的并联：$C=C_1+C_2+…+C_n$</li>
+</ol>
+<h4 id="静电场中的电介质"><a href="#静电场中的电介质" class="headerlink" title="静电场中的电介质"></a>静电场中的电介质</h4><h4 id="有电介质时的高斯定理与环路定理-电位移"><a href="#有电介质时的高斯定理与环路定理-电位移" class="headerlink" title="有电介质时的高斯定理与环路定理 电位移"></a>有电介质时的高斯定理与环路定理 电位移</h4><h4 id="静电场中的能量"><a href="#静电场中的能量" class="headerlink" title="静电场中的能量"></a>静电场中的能量</h4><p>外力总功：$A=\int dA=\int_{0}^{Q}\frac{q}{C}dq=\frac{1}{2}\frac{Q^2}{C}$</p>
+<p>静电能：$W_e=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}C(V_1-V_2)^2=\frac{1}{2}Q(V_1-V_2)$</p>
+<p>电场能量密度：$w_e=\frac{1}{2}D\cdot E=\frac{1}{2}\epsilon E_2$</p>
+<p>$W_e=\int_V w_e dV=\int_V\frac{1}{2}D\cdot EdV$</p>
+<h3 id="稳恒磁场"><a href="#稳恒磁场" class="headerlink" title="稳恒磁场"></a>稳恒磁场</h3><h4 id="恒定电流"><a href="#恒定电流" class="headerlink" title="恒定电流"></a>恒定电流</h4><h5 id="电流-电流密度"><a href="#电流-电流密度" class="headerlink" title="电流 电流密度"></a>电流 电流密度</h5><ol>
+<li>电流：$I=\frac{dq}{dt}\ ,\ I=\int_{S}j \cdot e_n dS=\int_{S}j\cdot dS$</li>
+<li>电流密度：$j=\frac{dI}{dS_{\perp}}$</li>
+<li>电动势：$\xi=\frac{dA}{dq}=\int_{B}^{A}E_k\cdot dl=\oint_L E_k\cdot dl$<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/16.png" style="zoom: 70%;"> </li>
+</ol>
+<h4 id="磁感应强度"><a href="#磁感应强度" class="headerlink" title="磁感应强度"></a>磁感应强度</h4><ol>
+<li>磁感应强度：$B=\frac{F_m}{qv}\ ,\ B=\frac{d\Phi}{dS_\perp}$</li>
+<li>磁感应线</li>
+<li>磁通量：$\Phi=\int_SB\cdot dS$</li>
+</ol>
+<h4 id="毕奥萨伐尔定律：-B-int-L-dB-frac-mu-0-4-pi-int-L-frac-Idl-times-e-r-r-2"><a href="#毕奥萨伐尔定律：-B-int-L-dB-frac-mu-0-4-pi-int-L-frac-Idl-times-e-r-r-2" class="headerlink" title="毕奥萨伐尔定律：$B=\int_L dB=\frac{\mu_0}{4\pi}\int_L\frac{Idl\times e_r}{r^2}$"></a>毕奥萨伐尔定律：$B=\int_L dB=\frac{\mu_0}{4\pi}\int_L\frac{Idl\times e_r}{r^2}$</h4><h5 id="运动电荷的磁场：-begin-cases-I-qnvS-B-q-frac-dB-dN-frac-mu-0-4-pi-frac-qv-times-e-r-r-2-end-cases"><a href="#运动电荷的磁场：-begin-cases-I-qnvS-B-q-frac-dB-dN-frac-mu-0-4-pi-frac-qv-times-e-r-r-2-end-cases" class="headerlink" title="运动电荷的磁场：$\begin{cases}I=qnvS \ B_q=\frac{dB}{dN}=\frac{\mu_0}{4\pi}\frac{qv\times e_r}{r^2}\end{cases}$"></a>运动电荷的磁场：$\begin{cases}I=qnvS \ B_q=\frac{dB}{dN}=\frac{\mu_0}{4\pi}\frac{qv\times e_r}{r^2}\end{cases}$</h5><h4 id="恒定磁场的高斯定理与安培环路定理"><a href="#恒定磁场的高斯定理与安培环路定理" class="headerlink" title="恒定磁场的高斯定理与安培环路定理"></a>恒定磁场的高斯定理与安培环路定理</h4><h5 id="恒定磁场的高斯定理：-iint-limits-S-B-cdot-dS-0"><a href="#恒定磁场的高斯定理：-iint-limits-S-B-cdot-dS-0" class="headerlink" title="恒定磁场的高斯定理：$\iint\limits_{S}B\cdot dS=0$"></a>恒定磁场的高斯定理：$\iint\limits_{S}B\cdot dS=0$</h5><h5 id="恒定磁场的安培环路定理：-oint-limits-L-B-cdot-dl-mu-0-sum-I"><a href="#恒定磁场的安培环路定理：-oint-limits-L-B-cdot-dl-mu-0-sum-I" class="headerlink" title="恒定磁场的安培环路定理：$\oint\limits_{L} B\cdot dl =\mu_0\sum I$"></a>恒定磁场的安培环路定理：$\oint\limits_{L} B\cdot dl =\mu_0\sum I$</h5><h4 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h4><h5 id="载流长直导线的磁场"><a href="#载流长直导线的磁场" class="headerlink" title="载流长直导线的磁场"></a>载流长直导线的磁场</h5><h5 id="载流线圈轴线上的磁场"><a href="#载流线圈轴线上的磁场" class="headerlink" title="载流线圈轴线上的磁场"></a>载流线圈轴线上的磁场</h5><h5 id="载流磁螺旋管内部的磁场"><a href="#载流磁螺旋管内部的磁场" class="headerlink" title="载流磁螺旋管内部的磁场"></a>载流磁螺旋管内部的磁场</h5><h5 id="长直圆柱载流导线内外磁场"><a href="#长直圆柱载流导线内外磁场" class="headerlink" title="长直圆柱载流导线内外磁场"></a>长直圆柱载流导线内外磁场</h5><h5 id="载流螺绕环内的磁场"><a href="#载流螺绕环内的磁场" class="headerlink" title="载流螺绕环内的磁场"></a>载流螺绕环内的磁场</h5><h4 id="带电粒子在电场和磁场中的运动"><a href="#带电粒子在电场和磁场中的运动" class="headerlink" title="带电粒子在电场和磁场中的运动"></a>带电粒子在电场和磁场中的运动</h4><h5 id="洛伦兹力：-F-Bqv-sin-theta"><a href="#洛伦兹力：-F-Bqv-sin-theta" class="headerlink" title="洛伦兹力： $F=Bqv\sin\theta$"></a>洛伦兹力： $F=Bqv\sin\theta$</h5><ol>
+<li><p>均匀磁场：$Bqv_0=m\frac{v_0^2}{R}\ ,\ R=\frac{mv_0}{Bq}\ ,\ T=\frac{2\pi R}{v_0}=2\pi\frac{m}{Bq}$</p>
+</li>
+<li><p>非均匀磁场</p>
+</li>
+</ol>
+<h5 id="霍尔效应"><a href="#霍尔效应" class="headerlink" title="霍尔效应"></a>霍尔效应</h5><p>霍尔系数：$R_H=\frac{-1}{nq}$<br><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/17.png" style="zoom: 70%;"> </p>
+<h4 id="磁场对载流导线的作用"><a href="#磁场对载流导线的作用" class="headerlink" title="磁场对载流导线的作用"></a>磁场对载流导线的作用</h4><h5 id="安培定律：-F-int-L-dF-int-L-Idl-times-B"><a href="#安培定律：-F-int-L-dF-int-L-Idl-times-B" class="headerlink" title="安培定律：$F=\int_{L}dF=\int_{L}Idl\times B$"></a>安培定律：$F=\int_{L}dF=\int_{L}Idl\times B$</h5><h5 id="磁场对载流线圈的作用"><a href="#磁场对载流线圈的作用" class="headerlink" title="磁场对载流线圈的作用"></a>磁场对载流线圈的作用</h5><p>磁矩：$m=NIS$</p>
+<p>力矩：$\begin{cases} M=F_2l_1cos\theta=BIl_1l_2cos\theta=BIScos\theta=BISsin\varphi \ M=m\times B \end{cases}$</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/18.png" style="zoom: 70%;"> 
+
+<h5 id="磁场力的功"><a href="#磁场力的功" class="headerlink" title="磁场力的功"></a>磁场力的功</h5><ol>
+<li><p>载流导线在磁场中运动：$\begin{cases} F=BIL \ \Phi =BL|aa’|\A=F|aa’|=BIL|aa’|=I\Delta \Phi \end{cases}$</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/19.png" style="zoom: 70%;"> </li>
+<li><p>载流线圈在磁场中运动：$\begin{cases}d\Phi =d(BScos\varphi) \ dA=Id\Phi \ A=\int^{\Phi_2}_ {\Phi_1}Id\Phi=I\Delta\Phi \end{cases} $</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/20.png" style="zoom: 70%;"> </li>
+</ol>
+<h4 id="磁场中的磁介质"><a href="#磁场中的磁介质" class="headerlink" title="磁场中的磁介质"></a>磁场中的磁介质</h4><h4 id="有磁介质时的高斯定理与安培环路定理-磁场强度"><a href="#有磁介质时的高斯定理与安培环路定理-磁场强度" class="headerlink" title="有磁介质时的高斯定理与安培环路定理 磁场强度"></a>有磁介质时的高斯定理与安培环路定理 磁场强度</h4><h5 id="磁场强度：-H-frac-B-mu-0-M"><a href="#磁场强度：-H-frac-B-mu-0-M" class="headerlink" title="磁场强度：$H=\frac{B}{\mu_0}-M$"></a>磁场强度：$H=\frac{B}{\mu_0}-M$</h5><h5 id="有磁介质时的安培环路定理：-oint-H-cdot-dl-sum-I"><a href="#有磁介质时的安培环路定理：-oint-H-cdot-dl-sum-I" class="headerlink" title="有磁介质时的安培环路定理：$\oint H\cdot dl=\sum I$"></a>有磁介质时的安培环路定理：$\oint H\cdot dl=\sum I$</h5><h5 id="有磁介质时的高斯定理"><a href="#有磁介质时的高斯定理" class="headerlink" title="有磁介质时的高斯定理"></a>有磁介质时的高斯定理</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/21.png" style="zoom: 70%;"> 
+
+
+<h3 id="电磁场"><a href="#电磁场" class="headerlink" title="电磁场"></a>电磁场</h3><h4 id="电磁感应定律"><a href="#电磁感应定律" class="headerlink" title="电磁感应定律"></a>电磁感应定律</h4><h5 id="电磁感应现象：-穿过闭合导体回路-磁通量发生变化-会产生感应电流"><a href="#电磁感应现象：-穿过闭合导体回路-磁通量发生变化-会产生感应电流" class="headerlink" title="电磁感应现象： 穿过闭合导体回路 磁通量发生变化 会产生感应电流"></a>电磁感应现象： 穿过闭合导体回路 磁通量发生变化 会产生感应电流</h5><h5 id="楞次定律：闭合回路中感应电流的方向-总使它所激发的磁场来阻止感应电流磁通量的变化"><a href="#楞次定律：闭合回路中感应电流的方向-总使它所激发的磁场来阻止感应电流磁通量的变化" class="headerlink" title="楞次定律：闭合回路中感应电流的方向,总使它所激发的磁场来阻止感应电流磁通量的变化"></a>楞次定律：闭合回路中感应电流的方向,总使它所激发的磁场来阻止感应电流磁通量的变化</h5><h5 id="电磁感应定律：-oint-limits-L-E-k-cdot-dl-frac-d-dt-int-limits-S-B-cdot-dS"><a href="#电磁感应定律：-oint-limits-L-E-k-cdot-dl-frac-d-dt-int-limits-S-B-cdot-dS" class="headerlink" title="电磁感应定律：$\oint\limits_{L}E_k\cdot dl=-\frac{d}{dt}\int\limits _ {S}B\cdot dS$"></a>电磁感应定律：$\oint\limits_{L}E_k\cdot dl=-\frac{d}{dt}\int\limits _ {S}B\cdot dS$</h5><p>感应电动势：$\varepsilon=-N\frac{d\Phi}{dt}=-\frac{dN\Phi}{dt}$</p>
+<p>感应电流：$ I=\frac{\varepsilon}{R} =-\frac{1}{R}\frac{d\Phi}{dt}$</p>
+<p>感生电荷量：$q=\int_{t_2}^{t_1}Idt=-\frac{1}{R}\int_{\Phi_1}^{\Phi_2}d\Phi=\frac{1}{R}(\Phi_1-\Phi_2)$ </p>
+<h4 id="动生电动势"><a href="#动生电动势" class="headerlink" title="动生电动势"></a>动生电动势</h4><h5 id="磁场中运动的导线内的感应电动势：-begin-cases-Phi-Bl-vt-x-0-frac-d-Phi-dt-Blv-varepsilon-frac-d-Phi-dt-Blv-end-cases-begin-cases-eE-k-ev-times-B-varepsilon-int-a-b-E-k-cdot-dl-Blv-end-cases"><a href="#磁场中运动的导线内的感应电动势：-begin-cases-Phi-Bl-vt-x-0-frac-d-Phi-dt-Blv-varepsilon-frac-d-Phi-dt-Blv-end-cases-begin-cases-eE-k-ev-times-B-varepsilon-int-a-b-E-k-cdot-dl-Blv-end-cases" class="headerlink" title="磁场中运动的导线内的感应电动势：$\begin{cases} \Phi=Bl(vt-x_0) \ \frac{d\Phi}{dt}=Blv\ \varepsilon=-\frac{d\Phi}{dt}=-Blv\end{cases}$ , $\begin{cases} eE_k=ev\times B\\varepsilon=\int_{a}^b E_k\cdot dl=Blv \end{cases}$"></a>磁场中运动的导线内的感应电动势：$\begin{cases} \Phi=Bl(vt-x_0) \ \frac{d\Phi}{dt}=Blv\ \varepsilon=-\frac{d\Phi}{dt}=-Blv\end{cases}$ , $\begin{cases} eE_k=ev\times B\\varepsilon=\int_{a}^b E_k\cdot dl=Blv \end{cases}$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/22.png" style="zoom: 70%;"> 
+
+<h5 id="磁场中转动的线圈内的感应电动势：-begin-cases-Phi-BScos-theta-varepsilon-N-frac-d-Phi-dt-NBSsin-theta-frac-d-theta-dt-NBS-omega-sin-omega-t-end-cases"><a href="#磁场中转动的线圈内的感应电动势：-begin-cases-Phi-BScos-theta-varepsilon-N-frac-d-Phi-dt-NBSsin-theta-frac-d-theta-dt-NBS-omega-sin-omega-t-end-cases" class="headerlink" title="磁场中转动的线圈内的感应电动势：$\begin{cases} \Phi=BScos\theta \ \varepsilon =-N\frac{d\Phi}{dt}=NBSsin\theta\frac{d\theta}{dt}  =NBS \omega \ sin \omega t \end{cases}$"></a>磁场中转动的线圈内的感应电动势：$\begin{cases} \Phi=BScos\theta \ \varepsilon =-N\frac{d\Phi}{dt}=NBSsin\theta\frac{d\theta}{dt}  =NBS \omega \ sin \omega t \end{cases}$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/23.png" style="zoom: 70%;"> 
+
+
+<h4 id="感生电动势-感生电场"><a href="#感生电动势-感生电场" class="headerlink" title="感生电动势 感生电场"></a>感生电动势 感生电场</h4><h5 id="感生电场：-oint-limits-L-E-i-cdot-dl-int-limits-S-frac-partial-B-partial-t-dS"><a href="#感生电场：-oint-limits-L-E-i-cdot-dl-int-limits-S-frac-partial-B-partial-t-dS" class="headerlink" title="感生电场：$\oint\limits_{L}E_i\cdot dl=-\int\limits_S \frac{\partial B}{\partial t}dS $"></a>感生电场：$\oint\limits_{L}E_i\cdot dl=-\int\limits_S \frac{\partial B}{\partial t}dS $</h5><h4 id="自感-互感"><a href="#自感-互感" class="headerlink" title="自感 互感"></a>自感 互感</h4><h5 id="自感："><a href="#自感：" class="headerlink" title="自感："></a>自感：</h5><p>以长直螺线管为例：$\begin{cases} B=\frac{\mu_0NI}{l} \ \Phi_N=NBS= \frac{\mu_0N^2I}{l}\pi R^2 \ \varepsilon_L=- \frac{d\Phi_N}{dt}=-\frac{\mu_0\pi R^2N^2}{l}\frac{dI}{dt}=-L\frac{dI}{dt} \ L= \frac{\Phi_N}{I}\end{cases}$</p>
+<h5 id="互感："><a href="#互感：" class="headerlink" title="互感："></a>互感：</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/25.png" style="zoom: 70%;"> 
+
+<h4 id="磁场的能量："><a href="#磁场的能量：" class="headerlink" title="磁场的能量："></a>磁场的能量：</h4><p>有：$\begin{cases} \varepsilon -L\frac{dI}{dr}=IR \ \int_{0}^{t}\varepsilon Idt=\int_{0}^{t_0}LIdI+\int_{0}^{t}RI^2dt \<br>W_m=\frac{1}{2}LI_0^2 =\frac{1}{2}(\mu nV)(\frac{B}{\mu n})^2=\frac{1}{2}BHV \ (长直螺线管)\ w_m=\frac{W_m}{V}=\frac{1}{2}BH \ \to \frac{1}{2} LI_0^2=\frac{1}{2}\int\limits_VBHdV\end{cases}$</p>
+<h4 id="位移电流-电磁场理论"><a href="#位移电流-电磁场理论" class="headerlink" title="位移电流 电磁场理论"></a>位移电流 电磁场理论</h4><h5 id="位移电流：-I-d-S-frac-dD-dt-frac-d-boldsymbol-psi-dt"><a href="#位移电流：-I-d-S-frac-dD-dt-frac-d-boldsymbol-psi-dt" class="headerlink" title="位移电流：$I_d=S\frac{dD}{dt}=\frac{d\boldsymbol{\psi}}{dt}$"></a>位移电流：$I_d=S\frac{dD}{dt}=\frac{d\boldsymbol{\psi}}{dt}$</h5><h5 id="位移电流密度：-j-d-frac-dD-dt-frac-1-S-frac-d-boldsymbol-psi-dt"><a href="#位移电流密度：-j-d-frac-dD-dt-frac-1-S-frac-d-boldsymbol-psi-dt" class="headerlink" title="位移电流密度：$j_d=\frac{dD}{dt}=\frac{1}{S}\frac{d\boldsymbol{\psi}}{dt}$"></a>位移电流密度：$j_d=\frac{dD}{dt}=\frac{1}{S}\frac{d\boldsymbol{\psi}}{dt}$</h5><p>$\oint_L H\cdot dl =I+I_d=\int\limits_sj\cdot dS+\int\limits_s \frac{\partial D}{\partial r}\cdot dS$</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/26.png" style="zoom: 70%;"> 
+
+<h5 id="麦克斯韦方程组：-begin-cases-end-cases"><a href="#麦克斯韦方程组：-begin-cases-end-cases" class="headerlink" title="麦克斯韦方程组：$\begin{cases} \end{cases}$"></a>麦克斯韦方程组：$\begin{cases} \end{cases}$</h5><h3 id="机械振动"><a href="#机械振动" class="headerlink" title="机械振动"></a>机械振动</h3><h4 id="简谐振动"><a href="#简谐振动" class="headerlink" title="简谐振动"></a>简谐振动</h4><h5 id="简谐振动方程"><a href="#简谐振动方程" class="headerlink" title="简谐振动方程"></a>简谐振动方程</h5><p>弹簧振子：$F=-kx=ma=m\frac{d^2x}{dt^2} \to w^2=\frac{k}{m}$</p>
+<p>简谐运动方程：$\begin{cases} \frac{d^2y}{dt^2}=-w^2y \ x=Acos(\omega t+\varphi_0) \ v=\frac{dx}{dt}=A\omega cos(\omega t+\varphi_0 +\frac{\pi}{2}) \a=\frac{d^2x}{dt^2}=A\omega^2cos(\omega  t+\varphi_0+\pi) \end{cases} \to \begin{cases} A=\sqrt{x_0^2+\frac{v_0^2}{\omega^2} }\ \varphi_0=arctan(-\frac{v_0}{\omega x_0}) \end{cases}$</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/27.png" style="zoom: 70%;"> 
+
+<h5 id="描述简谐振动的特征量"><a href="#描述简谐振动的特征量" class="headerlink" title="描述简谐振动的特征量"></a>描述简谐振动的特征量</h5><ol>
+<li>振幅：$A=\sqrt{x_0^2+\frac{v_0^2}{\omega^2}} $</li>
+<li>周期：$T=\frac{2\pi}{\omega}=2\pi \sqrt{\frac{m}{k}}$</li>
+<li>频率：$f=\frac{1}{T}=\frac{\omega}{2\pi} \sqrt{\frac{k}{m}}$</li>
+<li>相位，初项，相位差：$\varphi=\varphi_0+wt\ ,\ \Delta\varphi=\varphi_2-\varphi_1 $</li>
+</ol>
+<h5 id="简谐振动的能量：-begin-cases-E-p-frac-1-2-kx-2-frac-1-2-kA-2cos-2-omega-t-varphi-E-k-frac-1-2-mv-2-frac-1-2-m-omega-2A-2sin-2-omega-t-varphi-E-E-k-E-p-frac-1-2-kA-2-end-cases-to-frac-d-2x-dt-2-frac-k-m-x-0"><a href="#简谐振动的能量：-begin-cases-E-p-frac-1-2-kx-2-frac-1-2-kA-2cos-2-omega-t-varphi-E-k-frac-1-2-mv-2-frac-1-2-m-omega-2A-2sin-2-omega-t-varphi-E-E-k-E-p-frac-1-2-kA-2-end-cases-to-frac-d-2x-dt-2-frac-k-m-x-0" class="headerlink" title="简谐振动的能量：$\begin{cases} E_p= \frac{1}{2} kx^2 =\frac{1}{2} kA^2cos^2(\omega t+\varphi) \ E_k=\frac{1}{2}mv^2=\frac{1}{2}m\omega^2A^2sin^2(\omega t+\varphi) \ E=E_k+E_p=\frac{1}{2}kA^2 \end{cases} \to \frac{d^2x}{dt^2}+\frac{k}{m}x=0$"></a>简谐振动的能量：$\begin{cases} E_p= \frac{1}{2} kx^2 =\frac{1}{2} kA^2cos^2(\omega t+\varphi) \ E_k=\frac{1}{2}mv^2=\frac{1}{2}m\omega^2A^2sin^2(\omega t+\varphi) \ E=E_k+E_p=\frac{1}{2}kA^2 \end{cases} \to \frac{d^2x}{dt^2}+\frac{k}{m}x=0$</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/28.png" style="zoom: 70%;"> 
+
+<h5 id="简谐振动的旋转矢量表示法"><a href="#简谐振动的旋转矢量表示法" class="headerlink" title="简谐振动的旋转矢量表示法"></a>简谐振动的旋转矢量表示法</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/29.png" style="zoom: 80%;"> 
+
+
+<h4 id="简谐振动的合成"><a href="#简谐振动的合成" class="headerlink" title="简谐振动的合成"></a>简谐振动的合成</h4><h5 id="一维"><a href="#一维" class="headerlink" title="一维"></a>一维</h5><ol>
+<li><p>同一直线 同频率：$\begin{cases}x=x_1+x_2=A_1cos(\omega t+\varphi_{01})+A_2cos(\omega t+\varphi_{02})=Acos(\omega t+\varphi_0 )\ A=\sqrt{A_1^2+A_2^2+2A_1A_2cos(\varphi_{02}-\varphi_{01})} \ tan \varphi_0  =\frac{A_1sin\varphi_{01} +A_2sin\varphi_{02}}{A_1cos\varphi_{01}+A_2cos\varphi_{02}} \end{cases}$</p>
+</li>
+<li><p>同一直线 不同频率：</p>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/30.png" style="zoom: 100%;"> </li>
+</ol>
+<h5 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h5><ol>
+<li>相互垂直 同频率：$\begin{cases} x=A_1cos(\omega t+\varphi_{01}) \ y=A_2cos(\omega t+\varphi_{02}) \ \frac{x^2}{A_1^2} +\frac{y^2}{A_2^2}-2\frac{xy}{A_1A_2}cos(\varphi_{02}-\varphi_{01})=sin^2(\varphi_{02}-\varphi_{01}) \end{cases}$</li>
+</ol>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/31.png" style="zoom: 80%;"> 
+
+<ol start="2">
+<li>相互垂直 不同频率</li>
+</ol>
+<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/32.png" style="zoom: 80%;"> 
+
+<h4 id="振动的分解"><a href="#振动的分解" class="headerlink" title="振动的分解"></a>振动的分解</h4><h4 id="阻尼振动-受迫振动-共振"><a href="#阻尼振动-受迫振动-共振" class="headerlink" title="阻尼振动 受迫振动 共振"></a>阻尼振动 受迫振动 共振</h4><h4 id="电磁振荡"><a href="#电磁振荡" class="headerlink" title="电磁振荡"></a>电磁振荡</h4><h5 id="LC电路"><a href="#LC电路" class="headerlink" title="LC电路"></a>LC电路</h5><h5 id="受迫振荡-电共振"><a href="#受迫振荡-电共振" class="headerlink" title="受迫振荡 电共振"></a>受迫振荡 电共振</h5><h3 id="机械波"><a href="#机械波" class="headerlink" title="机械波"></a>机械波</h3><h4 id="机械波的产生与传播"><a href="#机械波的产生与传播" class="headerlink" title="机械波的产生与传播"></a>机械波的产生与传播</h4><h5 id="机械波产生条件"><a href="#机械波产生条件" class="headerlink" title="机械波产生条件"></a>机械波产生条件</h5><h5 id="机械波传播特点"><a href="#机械波传播特点" class="headerlink" title="机械波传播特点"></a>机械波传播特点</h5><ol>
+<li>横波</li>
+<li>竖波<img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/33.png" style="zoom: 80%;"> </li>
+</ol>
+<h5 id="波的几何描述"><a href="#波的几何描述" class="headerlink" title="波的几何描述"></a>波的几何描述</h5><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/34.png" style="zoom: 80%;"> 
+
+<h5 id="描述波动的特征量"><a href="#描述波动的特征量" class="headerlink" title="描述波动的特征量"></a>描述波动的特征量</h5><ol>
+<li>波长：$\lambda$</li>
+<li>周期 频率：$T\ ,\ f$</li>
+<li>波速：$u$</li>
+</ol>
+<p>有：$u=\frac{\lambda}{T}=f\lambda$ , 波在不同介质中传播时 波速不同 波长不同 频率不变</p>
+<h4 id="平面简谐波的波函数：-y-x-t-Acos-omega-t-mp-frac-x-u-varphi-0"><a href="#平面简谐波的波函数：-y-x-t-Acos-omega-t-mp-frac-x-u-varphi-0" class="headerlink" title="平面简谐波的波函数：$y(x,t)=Acos[\omega (t \mp \frac{x}{u})+ \varphi_0 ]$"></a>平面简谐波的波函数：$y(x,t)=Acos[\omega (t \mp \frac{x}{u})+ \varphi_0 ]$</h4><img src="/2020/07/14/%E7%89%A9%E7%90%86%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/35.png" style="zoom: 75%;"> 
+
+<h4 id="平面波的波动方程：-frac-partial-2-y-partial-x-2-frac-1-u-frac-partial-2-y-partial-t-2"><a href="#平面波的波动方程：-frac-partial-2-y-partial-x-2-frac-1-u-frac-partial-2-y-partial-t-2" class="headerlink" title="平面波的波动方程：$\frac{\partial^2 y}{\partial x^2}=\frac{1}{u}\frac{\partial^2 y}{\partial t^2}$"></a>平面波的波动方程：$\frac{\partial^2 y}{\partial x^2}=\frac{1}{u}\frac{\partial^2 y}{\partial t^2}$</h4><h4 id="波的能量-波的强度"><a href="#波的能量-波的强度" class="headerlink" title="波的能量 波的强度"></a>波的能量 波的强度</h4><h5 id="波的能量-能量密度"><a href="#波的能量-能量密度" class="headerlink" title="波的能量 能量密度"></a>波的能量 能量密度</h5><h5 id="能流-波的强度"><a href="#能流-波的强度" class="headerlink" title="能流 波的强度"></a>能流 波的强度</h5><h5 id="平面波与球面波的振幅"><a href="#平面波与球面波的振幅" class="headerlink" title="平面波与球面波的振幅"></a>平面波与球面波的振幅</h5><h4 id="电磁波"><a href="#电磁波" class="headerlink" title="电磁波"></a>电磁波</h4><h4 id="惠更斯原理-波的衍射-反射与折射"><a href="#惠更斯原理-波的衍射-反射与折射" class="headerlink" title="惠更斯原理 波的衍射 反射与折射"></a>惠更斯原理 波的衍射 反射与折射</h4><h4 id="波的叠加原理-波的干涉-驻波"><a href="#波的叠加原理-波的干涉-驻波" class="headerlink" title="波的叠加原理 波的干涉 驻波"></a>波的叠加原理 波的干涉 驻波</h4><h4 id="多普勒效应"><a href="#多普勒效应" class="headerlink" title="多普勒效应"></a>多普勒效应</h4><h3 id="光的干涉"><a href="#光的干涉" class="headerlink" title="光的干涉"></a>光的干涉</h3><h3 id="光的衍射"><a href="#光的衍射" class="headerlink" title="光的衍射"></a>光的衍射</h3><h3 id="光的偏振"><a href="#光的偏振" class="headerlink" title="光的偏振"></a>光的偏振</h3>]]></content>
+  </entry>
+  <entry>
+    <title>组合数学</title>
+    <url>/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</url>
+    <content><![CDATA[<h5 id="鸽巢原理"><a href="#鸽巢原理" class="headerlink" title="鸽巢原理"></a>鸽巢原理</h5><p>如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体</p>
+<p>如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体……</p>
+<p>设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中含有大于等于 $ \lceil \frac{m}{n} \rceil $ 个物体</p>
+<p>如果有 $n$ 个非负整数 $m_1 \sim m_n$ , $\frac{m_1+m_2+…+m_n}{n}&gt;r-1$ ，那么至少有一个整数大于等于 $r$</p>
+<p>如果有 $n$ 个非负整数 $m_1 \sim m_n$ , $\frac{m_1+m_2+…+m_n}{n} &lt; r+1$ ，那么至少有一个整数小于 $r$</p>
+<p>每个由 $n^2+1$ 个实数构成的序列 $a_1,a_2…a_{n^2+1}$ ,或者含有长度为 $n+1$ 的递增子序列 , 或者含有长度为 $n+1$ 的递减子序列</p>
+<h5 id="Ramsey定理"><a href="#Ramsey定理" class="headerlink" title="Ramsey定理"></a>Ramsey定理</h5><p>对于任意给定的两个正整数 $p$ , $q$ , 如果存在最小的正整数 $R(p,q)$ 使得当 $N \geqslant R(p,q)$ 时，对 $K_N$ (有$N$ 个顶点的完全图) 任意进行红蓝染色, $K_N$ 中均有红色 $K_p$ , 或蓝色 $K_q$ , 则 $R(p,q)$ 称为 $Ramsey$ 数</p>
+<p>简单性质：$\begin{cases} R(p,q)=R(q,p) \ R(n,2)=n \ R(m,n)\leqslant R(m-1,n)+R(m,n-1)\end{cases}$</p>
+<h5 id="集合的排列-begin-cases-线性-r-排列-：P-n-r-frac-n-n-r-循环-r-排列-frac-P-n-r-r-frac-n-r-n-r-end-cases"><a href="#集合的排列-begin-cases-线性-r-排列-：P-n-r-frac-n-n-r-循环-r-排列-frac-P-n-r-r-frac-n-r-n-r-end-cases" class="headerlink" title="集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)=\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} =\frac{n!}{r(n-r)!}\end{cases}$"></a>集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)=\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} =\frac{n!}{r(n-r)!}\end{cases}$</h5><h5 id="集合的组合：-binom-n-r-frac-P-n-r-r"><a href="#集合的组合：-binom-n-r-frac-P-n-r-r" class="headerlink" title="集合的组合： $ \binom{n}{r}=\frac{P(n,r)}{r!}$"></a>集合的组合： $ \binom{n}{r}=\frac{P(n,r)}{r!}$</h5><h5 id="多重集的排列："><a href="#多重集的排列：" class="headerlink" title="多重集的排列："></a>多重集的排列：</h5><p>假设共有 $k$ 种元素：</p>
+<p>$ \begin{cases} \begin{align} &amp;r\ 排列,S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}:k^r  \<br>&amp;n\ 排列,S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}:    \frac{n!}{n_1!n_2!\ …n_k!} \<br>&amp;r\ 排列,S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}:\sum \frac{r!}{m_1!\ m_2!\ … \ m_k!}\ ,(\sum_{i=1}^{k}m_i=r,\ 0\leqslant m_i\leqslant n_i) \ &amp;r \ 圆排列,S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}\end{align} \end{cases}$</p>
+<p>生成函数求解多重集的 $r$ 排列：</p>
+<p>$S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}$</p>
+<p>对应生成函数：$g^{(e)}(x)=f_{n_1}(x)f_{n_2}(x)…f_{n_3}(x)\ , \ f_{n_i}=1+x+\frac{x^2}{2}+…+\frac{x^{n_i}}{n_i!}  $</p>
+<p>莫比乌斯反演求解多重集的 $r$ 圆排列：</p>
+<p>$S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}$</p>
+<p>令 $S(n)$ 为多重集的 $r$ 圆排列方案数，$M(d)$ 为周期为 $d$ 的 $r$ 圆排列方案数 , 有：</p>
+<p>$$<br>\begin{align}<br>k^r=\sum_{d|r}d M(d)\ ,\ S(r)=\sum_{d|r}M(d)<br>\end{align}<br>$$</p>
+<p>$$<br>\begin{align}<br>rM(r)&amp;=\sum_{d|r}\mu(d)k^{\frac{r}{d}}=\sum_{d|r}\mu(\frac{r}{d})k^d \<br>dM(d)&amp;=\sum_{d_1|d}\mu(d_1)k^{\frac{d}{d_1}}=\sum_{d_1|d}\mu(\frac{d}{d_1})k^{d_1}\<br>M(d)&amp;=\frac{1}{d}\sum_{d_1|d}\mu(\frac{d}{d_1})k^{d_1}<br>\end{align}<br>$$<br>则：<br>$$<br>S(r)=\sum_{d|r}M(d)=\sum_{d|r}\frac{1}{d}\sum_{d_1|d}\mu(\frac{d}{d_1})k^{d_1}<br>$$</p>
+<h5 id="多重集的组合："><a href="#多重集的组合：" class="headerlink" title="多重集的组合："></a>多重集的组合：</h5><p>假设共有 $k$ 种元素：$ \begin{cases} r\ 组合,S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}: \binom{k+r-1}{r} \<br>r\ 组合,S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}<br>\end{cases}$</p>
+<p>多重集的 $r$ 组合 ：(容斥原理)</p>
+<p>$S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}$</p>
+<p>$T=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}$</p>
+<p>设性质 $P_i$ 为:  $T$ 集合的 $r$ 排列中 $a_i$ 个数大于 $n_i$，集合$A_i$ 为满足性质 $P_i$ 的集合</p>
+<p>则：$|\overline{A_1}\cap\overline{A_2}\cap…\cap\overline{A_k}|$ 为所求</p>
+<p>现在需要求出任意 $|A_{i_1}\cap A_{i_2}\cap …\cap A_{i_m}|$</p>
+<p>因为满足$a_i$个数大于$n_i$的 $r$ 排列个数 = 可以任取$a_i$的$(r-n_i-1)$排列个数 =$\binom{r-n_i-1 + k -1}{r-n_i-1}$</p>
+<p>即$|A_i|=\binom{r-n_i-1 + k -1}{r-n_i-1}$，所以可得：</p>
+<p>$$<br>|A_{i_1}\cap A_{i_2}\cap …\cap A_{i_m}| =<br>\binom{r-\sum\limits_{x=1} ^{m}(n_{i_x}+1) + k -1}{r-\sum\limits_{x=1} ^{m}(n_{i_x}+1)}<br>=\binom{r-\sum\limits_{x=1} ^{m}(n_{i_x}+1) + k -1}{k-1}<br>$$</p>
+<p>所以，可以通过容斥原理求出。</p>
+<p>多重集的 $r$ 组合 ：(生成函数)</p>
+<p>$S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}$</p>
+<p>对应生成函数：$\begin{align} g(x)=\prod_{i=1}^{k}\sum_{j=0}^{k_i}x^j=\prod_{i=1}^{k}\sum_{j\in T_i }x^j \end{align}$</p>
+<h5 id="Pascal公式：-binom-n-k-binom-n-1-k-binom-n-1-k-1"><a href="#Pascal公式：-binom-n-k-binom-n-1-k-binom-n-1-k-1" class="headerlink" title="Pascal公式：$\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$"></a>Pascal公式：$\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$</h5><h5 id="二项式定理：-x-y-n-begin-align-sum-k-0-n-binom-n-k-x-n-k-y-k-end-align"><a href="#二项式定理：-x-y-n-begin-align-sum-k-0-n-binom-n-k-x-n-k-y-k-end-align" class="headerlink" title="二项式定理：$(x+y)^n=\begin{align}\sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k \end{align}$"></a>二项式定理：$(x+y)^n=\begin{align}\sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k \end{align}$</h5><h5 id="组合恒等式"><a href="#组合恒等式" class="headerlink" title="组合恒等式"></a>组合恒等式</h5><p>$ \begin{align} \sum_{i=0}^{n} \binom{n}{i}=2^n \end{align}$ , $ \begin{align} \sum_{i=0}^{n} i\binom{n}{i}=n2^{n-1} \end{align}$ , $\begin{align} \sum_{i为偶数}^{n}\binom{n}{i}=\sum_{i为奇数}^{n}\binom{n}{i}\end{align}$</p>
+<p>$\begin{align} \binom{n}{k}=\frac{n}{k}\binom{n-1}{k-1}\end{align}$ , $\begin{align} \sum_{k=1}^{n} k^2\binom{n}{k} =n(n+1)2^{n-2}\end{align}$</p>
+<p>$\begin{align} \sum_{i=0}^{n} \binom{m}{i} \binom{n}{r-i} =\binom{m+n}{r}  \end{align} $ , $\begin{align} \sum_{i=0}^{n} \binom{n}{i}^2=\binom{2n}{n} \end{align}$</p>
+<p>$\begin{align} \sum_{i=0}^{n} (-1)^i\frac{1}{i+1}\binom{n}{i}=\frac{1}{n+1}   \end{align}$ , $\begin{align} \sum_{i=0}^{n} \binom{i}{k} = \binom{n+1}{k+1}\end{align}$</p>
+<h5 id="多项式定理：-begin-cases-x-1-x-2-…-x-t-n-sum-binom-n-n-1n-2…n-t-x-1-n-1-x-2-n-2-…x-t-n-t-begin-cases-binom-n-n-1n-2…n-t-frac-n-n-1-n-2-…-n-t-多项式系数-n-1-…-n-t-n-end-cases-项数-binom-n-t-1-n-end-cases"><a href="#多项式定理：-begin-cases-x-1-x-2-…-x-t-n-sum-binom-n-n-1n-2…n-t-x-1-n-1-x-2-n-2-…x-t-n-t-begin-cases-binom-n-n-1n-2…n-t-frac-n-n-1-n-2-…-n-t-多项式系数-n-1-…-n-t-n-end-cases-项数-binom-n-t-1-n-end-cases" class="headerlink" title="多项式定理：$ \begin{cases} (x_1+x_2+…+x_t)^n=\sum\binom{n}{n_1n_2…n_t}x_1^{n_1}x_2^{n_2}…x_t^{n_t}  ,\begin{cases} \binom{n}{n_1n_2…n_t}= \frac{n!}{n_1!\ n_2!\ …\ n_t!}\ (多项式系数)\n_1+…+n_t=n \end{cases}\项数=\binom{n+t-1}{n} \end{cases} $"></a>多项式定理：$ \begin{cases} (x_1+x_2+…+x_t)^n=\sum\binom{n}{n_1n_2…n_t}x_1^{n_1}x_2^{n_2}…x_t^{n_t}  ,\begin{cases} \binom{n}{n_1n_2…n_t}= \frac{n!}{n_1!\ n_2!\ …\ n_t!}\ (多项式系数)\n_1+…+n_t=n \end{cases}\项数=\binom{n+t-1}{n} \end{cases} $</h5><h5 id="牛顿二项式定理："><a href="#牛顿二项式定理：" class="headerlink" title="牛顿二项式定理："></a>牛顿二项式定理：</h5><p>令 $a$ 是实数，则对于所有 $0\leqslant |x|&lt;|y|  $ 的 $x$ , $y$ ,</p>
+<p>$$<br>\begin{align} \ (x+y)^a&amp;=\sum_{k=0}^{\infty} \binom{a}{k}x^ky^{a-k} =\sum_{k=0}^{\infty}\frac{a(a-1)…(a-k-1)}{k!}x^ky^{a-k} \end{align}<br>$$</p>
+<p>令 $z=\frac{x}{y} \ (|z|&lt;1)$ ，则可化简为：$\begin{align}(1+z)^a=\sum_{k=0}^{\infty} \binom{a}{k} z^k \end{align}$</p>
+<p>令 $n$ 为正整数 , $a=-n$ , 有：$\binom{a}{k}=\binom{-n}{k}=(-1)^k\binom{n+k-1}{k}$ , 则对于任意 $|z|&lt;1$：<br>$$<br>\begin{align}<br>&amp;(1+z)^{-n}=\frac{1}{(1+z)^n}=\sum_{k=0}^{\infty} (-1)^k\binom{n+k-1}{k}z^k\<br>&amp;(1-z)^{-n}=\frac{1}{(1-z)^n}=\sum_{k=0}^{\infty} \binom{n+k-1}{k}z^k<br>\<br>\<br>&amp;当\ n=1\ 时<br>\begin{cases}<br>\frac{1}{1+z}=\sum\limits_{k=0}^{\infty}(-1)^kz^k  \<br>\frac{1}{1-z}=\sum\limits_{k=0}^{\infty}z^k<br>\end{cases}</p>
+<p>\end{align}<br>$$</p>
+<h5 id="非降路径问题"><a href="#非降路径问题" class="headerlink" title="非降路径问题"></a>非降路径问题</h5><p>从 $(0,0)$ 到 $(m,n)$点的方案数为：$\binom{n+m}{m}$</p>
+<p>从 $(p,q)$ 到 $(r,s)$点的方案数为：$\binom{r+s-p-q}{r-q}$</p>
+<p>从 $(0,0)$ 到 $(n,n)$点,不接触 直线$y=x$ 的方案数为：$2(\binom{n+(n-1)-1-0}{n-1}-\binom{n+(n-1)-1-0}{n})=\frac{2}{n} \binom{2n-2}{n-1}$</p>
+<p>从 $(0,0)$ 到 $(n,n)$点,不经过 直线$y=x$ 的方案数为：$2(\binom{n+(n-1)-1-0}{n-1}-\binom{n+(n-1)-(-1)-2}{n-(-1)}=\frac{2}{n+1} \binom{2n}{n}$</p>
+<h5 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h5><p>$$<br>\begin{align}<br>|\overline{A_1}\cap\overline{A_2}\cap…\cap\overline{A_m}|</p>
+<p>&amp;=|S|-\sum|A_i|+\sum|A_i\cap A_j|-\sum|A_i\cap A_j\cap A_k |+…+(-1)^m|A_1 \cap A_2\cap …\cap A_m| \<br>|A_1\cup A_2 \cup …\cup A_m|&amp;=|S|-|\overline{A_1}\cap\overline{A_2}\cap…\cap\overline{A_m}| \</p>
+<p>&amp;=\sum|A_i|-\sum|A_i\cap A_j|+\sum|A_i\cap A_j\cap A_k |+…+(-1)^{m+1}|A_1 \cap A_2\cap …\cap A_m|<br>\end{align}<br>$$</p>
+<h5 id="错位排列：-begin-cases-D-n-n-1-D-n-2-D-n-1-n-geq-3-D-1-0-D-2-1-begin-align-D-n-amp-n-binom-n-1-n-1-binom-n-2-n-2-…-1-n-binom-n-n-0-amp-n-1-frac-1-1-frac-1-2-…-1-n-frac-1-n-end-align-end-cases"><a href="#错位排列：-begin-cases-D-n-n-1-D-n-2-D-n-1-n-geq-3-D-1-0-D-2-1-begin-align-D-n-amp-n-binom-n-1-n-1-binom-n-2-n-2-…-1-n-binom-n-n-0-amp-n-1-frac-1-1-frac-1-2-…-1-n-frac-1-n-end-align-end-cases" class="headerlink" title="错位排列：$ \begin{cases} D_n=(n-1) (D_{n-2}+D_{n-1}) ,\ (n\geq 3,D_1=0\ ,D_2=1)\ \begin{align} D_n &amp;=  n!-\binom{n}{1}(n-1)!+\binom{n}{2}(n-2)!\ +…+\ (-1)^n\binom{n}{n}0! \&amp;= n!\ (1-\frac{1}{1!}+\frac{1}{2!}+…+(-1)^n\frac{1}{n!}   )\end{align}\end{cases}$"></a>错位排列：$ \begin{cases} D_n=(n-1) (D_{n-2}+D_{n-1}) ,\ (n\geq 3,D_1=0\ ,D_2=1)\ \begin{align} D_n &amp;=  n!-\binom{n}{1}(n-1)!+\binom{n}{2}(n-2)!\ +…+\ (-1)^n\binom{n}{n}0! \&amp;= n!\ (1-\frac{1}{1!}+\frac{1}{2!}+…+(-1)^n\frac{1}{n!}   )\end{align}\end{cases}$</h5><h5 id="有限制条件的排列问题"><a href="#有限制条件的排列问题" class="headerlink" title="有限制条件的排列问题"></a>有限制条件的排列问题</h5><p>限制条件,指对相邻元素之间关系的限制,在 $n$ 排列中不出现 $12,23…,(n-1)n$ 的排列就叫做有限制条件的排列问题，记作 $Q_n$</p>
+<p>$<br>Q_n=n!-\binom{n-1}{1}(n-1)!+\binom{n-1}{2}(n-2)!-…+(-1)^{n-1}\binom{n-1}{n-1}1!<br>$</p>
+<p>利用容斥原理 , $|A_{i_1}\cap \ A_{i_2} \cap …\cap A_{i_m}|=\binom{n-1}{m}(n-m)!$ 。</p>
+<h5 id="棋盘多项式与有禁区的排列"><a href="#棋盘多项式与有禁区的排列" class="headerlink" title="棋盘多项式与有禁区的排列"></a>棋盘多项式与有禁区的排列</h5><p>假设棋盘是 $C$ , $r_k(C)$ 表示将 $k$ 个相同的棋子放入 $C$ 中的方案数 , 并且每行 , 每列只能有一个棋子 , 并规定 $r_0(C)=1$</p>
+<p>布棋方案数性质：$<br>\begin{cases}<br>\begin{align}<br>&amp;1)\ 若\ k 大于棋盘\ C\ 中方格数\ ,\ r_k(C)=0\<br>&amp;2)\ r_1(C)\ 等于棋盘\ C\ 中方格数 \<br>&amp;3)\ 若棋盘\ C_1\ 可以经过旋转, 翻转,变成棋盘\ C_2\ , 则\ r_k(C_1)=r_k(C_2)\<br>&amp;4)\ 设\ C_i是从棋盘\ C\ 中去掉指定的方格所在行,列以后剩余的棋盘 , C_l\ 是从棋盘\ C\ 中去掉指定方格所剩下的棋盘 , 则有：\<br>&amp;\ \ \ \ \ r_k(C)=r_{k-1}(C_{i})+r_k(C_l)\ (k\geqslant1)   \<br>&amp;5)\ 设棋盘\ C\ 由\ C_1\ ,\ C_2\ 两个布棋方案互相独立的子棋盘组成 \ ,则 \ r_k(C)=\sum_{i=0}^{k}r_i(C_1)r_{k-i}<br>(C_2)\end{align}<br>\end{cases}<br>$</p>
+<p>设 $C$ 是棋盘 , 将 $\begin{align}R(C)=\sum_{k=0}^{\infty}r_k(C)x^k\end{align}$ 记作棋盘多项式</p>
+<p>棋盘多项式性质：$\begin{cases}<br>R(C)=R(C_1)\cdot R(C_2)\R(C)=xR(C_i)+R(C_l)\end{cases}<br>$</p>
+<p>有禁区的排列问题：设 $C\ 是\ n\times n$ 的棋盘，其中有 $r$  个位置不能摆放棋子 , 则方案数是：<br>$$<br>n!-r_1(n-1)!+r_2(n-2)!-…+(-1)^nr_n<br>$$</p>
+<p>其中 , $r_i$ 为将 $i$ 个棋子放入禁区的方案数 , (求禁区部分的棋盘多项式)</p>
+<img src="/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/1.png" style="zoom: 33%;">
+
+<h5 id="生成函数：-begin-align-g-x-sum-n-0-infty-h-nx-n-end-align"><a href="#生成函数：-begin-align-g-x-sum-n-0-infty-h-nx-n-end-align" class="headerlink" title="生成函数：$\begin{align} g(x)=\sum_{n=0}^{\infty}h_nx^n \end{align}$"></a>生成函数：$\begin{align} g(x)=\sum_{n=0}^{\infty}h_nx^n \end{align}$</h5><p>假设 $A(x)$ 为序列 $a_k$ 的生成函数 , $B(x)$ 为序列 $b_k$ 的生成函数</p>
+<p>相关性质： $\begin{cases} 若\ b_k=a^k a_k \ ,\ 则\ B(x)=A(ax) \<br>若\ b_k=ka_k\ \ \ ,\ 则\ B(x)=xA’(x) \<br>\begin{align}<br>若\ b_k=\sum_{i=0}^{n}a^i\ ,\ 则\ B(x)=\frac{A(x)}{1-x}\<br>\end{align} \end{cases}$ ,  常见生成函数：$\begin{cases} g(1)=\frac{1}{1-x} \<br>g(k)=\frac{x}{(1-x)^2}\<br>g(\binom{a}{k})=(1+x)^a\<br>g(a^k)=\frac{1}{1-ax}\<br>\end{cases}<br>$</p>
+<h5 id="指数生成函数：-begin-align-g-e-x-sum-n-0-infty-h-n-frac-x-n-n-end-align"><a href="#指数生成函数：-begin-align-g-e-x-sum-n-0-infty-h-n-frac-x-n-n-end-align" class="headerlink" title="指数生成函数：$\begin{align} g^{(e)}(x)=\sum_{n=0}^{\infty} h_n\frac{x^n}{n!}\end{align}$"></a>指数生成函数：$\begin{align} g^{(e)}(x)=\sum_{n=0}^{\infty} h_n\frac{x^n}{n!}\end{align}$</h5><p>相关性质：$\begin{cases} \frac{e(x)+e(-x)}{2}=1+\frac{x^2}{2!}+\frac{x^4}{4!}+… \ \frac{e(x)-e(-x)}{2}=\frac{x}{1}+\frac{x^3}{3!}+\frac{x^5}{5!}… \<br>e(x)=1+\frac{x}{1}+\frac{x^2}{2!}+…+\frac{x^k}{k!}+… \<br>e(-x)=1-\frac{x}{1!}+\frac{x^2}{2}-…+(-1)^k\frac{x^k}{k}+… \end{cases}$</p>
+<h5 id="卡特兰数：-C-n-frac-1-n-1-binom-2n-n-C-n-frac-4n-2-n-1-C-n-1-n-geqslant-1"><a href="#卡特兰数：-C-n-frac-1-n-1-binom-2n-n-C-n-frac-4n-2-n-1-C-n-1-n-geqslant-1" class="headerlink" title="卡特兰数：$C_n=\frac{1}{n+1} \binom{2n}{n}$ , $C_n=\frac{4n-2}{n+1}C_{n-1} \ \  (n\geqslant 1)$"></a>卡特兰数：$C_n=\frac{1}{n+1} \binom{2n}{n}$ , $C_n=\frac{4n-2}{n+1}C_{n-1} \ \  (n\geqslant 1)$</h5><h5 id="拓展卡特兰数：-C-n-m-frac-n-m-1-n-1-binom-n-m-n"><a href="#拓展卡特兰数：-C-n-m-frac-n-m-1-n-1-binom-n-m-n" class="headerlink" title="拓展卡特兰数：$C_n^m = \frac{n-m+1}{n+1} \binom{n+m}{n}$"></a>拓展卡特兰数：$C_n^m = \frac{n-m+1}{n+1} \binom{n+m}{n}$</h5><h5 id="拟卡特兰数：-C-n-n-C-n-1-begin-cases-C-n-4n-6-C-n-1-n-geqslant-2-C-1-1-end-cases"><a href="#拟卡特兰数：-C-n-n-C-n-1-begin-cases-C-n-4n-6-C-n-1-n-geqslant-2-C-1-1-end-cases" class="headerlink" title="拟卡特兰数：$C_n^{*} =n! \  C_{n-1} $  , $ \begin{cases}C_n^{*}=(4n-6)C_{n-1}^{*} (n \geqslant 2) \ C_1^{*}=1 \end{cases}$"></a>拟卡特兰数：$C_n^{*} =n! \  C_{n-1} $  , $ \begin{cases}C_n^{*}=(4n-6)C_{n-1}^{*} (n \geqslant 2) \ C_1^{*}=1 \end{cases}$</h5><h5 id="第一类斯特林数：-S-1-n-m-表示将-n-个物体排成-m-个非空的循环排列的方法数"><a href="#第一类斯特林数：-S-1-n-m-表示将-n-个物体排成-m-个非空的循环排列的方法数" class="headerlink" title="第一类斯特林数：$ \ S_1(n,m) \ $ 表示将$\ n\ $个物体排成$\ m\ $个非空的循环排列的方法数"></a>第一类斯特林数：$ \ S_1(n,m) \ $ 表示将$\ n\ $个物体排成$\ m\ $个非空的循环排列的方法数</h5><p>$$<br>\begin{align}<br>&amp; S_1(n,m)=S_1(n-1,m-1)+(n-1)S_1(n-1,m) \<br>&amp;n!=\sum_{k=0}^nS_1(n,k) \<br>&amp;\begin{bmatrix} n \0 \end{bmatrix}=0 \ , \begin{bmatrix} n \1 \end{bmatrix} =(n-1)! \ , \begin{bmatrix} n\n\end{bmatrix} =1 \ , \begin{bmatrix} n\n-1\end{bmatrix} =\binom{n}{2}<br>\end{align}<br>$$</p>
+<h5 id="第二类斯特林数：-S-2-n-m-表示把-n-个不同的小球放在-m-个相同的盒子里方案数。"><a href="#第二类斯特林数：-S-2-n-m-表示把-n-个不同的小球放在-m-个相同的盒子里方案数。" class="headerlink" title="第二类斯特林数：$\ S_2(n,m)\  $表示把$\ n\ $个不同的小球放在$\ m\ $个相同的盒子里方案数。"></a>第二类斯特林数：$\ S_2(n,m)\  $表示把$\ n\ $个不同的小球放在$\ m\ $个相同的盒子里方案数。</h5><p>$$<br>\begin{align}<br>&amp;S_2(n,m)=\frac{1}{m!}\sum ^m <em>{k=0} (-1)^k \binom{m}{k} (m-k)^n \<br>&amp;S_2(n,m)=S_2(n-1,m-1)+mS_2(n-1,m) \<br>&amp;n^k=\sum^k</em>{i=0}S_2(k,i) \times i! \times \binom{n}{i}<br>\end{align}<br>$$</p>
+<img src="/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/2.png" style="zoom: 80%;">
+
+<h5 id="贝尔数-B-p-：将-p-个元素的集合分成非空，不可辨别盒子的划分数。"><a href="#贝尔数-B-p-：将-p-个元素的集合分成非空，不可辨别盒子的划分数。" class="headerlink" title="贝尔数($B_p$)：将 $p$ 个元素的集合分成非空，不可辨别盒子的划分数。"></a>贝尔数($B_p$)：将 $p$ 个元素的集合分成非空，不可辨别盒子的划分数。</h5><p>$$<br>\begin{align}<br>&amp; B_n=\sum_{k=0}^{n}S_2(n,k)=S_2(n,0)+S_2(n,1)+…+S_2(n,n) \<br>&amp; B_{n+1}=\sum_{k=0}^{n}\binom{n}{k}B_k<br>\end{align}<br>$$</p>
+<h5 id="分拆数：-lambda-n-a-n-…2-a-2-1-a-1"><a href="#分拆数：-lambda-n-a-n-…2-a-2-1-a-1" class="headerlink" title="分拆数：$ \lambda =n^{a_n}…2^{a_2}1^{a_1}$"></a>分拆数：$ \lambda =n^{a_n}…2^{a_2}1^{a_1}$</h5><h5 id="正整数的有序-k-分拆个数：-binom-n-k-k-1-k-1-binom-n-1-k-1"><a href="#正整数的有序-k-分拆个数：-binom-n-k-k-1-k-1-binom-n-1-k-1" class="headerlink" title="正整数的有序$\ k\ $分拆个数：$\binom{n-k+k-1}{k-1}=\binom{n-1}{k-1}$"></a>正整数的有序$\ k\ $分拆个数：$\binom{n-k+k-1}{k-1}=\binom{n-1}{k-1}$</h5><h5 id="正整数的有序-k-分拆个数（要求-i-分部量大于等于-p-i-）：-begin-align-binom-n-sum-i-1-k-p-i-k-1-k-1-end-align"><a href="#正整数的有序-k-分拆个数（要求-i-分部量大于等于-p-i-）：-begin-align-binom-n-sum-i-1-k-p-i-k-1-k-1-end-align" class="headerlink" title="正整数的有序$\ k\ $分拆个数（要求$\ i\ $分部量大于等于$\ p_i \ $）： $\begin{align}\binom{n-\sum_{i=1}^k p_i+k-1}{k-1}\end{align}$"></a>正整数的有序$\ k\ $分拆个数（要求$\ i\ $分部量大于等于$\ p_i \ $）： $\begin{align}\binom{n-\sum_{i=1}^k p_i+k-1}{k-1}\end{align}$</h5><h5 id="正整数-n-分为-k-个分部-若-n-k-同时为奇数或偶数，则-n-的分部量都是奇数的有序分拆数为-begin-align-binom-frac-n-k-2-k-1-k-1-end-align"><a href="#正整数-n-分为-k-个分部-若-n-k-同时为奇数或偶数，则-n-的分部量都是奇数的有序分拆数为-begin-align-binom-frac-n-k-2-k-1-k-1-end-align" class="headerlink" title="正整数$\ n\ $分为 $k$ 个分部,若 $n$ , $k$ 同时为奇数或偶数，则 $n$ 的分部量都是奇数的有序分拆数为 $\begin{align}\binom{\frac{n-k}{2}+k-1}{k-1}\end{align}$"></a>正整数$\ n\ $分为 $k$ 个分部,若 $n$ , $k$ 同时为奇数或偶数，则 $n$ 的分部量都是奇数的有序分拆数为 $\begin{align}\binom{\frac{n-k}{2}+k-1}{k-1}\end{align}$</h5><h5 id="无序-k-分拆："><a href="#无序-k-分拆：" class="headerlink" title="无序 $k$ 分拆："></a>无序 $k$ 分拆：</h5><p>$$<br>\begin{align}<br>&amp;B(n,k)=B(n-1,k-1)+B(n-k,k) \<br>&amp;B(n+k,k)=\sum_{i=1}^kB(n,i) \<br>&amp;\begin{cases}<br>B(n,1)=1\<br>B(n,n)=1\<br>B(n,n-1)=1\<br>B(n,2)=\lfloor \frac{n}{2}\rfloor<br>\end{cases}<br>\end{align}<br>$$</p>
+<h5 id="分拆的-Ferrers-图：每个-Ferrers-图对应一种分拆方案"><a href="#分拆的-Ferrers-图：每个-Ferrers-图对应一种分拆方案" class="headerlink" title="分拆的 $Ferrers$ 图：每个 $Ferrers$ 图对应一种分拆方案"></a>分拆的 $Ferrers$ 图：每个 $Ferrers$ 图对应一种分拆方案</h5><p>$<br>\begin{cases}<br>共轭图：将各行改成列\<br>共轭分拆：共轭图对应的分拆\<br>自共轭分拆：一个分拆与其共轭相同\<br>\end{cases}<br>$</p>
+<p>$<br>\begin{cases}<br>n的k分拆方案数,与n的最大分部量为k的分拆数相同\<br>n的自共轭分拆数,与n的分部量为奇数，且互不相等的分拆数\<br>n的分部量两两不等的分拆数等于n各分部量都是奇数的分拆的个数\<br>\end{cases}<br>$</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">不允许为空</th>
+<th align="center">允许为空</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">有序划分</td>
+<td align="center">$k!S_2(n,k)$</td>
+<td align="center">$k^n$</td>
+</tr>
+<tr>
+<td align="center">无序划分</td>
+<td align="center">$S_2(n,k)$</td>
+<td align="center">$\sum_{i=1}^kS_2(n,i)$</td>
+</tr>
+<tr>
+<td align="center">有序分拆</td>
+<td align="center">$\binom{n-1}{k-1}$</td>
+<td align="center">$\binom{n+k-1}{n}$</td>
+</tr>
+<tr>
+<td align="center">无序分拆</td>
+<td align="center">$B(n,k)$</td>
+<td align="center">$\sum_{i=1}^kB(n,i)$</td>
+</tr>
+</tbody></table>
+<img src="/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/3.png" style="zoom:80%;">
+
+
+<h5 id="卡特兰数的生成函数："><a href="#卡特兰数的生成函数：" class="headerlink" title="卡特兰数的生成函数："></a>卡特兰数的生成函数：</h5><p>$$<br>\begin{align}<br>&amp;C_n=\sum_{k=1}^{n-1}C_kC(n-k)\<br>令\ &amp;G(x)=C_0+C_1x+C_2x^2+…\<br>有\ &amp;G^2(x)=G(x)-x \<br>\ 解&amp;得 \ G(x)=\frac{1- \sqrt{1-4x}}{2}\ \ \ (舍 \frac{1- \sqrt{1+4x}}{2}) \<br>由&amp;牛顿二项式定理得：\<br>&amp;(1+4x)^{\frac{1}{2}}=1+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}2^{2n}}{n2^{2n-1}} \binom{2n-2}{n-1}x^n \ \ (|x|&lt;1) \<br>\ 解&amp;得 \ G(x)= \sum_{n=1}^{\infty} \frac{\binom{2n-2}{n-1}}{n}x^n<br>\end{align}<br>$$</p>
+<h5 id="第二类斯特林数-S-2-n-k-的生成函数：-G-k-t-frac-t-k-1-t-1-2t-…-1-kt"><a href="#第二类斯特林数-S-2-n-k-的生成函数：-G-k-t-frac-t-k-1-t-1-2t-…-1-kt" class="headerlink" title="第二类斯特林数$S_2(n,k)$的生成函数：$G_k(t)=\frac{t^k}{(1-t)(1-2t)…(1-kt)}$"></a>第二类斯特林数$S_2(n,k)$的生成函数：$G_k(t)=\frac{t^k}{(1-t)(1-2t)…(1-kt)}$</h5><p>$$<br>\begin{align}<br>&amp;S_2(n+1,k)=S_2(n,k-1)+kS_2(n,k) \<br>&amp;同时在等式两端同乘\ t^{n+1} 并求和 , 得: \<br>&amp;\sum_{n=0}^{\infty}S_2(n,k)t^n=t \sum_{n=0}^{\infty}S_2(n,k-1)t^n+kt\sum_{n=0}^{\infty}S_2(n,k)t^n \<br>\Rightarrow&amp;G_k(t)=tG_{k-1}(t)+ktG_k(t) \<br>&amp;G_k(t)=\frac{t}{1-kt}G_{k-1}(t)=\frac{t^k}{(1-t)(1-2t)…(1-kt)}</p>
+<p>\end{align}<br>$$</p>
+<h5 id="有序-k-分拆数的生成函数"><a href="#有序-k-分拆数的生成函数" class="headerlink" title="有序 $k$ 分拆数的生成函数"></a>有序 $k$ 分拆数的生成函数</h5><p>$$<br>\begin{cases}<br>\begin{align}</p>
+<p>有限制：&amp; \prod_{i=0}^{n}(\sum_{j=1}^{ri}x^j),<br>\begin{cases}<br>n=n_1+n_2+…+n_k \ ,\  k\geqslant 1\<br>1\leqslant n_i\leqslant r_i\ ,\ i=1,2,….,k<br>\end{cases}\</p>
+<p>无限制： &amp;\prod_{i=1}^{n} (\sum_{j=1}^{\infty} x^j) =(\frac{x}{1-x})^k = x^k\sum_{n=0}^{\infty}\binom{k+n-1}{n}x^n= \sum_{n=k}^{\infty}\binom{n-1}{k-1}x^n<br>\end{align}<br>\end{cases}<br>$$</p>
+<h5 id="无序分拆数的生成函数：-B-k-n-最大分部量不超过-k-B-n-k-最大分部量为-k"><a href="#无序分拆数的生成函数：-B-k-n-最大分部量不超过-k-B-n-k-最大分部量为-k" class="headerlink" title="无序分拆数的生成函数：$B_k(n)$ 最大分部量不超过$k$ , $B(n,k)$ 最大分部量为$k$"></a>无序分拆数的生成函数：$B_k(n)$ 最大分部量不超过$k$ , $B(n,k)$ 最大分部量为$k$</h5><p>$$<br>\begin{cases}<br>\begin{align}<br>&amp;\sum_{n=0}^{\infty}B_k(n)x^n=\frac{1}{(1-x)(1-x^2)…(1-x^k)} ,\ \begin{cases}x_1+2x_2+…+kx_k=n \ x_i \geqslant 0,i=1…k<br>\end{cases}\<br>&amp;\sum_{n=0}^{\infty}B(n,k)x^n=\frac{x^k}{(1-x)(1-x^2)…(1-x^k)} ,\ \begin{cases}x_1+2x_2+…+kx_k=n \ x_i \geqslant 0,i=1…k-1,x_k \geqslant1<br>\end{cases} \<br>&amp;\sum_{n=0}^{\infty}B(n)x^n=\frac{1}{(1-x)(1-x^2)…(1-x^k)…} ,\ (由有限乘积\prod_{j=1}^{N}\frac{1}{1-x^j}完全确定)</p>
+<p>\end{align}<br>\end{cases}<br>$$</p>
+<h5 id="常系数线性齐次递推关系：-h-n-a-1h-n-1-a-2h-n-2-…-a-kh-n-k-0-a-k-neq-0-n-geqslant-k"><a href="#常系数线性齐次递推关系：-h-n-a-1h-n-1-a-2h-n-2-…-a-kh-n-k-0-a-k-neq-0-n-geqslant-k" class="headerlink" title="常系数线性齐次递推关系：$h_n-a_1h_{n-1}-a_2h_{n-2}-…-a_kh_{n-k}=0\ (a_k\neq 0,n\geqslant k)$"></a>常系数线性齐次递推关系：$h_n-a_1h_{n-1}-a_2h_{n-2}-…-a_kh_{n-k}=0\ (a_k\neq 0,n\geqslant k)$</h5><p>$$<br>\begin{align}<br>&amp;h_n=q^n是该关系的解当且仅当 \ q\ 是多项式方程 \ x^k-a_1x^{x-1}…-a_k=0 \ 的一个根 \<br>&amp;\begin{cases}<br>若多项式方程有\ k\ 个不同的根\ q_1…q_k,则\ h_n=c_1q_1^n+c_2q_2^n+…+c_kq_k^n \ 为一般解 \<br>若多项式方程有\ t\ 个不同的根\ q_1…q_t,且\ q_i为 \ s_i重根\</p>
+<p>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  则该递推关系对\ q_i的部分一般解为：\<br>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \<br>H_n^{(i)}=c_1q_i^n+c_2nq_i^n+…+c_{s_i}n^{s_i-1}q_i^n \<br>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 递推关系的一般解为：\<br>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \<br>h_n=H_n^{(1)}+H_n^{(2)}+…+H_n^{(t)}</p>
+<p>\end{cases}<br>\end{align}<br>$$</p>
+<p>生成函数求解常系数线性齐次递推关系：$g(x)=h_0+h_1x+h_2x^2+…+h_nx^n+…$<br>$$<br>\begin{align}<br>    g(x)&amp;=\frac{p(x)}{q(x)}=\frac{p(x)}{x^kr(\frac{1}{x})}\<br>    &amp;=\frac{h_0+(h_1+a_1h_0)x+(h_2+a_1h_1+a_2h_0)x^2+…+(h_{k-1}+a_1h_{k-2}+…+a_{k-1}h_0)x^{k-1} }{1+a_1x+a_2x^2+…+a_kx^k} \<br>    r(x)&amp;=x^k+a_1x^{k-1}+a_2x^{k-2}…+a_k \ \ (特征方程)<br>\end{align}<br>$$</p>
+<h5 id="常系数线性非齐次递推关系：-h-n-ah-n-1-b-n-n-geqslant1"><a href="#常系数线性非齐次递推关系：-h-n-ah-n-1-b-n-n-geqslant1" class="headerlink" title="常系数线性非齐次递推关系：$h_n=ah_{n-1}+b_n \ (n\geqslant1)$"></a>常系数线性非齐次递推关系：$h_n=ah_{n-1}+b_n \ (n\geqslant1)$</h5><p>先求出齐次递推关系的一般解，再求出非齐次递推关系的特解</p>
+<p>特解对应：$\begin{cases}  b_n=d \Rightarrow h_n =r \<br>b_n=dn+e\Rightarrow  h_n=rn+s \ b_n=fn^2+dn+e \Rightarrow h_n=rn^2+sn+t  \ b_n=d^n \Rightarrow h_n=pd^n \ ,\ h_n=pnd^n   \end{cases}$</p>
+<h5 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h5><p>$$<br>\begin{cases}<br>\begin{align}<br>&amp;f_n=\sum_{i=1}^n(-1)^i\binom{n}{i}g(i) \leftrightarrow g_n=\sum_{i=0}^n(-1)^i\binom{n}{i}f_i\<br>&amp;f_n=\sum_{i=1}^n\binom{n}{i}g_i \leftrightarrow g_n=\sum_{i=0}^n(-1)^{n-i} \binom{n}{i}f_i<br>\end{align}<br>\end{cases}<br>$$</p>
+<h5 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h5><p>莫比乌斯函数: $\mu (x)=\begin{cases}1 \ ,\ x=1 \<br>(-1)^k\ ,\ x\ 是\ k\ 个不同质数的乘积 \ 0\end{cases} $</p>
+<p>对于任意的正整数 $n$ , 有：$ \begin{align} \sum_{d|n} \mu(d)=\begin{cases} 1 \ ,\ n=1 \ 0\ , \ n&gt;1\end{cases}\end{align}$</p>
+<p>推论：设 $d_1|n$ ,则 $\begin{align} \sum_{d|(n/d_1)}\mu(d)=\begin{cases}1\ ,\ n=d_1\ 0\ ,\ n&gt;d_1 \end{cases} \end{align}$</p>
+<p>莫比乌斯反演：设 $f(n)$ , $g(n)$ 为定义在正整数集合上的两个函数 , 则：</p>
+<p>$$<br>f(n)=\sum_{d|n}g(d) \Leftrightarrow g(n)=\sum_{d|n}\mu(d)f(\frac{n}{d})<br>$$</p>
+<p>证明：<br>$$<br>\begin{align}<br>f(\frac{n}{d})&amp;=\sum_{d_1|\frac{n}{d}}g(d_1) \ \<br>\sum_{d|n}\mu(d)f(\frac{n}{d})&amp;=\sum_{d|n}\mu(d)\sum_{d_1|\frac{n}{d}}g(d_1) \<br>&amp;=\sum_{d|n}\sum_{d_1|\frac{n}{d}}\mu(d)g(d_1)\<br>&amp;=\sum_{d_1|n}\sum_{d|\frac{n}{d_1}}\mu(d)g(d_1)\<br>&amp;=\sum_{d_1|n}g(d_1)\sum_{d|\frac{n}{d_1}}\mu(d)\<br>只有当\ d_1=n\ &amp;时\ \sum_{d|\frac{n}{d_1}}\mu(d)=1\ ,\ 其余情况为\ 0 \ 则\ ,\ g(n)&amp;=\sum_{d|n}\mu(d)f(\frac{n}{d})<br>\end{align}<br>$$</p>
+<p>证明：<br>$$<br>\begin{align}<br>g(\frac{n}{d})&amp;=\sum_{d_1|\frac{n}{d}} \mu(d_1)f(\frac{n}{d\cdot d_1} )\<br>&amp;=\sum_{d_1|\frac{n}{d}} \mu(\frac{n}{d\cdot d_1})f(d_1)\ \<br>\sum_{d|n}g(d)&amp;=\sum_{d|n}g(\frac{n}{d})\<br>&amp;=\sum_{d|n}\sum_{d_1|\frac{n}{d}} \mu(\frac{n}{d\cdot d_1})f(d_1)\<br>&amp;=\sum_{d_1|n}\sum_{d|\frac{n}{d_1}} \mu(\frac{n}{d\cdot d_1})f(d_1)\<br>&amp;=\sum_{d_1|n}f(d_1)\sum_{d|\frac{n}{d_1}}\mu(d)\<br>只有当\ d_1=n\ &amp;时\ \sum_{d|\frac{n}{d_1}}\mu(d)=1\ ,\ 其余情况为\ 0 \ 则\ ,\ f(n)&amp;=\sum_{d|n}g(d)<br>\end{align}<br>$$</p>
+<p>相关性质：</p>
+<p>$$<br>\begin{align}<br>\varphi(n)&amp;=n\sum_{d|n} \frac{\mu(d)}{d}=\sum_{d|n} \mu(d) \frac{n}{d} \<br>\Rightarrow n&amp;=\sum_{d|n}\varphi(n)<br>\end{align}<br>$$</p>
+<h5 id="代数系统"><a href="#代数系统" class="headerlink" title="代数系统"></a>代数系统</h5><p>设 $S$ 为非空集合,称 $S\times S$ 到 $S$ 的一个映射 $f$ 为 $S$ 的二元代数运算,即 $f(a,b)=c$,通常记作 $a * b=c$</p>
+<p>设 $S$ 是一个非空集合,$ f_1…f_m$ 是 $S$ 上若干代数运算,则 $S$ 与这些运算形成了代数系统,记为$(S,f_1…f_m)$</p>
+<p>如果对于 $S$ 中任意两个元素 $a$ , $b$ ,等式 $a * b= b * a$ 都成立 则称运算”$ * $”满足交换律</p>
+<p>如果对于 $S$ 中任意三个元素 $a$ , $b$ , $c$ ,等式 $(a * b) * c=a * (b * c) $ 都成立,则称运算”$ * $”满足结合律</p>
+<p>如果 $a * a$ = $a$ ,则 $a$ 是关于运算 $ * $ 的幂等元。如果 $S$ 中每个元素都是关于 $ * $ 的幂等元,则称运算”$ * $”满足幂等律</p>
+<p>如果对于 $S$ 中任意三个元素 $a$ , $b$ , $c$ ,等式 $\begin{cases} a * (b+c)=(a * b)+a * c  \ (b+c) * a=(b * a)+(c * a) \end{cases}$都成立,则称运算”$ * $” 对”$ + $”满足分配律</p>
+<p>如果对于 $S$ 中任意两个元素 $a$ , $b$ ,等式 $\begin{cases}a * (a+b)=a \ a+(a * b)=a \end{cases}$ 都成立 则称运算”$ * $”,”$ + $”满足吸收律</p>
+<p>如果对于 $S$ 中任意三个元素 $a$ , $b$ , $c$ ,$\begin{cases} 若 a * b=a  * c,则b=c \ 若b * a=c * a,则b=c \end{cases}$ , 则称运算”$ * $”满足消去律</p>
+<h5 id="半群"><a href="#半群" class="headerlink" title="半群"></a>半群</h5><p>设 $S$ 是一个非空集合, 若”$ * $”为 $S$ 上二元代数运算,且满足结合律,则称 $ (S, * )$ 为半群</p>
+<h5 id="群"><a href="#群" class="headerlink" title="群"></a>群</h5><p>设 $(S, * )$为半群 若满足条件:$\begin{cases}     \ S\ 中有一个元素\ x ,对于\ S\ 中任意元素a ,都有\ a * x = x * a = a\ 对于\ S\ 中任意元素\ a  ,都可以找到\ S\ 中一个元素a^{-1} , 满足a * a^{-1}=a^{-1} * a=x  \end{cases}$</p>
+<p>则称 $(S, * )$为群,并且元素 $x$ 称为 $S$ 的单位元, $a^{-1}$ 称为 $a$ 的逆元 ,$|S|:\begin{cases}有限群\无限群\end{cases}$</p>
+<p>群的性质：$\begin{cases} 群的单位元唯一,任意元素的逆唯一 \ 对于任意\ a,b ,有\ x\ 使\ x * a=b,又有\ y\ 使\ a * y=b \<br>设 \ G\  是一个群,在一个乘积 \ a_1…a_n \  中可以任意加括号而求其值 \end{cases}$</p>
+<p>对 $a_1…a_n$ 有意义,并且他们都相同时,称 $n$ 个 $a$ 连乘积为 $a^n$,规定 $a^0=x$ , $a^{-n}=(a^n)^{-1}$</p>
+<p>第一指数律：$a^m * a^n=a^{m+n}$ ,第二指数律：$(a^m)^n=a^{mn}$ 。</p>
+<h5 id="交换群：若群-S-的运算”-”适合交换律-则称-S-为交换群"><a href="#交换群：若群-S-的运算”-”适合交换律-则称-S-为交换群" class="headerlink" title="交换群：若群 $(S, * )$ 的运算”$ * $”适合交换律,则称$(S, * )$为交换群"></a>交换群：若群 $(S, * )$ 的运算”$ * $”适合交换律,则称$(S, * )$为交换群</h5><p>在一个交换群 $(S, * )$ 中,一个乘积可以任意颠倒因子次序而求值</p>
+<p>第三指数律：$(a * b)^m=a^m * b^m$</p>
+<h5 id="置换与置换群"><a href="#置换与置换群" class="headerlink" title="置换与置换群"></a>置换与置换群</h5><p>置换：设 $M=\begin{Bmatrix}  a_1,  a_2 , … ,  a_n \end{Bmatrix}$ 是一个非空有限集合 , $M$ 的一个一对一变换称为一个置换 $\sigma$.<br>$$<br>\sigma=\binom{a_1\ a_2…a_n}{b_1\ b_2…b_n},b_i=\sigma(a_i)\ ,i=1,2…n<br>$$</p>
+<p>$M$ 的置换一共有 $n!$ 个,也称为 $n$ 元置换,令 $S_n$ 表示这 $n!$ 个置换形成的集合</p>
+<p>若 $\sigma =\binom{a_1,a_2…a_n}{a_1,a_2…a_n} $ , 则称 $\sigma$ 为 $n$ 元恒等置换 </p>
+<p>对于 $M$ 中任意元素 $a$ 及 $M$ 的任意两个置换 $\sigma$,$\tau$ , 规定 $\sigma\tau(a)=\sigma(\tau(a))$</p>
+<p>置换乘法性质：$\begin{cases} (\sigma \tau) \rho=\sigma(\tau\rho)\ ,(\sigma,\tau,\rho \in S_n)\ n元恒等置换是S_n中的单位元素,设为\ \sigma_0 ,\ 有\ \sigma_0\tau=\tau \sigma_0=\tau\ ,\tau \in S_n \<br>每个n元置换在S_n中都有逆元素:\binom{a_1 a_2…a_n}{b_1b_2…b_n}^{-1} =\binom{b_1b_2…b_n}{a_1 a_2…a_n}\end{cases}$</p>
+<p>$n$元置换的全体集合 $S_n$ 对置换的乘法做成一个群,称为 $n$ 次对称群 , 而 $S_n\times S_n$ 的任意一个子群称作置换群 </p>
+<p>置换的轮换表示：设 $\sigma $ 是 $M$ 的置换,若可取到 $M$ 的元素 $a_1…a_r$ 使 $\sigma(a_1)=a_2$ , $\sigma(a_2)=a_3 ,…\sigma(a_{r-1})=a_r,\sigma(a_r)=a_1 $ , 而其他的元素在 $\sigma$ 下不变, 则将 $\sigma$ 称作一个 $r$ 轮换,记为 $(a_1,a_2…a_r)$ , 长度为 $2$ 的轮换叫做对换。若两个轮换没有相同元素,称作这两个轮换不相交</p>
+<p>任意置换 $\sigma$ 恰好有一种方法写成不相交(不相杂)的轮换乘积</p>
+<p>任意轮换 $\sigma$ 可以写成对换的乘积(不唯一)：$(a_1,a_2…a_r)=(a_1a_r)(a_1a_{r-1})…(a_1a_3)(a_1a_2)$</p>
+<p>若 $n$ 元置换 $\sigma$ 可表示为互不相交的 $\lambda_1$个$1$轮换 ,$\lambda_2$个$2$轮换 ,…, $\lambda_n$个 $n$ 轮换的乘积,则称 $\sigma$ 为 $(\lambda_1,\lambda_{2},…\lambda_n)$ 类型, 或 $1^{\lambda_1}2^{\lambda_2}…n^{\lambda_n}$ , 有: $\begin{align} \sum_{i=1}^{n}i \lambda_i=n \end{align}$</p>
+<p>共轭类：置换群 $G$ 中属于同一类型的全体置换的集合,叫做该类型相应的共轭类,记作 $D(\lambda_1,\lambda_{2},…\lambda_n)$. 将 $1^{\lambda_1}2^{\lambda_2}…n^{\lambda_n}$ 称作 $\sigma$ 的格式 , $S_n$ 的共轭类个数等于 $n$ 的拆分数 $P(n)$</p>
+<p>在 $n$ 次对称群 $S_n$中, $|D(\lambda_1,\lambda_{2},…\lambda_n)|=\frac{n!}{\lambda_1!,\lambda_2!,…\lambda_n!\ 1^{\lambda_1}2^{\lambda_2}…n^{\lambda_n}}$</p>
+<p>轮换指标多项式：令 $G$ 是作用上在 $S=\begin{Bmatrix} 1,2,…n \end{Bmatrix}$ 的置换群, $\Gamma$ 为 $G$ 的置换的所有不同格式构成的集合,则：<br>$$<br>P(G \ ; x_1,x_2…x_n)=\frac{1}{|G|} \sum_{ (1)^{\lambda_1}(2)^{\lambda_2}…(n)^{\lambda_n}\in \Gamma} x_1^{\lambda_1}x_2^{\lambda_2}…x_n^{\lambda_n}<br>$$<br>称为轮换指标多项式.</p>
+<p>不动置换类： 设 $G$ 是集合 $S=\begin{Bmatrix} 1,2,…n \end{Bmatrix}$ 上的一个置换群, $k \in S$ , $\sigma \in G$ , 若 $\sigma(k)=k$ , 则称 $k$ 为置换 $\sigma$ 的不动点。 $G$中所有以 $k$ 为不动点的全体置换, 构成 $G$ 的一个子集, 称作 $k$ 的不动置换类 ,记作 $Z_k$</p>
+<p>$$<br>在\ S_3\ 中,Z_1=\begin{Bmatrix}e,(2,3)\end{Bmatrix}, Z_2=\begin{Bmatrix}e,(1,3)\end{Bmatrix}, Z_3=\begin{Bmatrix}e,(1,2)\end{Bmatrix}<br>$$</p>
+<p>等价类：设 $G$ 是集合 $S=\begin{Bmatrix} 1,2,…n \end{Bmatrix}$ 的置换群, 若 $i$,$j\in S$ , 满足 $\sigma(i)=j$ ,则称 $i$ 与 $j$ 等价,记为 $i\approx j$ , $S$ 中与 $i$ 等价的元素的全体记为 $E_i$ , 称为元素 $i$ 的轨道。 $E_i$ 的个数叫做轨道的长度</p>
+<p>性质:$\begin{cases} 反身性,即 i \approx i  \ 对称性, 若i\approx j,则 j\approx i \ 传递性, 若i\approx j , j\approx k,则 i\approx k\end{cases}$</p>
+<p>等价类 $|E_k|\cdot|Z_k|=|G| , k=1,2…n $ , 且相同大小的等价类个数等于等价类的大小 </p>
+<h5 id="Burnside-引理"><a href="#Burnside-引理" class="headerlink" title="Burnside 引理"></a>Burnside 引理</h5><p>设 $G$ 是 $n$ 元集 S={1,2…n} 上的置换群 $G=\begin{Bmatrix}\sigma_1,\sigma_2,…\sigma_r \end{Bmatrix}$ , 把每个 $\sigma_i$ 表示称不相杂的轮换的乘积, 令 $\lambda_k (\sigma_i) ,(i=1,…,r)$ 表示置换 $\sigma_i$ 中 $k$ 阶轮换的个数,则 $G$ 在 $S$ 上的等价关系将 $S$ 划分为不同等价类的个数为：</p>
+<p>$$<br>L=\frac{1}{|G|} \sum_{j=1}^{r} \lambda_1(\sigma_j)<br>$$</p>
+<p>其中 $\lambda_1(\sigma)$ 为置换 $\sigma$ 中的不动点的个数</p>
+<p>证明：</p>
+<p>令 $N$ 为 $S$ 在 $G$ 中所有置换作用下不动点的个数</p>
+<p>$$<br>\begin{align}<br>&amp;N=\sum_{\sigma \in G} \lambda_1(\sigma)=\sum_{j=1}^{r}\lambda_1(\sigma_j)  \<br>&amp;N=\sum_{k=1}^{n}|Z_k|\<br>\Rightarrow &amp;\sum_{j=1}^{r}\lambda_1(\sigma_j) =\sum_{k=1}^{n}|Z_k|<br>\end{align}<br>$$<br>设 $S$ 的不同等价类有 $L$ 个 , 那么, $\begin{align} S=\sum_{k=1}^{L}E_i\end{align}$,且有：</p>
+<p>$$<br>\begin{align}</p>
+<p>\sum_{k=1}^{n}|Z_k|&amp;=\sum_{k=1}^{n}\frac{|G|}{|E_k|}=|G|\sum_{k=1}^{n}\frac{1}{E_k} \<br>&amp;=|G|\sum_{i=1}^{L}\sum_{k\in E_i} \frac{1}{E_i}=L|G|</p>
+<p>\end{align}<br>$$</p>
+<p>所以：<br>$$<br>L=\frac{1}{|G|} \sum_{j=1}^{r} \lambda_1(\sigma_j)<br>$$</p>
+<h5 id="Polya定理"><a href="#Polya定理" class="headerlink" title="Polya定理"></a>Polya定理</h5><p>有 $n$ 个对象,用 $m$ 种颜色染色,求不等价的方案数</p>
+<p>任意一种涂色方案都可以表示成一个映射 $f:S\rightarrow C$, 其中 $f$ 规定: $S$ 中各个元素的染色方案, 它将 $\forall$ $a\in S$ 染上颜色 $f(a)\in C$, 所有的映射 $f$ 构成集合 $C^S$ : $|C^S|=|C|^{|S|}=m^n$</p>
+<p>我们根据同样的置换方法, 设定两个置换群, $H$ 和 $G$, $H$ 作用在集合 $S$ 上, $G$ 作用在方案集 $C^S$ 上。 设定 $\tau \in H$ , 相应在 $C^S$ 上诱导出置换 $\sigma \in G$ , 且有：  $<br>\begin{cases}<br>\lambda_1(\sigma)=m^{\lambda(\tau)}  ,\  (\lambda(\tau)为将置换\sigma表示成不相交轮换的个数) \<br>|G|=|H|<br>\end{cases}<br>$ </p>
+<p>实质上的意思是: 若将 $S$ 中的置换 $\tau_i$ 的每一个轮换内部的点涂上同一种颜色 ,所得的各种涂色方案正好对应 $C^S$ 中 在置换 $\sigma_i$下不变的方案</p>
+<p>由此我们可以得出 $Polya$ 定理:</p>
+<p>$$<br>L=\frac{1}{H}\sum_{\sigma \in H} m^{\lambda(\sigma)}<br>$$</p>
+<p>$Polya$ 定理的生成函数形式</p>
+<p>在 $Polya$ 定理中 ,将置换方案分解之后,每个$k$ 轮换的 $k$ 个元素对应一个颜色使用了 $k$ 次 , 我们设 $b_m^k$ 代表颜色 $b$ 出现 $k$ 次,所以每种颜色的元素出现 $k$ 次表示为 $b_1^k+…+b_m^k$。 所以按照这种思想替换 $\sigma_i$ 的每一个 $k$ 轮换 ,得到 $Polya$ 定理的生成函数形式： </p>
+<p>$$<br>令 \ s_k=b_1^k+…+b_m^k \ ,k=1,2,…,n \<br>L=\frac{1}{|H|}\sum_{\sigma\in H} s_1^{\lambda_1(\sigma)}s_2^{\lambda_2(\sigma)}…s_n^{\lambda_n(\sigma)} \<br>$$</p>
+<p>展开式中 $ b_1^{i_1}b_2^{i_2}…b_m^{i_m}$ 的系数即为 $i_1$ 个对象涂 $b_1$ 色, $i_2$ 个对象涂 $b_2$ 色 $…$ $i_m$ 个对象涂 $b_m$ 色的方案数 ,并且 $i_1+i_2+…+i_m =n$</p>
+]]></content>
+  </entry>
+</search>

@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="鸽巢原理如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体 如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体…… 设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组合数学">
+<meta property="og:url" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Superbia-zyb&#39;s Blog">
+<meta property="og:description" content="鸽巢原理如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体 如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体…… 设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中">
+<meta property="og:locale">
+<meta property="og:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/1.png">
+<meta property="og:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/2.png">
+<meta property="og:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/3.png">
+<meta property="article:published_time" content="2020-07-07T16:11:06.000Z">
+<meta property="article:modified_time" content="2020-07-09T17:30:20.293Z">
+<meta property="article:author" content="Spb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Superia-zyb.github.io/2020/07/08/组合数学/"/>
+
+
+
+
+
+  <title>组合数学 | Superbia-zyb's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Superbia-zyb's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zyb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Superbia-zyb's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">组合数学</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-08T00:11:06+08:00">
+                2020-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  32 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="鸽巢原理"><a href="#鸽巢原理" class="headerlink" title="鸽巢原理"></a>鸽巢原理</h5><p>如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体</p>
+<p>如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体……</p>
+<p>设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中含有大于等于 $ \lceil \frac{m}{n} \rceil $ 个物体</p>
+<p>如果有 $n$ 个非负整数 $m_1 \sim m_n$ , $\frac{m_1+m_2+…+m_n}{n}&gt;r-1$ ，那么至少有一个整数大于等于 $r$</p>
+<p>如果有 $n$ 个非负整数 $m_1 \sim m_n$ , $\frac{m_1+m_2+…+m_n}{n} &lt; r+1$ ，那么至少有一个整数小于 $r$</p>
+<p>每个由 $n^2+1$ 个实数构成的序列 $a_1,a_2…a_{n^2+1}$ ,或者含有长度为 $n+1$ 的递增子序列 , 或者含有长度为 $n+1$ 的递减子序列</p>
+<h5 id="Ramsey定理"><a href="#Ramsey定理" class="headerlink" title="Ramsey定理"></a>Ramsey定理</h5><p>对于任意给定的两个正整数 $p$ , $q$ , 如果存在最小的正整数 $R(p,q)$ 使得当 $N \geqslant R(p,q)$ 时，对 $K_N$ (有$N$ 个顶点的完全图) 任意进行红蓝染色, $K_N$ 中均有红色 $K_p$ , 或蓝色 $K_q$ , 则 $R(p,q)$ 称为 $Ramsey$ 数</p>
+<p>简单性质：$\begin{cases} R(p,q)=R(q,p) \ R(n,2)=n \ R(m,n)\leqslant R(m-1,n)+R(m,n-1)\end{cases}$</p>
+<h5 id="集合的排列-begin-cases-线性-r-排列-：P-n-r-frac-n-n-r-循环-r-排列-frac-P-n-r-r-frac-n-r-n-r-end-cases"><a href="#集合的排列-begin-cases-线性-r-排列-：P-n-r-frac-n-n-r-循环-r-排列-frac-P-n-r-r-frac-n-r-n-r-end-cases" class="headerlink" title="集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)=\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} =\frac{n!}{r(n-r)!}\end{cases}$"></a>集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)=\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} =\frac{n!}{r(n-r)!}\end{cases}$</h5><h5 id="集合的组合：-binom-n-r-frac-P-n-r-r"><a href="#集合的组合：-binom-n-r-frac-P-n-r-r" class="headerlink" title="集合的组合： $ \binom{n}{r}=\frac{P(n,r)}{r!}$"></a>集合的组合： $ \binom{n}{r}=\frac{P(n,r)}{r!}$</h5><h5 id="多重集的排列："><a href="#多重集的排列：" class="headerlink" title="多重集的排列："></a>多重集的排列：</h5><p>假设共有 $k$ 种元素：</p>
+<p>$ \begin{cases} \begin{align} &amp;r\ 排列,S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}:k^r  \<br>&amp;n\ 排列,S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}:    \frac{n!}{n_1!n_2!\ …n_k!} \<br>&amp;r\ 排列,S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}:\sum \frac{r!}{m_1!\ m_2!\ … \ m_k!}\ ,(\sum_{i=1}^{k}m_i=r,\ 0\leqslant m_i\leqslant n_i) \ &amp;r \ 圆排列,S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}\end{align} \end{cases}$</p>
+<p>生成函数求解多重集的 $r$ 排列：</p>
+<p>$S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}$</p>
+<p>对应生成函数：$g^{(e)}(x)=f_{n_1}(x)f_{n_2}(x)…f_{n_3}(x)\ , \ f_{n_i}=1+x+\frac{x^2}{2}+…+\frac{x^{n_i}}{n_i!}  $</p>
+<p>莫比乌斯反演求解多重集的 $r$ 圆排列：</p>
+<p>$S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}$</p>
+<p>令 $S(n)$ 为多重集的 $r$ 圆排列方案数，$M(d)$ 为周期为 $d$ 的 $r$ 圆排列方案数 , 有：</p>
+<p>$$<br>\begin{align}<br>k^r=\sum_{d|r}d M(d)\ ,\ S(r)=\sum_{d|r}M(d)<br>\end{align}<br>$$</p>
+<p>$$<br>\begin{align}<br>rM(r)&amp;=\sum_{d|r}\mu(d)k^{\frac{r}{d}}=\sum_{d|r}\mu(\frac{r}{d})k^d \<br>dM(d)&amp;=\sum_{d_1|d}\mu(d_1)k^{\frac{d}{d_1}}=\sum_{d_1|d}\mu(\frac{d}{d_1})k^{d_1}\<br>M(d)&amp;=\frac{1}{d}\sum_{d_1|d}\mu(\frac{d}{d_1})k^{d_1}<br>\end{align}<br>$$<br>则：<br>$$<br>S(r)=\sum_{d|r}M(d)=\sum_{d|r}\frac{1}{d}\sum_{d_1|d}\mu(\frac{d}{d_1})k^{d_1}<br>$$</p>
+<h5 id="多重集的组合："><a href="#多重集的组合：" class="headerlink" title="多重集的组合："></a>多重集的组合：</h5><p>假设共有 $k$ 种元素：$ \begin{cases} r\ 组合,S=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}: \binom{k+r-1}{r} \<br>r\ 组合,S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}<br>\end{cases}$</p>
+<p>多重集的 $r$ 组合 ：(容斥原理)</p>
+<p>$S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}$</p>
+<p>$T=\begin{Bmatrix}  \infty \cdot a_1, \infty \cdot a_2 , … , \infty \cdot a_k \end{Bmatrix}$</p>
+<p>设性质 $P_i$ 为:  $T$ 集合的 $r$ 排列中 $a_i$ 个数大于 $n_i$，集合$A_i$ 为满足性质 $P_i$ 的集合</p>
+<p>则：$|\overline{A_1}\cap\overline{A_2}\cap…\cap\overline{A_k}|$ 为所求</p>
+<p>现在需要求出任意 $|A_{i_1}\cap A_{i_2}\cap …\cap A_{i_m}|$</p>
+<p>因为满足$a_i$个数大于$n_i$的 $r$ 排列个数 = 可以任取$a_i$的$(r-n_i-1)$排列个数 =$\binom{r-n_i-1 + k -1}{r-n_i-1}$</p>
+<p>即$|A_i|=\binom{r-n_i-1 + k -1}{r-n_i-1}$，所以可得：</p>
+<p>$$<br>|A_{i_1}\cap A_{i_2}\cap …\cap A_{i_m}| =<br>\binom{r-\sum\limits_{x=1} ^{m}(n_{i_x}+1) + k -1}{r-\sum\limits_{x=1} ^{m}(n_{i_x}+1)}<br>=\binom{r-\sum\limits_{x=1} ^{m}(n_{i_x}+1) + k -1}{k-1}<br>$$</p>
+<p>所以，可以通过容斥原理求出。</p>
+<p>多重集的 $r$ 组合 ：(生成函数)</p>
+<p>$S=\begin{Bmatrix}  n_1 \cdot a_1, n_2 \cdot a_2 , … , n_k \cdot a_k \end{Bmatrix}$</p>
+<p>对应生成函数：$\begin{align} g(x)=\prod_{i=1}^{k}\sum_{j=0}^{k_i}x^j=\prod_{i=1}^{k}\sum_{j\in T_i }x^j \end{align}$</p>
+<h5 id="Pascal公式：-binom-n-k-binom-n-1-k-binom-n-1-k-1"><a href="#Pascal公式：-binom-n-k-binom-n-1-k-binom-n-1-k-1" class="headerlink" title="Pascal公式：$\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$"></a>Pascal公式：$\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$</h5><h5 id="二项式定理：-x-y-n-begin-align-sum-k-0-n-binom-n-k-x-n-k-y-k-end-align"><a href="#二项式定理：-x-y-n-begin-align-sum-k-0-n-binom-n-k-x-n-k-y-k-end-align" class="headerlink" title="二项式定理：$(x+y)^n=\begin{align}\sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k \end{align}$"></a>二项式定理：$(x+y)^n=\begin{align}\sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k \end{align}$</h5><h5 id="组合恒等式"><a href="#组合恒等式" class="headerlink" title="组合恒等式"></a>组合恒等式</h5><p>$ \begin{align} \sum_{i=0}^{n} \binom{n}{i}=2^n \end{align}$ , $ \begin{align} \sum_{i=0}^{n} i\binom{n}{i}=n2^{n-1} \end{align}$ , $\begin{align} \sum_{i为偶数}^{n}\binom{n}{i}=\sum_{i为奇数}^{n}\binom{n}{i}\end{align}$</p>
+<p>$\begin{align} \binom{n}{k}=\frac{n}{k}\binom{n-1}{k-1}\end{align}$ , $\begin{align} \sum_{k=1}^{n} k^2\binom{n}{k} =n(n+1)2^{n-2}\end{align}$</p>
+<p>$\begin{align} \sum_{i=0}^{n} \binom{m}{i} \binom{n}{r-i} =\binom{m+n}{r}  \end{align} $ , $\begin{align} \sum_{i=0}^{n} \binom{n}{i}^2=\binom{2n}{n} \end{align}$</p>
+<p>$\begin{align} \sum_{i=0}^{n} (-1)^i\frac{1}{i+1}\binom{n}{i}=\frac{1}{n+1}   \end{align}$ , $\begin{align} \sum_{i=0}^{n} \binom{i}{k} = \binom{n+1}{k+1}\end{align}$</p>
+<h5 id="多项式定理：-begin-cases-x-1-x-2-…-x-t-n-sum-binom-n-n-1n-2…n-t-x-1-n-1-x-2-n-2-…x-t-n-t-begin-cases-binom-n-n-1n-2…n-t-frac-n-n-1-n-2-…-n-t-多项式系数-n-1-…-n-t-n-end-cases-项数-binom-n-t-1-n-end-cases"><a href="#多项式定理：-begin-cases-x-1-x-2-…-x-t-n-sum-binom-n-n-1n-2…n-t-x-1-n-1-x-2-n-2-…x-t-n-t-begin-cases-binom-n-n-1n-2…n-t-frac-n-n-1-n-2-…-n-t-多项式系数-n-1-…-n-t-n-end-cases-项数-binom-n-t-1-n-end-cases" class="headerlink" title="多项式定理：$ \begin{cases} (x_1+x_2+…+x_t)^n=\sum\binom{n}{n_1n_2…n_t}x_1^{n_1}x_2^{n_2}…x_t^{n_t}  ,\begin{cases} \binom{n}{n_1n_2…n_t}= \frac{n!}{n_1!\ n_2!\ …\ n_t!}\ (多项式系数)\n_1+…+n_t=n \end{cases}\项数=\binom{n+t-1}{n} \end{cases} $"></a>多项式定理：$ \begin{cases} (x_1+x_2+…+x_t)^n=\sum\binom{n}{n_1n_2…n_t}x_1^{n_1}x_2^{n_2}…x_t^{n_t}  ,\begin{cases} \binom{n}{n_1n_2…n_t}= \frac{n!}{n_1!\ n_2!\ …\ n_t!}\ (多项式系数)\n_1+…+n_t=n \end{cases}\项数=\binom{n+t-1}{n} \end{cases} $</h5><h5 id="牛顿二项式定理："><a href="#牛顿二项式定理：" class="headerlink" title="牛顿二项式定理："></a>牛顿二项式定理：</h5><p>令 $a$ 是实数，则对于所有 $0\leqslant |x|&lt;|y|  $ 的 $x$ , $y$ ,</p>
+<p>$$<br>\begin{align} \ (x+y)^a&amp;=\sum_{k=0}^{\infty} \binom{a}{k}x^ky^{a-k} =\sum_{k=0}^{\infty}\frac{a(a-1)…(a-k-1)}{k!}x^ky^{a-k} \end{align}<br>$$</p>
+<p>令 $z=\frac{x}{y} \ (|z|&lt;1)$ ，则可化简为：$\begin{align}(1+z)^a=\sum_{k=0}^{\infty} \binom{a}{k} z^k \end{align}$</p>
+<p>令 $n$ 为正整数 , $a=-n$ , 有：$\binom{a}{k}=\binom{-n}{k}=(-1)^k\binom{n+k-1}{k}$ , 则对于任意 $|z|&lt;1$：<br>$$<br>\begin{align}<br>&amp;(1+z)^{-n}=\frac{1}{(1+z)^n}=\sum_{k=0}^{\infty} (-1)^k\binom{n+k-1}{k}z^k\<br>&amp;(1-z)^{-n}=\frac{1}{(1-z)^n}=\sum_{k=0}^{\infty} \binom{n+k-1}{k}z^k<br>\<br>\<br>&amp;当\ n=1\ 时<br>\begin{cases}<br>\frac{1}{1+z}=\sum\limits_{k=0}^{\infty}(-1)^kz^k  \<br>\frac{1}{1-z}=\sum\limits_{k=0}^{\infty}z^k<br>\end{cases}</p>
+<p>\end{align}<br>$$</p>
+<h5 id="非降路径问题"><a href="#非降路径问题" class="headerlink" title="非降路径问题"></a>非降路径问题</h5><p>从 $(0,0)$ 到 $(m,n)$点的方案数为：$\binom{n+m}{m}$</p>
+<p>从 $(p,q)$ 到 $(r,s)$点的方案数为：$\binom{r+s-p-q}{r-q}$</p>
+<p>从 $(0,0)$ 到 $(n,n)$点,不接触 直线$y=x$ 的方案数为：$2(\binom{n+(n-1)-1-0}{n-1}-\binom{n+(n-1)-1-0}{n})=\frac{2}{n} \binom{2n-2}{n-1}$</p>
+<p>从 $(0,0)$ 到 $(n,n)$点,不经过 直线$y=x$ 的方案数为：$2(\binom{n+(n-1)-1-0}{n-1}-\binom{n+(n-1)-(-1)-2}{n-(-1)}=\frac{2}{n+1} \binom{2n}{n}$</p>
+<h5 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h5><p>$$<br>\begin{align}<br>|\overline{A_1}\cap\overline{A_2}\cap…\cap\overline{A_m}|</p>
+<p>&amp;=|S|-\sum|A_i|+\sum|A_i\cap A_j|-\sum|A_i\cap A_j\cap A_k |+…+(-1)^m|A_1 \cap A_2\cap …\cap A_m| \<br>|A_1\cup A_2 \cup …\cup A_m|&amp;=|S|-|\overline{A_1}\cap\overline{A_2}\cap…\cap\overline{A_m}| \</p>
+<p>&amp;=\sum|A_i|-\sum|A_i\cap A_j|+\sum|A_i\cap A_j\cap A_k |+…+(-1)^{m+1}|A_1 \cap A_2\cap …\cap A_m|<br>\end{align}<br>$$</p>
+<h5 id="错位排列：-begin-cases-D-n-n-1-D-n-2-D-n-1-n-geq-3-D-1-0-D-2-1-begin-align-D-n-amp-n-binom-n-1-n-1-binom-n-2-n-2-…-1-n-binom-n-n-0-amp-n-1-frac-1-1-frac-1-2-…-1-n-frac-1-n-end-align-end-cases"><a href="#错位排列：-begin-cases-D-n-n-1-D-n-2-D-n-1-n-geq-3-D-1-0-D-2-1-begin-align-D-n-amp-n-binom-n-1-n-1-binom-n-2-n-2-…-1-n-binom-n-n-0-amp-n-1-frac-1-1-frac-1-2-…-1-n-frac-1-n-end-align-end-cases" class="headerlink" title="错位排列：$ \begin{cases} D_n=(n-1) (D_{n-2}+D_{n-1}) ,\ (n\geq 3,D_1=0\ ,D_2=1)\ \begin{align} D_n &amp;=  n!-\binom{n}{1}(n-1)!+\binom{n}{2}(n-2)!\ +…+\ (-1)^n\binom{n}{n}0! \&amp;= n!\ (1-\frac{1}{1!}+\frac{1}{2!}+…+(-1)^n\frac{1}{n!}   )\end{align}\end{cases}$"></a>错位排列：$ \begin{cases} D_n=(n-1) (D_{n-2}+D_{n-1}) ,\ (n\geq 3,D_1=0\ ,D_2=1)\ \begin{align} D_n &amp;=  n!-\binom{n}{1}(n-1)!+\binom{n}{2}(n-2)!\ +…+\ (-1)^n\binom{n}{n}0! \&amp;= n!\ (1-\frac{1}{1!}+\frac{1}{2!}+…+(-1)^n\frac{1}{n!}   )\end{align}\end{cases}$</h5><h5 id="有限制条件的排列问题"><a href="#有限制条件的排列问题" class="headerlink" title="有限制条件的排列问题"></a>有限制条件的排列问题</h5><p>限制条件,指对相邻元素之间关系的限制,在 $n$ 排列中不出现 $12,23…,(n-1)n$ 的排列就叫做有限制条件的排列问题，记作 $Q_n$</p>
+<p>$<br>Q_n=n!-\binom{n-1}{1}(n-1)!+\binom{n-1}{2}(n-2)!-…+(-1)^{n-1}\binom{n-1}{n-1}1!<br>$</p>
+<p>利用容斥原理 , $|A_{i_1}\cap \ A_{i_2} \cap …\cap A_{i_m}|=\binom{n-1}{m}(n-m)!$ 。</p>
+<h5 id="棋盘多项式与有禁区的排列"><a href="#棋盘多项式与有禁区的排列" class="headerlink" title="棋盘多项式与有禁区的排列"></a>棋盘多项式与有禁区的排列</h5><p>假设棋盘是 $C$ , $r_k(C)$ 表示将 $k$ 个相同的棋子放入 $C$ 中的方案数 , 并且每行 , 每列只能有一个棋子 , 并规定 $r_0(C)=1$</p>
+<p>布棋方案数性质：$<br>\begin{cases}<br>\begin{align}<br>&amp;1)\ 若\ k 大于棋盘\ C\ 中方格数\ ,\ r_k(C)=0\<br>&amp;2)\ r_1(C)\ 等于棋盘\ C\ 中方格数 \<br>&amp;3)\ 若棋盘\ C_1\ 可以经过旋转, 翻转,变成棋盘\ C_2\ , 则\ r_k(C_1)=r_k(C_2)\<br>&amp;4)\ 设\ C_i是从棋盘\ C\ 中去掉指定的方格所在行,列以后剩余的棋盘 , C_l\ 是从棋盘\ C\ 中去掉指定方格所剩下的棋盘 , 则有：\<br>&amp;\ \ \ \ \ r_k(C)=r_{k-1}(C_{i})+r_k(C_l)\ (k\geqslant1)   \<br>&amp;5)\ 设棋盘\ C\ 由\ C_1\ ,\ C_2\ 两个布棋方案互相独立的子棋盘组成 \ ,则 \ r_k(C)=\sum_{i=0}^{k}r_i(C_1)r_{k-i}<br>(C_2)\end{align}<br>\end{cases}<br>$</p>
+<p>设 $C$ 是棋盘 , 将 $\begin{align}R(C)=\sum_{k=0}^{\infty}r_k(C)x^k\end{align}$ 记作棋盘多项式</p>
+<p>棋盘多项式性质：$\begin{cases}<br>R(C)=R(C_1)\cdot R(C_2)\R(C)=xR(C_i)+R(C_l)\end{cases}<br>$</p>
+<p>有禁区的排列问题：设 $C\ 是\ n\times n$ 的棋盘，其中有 $r$  个位置不能摆放棋子 , 则方案数是：<br>$$<br>n!-r_1(n-1)!+r_2(n-2)!-…+(-1)^nr_n<br>$$</p>
+<p>其中 , $r_i$ 为将 $i$ 个棋子放入禁区的方案数 , (求禁区部分的棋盘多项式)</p>
+<img src="/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/1.png" style="zoom: 33%;">
+
+<h5 id="生成函数：-begin-align-g-x-sum-n-0-infty-h-nx-n-end-align"><a href="#生成函数：-begin-align-g-x-sum-n-0-infty-h-nx-n-end-align" class="headerlink" title="生成函数：$\begin{align} g(x)=\sum_{n=0}^{\infty}h_nx^n \end{align}$"></a>生成函数：$\begin{align} g(x)=\sum_{n=0}^{\infty}h_nx^n \end{align}$</h5><p>假设 $A(x)$ 为序列 $a_k$ 的生成函数 , $B(x)$ 为序列 $b_k$ 的生成函数</p>
+<p>相关性质： $\begin{cases} 若\ b_k=a^k a_k \ ,\ 则\ B(x)=A(ax) \<br>若\ b_k=ka_k\ \ \ ,\ 则\ B(x)=xA’(x) \<br>\begin{align}<br>若\ b_k=\sum_{i=0}^{n}a^i\ ,\ 则\ B(x)=\frac{A(x)}{1-x}\<br>\end{align} \end{cases}$ ,  常见生成函数：$\begin{cases} g(1)=\frac{1}{1-x} \<br>g(k)=\frac{x}{(1-x)^2}\<br>g(\binom{a}{k})=(1+x)^a\<br>g(a^k)=\frac{1}{1-ax}\<br>\end{cases}<br>$</p>
+<h5 id="指数生成函数：-begin-align-g-e-x-sum-n-0-infty-h-n-frac-x-n-n-end-align"><a href="#指数生成函数：-begin-align-g-e-x-sum-n-0-infty-h-n-frac-x-n-n-end-align" class="headerlink" title="指数生成函数：$\begin{align} g^{(e)}(x)=\sum_{n=0}^{\infty} h_n\frac{x^n}{n!}\end{align}$"></a>指数生成函数：$\begin{align} g^{(e)}(x)=\sum_{n=0}^{\infty} h_n\frac{x^n}{n!}\end{align}$</h5><p>相关性质：$\begin{cases} \frac{e(x)+e(-x)}{2}=1+\frac{x^2}{2!}+\frac{x^4}{4!}+… \ \frac{e(x)-e(-x)}{2}=\frac{x}{1}+\frac{x^3}{3!}+\frac{x^5}{5!}… \<br>e(x)=1+\frac{x}{1}+\frac{x^2}{2!}+…+\frac{x^k}{k!}+… \<br>e(-x)=1-\frac{x}{1!}+\frac{x^2}{2}-…+(-1)^k\frac{x^k}{k}+… \end{cases}$</p>
+<h5 id="卡特兰数：-C-n-frac-1-n-1-binom-2n-n-C-n-frac-4n-2-n-1-C-n-1-n-geqslant-1"><a href="#卡特兰数：-C-n-frac-1-n-1-binom-2n-n-C-n-frac-4n-2-n-1-C-n-1-n-geqslant-1" class="headerlink" title="卡特兰数：$C_n=\frac{1}{n+1} \binom{2n}{n}$ , $C_n=\frac{4n-2}{n+1}C_{n-1} \ \  (n\geqslant 1)$"></a>卡特兰数：$C_n=\frac{1}{n+1} \binom{2n}{n}$ , $C_n=\frac{4n-2}{n+1}C_{n-1} \ \  (n\geqslant 1)$</h5><h5 id="拓展卡特兰数：-C-n-m-frac-n-m-1-n-1-binom-n-m-n"><a href="#拓展卡特兰数：-C-n-m-frac-n-m-1-n-1-binom-n-m-n" class="headerlink" title="拓展卡特兰数：$C_n^m = \frac{n-m+1}{n+1} \binom{n+m}{n}$"></a>拓展卡特兰数：$C_n^m = \frac{n-m+1}{n+1} \binom{n+m}{n}$</h5><h5 id="拟卡特兰数：-C-n-n-C-n-1-begin-cases-C-n-4n-6-C-n-1-n-geqslant-2-C-1-1-end-cases"><a href="#拟卡特兰数：-C-n-n-C-n-1-begin-cases-C-n-4n-6-C-n-1-n-geqslant-2-C-1-1-end-cases" class="headerlink" title="拟卡特兰数：$C_n^{*} =n! \  C_{n-1} $  , $ \begin{cases}C_n^{*}=(4n-6)C_{n-1}^{*} (n \geqslant 2) \ C_1^{*}=1 \end{cases}$"></a>拟卡特兰数：$C_n^{*} =n! \  C_{n-1} $  , $ \begin{cases}C_n^{*}=(4n-6)C_{n-1}^{*} (n \geqslant 2) \ C_1^{*}=1 \end{cases}$</h5><h5 id="第一类斯特林数：-S-1-n-m-表示将-n-个物体排成-m-个非空的循环排列的方法数"><a href="#第一类斯特林数：-S-1-n-m-表示将-n-个物体排成-m-个非空的循环排列的方法数" class="headerlink" title="第一类斯特林数：$ \ S_1(n,m) \ $ 表示将$\ n\ $个物体排成$\ m\ $个非空的循环排列的方法数"></a>第一类斯特林数：$ \ S_1(n,m) \ $ 表示将$\ n\ $个物体排成$\ m\ $个非空的循环排列的方法数</h5><p>$$<br>\begin{align}<br>&amp; S_1(n,m)=S_1(n-1,m-1)+(n-1)S_1(n-1,m) \<br>&amp;n!=\sum_{k=0}^nS_1(n,k) \<br>&amp;\begin{bmatrix} n \0 \end{bmatrix}=0 \ , \begin{bmatrix} n \1 \end{bmatrix} =(n-1)! \ , \begin{bmatrix} n\n\end{bmatrix} =1 \ , \begin{bmatrix} n\n-1\end{bmatrix} =\binom{n}{2}<br>\end{align}<br>$$</p>
+<h5 id="第二类斯特林数：-S-2-n-m-表示把-n-个不同的小球放在-m-个相同的盒子里方案数。"><a href="#第二类斯特林数：-S-2-n-m-表示把-n-个不同的小球放在-m-个相同的盒子里方案数。" class="headerlink" title="第二类斯特林数：$\ S_2(n,m)\  $表示把$\ n\ $个不同的小球放在$\ m\ $个相同的盒子里方案数。"></a>第二类斯特林数：$\ S_2(n,m)\  $表示把$\ n\ $个不同的小球放在$\ m\ $个相同的盒子里方案数。</h5><p>$$<br>\begin{align}<br>&amp;S_2(n,m)=\frac{1}{m!}\sum ^m <em>{k=0} (-1)^k \binom{m}{k} (m-k)^n \<br>&amp;S_2(n,m)=S_2(n-1,m-1)+mS_2(n-1,m) \<br>&amp;n^k=\sum^k</em>{i=0}S_2(k,i) \times i! \times \binom{n}{i}<br>\end{align}<br>$$</p>
+<img src="/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/2.png" style="zoom: 80%;">
+
+<h5 id="贝尔数-B-p-：将-p-个元素的集合分成非空，不可辨别盒子的划分数。"><a href="#贝尔数-B-p-：将-p-个元素的集合分成非空，不可辨别盒子的划分数。" class="headerlink" title="贝尔数($B_p$)：将 $p$ 个元素的集合分成非空，不可辨别盒子的划分数。"></a>贝尔数($B_p$)：将 $p$ 个元素的集合分成非空，不可辨别盒子的划分数。</h5><p>$$<br>\begin{align}<br>&amp; B_n=\sum_{k=0}^{n}S_2(n,k)=S_2(n,0)+S_2(n,1)+…+S_2(n,n) \<br>&amp; B_{n+1}=\sum_{k=0}^{n}\binom{n}{k}B_k<br>\end{align}<br>$$</p>
+<h5 id="分拆数：-lambda-n-a-n-…2-a-2-1-a-1"><a href="#分拆数：-lambda-n-a-n-…2-a-2-1-a-1" class="headerlink" title="分拆数：$ \lambda =n^{a_n}…2^{a_2}1^{a_1}$"></a>分拆数：$ \lambda =n^{a_n}…2^{a_2}1^{a_1}$</h5><h5 id="正整数的有序-k-分拆个数：-binom-n-k-k-1-k-1-binom-n-1-k-1"><a href="#正整数的有序-k-分拆个数：-binom-n-k-k-1-k-1-binom-n-1-k-1" class="headerlink" title="正整数的有序$\ k\ $分拆个数：$\binom{n-k+k-1}{k-1}=\binom{n-1}{k-1}$"></a>正整数的有序$\ k\ $分拆个数：$\binom{n-k+k-1}{k-1}=\binom{n-1}{k-1}$</h5><h5 id="正整数的有序-k-分拆个数（要求-i-分部量大于等于-p-i-）：-begin-align-binom-n-sum-i-1-k-p-i-k-1-k-1-end-align"><a href="#正整数的有序-k-分拆个数（要求-i-分部量大于等于-p-i-）：-begin-align-binom-n-sum-i-1-k-p-i-k-1-k-1-end-align" class="headerlink" title="正整数的有序$\ k\ $分拆个数（要求$\ i\ $分部量大于等于$\ p_i \ $）： $\begin{align}\binom{n-\sum_{i=1}^k p_i+k-1}{k-1}\end{align}$"></a>正整数的有序$\ k\ $分拆个数（要求$\ i\ $分部量大于等于$\ p_i \ $）： $\begin{align}\binom{n-\sum_{i=1}^k p_i+k-1}{k-1}\end{align}$</h5><h5 id="正整数-n-分为-k-个分部-若-n-k-同时为奇数或偶数，则-n-的分部量都是奇数的有序分拆数为-begin-align-binom-frac-n-k-2-k-1-k-1-end-align"><a href="#正整数-n-分为-k-个分部-若-n-k-同时为奇数或偶数，则-n-的分部量都是奇数的有序分拆数为-begin-align-binom-frac-n-k-2-k-1-k-1-end-align" class="headerlink" title="正整数$\ n\ $分为 $k$ 个分部,若 $n$ , $k$ 同时为奇数或偶数，则 $n$ 的分部量都是奇数的有序分拆数为 $\begin{align}\binom{\frac{n-k}{2}+k-1}{k-1}\end{align}$"></a>正整数$\ n\ $分为 $k$ 个分部,若 $n$ , $k$ 同时为奇数或偶数，则 $n$ 的分部量都是奇数的有序分拆数为 $\begin{align}\binom{\frac{n-k}{2}+k-1}{k-1}\end{align}$</h5><h5 id="无序-k-分拆："><a href="#无序-k-分拆：" class="headerlink" title="无序 $k$ 分拆："></a>无序 $k$ 分拆：</h5><p>$$<br>\begin{align}<br>&amp;B(n,k)=B(n-1,k-1)+B(n-k,k) \<br>&amp;B(n+k,k)=\sum_{i=1}^kB(n,i) \<br>&amp;\begin{cases}<br>B(n,1)=1\<br>B(n,n)=1\<br>B(n,n-1)=1\<br>B(n,2)=\lfloor \frac{n}{2}\rfloor<br>\end{cases}<br>\end{align}<br>$$</p>
+<h5 id="分拆的-Ferrers-图：每个-Ferrers-图对应一种分拆方案"><a href="#分拆的-Ferrers-图：每个-Ferrers-图对应一种分拆方案" class="headerlink" title="分拆的 $Ferrers$ 图：每个 $Ferrers$ 图对应一种分拆方案"></a>分拆的 $Ferrers$ 图：每个 $Ferrers$ 图对应一种分拆方案</h5><p>$<br>\begin{cases}<br>共轭图：将各行改成列\<br>共轭分拆：共轭图对应的分拆\<br>自共轭分拆：一个分拆与其共轭相同\<br>\end{cases}<br>$</p>
+<p>$<br>\begin{cases}<br>n的k分拆方案数,与n的最大分部量为k的分拆数相同\<br>n的自共轭分拆数,与n的分部量为奇数，且互不相等的分拆数\<br>n的分部量两两不等的分拆数等于n各分部量都是奇数的分拆的个数\<br>\end{cases}<br>$</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">不允许为空</th>
+<th align="center">允许为空</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">有序划分</td>
+<td align="center">$k!S_2(n,k)$</td>
+<td align="center">$k^n$</td>
+</tr>
+<tr>
+<td align="center">无序划分</td>
+<td align="center">$S_2(n,k)$</td>
+<td align="center">$\sum_{i=1}^kS_2(n,i)$</td>
+</tr>
+<tr>
+<td align="center">有序分拆</td>
+<td align="center">$\binom{n-1}{k-1}$</td>
+<td align="center">$\binom{n+k-1}{n}$</td>
+</tr>
+<tr>
+<td align="center">无序分拆</td>
+<td align="center">$B(n,k)$</td>
+<td align="center">$\sum_{i=1}^kB(n,i)$</td>
+</tr>
+</tbody></table>
+<img src="/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/3.png" style="zoom:80%;">
+
+
+<h5 id="卡特兰数的生成函数："><a href="#卡特兰数的生成函数：" class="headerlink" title="卡特兰数的生成函数："></a>卡特兰数的生成函数：</h5><p>$$<br>\begin{align}<br>&amp;C_n=\sum_{k=1}^{n-1}C_kC(n-k)\<br>令\ &amp;G(x)=C_0+C_1x+C_2x^2+…\<br>有\ &amp;G^2(x)=G(x)-x \<br>\ 解&amp;得 \ G(x)=\frac{1- \sqrt{1-4x}}{2}\ \ \ (舍 \frac{1- \sqrt{1+4x}}{2}) \<br>由&amp;牛顿二项式定理得：\<br>&amp;(1+4x)^{\frac{1}{2}}=1+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}2^{2n}}{n2^{2n-1}} \binom{2n-2}{n-1}x^n \ \ (|x|&lt;1) \<br>\ 解&amp;得 \ G(x)= \sum_{n=1}^{\infty} \frac{\binom{2n-2}{n-1}}{n}x^n<br>\end{align}<br>$$</p>
+<h5 id="第二类斯特林数-S-2-n-k-的生成函数：-G-k-t-frac-t-k-1-t-1-2t-…-1-kt"><a href="#第二类斯特林数-S-2-n-k-的生成函数：-G-k-t-frac-t-k-1-t-1-2t-…-1-kt" class="headerlink" title="第二类斯特林数$S_2(n,k)$的生成函数：$G_k(t)=\frac{t^k}{(1-t)(1-2t)…(1-kt)}$"></a>第二类斯特林数$S_2(n,k)$的生成函数：$G_k(t)=\frac{t^k}{(1-t)(1-2t)…(1-kt)}$</h5><p>$$<br>\begin{align}<br>&amp;S_2(n+1,k)=S_2(n,k-1)+kS_2(n,k) \<br>&amp;同时在等式两端同乘\ t^{n+1} 并求和 , 得: \<br>&amp;\sum_{n=0}^{\infty}S_2(n,k)t^n=t \sum_{n=0}^{\infty}S_2(n,k-1)t^n+kt\sum_{n=0}^{\infty}S_2(n,k)t^n \<br>\Rightarrow&amp;G_k(t)=tG_{k-1}(t)+ktG_k(t) \<br>&amp;G_k(t)=\frac{t}{1-kt}G_{k-1}(t)=\frac{t^k}{(1-t)(1-2t)…(1-kt)}</p>
+<p>\end{align}<br>$$</p>
+<h5 id="有序-k-分拆数的生成函数"><a href="#有序-k-分拆数的生成函数" class="headerlink" title="有序 $k$ 分拆数的生成函数"></a>有序 $k$ 分拆数的生成函数</h5><p>$$<br>\begin{cases}<br>\begin{align}</p>
+<p>有限制：&amp; \prod_{i=0}^{n}(\sum_{j=1}^{ri}x^j),<br>\begin{cases}<br>n=n_1+n_2+…+n_k \ ,\  k\geqslant 1\<br>1\leqslant n_i\leqslant r_i\ ,\ i=1,2,….,k<br>\end{cases}\</p>
+<p>无限制： &amp;\prod_{i=1}^{n} (\sum_{j=1}^{\infty} x^j) =(\frac{x}{1-x})^k = x^k\sum_{n=0}^{\infty}\binom{k+n-1}{n}x^n= \sum_{n=k}^{\infty}\binom{n-1}{k-1}x^n<br>\end{align}<br>\end{cases}<br>$$</p>
+<h5 id="无序分拆数的生成函数：-B-k-n-最大分部量不超过-k-B-n-k-最大分部量为-k"><a href="#无序分拆数的生成函数：-B-k-n-最大分部量不超过-k-B-n-k-最大分部量为-k" class="headerlink" title="无序分拆数的生成函数：$B_k(n)$ 最大分部量不超过$k$ , $B(n,k)$ 最大分部量为$k$"></a>无序分拆数的生成函数：$B_k(n)$ 最大分部量不超过$k$ , $B(n,k)$ 最大分部量为$k$</h5><p>$$<br>\begin{cases}<br>\begin{align}<br>&amp;\sum_{n=0}^{\infty}B_k(n)x^n=\frac{1}{(1-x)(1-x^2)…(1-x^k)} ,\ \begin{cases}x_1+2x_2+…+kx_k=n \ x_i \geqslant 0,i=1…k<br>\end{cases}\<br>&amp;\sum_{n=0}^{\infty}B(n,k)x^n=\frac{x^k}{(1-x)(1-x^2)…(1-x^k)} ,\ \begin{cases}x_1+2x_2+…+kx_k=n \ x_i \geqslant 0,i=1…k-1,x_k \geqslant1<br>\end{cases} \<br>&amp;\sum_{n=0}^{\infty}B(n)x^n=\frac{1}{(1-x)(1-x^2)…(1-x^k)…} ,\ (由有限乘积\prod_{j=1}^{N}\frac{1}{1-x^j}完全确定)</p>
+<p>\end{align}<br>\end{cases}<br>$$</p>
+<h5 id="常系数线性齐次递推关系：-h-n-a-1h-n-1-a-2h-n-2-…-a-kh-n-k-0-a-k-neq-0-n-geqslant-k"><a href="#常系数线性齐次递推关系：-h-n-a-1h-n-1-a-2h-n-2-…-a-kh-n-k-0-a-k-neq-0-n-geqslant-k" class="headerlink" title="常系数线性齐次递推关系：$h_n-a_1h_{n-1}-a_2h_{n-2}-…-a_kh_{n-k}=0\ (a_k\neq 0,n\geqslant k)$"></a>常系数线性齐次递推关系：$h_n-a_1h_{n-1}-a_2h_{n-2}-…-a_kh_{n-k}=0\ (a_k\neq 0,n\geqslant k)$</h5><p>$$<br>\begin{align}<br>&amp;h_n=q^n是该关系的解当且仅当 \ q\ 是多项式方程 \ x^k-a_1x^{x-1}…-a_k=0 \ 的一个根 \<br>&amp;\begin{cases}<br>若多项式方程有\ k\ 个不同的根\ q_1…q_k,则\ h_n=c_1q_1^n+c_2q_2^n+…+c_kq_k^n \ 为一般解 \<br>若多项式方程有\ t\ 个不同的根\ q_1…q_t,且\ q_i为 \ s_i重根\</p>
+<p>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  则该递推关系对\ q_i的部分一般解为：\<br>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \<br>H_n^{(i)}=c_1q_i^n+c_2nq_i^n+…+c_{s_i}n^{s_i-1}q_i^n \<br>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 递推关系的一般解为：\<br>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \<br>h_n=H_n^{(1)}+H_n^{(2)}+…+H_n^{(t)}</p>
+<p>\end{cases}<br>\end{align}<br>$$</p>
+<p>生成函数求解常系数线性齐次递推关系：$g(x)=h_0+h_1x+h_2x^2+…+h_nx^n+…$<br>$$<br>\begin{align}<br>    g(x)&amp;=\frac{p(x)}{q(x)}=\frac{p(x)}{x^kr(\frac{1}{x})}\<br>    &amp;=\frac{h_0+(h_1+a_1h_0)x+(h_2+a_1h_1+a_2h_0)x^2+…+(h_{k-1}+a_1h_{k-2}+…+a_{k-1}h_0)x^{k-1} }{1+a_1x+a_2x^2+…+a_kx^k} \<br>    r(x)&amp;=x^k+a_1x^{k-1}+a_2x^{k-2}…+a_k \ \ (特征方程)<br>\end{align}<br>$$</p>
+<h5 id="常系数线性非齐次递推关系：-h-n-ah-n-1-b-n-n-geqslant1"><a href="#常系数线性非齐次递推关系：-h-n-ah-n-1-b-n-n-geqslant1" class="headerlink" title="常系数线性非齐次递推关系：$h_n=ah_{n-1}+b_n \ (n\geqslant1)$"></a>常系数线性非齐次递推关系：$h_n=ah_{n-1}+b_n \ (n\geqslant1)$</h5><p>先求出齐次递推关系的一般解，再求出非齐次递推关系的特解</p>
+<p>特解对应：$\begin{cases}  b_n=d \Rightarrow h_n =r \<br>b_n=dn+e\Rightarrow  h_n=rn+s \ b_n=fn^2+dn+e \Rightarrow h_n=rn^2+sn+t  \ b_n=d^n \Rightarrow h_n=pd^n \ ,\ h_n=pnd^n   \end{cases}$</p>
+<h5 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h5><p>$$<br>\begin{cases}<br>\begin{align}<br>&amp;f_n=\sum_{i=1}^n(-1)^i\binom{n}{i}g(i) \leftrightarrow g_n=\sum_{i=0}^n(-1)^i\binom{n}{i}f_i\<br>&amp;f_n=\sum_{i=1}^n\binom{n}{i}g_i \leftrightarrow g_n=\sum_{i=0}^n(-1)^{n-i} \binom{n}{i}f_i<br>\end{align}<br>\end{cases}<br>$$</p>
+<h5 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h5><p>莫比乌斯函数: $\mu (x)=\begin{cases}1 \ ,\ x=1 \<br>(-1)^k\ ,\ x\ 是\ k\ 个不同质数的乘积 \ 0\end{cases} $</p>
+<p>对于任意的正整数 $n$ , 有：$ \begin{align} \sum_{d|n} \mu(d)=\begin{cases} 1 \ ,\ n=1 \ 0\ , \ n&gt;1\end{cases}\end{align}$</p>
+<p>推论：设 $d_1|n$ ,则 $\begin{align} \sum_{d|(n/d_1)}\mu(d)=\begin{cases}1\ ,\ n=d_1\ 0\ ,\ n&gt;d_1 \end{cases} \end{align}$</p>
+<p>莫比乌斯反演：设 $f(n)$ , $g(n)$ 为定义在正整数集合上的两个函数 , 则：</p>
+<p>$$<br>f(n)=\sum_{d|n}g(d) \Leftrightarrow g(n)=\sum_{d|n}\mu(d)f(\frac{n}{d})<br>$$</p>
+<p>证明：<br>$$<br>\begin{align}<br>f(\frac{n}{d})&amp;=\sum_{d_1|\frac{n}{d}}g(d_1) \ \<br>\sum_{d|n}\mu(d)f(\frac{n}{d})&amp;=\sum_{d|n}\mu(d)\sum_{d_1|\frac{n}{d}}g(d_1) \<br>&amp;=\sum_{d|n}\sum_{d_1|\frac{n}{d}}\mu(d)g(d_1)\<br>&amp;=\sum_{d_1|n}\sum_{d|\frac{n}{d_1}}\mu(d)g(d_1)\<br>&amp;=\sum_{d_1|n}g(d_1)\sum_{d|\frac{n}{d_1}}\mu(d)\<br>只有当\ d_1=n\ &amp;时\ \sum_{d|\frac{n}{d_1}}\mu(d)=1\ ,\ 其余情况为\ 0 \ 则\ ,\ g(n)&amp;=\sum_{d|n}\mu(d)f(\frac{n}{d})<br>\end{align}<br>$$</p>
+<p>证明：<br>$$<br>\begin{align}<br>g(\frac{n}{d})&amp;=\sum_{d_1|\frac{n}{d}} \mu(d_1)f(\frac{n}{d\cdot d_1} )\<br>&amp;=\sum_{d_1|\frac{n}{d}} \mu(\frac{n}{d\cdot d_1})f(d_1)\ \<br>\sum_{d|n}g(d)&amp;=\sum_{d|n}g(\frac{n}{d})\<br>&amp;=\sum_{d|n}\sum_{d_1|\frac{n}{d}} \mu(\frac{n}{d\cdot d_1})f(d_1)\<br>&amp;=\sum_{d_1|n}\sum_{d|\frac{n}{d_1}} \mu(\frac{n}{d\cdot d_1})f(d_1)\<br>&amp;=\sum_{d_1|n}f(d_1)\sum_{d|\frac{n}{d_1}}\mu(d)\<br>只有当\ d_1=n\ &amp;时\ \sum_{d|\frac{n}{d_1}}\mu(d)=1\ ,\ 其余情况为\ 0 \ 则\ ,\ f(n)&amp;=\sum_{d|n}g(d)<br>\end{align}<br>$$</p>
+<p>相关性质：</p>
+<p>$$<br>\begin{align}<br>\varphi(n)&amp;=n\sum_{d|n} \frac{\mu(d)}{d}=\sum_{d|n} \mu(d) \frac{n}{d} \<br>\Rightarrow n&amp;=\sum_{d|n}\varphi(n)<br>\end{align}<br>$$</p>
+<h5 id="代数系统"><a href="#代数系统" class="headerlink" title="代数系统"></a>代数系统</h5><p>设 $S$ 为非空集合,称 $S\times S$ 到 $S$ 的一个映射 $f$ 为 $S$ 的二元代数运算,即 $f(a,b)=c$,通常记作 $a * b=c$</p>
+<p>设 $S$ 是一个非空集合,$ f_1…f_m$ 是 $S$ 上若干代数运算,则 $S$ 与这些运算形成了代数系统,记为$(S,f_1…f_m)$</p>
+<p>如果对于 $S$ 中任意两个元素 $a$ , $b$ ,等式 $a * b= b * a$ 都成立 则称运算”$ * $”满足交换律</p>
+<p>如果对于 $S$ 中任意三个元素 $a$ , $b$ , $c$ ,等式 $(a * b) * c=a * (b * c) $ 都成立,则称运算”$ * $”满足结合律</p>
+<p>如果 $a * a$ = $a$ ,则 $a$ 是关于运算 $ * $ 的幂等元。如果 $S$ 中每个元素都是关于 $ * $ 的幂等元,则称运算”$ * $”满足幂等律</p>
+<p>如果对于 $S$ 中任意三个元素 $a$ , $b$ , $c$ ,等式 $\begin{cases} a * (b+c)=(a * b)+a * c  \ (b+c) * a=(b * a)+(c * a) \end{cases}$都成立,则称运算”$ * $” 对”$ + $”满足分配律</p>
+<p>如果对于 $S$ 中任意两个元素 $a$ , $b$ ,等式 $\begin{cases}a * (a+b)=a \ a+(a * b)=a \end{cases}$ 都成立 则称运算”$ * $”,”$ + $”满足吸收律</p>
+<p>如果对于 $S$ 中任意三个元素 $a$ , $b$ , $c$ ,$\begin{cases} 若 a * b=a  * c,则b=c \ 若b * a=c * a,则b=c \end{cases}$ , 则称运算”$ * $”满足消去律</p>
+<h5 id="半群"><a href="#半群" class="headerlink" title="半群"></a>半群</h5><p>设 $S$ 是一个非空集合, 若”$ * $”为 $S$ 上二元代数运算,且满足结合律,则称 $ (S, * )$ 为半群</p>
+<h5 id="群"><a href="#群" class="headerlink" title="群"></a>群</h5><p>设 $(S, * )$为半群 若满足条件:$\begin{cases}     \ S\ 中有一个元素\ x ,对于\ S\ 中任意元素a ,都有\ a * x = x * a = a\ 对于\ S\ 中任意元素\ a  ,都可以找到\ S\ 中一个元素a^{-1} , 满足a * a^{-1}=a^{-1} * a=x  \end{cases}$</p>
+<p>则称 $(S, * )$为群,并且元素 $x$ 称为 $S$ 的单位元, $a^{-1}$ 称为 $a$ 的逆元 ,$|S|:\begin{cases}有限群\无限群\end{cases}$</p>
+<p>群的性质：$\begin{cases} 群的单位元唯一,任意元素的逆唯一 \ 对于任意\ a,b ,有\ x\ 使\ x * a=b,又有\ y\ 使\ a * y=b \<br>设 \ G\  是一个群,在一个乘积 \ a_1…a_n \  中可以任意加括号而求其值 \end{cases}$</p>
+<p>对 $a_1…a_n$ 有意义,并且他们都相同时,称 $n$ 个 $a$ 连乘积为 $a^n$,规定 $a^0=x$ , $a^{-n}=(a^n)^{-1}$</p>
+<p>第一指数律：$a^m * a^n=a^{m+n}$ ,第二指数律：$(a^m)^n=a^{mn}$ 。</p>
+<h5 id="交换群：若群-S-的运算”-”适合交换律-则称-S-为交换群"><a href="#交换群：若群-S-的运算”-”适合交换律-则称-S-为交换群" class="headerlink" title="交换群：若群 $(S, * )$ 的运算”$ * $”适合交换律,则称$(S, * )$为交换群"></a>交换群：若群 $(S, * )$ 的运算”$ * $”适合交换律,则称$(S, * )$为交换群</h5><p>在一个交换群 $(S, * )$ 中,一个乘积可以任意颠倒因子次序而求值</p>
+<p>第三指数律：$(a * b)^m=a^m * b^m$</p>
+<h5 id="置换与置换群"><a href="#置换与置换群" class="headerlink" title="置换与置换群"></a>置换与置换群</h5><p>置换：设 $M=\begin{Bmatrix}  a_1,  a_2 , … ,  a_n \end{Bmatrix}$ 是一个非空有限集合 , $M$ 的一个一对一变换称为一个置换 $\sigma$.<br>$$<br>\sigma=\binom{a_1\ a_2…a_n}{b_1\ b_2…b_n},b_i=\sigma(a_i)\ ,i=1,2…n<br>$$</p>
+<p>$M$ 的置换一共有 $n!$ 个,也称为 $n$ 元置换,令 $S_n$ 表示这 $n!$ 个置换形成的集合</p>
+<p>若 $\sigma =\binom{a_1,a_2…a_n}{a_1,a_2…a_n} $ , 则称 $\sigma$ 为 $n$ 元恒等置换 </p>
+<p>对于 $M$ 中任意元素 $a$ 及 $M$ 的任意两个置换 $\sigma$,$\tau$ , 规定 $\sigma\tau(a)=\sigma(\tau(a))$</p>
+<p>置换乘法性质：$\begin{cases} (\sigma \tau) \rho=\sigma(\tau\rho)\ ,(\sigma,\tau,\rho \in S_n)\ n元恒等置换是S_n中的单位元素,设为\ \sigma_0 ,\ 有\ \sigma_0\tau=\tau \sigma_0=\tau\ ,\tau \in S_n \<br>每个n元置换在S_n中都有逆元素:\binom{a_1 a_2…a_n}{b_1b_2…b_n}^{-1} =\binom{b_1b_2…b_n}{a_1 a_2…a_n}\end{cases}$</p>
+<p>$n$元置换的全体集合 $S_n$ 对置换的乘法做成一个群,称为 $n$ 次对称群 , 而 $S_n\times S_n$ 的任意一个子群称作置换群 </p>
+<p>置换的轮换表示：设 $\sigma $ 是 $M$ 的置换,若可取到 $M$ 的元素 $a_1…a_r$ 使 $\sigma(a_1)=a_2$ , $\sigma(a_2)=a_3 ,…\sigma(a_{r-1})=a_r,\sigma(a_r)=a_1 $ , 而其他的元素在 $\sigma$ 下不变, 则将 $\sigma$ 称作一个 $r$ 轮换,记为 $(a_1,a_2…a_r)$ , 长度为 $2$ 的轮换叫做对换。若两个轮换没有相同元素,称作这两个轮换不相交</p>
+<p>任意置换 $\sigma$ 恰好有一种方法写成不相交(不相杂)的轮换乘积</p>
+<p>任意轮换 $\sigma$ 可以写成对换的乘积(不唯一)：$(a_1,a_2…a_r)=(a_1a_r)(a_1a_{r-1})…(a_1a_3)(a_1a_2)$</p>
+<p>若 $n$ 元置换 $\sigma$ 可表示为互不相交的 $\lambda_1$个$1$轮换 ,$\lambda_2$个$2$轮换 ,…, $\lambda_n$个 $n$ 轮换的乘积,则称 $\sigma$ 为 $(\lambda_1,\lambda_{2},…\lambda_n)$ 类型, 或 $1^{\lambda_1}2^{\lambda_2}…n^{\lambda_n}$ , 有: $\begin{align} \sum_{i=1}^{n}i \lambda_i=n \end{align}$</p>
+<p>共轭类：置换群 $G$ 中属于同一类型的全体置换的集合,叫做该类型相应的共轭类,记作 $D(\lambda_1,\lambda_{2},…\lambda_n)$. 将 $1^{\lambda_1}2^{\lambda_2}…n^{\lambda_n}$ 称作 $\sigma$ 的格式 , $S_n$ 的共轭类个数等于 $n$ 的拆分数 $P(n)$</p>
+<p>在 $n$ 次对称群 $S_n$中, $|D(\lambda_1,\lambda_{2},…\lambda_n)|=\frac{n!}{\lambda_1!,\lambda_2!,…\lambda_n!\ 1^{\lambda_1}2^{\lambda_2}…n^{\lambda_n}}$</p>
+<p>轮换指标多项式：令 $G$ 是作用上在 $S=\begin{Bmatrix} 1,2,…n \end{Bmatrix}$ 的置换群, $\Gamma$ 为 $G$ 的置换的所有不同格式构成的集合,则：<br>$$<br>P(G \ ; x_1,x_2…x_n)=\frac{1}{|G|} \sum_{ (1)^{\lambda_1}(2)^{\lambda_2}…(n)^{\lambda_n}\in \Gamma} x_1^{\lambda_1}x_2^{\lambda_2}…x_n^{\lambda_n}<br>$$<br>称为轮换指标多项式.</p>
+<p>不动置换类： 设 $G$ 是集合 $S=\begin{Bmatrix} 1,2,…n \end{Bmatrix}$ 上的一个置换群, $k \in S$ , $\sigma \in G$ , 若 $\sigma(k)=k$ , 则称 $k$ 为置换 $\sigma$ 的不动点。 $G$中所有以 $k$ 为不动点的全体置换, 构成 $G$ 的一个子集, 称作 $k$ 的不动置换类 ,记作 $Z_k$</p>
+<p>$$<br>在\ S_3\ 中,Z_1=\begin{Bmatrix}e,(2,3)\end{Bmatrix}, Z_2=\begin{Bmatrix}e,(1,3)\end{Bmatrix}, Z_3=\begin{Bmatrix}e,(1,2)\end{Bmatrix}<br>$$</p>
+<p>等价类：设 $G$ 是集合 $S=\begin{Bmatrix} 1,2,…n \end{Bmatrix}$ 的置换群, 若 $i$,$j\in S$ , 满足 $\sigma(i)=j$ ,则称 $i$ 与 $j$ 等价,记为 $i\approx j$ , $S$ 中与 $i$ 等价的元素的全体记为 $E_i$ , 称为元素 $i$ 的轨道。 $E_i$ 的个数叫做轨道的长度</p>
+<p>性质:$\begin{cases} 反身性,即 i \approx i  \ 对称性, 若i\approx j,则 j\approx i \ 传递性, 若i\approx j , j\approx k,则 i\approx k\end{cases}$</p>
+<p>等价类 $|E_k|\cdot|Z_k|=|G| , k=1,2…n $ , 且相同大小的等价类个数等于等价类的大小 </p>
+<h5 id="Burnside-引理"><a href="#Burnside-引理" class="headerlink" title="Burnside 引理"></a>Burnside 引理</h5><p>设 $G$ 是 $n$ 元集 S={1,2…n} 上的置换群 $G=\begin{Bmatrix}\sigma_1,\sigma_2,…\sigma_r \end{Bmatrix}$ , 把每个 $\sigma_i$ 表示称不相杂的轮换的乘积, 令 $\lambda_k (\sigma_i) ,(i=1,…,r)$ 表示置换 $\sigma_i$ 中 $k$ 阶轮换的个数,则 $G$ 在 $S$ 上的等价关系将 $S$ 划分为不同等价类的个数为：</p>
+<p>$$<br>L=\frac{1}{|G|} \sum_{j=1}^{r} \lambda_1(\sigma_j)<br>$$</p>
+<p>其中 $\lambda_1(\sigma)$ 为置换 $\sigma$ 中的不动点的个数</p>
+<p>证明：</p>
+<p>令 $N$ 为 $S$ 在 $G$ 中所有置换作用下不动点的个数</p>
+<p>$$<br>\begin{align}<br>&amp;N=\sum_{\sigma \in G} \lambda_1(\sigma)=\sum_{j=1}^{r}\lambda_1(\sigma_j)  \<br>&amp;N=\sum_{k=1}^{n}|Z_k|\<br>\Rightarrow &amp;\sum_{j=1}^{r}\lambda_1(\sigma_j) =\sum_{k=1}^{n}|Z_k|<br>\end{align}<br>$$<br>设 $S$ 的不同等价类有 $L$ 个 , 那么, $\begin{align} S=\sum_{k=1}^{L}E_i\end{align}$,且有：</p>
+<p>$$<br>\begin{align}</p>
+<p>\sum_{k=1}^{n}|Z_k|&amp;=\sum_{k=1}^{n}\frac{|G|}{|E_k|}=|G|\sum_{k=1}^{n}\frac{1}{E_k} \<br>&amp;=|G|\sum_{i=1}^{L}\sum_{k\in E_i} \frac{1}{E_i}=L|G|</p>
+<p>\end{align}<br>$$</p>
+<p>所以：<br>$$<br>L=\frac{1}{|G|} \sum_{j=1}^{r} \lambda_1(\sigma_j)<br>$$</p>
+<h5 id="Polya定理"><a href="#Polya定理" class="headerlink" title="Polya定理"></a>Polya定理</h5><p>有 $n$ 个对象,用 $m$ 种颜色染色,求不等价的方案数</p>
+<p>任意一种涂色方案都可以表示成一个映射 $f:S\rightarrow C$, 其中 $f$ 规定: $S$ 中各个元素的染色方案, 它将 $\forall$ $a\in S$ 染上颜色 $f(a)\in C$, 所有的映射 $f$ 构成集合 $C^S$ : $|C^S|=|C|^{|S|}=m^n$</p>
+<p>我们根据同样的置换方法, 设定两个置换群, $H$ 和 $G$, $H$ 作用在集合 $S$ 上, $G$ 作用在方案集 $C^S$ 上。 设定 $\tau \in H$ , 相应在 $C^S$ 上诱导出置换 $\sigma \in G$ , 且有：  $<br>\begin{cases}<br>\lambda_1(\sigma)=m^{\lambda(\tau)}  ,\  (\lambda(\tau)为将置换\sigma表示成不相交轮换的个数) \<br>|G|=|H|<br>\end{cases}<br>$ </p>
+<p>实质上的意思是: 若将 $S$ 中的置换 $\tau_i$ 的每一个轮换内部的点涂上同一种颜色 ,所得的各种涂色方案正好对应 $C^S$ 中 在置换 $\sigma_i$下不变的方案</p>
+<p>由此我们可以得出 $Polya$ 定理:</p>
+<p>$$<br>L=\frac{1}{H}\sum_{\sigma \in H} m^{\lambda(\sigma)}<br>$$</p>
+<p>$Polya$ 定理的生成函数形式</p>
+<p>在 $Polya$ 定理中 ,将置换方案分解之后,每个$k$ 轮换的 $k$ 个元素对应一个颜色使用了 $k$ 次 , 我们设 $b_m^k$ 代表颜色 $b$ 出现 $k$ 次,所以每种颜色的元素出现 $k$ 次表示为 $b_1^k+…+b_m^k$。 所以按照这种思想替换 $\sigma_i$ 的每一个 $k$ 轮换 ,得到 $Polya$ 定理的生成函数形式： </p>
+<p>$$<br>令 \ s_k=b_1^k+…+b_m^k \ ,k=1,2,…,n \<br>L=\frac{1}{|H|}\sum_{\sigma\in H} s_1^{\lambda_1(\sigma)}s_2^{\lambda_2(\sigma)}…s_n^{\lambda_n(\sigma)} \<br>$$</p>
+<p>展开式中 $ b_1^{i_1}b_2^{i_2}…b_m^{i_m}$ 的系数即为 $i_1$ 个对象涂 $b_1$ 色, $i_2$ 个对象涂 $b_2$ 色 $…$ $i_m$ 个对象涂 $b_m$ 色的方案数 ,并且 $i_1+i_2+…+i_m =n$</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/06/%E6%97%8B%E8%BD%AC%E6%9B%B2%E9%9D%A2%E4%B8%8E%E6%8A%95%E5%BD%B1%E6%9B%B2%E7%BA%BF/" rel="next" title="旋转曲面与投影曲线">
+                <i class="fa fa-chevron-left"></i> 旋转曲面与投影曲线
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/10/%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0/" rel="prev" title="数论笔记">
+                数论笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zyb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%B8%BD%E5%B7%A2%E5%8E%9F%E7%90%86"><span class="nav-text">鸽巢原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ramsey%E5%AE%9A%E7%90%86"><span class="nav-text">Ramsey定理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E6%8E%92%E5%88%97-begin-cases-%E7%BA%BF%E6%80%A7-r-%E6%8E%92%E5%88%97-%EF%BC%9AP-n-r-frac-n-n-r-%E5%BE%AA%E7%8E%AF-r-%E6%8E%92%E5%88%97-frac-P-n-r-r-frac-n-r-n-r-end-cases"><span class="nav-text">集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)&#x3D;\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} &#x3D;\frac{n!}{r(n-r)!}\end{cases}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E7%BB%84%E5%90%88%EF%BC%9A-binom-n-r-frac-P-n-r-r"><span class="nav-text">集合的组合： $ \binom{n}{r}&#x3D;\frac{P(n,r)}{r!}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E9%9B%86%E7%9A%84%E6%8E%92%E5%88%97%EF%BC%9A"><span class="nav-text">多重集的排列：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E9%9B%86%E7%9A%84%E7%BB%84%E5%90%88%EF%BC%9A"><span class="nav-text">多重集的组合：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pascal%E5%85%AC%E5%BC%8F%EF%BC%9A-binom-n-k-binom-n-1-k-binom-n-1-k-1"><span class="nav-text">Pascal公式：$\binom{n}{k}&#x3D;\binom{n-1}{k}+\binom{n-1}{k-1}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86%EF%BC%9A-x-y-n-begin-align-sum-k-0-n-binom-n-k-x-n-k-y-k-end-align"><span class="nav-text">二项式定理：$(x+y)^n&#x3D;\begin{align}\sum_{k&#x3D;0}^{n}\binom{n}{k}x^{n-k}y^k \end{align}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%81%92%E7%AD%89%E5%BC%8F"><span class="nav-text">组合恒等式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86%EF%BC%9A-begin-cases-x-1-x-2-%E2%80%A6-x-t-n-sum-binom-n-n-1n-2%E2%80%A6n-t-x-1-n-1-x-2-n-2-%E2%80%A6x-t-n-t-begin-cases-binom-n-n-1n-2%E2%80%A6n-t-frac-n-n-1-n-2-%E2%80%A6-n-t-%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%B3%BB%E6%95%B0-n-1-%E2%80%A6-n-t-n-end-cases-%E9%A1%B9%E6%95%B0-binom-n-t-1-n-end-cases"><span class="nav-text">多项式定理：$ \begin{cases} (x_1+x_2+…+x_t)^n&#x3D;\sum\binom{n}{n_1n_2…n_t}x_1^{n_1}x_2^{n_2}…x_t^{n_t}  ,\begin{cases} \binom{n}{n_1n_2…n_t}&#x3D; \frac{n!}{n_1!\ n_2!\ …\ n_t!}\ (多项式系数)\n_1+…+n_t&#x3D;n \end{cases}\项数&#x3D;\binom{n+t-1}{n} \end{cases} $</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%9B%E9%A1%BF%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86%EF%BC%9A"><span class="nav-text">牛顿二项式定理：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%9E%E9%99%8D%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="nav-text">非降路径问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86"><span class="nav-text">容斥原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%99%E4%BD%8D%E6%8E%92%E5%88%97%EF%BC%9A-begin-cases-D-n-n-1-D-n-2-D-n-1-n-geq-3-D-1-0-D-2-1-begin-align-D-n-amp-n-binom-n-1-n-1-binom-n-2-n-2-%E2%80%A6-1-n-binom-n-n-0-amp-n-1-frac-1-1-frac-1-2-%E2%80%A6-1-n-frac-1-n-end-align-end-cases"><span class="nav-text">错位排列：$ \begin{cases} D_n&#x3D;(n-1) (D_{n-2}+D_{n-1}) ,\ (n\geq 3,D_1&#x3D;0\ ,D_2&#x3D;1)\ \begin{align} D_n &amp;&#x3D;  n!-\binom{n}{1}(n-1)!+\binom{n}{2}(n-2)!\ +…+\ (-1)^n\binom{n}{n}0! \&amp;&#x3D; n!\ (1-\frac{1}{1!}+\frac{1}{2!}+…+(-1)^n\frac{1}{n!}   )\end{align}\end{cases}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%88%B6%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98"><span class="nav-text">有限制条件的排列问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%8B%E7%9B%98%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B8%8E%E6%9C%89%E7%A6%81%E5%8C%BA%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-text">棋盘多项式与有禁区的排列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%EF%BC%9A-begin-align-g-x-sum-n-0-infty-h-nx-n-end-align"><span class="nav-text">生成函数：$\begin{align} g(x)&#x3D;\sum_{n&#x3D;0}^{\infty}h_nx^n \end{align}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%EF%BC%9A-begin-align-g-e-x-sum-n-0-infty-h-n-frac-x-n-n-end-align"><span class="nav-text">指数生成函数：$\begin{align} g^{(e)}(x)&#x3D;\sum_{n&#x3D;0}^{\infty} h_n\frac{x^n}{n!}\end{align}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%EF%BC%9A-C-n-frac-1-n-1-binom-2n-n-C-n-frac-4n-2-n-1-C-n-1-n-geqslant-1"><span class="nav-text">卡特兰数：$C_n&#x3D;\frac{1}{n+1} \binom{2n}{n}$ , $C_n&#x3D;\frac{4n-2}{n+1}C_{n-1} \ \  (n\geqslant 1)$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%EF%BC%9A-C-n-m-frac-n-m-1-n-1-binom-n-m-n"><span class="nav-text">拓展卡特兰数：$C_n^m &#x3D; \frac{n-m+1}{n+1} \binom{n+m}{n}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%9F%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%EF%BC%9A-C-n-n-C-n-1-begin-cases-C-n-4n-6-C-n-1-n-geqslant-2-C-1-1-end-cases"><span class="nav-text">拟卡特兰数：$C_n^{*} &#x3D;n! \  C_{n-1} $  , $ \begin{cases}C_n^{*}&#x3D;(4n-6)C_{n-1}^{*} (n \geqslant 2) \ C_1^{*}&#x3D;1 \end{cases}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0%EF%BC%9A-S-1-n-m-%E8%A1%A8%E7%A4%BA%E5%B0%86-n-%E4%B8%AA%E7%89%A9%E4%BD%93%E6%8E%92%E6%88%90-m-%E4%B8%AA%E9%9D%9E%E7%A9%BA%E7%9A%84%E5%BE%AA%E7%8E%AF%E6%8E%92%E5%88%97%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B0"><span class="nav-text">第一类斯特林数：$ \ S_1(n,m) \ $ 表示将$\ n\ $个物体排成$\ m\ $个非空的循环排列的方法数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0%EF%BC%9A-S-2-n-m-%E8%A1%A8%E7%A4%BA%E6%8A%8A-n-%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E5%B0%8F%E7%90%83%E6%94%BE%E5%9C%A8-m-%E4%B8%AA%E7%9B%B8%E5%90%8C%E7%9A%84%E7%9B%92%E5%AD%90%E9%87%8C%E6%96%B9%E6%A1%88%E6%95%B0%E3%80%82"><span class="nav-text">第二类斯特林数：$\ S_2(n,m)\  $表示把$\ n\ $个不同的小球放在$\ m\ $个相同的盒子里方案数。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B4%9D%E5%B0%94%E6%95%B0-B-p-%EF%BC%9A%E5%B0%86-p-%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E9%9B%86%E5%90%88%E5%88%86%E6%88%90%E9%9D%9E%E7%A9%BA%EF%BC%8C%E4%B8%8D%E5%8F%AF%E8%BE%A8%E5%88%AB%E7%9B%92%E5%AD%90%E7%9A%84%E5%88%92%E5%88%86%E6%95%B0%E3%80%82"><span class="nav-text">贝尔数($B_p$)：将 $p$ 个元素的集合分成非空，不可辨别盒子的划分数。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E6%8B%86%E6%95%B0%EF%BC%9A-lambda-n-a-n-%E2%80%A62-a-2-1-a-1"><span class="nav-text">分拆数：$ \lambda &#x3D;n^{a_n}…2^{a_2}1^{a_1}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%95%B4%E6%95%B0%E7%9A%84%E6%9C%89%E5%BA%8F-k-%E5%88%86%E6%8B%86%E4%B8%AA%E6%95%B0%EF%BC%9A-binom-n-k-k-1-k-1-binom-n-1-k-1"><span class="nav-text">正整数的有序$\ k\ $分拆个数：$\binom{n-k+k-1}{k-1}&#x3D;\binom{n-1}{k-1}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%95%B4%E6%95%B0%E7%9A%84%E6%9C%89%E5%BA%8F-k-%E5%88%86%E6%8B%86%E4%B8%AA%E6%95%B0%EF%BC%88%E8%A6%81%E6%B1%82-i-%E5%88%86%E9%83%A8%E9%87%8F%E5%A4%A7%E4%BA%8E%E7%AD%89%E4%BA%8E-p-i-%EF%BC%89%EF%BC%9A-begin-align-binom-n-sum-i-1-k-p-i-k-1-k-1-end-align"><span class="nav-text">正整数的有序$\ k\ $分拆个数（要求$\ i\ $分部量大于等于$\ p_i \ $）： $\begin{align}\binom{n-\sum_{i&#x3D;1}^k p_i+k-1}{k-1}\end{align}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%95%B4%E6%95%B0-n-%E5%88%86%E4%B8%BA-k-%E4%B8%AA%E5%88%86%E9%83%A8-%E8%8B%A5-n-k-%E5%90%8C%E6%97%B6%E4%B8%BA%E5%A5%87%E6%95%B0%E6%88%96%E5%81%B6%E6%95%B0%EF%BC%8C%E5%88%99-n-%E7%9A%84%E5%88%86%E9%83%A8%E9%87%8F%E9%83%BD%E6%98%AF%E5%A5%87%E6%95%B0%E7%9A%84%E6%9C%89%E5%BA%8F%E5%88%86%E6%8B%86%E6%95%B0%E4%B8%BA-begin-align-binom-frac-n-k-2-k-1-k-1-end-align"><span class="nav-text">正整数$\ n\ $分为 $k$ 个分部,若 $n$ , $k$ 同时为奇数或偶数，则 $n$ 的分部量都是奇数的有序分拆数为 $\begin{align}\binom{\frac{n-k}{2}+k-1}{k-1}\end{align}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F-k-%E5%88%86%E6%8B%86%EF%BC%9A"><span class="nav-text">无序 $k$ 分拆：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E6%8B%86%E7%9A%84-Ferrers-%E5%9B%BE%EF%BC%9A%E6%AF%8F%E4%B8%AA-Ferrers-%E5%9B%BE%E5%AF%B9%E5%BA%94%E4%B8%80%E7%A7%8D%E5%88%86%E6%8B%86%E6%96%B9%E6%A1%88"><span class="nav-text">分拆的 $Ferrers$ 图：每个 $Ferrers$ 图对应一种分拆方案</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="nav-text">卡特兰数的生成函数：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0-S-2-n-k-%E7%9A%84%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%EF%BC%9A-G-k-t-frac-t-k-1-t-1-2t-%E2%80%A6-1-kt"><span class="nav-text">第二类斯特林数$S_2(n,k)$的生成函数：$G_k(t)&#x3D;\frac{t^k}{(1-t)(1-2t)…(1-kt)}$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F-k-%E5%88%86%E6%8B%86%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="nav-text">有序 $k$ 分拆数的生成函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%88%86%E6%8B%86%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%EF%BC%9A-B-k-n-%E6%9C%80%E5%A4%A7%E5%88%86%E9%83%A8%E9%87%8F%E4%B8%8D%E8%B6%85%E8%BF%87-k-B-n-k-%E6%9C%80%E5%A4%A7%E5%88%86%E9%83%A8%E9%87%8F%E4%B8%BA-k"><span class="nav-text">无序分拆数的生成函数：$B_k(n)$ 最大分部量不超过$k$ , $B(n,k)$ 最大分部量为$k$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E7%B3%BB%E6%95%B0%E7%BA%BF%E6%80%A7%E9%BD%90%E6%AC%A1%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB%EF%BC%9A-h-n-a-1h-n-1-a-2h-n-2-%E2%80%A6-a-kh-n-k-0-a-k-neq-0-n-geqslant-k"><span class="nav-text">常系数线性齐次递推关系：$h_n-a_1h_{n-1}-a_2h_{n-2}-…-a_kh_{n-k}&#x3D;0\ (a_k\neq 0,n\geqslant k)$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E7%B3%BB%E6%95%B0%E7%BA%BF%E6%80%A7%E9%9D%9E%E9%BD%90%E6%AC%A1%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB%EF%BC%9A-h-n-ah-n-1-b-n-n-geqslant1"><span class="nav-text">常系数线性非齐次递推关系：$h_n&#x3D;ah_{n-1}+b_n \ (n\geqslant1)$</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94"><span class="nav-text">二项式反演</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94"><span class="nav-text">莫比乌斯反演</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F"><span class="nav-text">代数系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%8A%E7%BE%A4"><span class="nav-text">半群</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BE%A4"><span class="nav-text">群</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E7%BE%A4%EF%BC%9A%E8%8B%A5%E7%BE%A4-S-%E7%9A%84%E8%BF%90%E7%AE%97%E2%80%9D-%E2%80%9D%E9%80%82%E5%90%88%E4%BA%A4%E6%8D%A2%E5%BE%8B-%E5%88%99%E7%A7%B0-S-%E4%B8%BA%E4%BA%A4%E6%8D%A2%E7%BE%A4"><span class="nav-text">交换群：若群 $(S, * )$ 的运算”$ * $”适合交换律,则称$(S, * )$为交换群</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%AE%E6%8D%A2%E4%B8%8E%E7%BD%AE%E6%8D%A2%E7%BE%A4"><span class="nav-text">置换与置换群</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Burnside-%E5%BC%95%E7%90%86"><span class="nav-text">Burnside 引理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Polya%E5%AE%9A%E7%90%86"><span class="nav-text">Polya定理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Spb</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">24.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
