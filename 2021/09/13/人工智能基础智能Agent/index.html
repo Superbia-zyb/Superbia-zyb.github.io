@@ -126,12 +126,12 @@
 
 
 
-<meta name="description" content="$\text{Agent}$与环境$\text{Agent}$通过传感器感知环境，并通过执行器对所处环境产生影响。   感知序列：指 $\text{Agent}$ 所收到的所有输入数据的完整历史。 $\text{Agent}$在任何时刻的行动依赖于到那个时刻为止，该$\text{Agent}$的整个感知序列。 $\text{Agent}$函数描述了$\text{Agent}$的行为，它将任何给定感">
+<meta name="description" content="$\text{Agent}$与环境$\text{Agent}$通过传感器感知环境，并通过执行器对所处环境产生影响。  感知序列：指 $\text{Agent}$ 所收到的所有输入数据的完整历史。 $\text{Agent}$在任何时刻的行动依赖于到那个时刻为止，该$\text{Agent}$的整个感知序列。 $\text{Agent}$函数描述了$\text{Agent}$的行为，它将任何给定感知">
 <meta property="og:type" content="article">
 <meta property="og:title" content="人工智能基础 | 智能Agent">
 <meta property="og:url" content="http://superia-zyb.github.io/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/index.html">
 <meta property="og:site_name" content="Superbia-zyb&#39;s Blog">
-<meta property="og:description" content="$\text{Agent}$与环境$\text{Agent}$通过传感器感知环境，并通过执行器对所处环境产生影响。   感知序列：指 $\text{Agent}$ 所收到的所有输入数据的完整历史。 $\text{Agent}$在任何时刻的行动依赖于到那个时刻为止，该$\text{Agent}$的整个感知序列。 $\text{Agent}$函数描述了$\text{Agent}$的行为，它将任何给定感">
+<meta property="og:description" content="$\text{Agent}$与环境$\text{Agent}$通过传感器感知环境，并通过执行器对所处环境产生影响。  感知序列：指 $\text{Agent}$ 所收到的所有输入数据的完整历史。 $\text{Agent}$在任何时刻的行动依赖于到那个时刻为止，该$\text{Agent}$的整个感知序列。 $\text{Agent}$函数描述了$\text{Agent}$的行为，它将任何给定感知">
 <meta property="og:locale">
 <meta property="og:image" content="http://superia-zyb.github.io/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/1.png">
 <meta property="og:image" content="http://superia-zyb.github.io/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/2.jpg">
@@ -448,12 +448,10 @@
 
       
         <h4 id="text-Agent-与环境"><a href="#text-Agent-与环境" class="headerlink" title="$\text{Agent}$与环境"></a>$\text{Agent}$与环境</h4><p>$\text{Agent}$通过<strong>传感器</strong>感知环境，并通过<strong>执行器</strong>对所处环境产生影响。</p>
-<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/1.png" alt="1" style="zoom: 80%;">
-
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/1.png" alt="1" style="zoom: 80%;"></p>
 <p>感知序列：指 $\text{Agent}$ 所收到的<strong>所有输入数据的完整历史</strong>。</p>
 <p>$\text{Agent}$在任何时刻的行动依赖于到那个时刻为止，该$\text{Agent}$的<strong>整个感知序列</strong>。 <strong>$\text{Agent}$函数</strong>描述了$\text{Agent}$的行为，它将任何给定感知序列映射为行动，$\text{Agent}$函数通过$\text{Agent}$程序实现。</p>
 <span id="more"></span>
-
 <h4 id="什么是理性？"><a href="#什么是理性？" class="headerlink" title="什么是理性？"></a>什么是理性？</h4><h5 id="理性"><a href="#理性" class="headerlink" title="理性"></a>理性</h5><p>判断$\text{Agent}$理性的标准</p>
 <ul>
 <li>定义成功标准的性能度量，评价$\text{Agent}$在环境中的行为表现</li>
@@ -484,32 +482,26 @@
 <li><p>已知的 vs 未知的 （对于$\text{Agent}$知识状态）</p>
 </li>
 </ul>
-<h4 id="text-Agent-的结构"><a href="#text-Agent-的结构" class="headerlink" title="$\text{Agent}$的结构"></a>$\text{Agent}$的结构</h4><p>假设该程序要在某个具备物理传感器和执行器的计算装置上运行,我们称为体系结构.<br>$$<br>\text{Agent} = \text{体系结构}+\text{程序}<br>$$</p>
-<h5 id="text-Agent-程序：-text-Agent-函数的实现"><a href="#text-Agent-程序：-text-Agent-函数的实现" class="headerlink" title="$\text{Agent}$程序：$\text{Agent}$函数的实现"></a>$\text{Agent}$程序：$\text{Agent}$函数的实现</h5><p>输入：传感器得到的当前感知信息</p>
+<h4 id="text-Agent-的结构"><a href="#text-Agent-的结构" class="headerlink" title="$\text{Agent}$的结构"></a>$\text{Agent}$的结构</h4><p>假设该程序要在某个具备物理传感器和执行器的计算装置上运行,我们称为体系结构.</p>
+<script type="math/tex; mode=display">
+\text{Agent} = \text{体系结构}+\text{程序}</script><h5 id="text-Agent-程序：-text-Agent-函数的实现"><a href="#text-Agent-程序：-text-Agent-函数的实现" class="headerlink" title="$\text{Agent}$程序：$\text{Agent}$函数的实现"></a>$\text{Agent}$程序：$\text{Agent}$函数的实现</h5><p>输入：传感器得到的当前感知信息</p>
 <p>输出：执行器需要的当前执行动作</p>
 <p>表驱动：构建对于每个可能感知序列的适当行动的函数表。</p>
-<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/2.jpg"></p>
-<h4 id="简单反射-text-Agent"><a href="#简单反射-text-Agent" class="headerlink" title="简单反射$\text{Agent}$"></a>简单反射$\text{Agent}$</h4><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/3.jpg" style="zoom:70%;">
-
-<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/4.jpg" style="zoom:80%;">
-
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/2.jpg" alt></p>
+<h4 id="简单反射-text-Agent"><a href="#简单反射-text-Agent" class="headerlink" title="简单反射$\text{Agent}$"></a>简单反射$\text{Agent}$</h4><p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/3.jpg" style="zoom:70%;"></p>
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/4.jpg" style="zoom:80%;"></p>
 <p>基于当前感知选择行动，不关注感知历史，需要环境完全可观察。</p>
-<h4 id="基于模型的反射-text-Agent"><a href="#基于模型的反射-text-Agent" class="headerlink" title="基于模型的反射$\text{Agent}$"></a>基于模型的反射$\text{Agent}$</h4><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/5.jpg" style="zoom:75%;">
-
-<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/6.jpg" style="zoom:85%;">
-
+<h4 id="基于模型的反射-text-Agent"><a href="#基于模型的反射-text-Agent" class="headerlink" title="基于模型的反射$\text{Agent}$"></a>基于模型的反射$\text{Agent}$</h4><p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/5.jpg" style="zoom:75%;"></p>
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/6.jpg" style="zoom:85%;"></p>
 <p>$\text{Agent}$根据感知历史维持内部状态。</p>
 <p>增加两种知识：世界是如何独立于$\text{Agent}$而发展的信息；$\text{Agent}$自身的行动如何影响世界的信息。（世界模型）</p>
 <h4 id="基于目标的-text-Agent"><a href="#基于目标的-text-Agent" class="headerlink" title="基于目标的$\text{Agent}$"></a>基于目标的$\text{Agent}$</h4><p>$\text{Agent}$可以通过<strong>搜索</strong>与<strong>规划</strong>，寻找达到$\text{Agent}$目标的行动序列。</p>
 <p>基于目标的$\text{Agent}$会进行推理。</p>
-<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/7.jpg" style="zoom:70%;">
-
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/7.jpg" style="zoom:70%;"></p>
 <h4 id="基于效用的-text-Agent"><a href="#基于效用的-text-Agent" class="headerlink" title="基于效用的$\text{Agent}$"></a>基于效用的$\text{Agent}$</h4><p>$\text{Agent}$的<strong>效用函数</strong>是性能度量的内在化。</p>
 <p>基于效用的$\text{Agent}$选择使其<strong>期望效用</strong>最大化的行动。</p>
-<img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/8.jpg" style="zoom:75%;">
-
-<h4 id="学习-text-Agent"><a href="#学习-text-Agent" class="headerlink" title="学习$\text{Agent}$"></a>学习$\text{Agent}$</h4><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/9.jpg" style="zoom:75%;">
-
+<p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/8.jpg" style="zoom:75%;"></p>
+<h4 id="学习-text-Agent"><a href="#学习-text-Agent" class="headerlink" title="学习$\text{Agent}$"></a>学习$\text{Agent}$</h4><p><img src="/2021/09/13/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%99%BA%E8%83%BDAgent/9.jpg" style="zoom:75%;"></p>
 <p>四大组件：学习元件，性能元件，评判元件，问题产生器。</p>
 <ul>
 <li>学习元件：通过评判元件，改进提高。</li>
@@ -644,10 +636,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
+                
                   <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
-                </a>
+                
               </div>
             
 
@@ -724,7 +716,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">26.1k</span>
+    <span title="Site words total count">22.6k</span>
   
 </div>
 
