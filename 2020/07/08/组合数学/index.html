@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="鸽巢原理如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体 如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体…… 设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中">
+<meta name="description" content="期末复习专用~ 不太全 有时间填坑！ 鸽巢原理如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体 如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体…… 设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="组合数学">
+<meta property="og:title" content="组合数学笔记">
 <meta property="og:url" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/index.html">
 <meta property="og:site_name" content="Superbia-zyb&#39;s Blog">
-<meta property="og:description" content="鸽巢原理如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体 如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体…… 设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中">
+<meta property="og:description" content="期末复习专用~ 不太全 有时间填坑！ 鸽巢原理如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体 如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体…… 设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入">
 <meta property="og:locale">
 <meta property="og:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/1.png">
 <meta property="og:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/2.png">
 <meta property="og:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/3.png">
 <meta property="article:published_time" content="2020-07-07T16:11:06.000Z">
-<meta property="article:modified_time" content="2020-07-09T17:30:20.293Z">
+<meta property="article:modified_time" content="2021-09-16T03:10:55.057Z">
 <meta property="article:author" content="Spb">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://superia-zyb.github.io/2020/07/08/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/1.png">
@@ -161,7 +161,7 @@
 
 
 
-  <title>组合数学 | Superbia-zyb's Blog</title>
+  <title>组合数学笔记 | Superbia-zyb's Blog</title>
   
 
 
@@ -349,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">组合数学</h1>
+          <h1 class="post-title" itemprop="name headline">组合数学笔记</h1>
         
 
         <div class="post-meta">
@@ -430,12 +430,15 @@
       
 
       
-        <h5 id="鸽巢原理"><a href="#鸽巢原理" class="headerlink" title="鸽巢原理"></a>鸽巢原理</h5><p>如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体</p>
+        <p>期末复习专用~ 不太全 有时间填坑！</p>
+<h5 id="鸽巢原理"><a href="#鸽巢原理" class="headerlink" title="鸽巢原理"></a>鸽巢原理</h5><p>如果将 $n+1$ 个物体放入 $n$ 个盒子，那么至少有一个盒子包含两个或更多的物体</p>
 <p>如果将 $q_1+q_2+…+q_n-n+1$ 个物体放入 $n$ 个盒子 , 那么或者第一个盒子至少有 $q_1$ 个物体 , 或者第二个盒子至少有 $q_2$ 个物体……</p>
 <p>设 $n$ , $m$ 都是正整数 , 且 $m&gt;n$ , 若将 $m$ 个物体放入 $n$ 个盒子 , 至少有一个盒子中含有大于等于 $ \lceil \frac{m}{n} \rceil $ 个物体</p>
 <p>如果有 $n$ 个非负整数 $m_1 \sim m_n$ , $\frac{m_1+m_2+…+m_n}{n}&gt;r-1$ ，那么至少有一个整数大于等于 $r$</p>
 <p>如果有 $n$ 个非负整数 $m_1 \sim m_n$ , $\frac{m_1+m_2+…+m_n}{n} &lt; r+1$ ，那么至少有一个整数小于 $r$</p>
 <p>每个由 $n^2+1$ 个实数构成的序列 $a_1,a_2…a_{n^2+1}$ ,或者含有长度为 $n+1$ 的递增子序列 , 或者含有长度为 $n+1$ 的递减子序列</p>
+<span id="more"></span>
+
 <h5 id="Ramsey定理"><a href="#Ramsey定理" class="headerlink" title="Ramsey定理"></a>Ramsey定理</h5><p>对于任意给定的两个正整数 $p$ , $q$ , 如果存在最小的正整数 $R(p,q)$ 使得当 $N \geqslant R(p,q)$ 时，对 $K_N$ (有$N$ 个顶点的完全图) 任意进行红蓝染色, $K_N$ 中均有红色 $K_p$ , 或蓝色 $K_q$ , 则 $R(p,q)$ 称为 $Ramsey$ 数</p>
 <p>简单性质：$\begin{cases} R(p,q)=R(q,p) \ R(n,2)=n \ R(m,n)\leqslant R(m-1,n)+R(m,n-1)\end{cases}$</p>
 <h5 id="集合的排列-begin-cases-线性-r-排列-：P-n-r-frac-n-n-r-循环-r-排列-frac-P-n-r-r-frac-n-r-n-r-end-cases"><a href="#集合的排列-begin-cases-线性-r-排列-：P-n-r-frac-n-n-r-循环-r-排列-frac-P-n-r-r-frac-n-r-n-r-end-cases" class="headerlink" title="集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)=\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} =\frac{n!}{r(n-r)!}\end{cases}$"></a>集合的排列$ \begin{cases} 线性 \ r\ 排列 ：P(n,r)=\frac{n!}{(n-r)!} \ 循环\ r\ 排列 : \frac{P(n,r)}{r} =\frac{n!}{r(n-r)!}\end{cases}$</h5><h5 id="集合的组合：-binom-n-r-frac-P-n-r-r"><a href="#集合的组合：-binom-n-r-frac-P-n-r-r" class="headerlink" title="集合的组合： $ \binom{n}{r}=\frac{P(n,r)}{r!}$"></a>集合的组合： $ \binom{n}{r}=\frac{P(n,r)}{r!}$</h5><h5 id="多重集的排列："><a href="#多重集的排列：" class="headerlink" title="多重集的排列："></a>多重集的排列：</h5><p>假设共有 $k$ 种元素：</p>
@@ -799,7 +802,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">25k</span>
+    <span title="Site words total count">25.1k</span>
   
 </div>
 
