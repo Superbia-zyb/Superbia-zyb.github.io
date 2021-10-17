@@ -1264,4 +1264,23 @@ L=\frac{1}{H}\sum_{\sigma \in H} m^{\lambda(\sigma)}</script><p>$Polya$ 定理�
 L=\frac{1}{|H|}\sum_{\sigma\in H} s_1^{\lambda_1(\sigma)}s_2^{\lambda_2(\sigma)}...s_n^{\lambda_n(\sigma)} \\</script><p>展开式中 $ b_1^{i_1}b_2^{i_2}…b_m^{i_m}$ 的系数即为 $i_1$ 个对象涂 $b_1$ 色, $i_2$ 个对象涂 $b_2$ 色 $…$ $i_m$ 个对象涂 $b_m$ 色的方案数 ,并且 $i_1+i_2+…+i_m =n$</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>JLU单片机实验一 电路原理图分析与设计</title>
+    <url>/2021/10/17/JLU%E5%8D%95%E7%89%87%E6%9C%BA%E5%AE%9E%E9%AA%8C%E4%B8%80%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</url>
+    <content><![CDATA[
+
+	<div class="row">
+    <embed src="实验一实验报告.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+]]></content>
+      <categories>
+        <category>单片机</category>
+      </categories>
+      <tags>
+        <tag>单片机</tag>
+      </tags>
+  </entry>
 </search>
